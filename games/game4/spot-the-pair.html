@@ -1,0 +1,2366 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Spot the Pair | Clickzle Game 4 — Daily Visual Observation Game</title>
+<meta name="description" content="Spot the Pair is a daily browser observation game. 20 tiles, one hidden pair — find both before the clock runs out. Five rounds, fifty seconds each. One shot per day. Free to play at Clickzle.games.">
+<meta name="keywords" content="spot the pair game, daily observation game, browser game, clickzle, visual memory game, daily puzzle game, free online game, pair matching game, concentration game">
+<meta name="author" content="Clickzle">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#facc15">
+<link rel="canonical" href="https://clickzle.games/spot-the-pair-game-4.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Clickzle">
+<meta property="og:title" content="Spot the Pair — Daily Visual Observation Game | Clickzle">
+<meta property="og:description" content="20 tiles, one hidden pair. Find both before time runs out. Five rounds, fifty seconds each. One attempt per day — same puzzle worldwide.">
+<meta property="og:url" content="https://clickzle.games/spot-the-pair-game-4.html">
+<meta property="og:image" content="https://clickzle.games/assets/og-spot-the-pair.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Spot the Pair — Clickzle daily observation game">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@clickzle">
+<meta name="twitter:title" content="Spot the Pair — Daily Observation Game | Clickzle">
+<meta name="twitter:description" content="20 tiles, one hidden pair. Find it before time runs out. Five rounds. One shot per day. Free to play.">
+<meta name="twitter:image" content="https://clickzle.games/assets/og-spot-the-pair.png">
+<meta name="twitter:image:alt" content="Spot the Pair — Clickzle">
+<meta name="GPTBot" content="index, follow">
+<meta name="ClaudeBot" content="index, follow">
+<meta name="anthropic-ai" content="index, follow">
+<meta name="PerplexityBot" content="index, follow">
+<meta name="Applebot-Extended" content="index, follow">
+<meta name="CCBot" content="index, follow">
+<meta name="ai-content-type" content="interactive-game">
+<meta name="ai-summary" content="Spot the Pair is Game 4 of the Clickzle daily browser game platform. Players scan a 20-tile grid to find one matching pair before the clock runs out. Five rounds of fifty seconds each. One attempt per day, seeded daily so all players face the same puzzle. Free to play at clickzle.games.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VideoGame","name":"Spot the Pair","alternateName":"Clickzle Spot the Pair","description":"A daily browser-based visual observation game. Players must find one matching pair hidden among 20 tiles before the timer runs out. Five fifty-second rounds with increasing difficulty. One attempt per day.","url":"https://clickzle.games/spot-the-pair-game-4.html","genre":["Observation Game","Puzzle Game","Daily Game","Browser Game"],"gamePlatform":["Web Browser","Mobile Browser"],"offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"publisher":{"@type":"Organization","name":"Clickzle","url":"https://clickzle.games"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Spot the Pair on Clickzle?","acceptedAnswer":{"@type":"Answer","text":"Spot the Pair is Game 4 of 5 on Clickzle. It is a visual observation game where players find one matching pair hidden among 20 tiles before the timer runs out. Five rounds, one attempt per day."}},{"@type":"Question","name":"How do you score points?","acceptedAnswer":{"@type":"Answer","text":"Points are awarded for finding the pair quickly. A streak combo builds with consecutive correct pairs. Wrong taps break your streak and deduct points."}},{"@type":"Question","name":"Is it free to play?","acceptedAnswer":{"@type":"Answer","text":"Yes. Spot the Pair is completely free at clickzle.games. One attempt per day, same daily puzzle worldwide."}}]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a; --surface: #141414; --surface2: #1e1e1e;
+    --border: #2a2a2a; --border2: #333333;
+    --text: #f0f0f0; --text2: #888; --text3: #555;
+    --accent: #facc15;
+    --accent-dim: rgba(250,204,21,0.08);
+    --accent-border: rgba(250,204,21,0.22);
+    --accent-glow: rgba(250,204,21,0.45);
+    --green: #4ade80; --red: #f87171; --gold: #facc15;
+  }
+  body.light {
+    --bg: #f4f4f4; --surface: #ffffff; --surface2: #ebebeb;
+    --border: #d0d0d0; --border2: #c0c0c0;
+    --text: #111111; --text2: #555555; --text3: #999999;
+    --accent-dim: rgba(250,204,21,0.12);
+    --accent-border: rgba(180,140,0,0.30);
+  }
+  body.light { background: #d8d8d8; }
+
+  html, body {
+    width: 100%; height: 100%; background: #000;
+    display: flex; justify-content: center; align-items: center;
+    font-family: 'Inter', sans-serif; overflow: hidden;
+    touch-action: manipulation;
+  }
+  #app {
+    width: 100%; max-width: 440px;
+    height: 100dvh; max-height: 100dvh;
+    background: var(--bg); display: flex; flex-direction: column;
+    position: relative; overflow: hidden; touch-action: manipulation;
+  }
+  #app.time-critical { animation: criticalGlow 0.42s ease-in-out infinite; }
+  @keyframes criticalGlow {
+    0%, 100% { box-shadow: none; }
+    50% { box-shadow: inset 0 0 0 3px rgba(248,113,113,0.85), 0 0 40px 8px rgba(248,113,113,0.4); }
+  }
+
+  /* HEADER */
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px; height: 80px; min-height: 80px;
+    border-bottom: 1px solid var(--border); background: var(--bg); position: relative; z-index: 10;
+  }
+  .header.hidden { display: none; }
+  .header-icons { display: flex; gap: 2px; width: 120px; flex-shrink: 0; }
+  .header-icons.right { justify-content: flex-end; }
+  .icon-btn {
+    width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer; color: var(--text2);
+    border-radius: 8px; transition: background 0.15s, color 0.15s; flex-shrink: 0;
+  }
+  .icon-btn:hover { background: var(--surface2); color: var(--text); }
+  .icon-btn:active { transform: scale(0.92); }
+  .icon-btn svg { width: 20px; height: 20px; }
+  .header-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
+  .header-title-link { text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: opacity 0.15s; }
+  .header-title-link:hover { opacity: 0.75; }
+  .header-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 4px; color: var(--text); line-height: 1; }
+  .header-title span { color: var(--accent); }
+  .header-subtitle { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text3); margin-top: 3px; }
+
+  /* START SCREEN */
+  #startScreen {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 32px 28px; gap: 0; overflow: hidden; position: relative;
+    visibility: hidden;
+  }
+  body.fonts-ready #startScreen { visibility: visible; transition: opacity 0.18s ease; }
+  .start-home-btn {
+    position: absolute; top: 14px; left: 14px;
+    display: flex; align-items: center; gap: 7px; color: var(--text3);
+    text-decoration: none; font-size: 12px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; padding: 8px 10px;
+    border-radius: 8px; transition: background 0.15s, color 0.15s; z-index: 5;
+  }
+  .start-home-btn:hover { background: var(--surface2); color: var(--text); }
+  .start-home-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .start-logo-img { width: 120px; display: block; margin: 0 auto 4px; }
+  .game-identity { text-align: center; padding: 20px 0 24px; }
+  .game-id-badge { display: inline-block; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+  .game-id-title { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: 3px; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .game-id-challenge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
+  .game-id-desc { font-size: 15px; color: var(--text2); line-height: 1.55; max-width: 300px; margin: 0 auto 12px; }
+  .game-id-tags { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  .game-id-tag { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 20px; background: var(--accent-dim); border: 1px solid var(--accent-border); color: var(--accent); }
+  .section-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--text3); font-weight: 600; width: 100%; margin-bottom: 8px; margin-top: 4px; }
+  .free-play-section { padding: 20px 0 24px; width: 100%; margin-bottom: 6px; }
+  .name-row { display: flex; gap: 8px; width: 100%; }
+  .name-input {
+    flex: 1; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 16px; font-size: 15px; color: var(--text);
+    font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s;
+  }
+  .name-input:focus { border-color: var(--accent); }
+  .name-input::placeholder { color: var(--text3); }
+  .start-btn {
+    background: var(--accent); color: #000; border: none; border-radius: 10px;
+    padding: 12px 22px; font-size: 15px; font-weight: 700; font-family: 'Inter', sans-serif;
+    cursor: pointer; letter-spacing: 0.5px; transition: opacity 0.15s, transform 0.1s; white-space: nowrap;
+  }
+  .start-btn:hover { opacity: 0.9; }
+  .start-btn:active { transform: scale(0.96); }
+  .free-note { font-size: 11px; color: var(--text3); text-align: center; margin-top: 8px; line-height: 1.5; }
+  .start-divider { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 16px; }
+  .start-divider::before, .start-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .start-divider span { font-size: 10px; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; white-space: nowrap; }
+  .register-section { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 16px; display: flex; flex-direction: column; gap: 12px; }
+  .register-headline { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--text); line-height: 1.1; }
+  .register-headline span { color: var(--accent); }
+  .register-tagline { font-size: 13px; color: var(--text2); line-height: 1.55; margin-top: -4px; }
+  .register-perks { display: flex; flex-direction: column; gap: 8px; margin: 2px 0; }
+  .register-perk { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text2); }
+  .register-perk svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
+  .register-perk strong { color: var(--text); }
+  .register-btns { display: flex; flex-direction: column; gap: 8px; margin-top: 2px; }
+  .btn-create { width: 100%; background: var(--accent); color: #000; border: none; border-radius: 10px; padding: 13px; font-size: 14px; font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer; letter-spacing: 0.3px; transition: opacity 0.15s, transform 0.1s; }
+  .btn-create:hover { opacity: 0.9; }
+  .btn-create:active { transform: scale(0.97); }
+  .btn-login { width: 100%; background: transparent; color: var(--text2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+  .btn-login:hover { border-color: var(--accent); color: var(--text); }
+
+  /* GAME SCREEN */
+  #gameScreen { flex: 1; display: none; flex-direction: column; overflow: hidden; }
+  #gameScreen.active { display: flex; }
+
+  /* STATUS BAR */
+  .status-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 16px; min-height: 56px; flex-shrink: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-block { display: flex; flex-direction: column; gap: 2px; min-width: 72px; }
+  .stat-block.right { align-items: flex-end; }
+  .stat-lbl { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); font-weight: 600; }
+  .stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 1px; color: var(--text); line-height: 1; }
+  .stat-val.accent { color: var(--accent); }
+  .combo-badge { font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 2px 7px; border-radius: 12px; border: 1px solid var(--border2); background: var(--surface2); color: var(--text3); display: inline-block; transition: all 0.2s; white-space: nowrap; }
+  .combo-badge.c2 { background: var(--accent-dim); border-color: var(--accent-border); color: var(--accent); }
+  .combo-badge.c3 { background: var(--accent-dim); border-color: var(--accent-border); color: var(--accent); }
+  .combo-badge.c4 { background: var(--accent-dim); border-color: var(--accent-border); color: var(--accent); animation: comboPulse 1.1s ease-in-out infinite; }
+  .combo-badge.c5 { background: rgba(250,204,21,0.18); border-color: rgba(250,204,21,0.5); color: var(--accent); animation: comboPulse 0.7s ease-in-out infinite; }
+  @keyframes comboPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(250,204,21,0); } 50% { box-shadow: 0 0 12px 3px rgba(250,204,21,0.45); } }
+  .status-centre { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .round-dots { display: flex; gap: 5px; align-items: center; }
+  .round-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border2); transition: all 0.25s; }
+  .round-dot.done { background: var(--text3); }
+  .round-dot.active { background: var(--accent); transform: scale(1.4); box-shadow: 0 0 6px 2px var(--accent-glow); }
+  .round-label { font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text3); font-weight: 600; }
+
+  /* GRID */
+  .grid-wrapper { flex: 1; display: flex; min-height: 0; position: relative; padding: 10px; }
+  .grid-wrapper::before { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0; background: radial-gradient(ellipse at 50% 50%, rgba(250,204,21,0) 40%, transparent 70%); transition: background 0.8s ease; }
+  #app.combo-2 .grid-wrapper::before { background: radial-gradient(ellipse at 50% 50%, rgba(250,204,21,0.03) 40%, transparent 70%); }
+  #app.combo-3 .grid-wrapper::before { background: radial-gradient(ellipse at 50% 50%, rgba(250,204,21,0.055) 40%, transparent 70%); }
+  #app.combo-4 .grid-wrapper::before { background: radial-gradient(ellipse at 50% 50%, rgba(250,204,21,0.085) 40%, transparent 70%); }
+  #app.combo-5 .grid-wrapper::before { background: radial-gradient(ellipse at 50% 50%, rgba(250,204,21,0.13) 40%, transparent 70%); }
+  #gameGrid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(5, 1fr); gap: 7px; flex: 1; min-height: 0; position: relative; z-index: 1; touch-action: manipulation; }
+
+  /* ── TILES ── */
+  .tile {
+    position: relative; overflow: hidden;
+    background: var(--surface); border-radius: 12px; border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: transform 0.12s cubic-bezier(0.34,1.56,0.64,1), border-color 0.18s, background 0.18s, box-shadow 0.22s;
+  }
+  /* Subtle bg tint using the icon colour */
+  .tile::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    background: var(--ic, transparent); opacity: 0.07; pointer-events: none;
+    transition: opacity 0.18s;
+  }
+  /* Hover: lift + coloured border glow */
+  .tile:hover:not(.selected):not(.matched) {
+    transform: scale(1.06);
+    border-color: var(--ic, var(--border2));
+    box-shadow: 0 0 10px 1px color-mix(in srgb, var(--ic, #888) 40%, transparent);
+  }
+  .tile:hover::before { opacity: 0.13; }
+  .tile:active { transform: scale(0.87) !important; }
+
+  /* Icon */
+  .tile svg { width: 56%; height: 56%; pointer-events: none; display: block; transition: filter 0.15s; }
+  .tile:hover:not(.selected) svg { filter: brightness(1.3); }
+
+  /* SELECTED */
+  .tile.selected {
+    border: 2px solid var(--accent);
+    background: rgba(250,204,21,0.06);
+    box-shadow: 0 0 0 3px rgba(250,204,21,0.2), 0 0 22px 4px rgba(250,204,21,0.35);
+    animation: tileSelPulse 1s ease-in-out infinite;
+    transform: scale(1.07); z-index: 5;
+  }
+  .tile.selected::before { opacity: 0; }
+  .tile.selected svg { filter: brightness(1.5) drop-shadow(0 0 4px rgba(250,204,21,0.6)); }
+  @keyframes tileSelPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(250,204,21,0.2), 0 0 22px 4px rgba(250,204,21,0.35); }
+    50%       { box-shadow: 0 0 0 4px rgba(250,204,21,0.35), 0 0 36px 8px rgba(250,204,21,0.55); }
+  }
+
+  /* MATCHED — pop then dissolve with a brightness flash */
+  .tile.matched {
+    animation: tileMatch 0.42s cubic-bezier(0.36,0.07,0.19,0.97) forwards;
+    pointer-events: none; z-index: 10;
+  }
+  @keyframes tileMatch {
+    0%   { transform: scale(1);    opacity: 1; filter: brightness(1); }
+    18%  { transform: scale(1.18); opacity: 1; filter: brightness(2.4) saturate(1.8); }
+    55%  { transform: scale(1.06); opacity: 0.8; filter: brightness(1.4); }
+    100% { transform: scale(0.4);  opacity: 0; filter: brightness(3); }
+  }
+
+  /* SPAWN — staggered wave in */
+  .tile.spawning {
+    animation: tileSpawn 0.32s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes tileSpawn {
+    0%   { transform: scale(0.45) rotate(-6deg); opacity: 0; }
+    60%  { transform: scale(1.08) rotate(1deg);  opacity: 1; }
+    100% { transform: scale(1)    rotate(0);     opacity: 1; }
+  }
+
+  /* WRONG — red flash + small jerk on the tile itself */
+  .tile.wrong {
+    animation: tileWrong 0.32s ease-out forwards; pointer-events: none;
+  }
+  @keyframes tileWrong {
+    0%   { background: var(--surface); border-color: var(--border); transform: scale(1) rotate(0); }
+    20%  { background: rgba(248,113,113,0.38); border-color: var(--red); transform: scale(1.08) rotate(-4deg); box-shadow: 0 0 18px 4px rgba(248,113,113,0.5); }
+    50%  { transform: scale(0.94) rotate(3deg); }
+    80%  { background: rgba(248,113,113,0.12); border-color: rgba(248,113,113,0.3); transform: scale(1.02) rotate(-1deg); }
+    100% { background: var(--surface); border-color: var(--border); transform: scale(1) rotate(0); }
+  }
+
+  /* STUN */
+  .grid-wrapper.stunned .tile:not(.matched) {
+    opacity: 0.35; pointer-events: none; transition: opacity 0.1s;
+  }
+
+  /* TAP RIPPLE */
+  .tile-ripple {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 70%);
+    width: 120%; height: 120%; left: -10%; top: -10%;
+    animation: rippleOut 0.4s ease-out forwards;
+  }
+  @keyframes rippleOut {
+    0%   { transform: scale(0); opacity: 1; }
+    100% { transform: scale(1.4); opacity: 0; }
+  }
+
+  /* PARTICLES */
+  @keyframes particleFly {
+    0%   { transform: translate(-50%,-50%) translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(-50%,-50%) translate(var(--dx),var(--dy)) scale(0); opacity: 0; }
+  }
+
+  /* OVERLAYS */
+  #wrongOverlay { position: absolute; inset: 0; pointer-events: none; z-index: 50; opacity: 0; }
+  #wrongOverlay.flash { animation: wrongVig 0.5s ease-out forwards; }
+  @keyframes wrongVig { 0% { opacity: 0; box-shadow: inset 0 0 0 0 rgba(248,113,113,0); } 20% { opacity: 1; box-shadow: inset 0 0 0 12px rgba(248,113,113,0.85); } 100% { opacity: 0; box-shadow: inset 0 0 0 0 rgba(248,113,113,0); } }
+  #shakeWrap { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
+  #shakeWrap.wrong-shake { animation: wrongShake 0.45s ease-out forwards; }
+  @keyframes wrongShake { 0%, 100% { transform: translateX(0); } 15% { transform: translateX(-7px); } 30% { transform: translateX(6px); } 45% { transform: translateX(-5px); } 60% { transform: translateX(4px); } 75% { transform: translateX(-2px); } }
+
+  /* SCORE POP */
+  .score-pop { position: absolute; pointer-events: none; z-index: 60; font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--text); text-shadow: 0 2px 8px rgba(0,0,0,0.8); animation: scorePop 0.9s ease-out forwards; white-space: nowrap; }
+  .score-pop.gold { color: var(--accent); font-size: 28px; }
+  @keyframes scorePop { 0% { transform: translateY(0) scale(1.2); opacity: 1; } 55% { transform: translateY(-28px) scale(1); opacity: 1; } 100% { transform: translateY(-48px) scale(0.85); opacity: 0; } }
+
+  /* PAIR REVEAL at round end */
+  .tile.reveal-pair {
+    border: 2.5px solid var(--accent) !important;
+    background: rgba(250,204,21,0.10) !important;
+    animation: revealPulse 0.55s ease-in-out 3 !important;
+    z-index: 8;
+    pointer-events: none;
+  }
+  .tile.reveal-pair svg { filter: brightness(1.5) drop-shadow(0 0 5px var(--accent)) !important; }
+  @keyframes revealPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(250,204,21,0.0); }
+    50%       { box-shadow: 0 0 18px 6px rgba(250,204,21,0.6); }
+  }
+
+  /* FEEDBACK MSG (near-miss / wrong in-game) */
+  .feedback-msg {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    top: 42%; z-index: 56; pointer-events: none; white-space: nowrap;
+    font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 4px;
+    text-shadow: 0 0 20px currentColor;
+    animation: feedbackIn 0.8s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+  .feedback-msg.hidden { display: none; }
+  @keyframes feedbackIn {
+    0%   { opacity: 0; transform: translateX(-50%) scale(0.65) translateY(8px); }
+    20%  { opacity: 1; transform: translateX(-50%) scale(1.08) translateY(-2px); }
+    55%  { opacity: 1; transform: translateX(-50%) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) scale(0.9) translateY(-10px); }
+  }
+
+  /* COMBO BREAK PAIN */
+  .combo-break {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    top: 28%; z-index: 57; pointer-events: none; white-space: nowrap;
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px;
+    color: var(--red); opacity: 0;
+    animation: comboBreakAnim 0.9s ease-out forwards;
+    text-shadow: 0 0 14px rgba(248,113,113,0.7);
+  }
+  @keyframes comboBreakAnim {
+    0%   { opacity: 0; transform: translateX(-50%) translateY(0) scale(0.8); }
+    15%  { opacity: 1; transform: translateX(-50%) translateY(-4px) scale(1.05); }
+    60%  { opacity: 1; transform: translateX(-50%) translateY(-8px) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-22px) scale(0.9); }
+  }
+
+  /* PANIC MODE — last 5 seconds */
+  #app.time-panic .tile:not(.selected):not(.matched) {
+    animation: tilePanic 0.22s ease-in-out infinite;
+  }
+  @keyframes tilePanic {
+    0%, 100% { transform: translateY(0); }
+    33%       { transform: translateY(-1.5px); }
+    66%       { transform: translateY(1px); }
+  }
+
+  /* SCORE POP sub-line */
+  .score-pop-sub {
+    font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+    letter-spacing: 1px; opacity: 0.75; display: block; text-align: center;
+    margin-top: 1px;
+  }
+
+  /* NEAR-MISS PULSE — glows amber 500ms after same-group wrong tap */
+  .tile.near-miss-pulse { animation: nearMissPulse 0.6s ease-out forwards !important; }
+  @keyframes nearMissPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(250,204,21,0.3); border-color: var(--border); }
+    25%  { box-shadow: 0 0 24px 8px rgba(250,204,21,0.75); border-color: rgba(250,204,21,0.8); }
+    100% { box-shadow: 0 0 0 0 rgba(250,204,21,0); border-color: var(--border); }
+  }
+
+  /* FLOW STATE banner — x5 combo active */
+
+  /* MILESTONE */
+  #milestoneBanner { position: absolute; left: 50%; transform: translateX(-50%); top: 10px; z-index: 55; pointer-events: none; background: rgba(250,204,21,0.12); border: 1px solid rgba(250,204,21,0.35); border-radius: 8px; padding: 6px 14px; font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: var(--accent); animation: milestoneIn 0.22s ease-out forwards; }
+  #milestoneBanner.hidden { display: none; }
+  @keyframes milestoneIn { from { opacity: 0; transform: translateX(-50%) scale(0.8); } to { opacity: 1; transform: translateX(-50%) scale(1); } }
+
+  /* ROUND OVERLAY */
+  /* ── ROUND TRANSITION OVERLAY (matches G3) ── */
+  #roundOverlay {
+    position: absolute; inset: 0; z-index: 60;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: rgba(7,7,7,0.96); backdrop-filter: blur(6px); gap: 0;
+  }
+  #roundOverlay.hidden { display: none; }
+  .ro-header { display: flex; flex-direction: column; align-items: center; gap: 3px; margin-bottom: 8px; }
+  .ro-label  { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--text3); font-weight: 700; }
+  .ro-num    { font-family: 'Bebas Neue', sans-serif; font-size: 120px; color: var(--text); line-height: 0.9; letter-spacing: 4px; animation: roNumIn 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+  .ro-of     { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--text2); }
+  .ro-tagline{ font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin: 10px 0 24px; min-height: 18px; }
+  .ro-ready-bar {
+    background: rgba(250,204,21,0.08); border: 1px solid var(--accent-border);
+    border-radius: 10px; padding: 9px 28px; margin-bottom: 28px;
+    font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--text2); font-weight: 700;
+    animation: roReadyPulse 0.8s ease-in-out infinite;
+  }
+  @keyframes roReadyPulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
+  .ro-ready-bar.go-state { background: rgba(250,204,21,0.15); border-color: var(--accent); color: var(--accent); animation: none; opacity: 1; }
+  .ro-count      { font-family: 'Bebas Neue', sans-serif; font-size: 130px; color: #fff; line-height: 1; animation: roCountIn 0.18s cubic-bezier(0.22,1.8,0.36,1) forwards; min-width: 120px; text-align: center; }
+  .ro-count.go   { color: var(--accent); font-size: 100px; letter-spacing: 10px; text-shadow: 0 0 80px rgba(250,204,21,0.8); }
+  .ro-count.exit { animation: roCountOut 0.18s ease-in forwards; }
+  .ro-dots { display: flex; gap: 10px; margin-top: 22px; }
+  .ro-dot  { width: 10px; height: 10px; border-radius: 50%; background: var(--border2); transition: background 0.15s, transform 0.15s; }
+  .ro-dot.done   { background: var(--text3); }
+  .ro-dot.active { background: #fff; transform: scale(1.4); }
+  @keyframes roNumIn   { from{transform:scale(0.45);opacity:0} to{transform:scale(1);opacity:1} }
+  @keyframes roCountIn { from{transform:scale(1.7);opacity:0} to{transform:scale(1);opacity:1} }
+  @keyframes roCountOut{ from{transform:scale(1);opacity:1} to{transform:scale(0.4);opacity:0} }
+
+  /* PROGRESS BAR */
+  .progress-bar-wrap { height: 3px; background: var(--border); flex-shrink: 0; position: relative; }
+  #progressBar { height: 100%; background: var(--accent); transition: width 0.1s linear; width: 100%; }
+  #progressBar.warning  { background: #f97316; }
+  #progressBar.critical { background: var(--red); }
+
+  /* LOWER INFO */
+  .lower-info { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; min-height: 64px; flex-shrink: 0; border-top: 1px solid var(--border); }
+  .info-left  { display: flex; flex-direction: column; gap: 2px; }
+  .info-right { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+  .player-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--text); line-height: 1; }
+  .game-mode { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); font-weight: 600; }
+  .timer-wrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .timer-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); font-weight: 600; }
+  #timerDisplay { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; color: var(--text); line-height: 1; transition: color 0.3s; }
+  #timerDisplay.warning  { color: #f97316; }
+  #timerDisplay.critical { color: var(--red); animation: timerPulse 0.5s ease-in-out infinite; }
+  @keyframes timerPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .turns-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); font-weight: 600; }
+  #scoreDisplay { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 1px; color: var(--text); line-height: 1; }
+
+  /* MODALS — full screen, same as G1/G2/G3 */
+  .modal-overlay {
+    position: absolute; inset: 0; z-index: 200;
+    padding: 0; align-items: stretch; justify-content: stretch;
+    background: var(--bg); backdrop-filter: none; display: none; overflow: hidden;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal { max-width: none; width: 100%; height: 100%; max-height: 100%; border-radius: 0; border: none; border-top: 1px solid var(--border2); transform: none; display: flex; flex-direction: column; overflow: hidden; }
+  #pregameHelpModal .modal { border-top: 2px solid var(--accent); }
+  #timeoutModal     .modal { border-top: 2px solid var(--accent); }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--text); }
+  .modal-close { background: none; border: none; cursor: pointer; color: var(--text2); padding: 6px; border-radius: 6px; transition: background 0.15s; display: flex; align-items: center; justify-content: center; }
+  .modal-close svg { width: 18px; height: 18px; }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+
+  #pregameHelpModal .modal-body {
+    flex: 1; display: flex; flex-direction: column; justify-content: space-between;
+    padding: 15px 20px 20px; gap: 16px; min-height: 0; overflow: hidden;
+  }
+  #helpModal .modal-body {
+    flex: 1; display: flex; flex-direction: column;
+    padding: 15px 20px 20px; gap: 16px; min-height: 0;
+    overflow-y: auto; scrollbar-width: none;
+  }
+  #helpModal .modal-body::-webkit-scrollbar { display: none; }
+  #timeoutModal .modal-body { flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 16px 18px 20px; gap: 10px; overflow-y: auto; scrollbar-width: none; }
+  #statsModal .modal-body, #settingsModal .modal-body, #shareModal .modal-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 28px 24px; gap: 0; overflow-y: auto; }
+  #categoriesModal .modal-body { flex: 1; overflow-y: auto; padding: 8px 0; }
+
+  /* HTP */
+  .help-rules-block { display: flex; flex-direction: column; gap: 16px; }
+  .help-rule { display: flex; gap: 14px; align-items: flex-start; }
+  .help-icon { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: var(--accent-dim); border: 1px solid var(--accent-border); display: flex; align-items: center; justify-content: center; }
+  .help-icon svg { width: 18px; height: 18px; color: var(--accent); }
+  .tile-swatch { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: var(--surface2); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; position: relative; }
+  .tile-swatch.is-pair { background: var(--accent-dim); border-color: var(--accent-border); }
+  .tile-swatch.is-pair svg { color: var(--accent); width: 52%; height: 52%; }
+  .tile-swatch.is-decoy svg { color: rgba(255,255,255,0.5); width: 52%; height: 52%; }
+  .help-text h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .help-text p  { font-size: 13px; color: var(--text2); line-height: 1.5; }
+  .bonus-section { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .bonus-title { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .bonus-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; flex: 1; min-height: 0; }
+  .bonus-card { background: var(--surface2); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; justify-content: center; gap: 3px; }
+  .bonus-pts  { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--accent); line-height: 1; }
+  .bonus-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .bonus-desc { font-size: 11px; color: var(--text3); line-height: 1.4; margin-top: 1px; }
+  .pregame-modal-foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px 20px; border-top: 1px solid var(--border); background: var(--surface2); flex-wrap: wrap; }
+  .dont-show-label { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text3); cursor: pointer; user-select: none; }
+  .dont-show-label input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  .dont-show-label:hover { color: var(--text2); }
+  .pregame-play-btn { display: flex; align-items: center; gap: 8px; background: var(--accent); color: #0a0a0a; border: none; border-radius: 10px; padding: 11px 20px; font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1.5px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
+  .pregame-play-btn:hover  { opacity: 0.88; }
+  .pregame-play-btn:active { transform: scale(0.97); }
+  .pregame-play-btn svg { width: 13px; height: 13px; }
+
+  /* END CARD */
+  .ec-header { text-align: center; flex-shrink: 0; padding-bottom: 4px; }
+  .ec-title { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--accent); letter-spacing: 4px; line-height: 1; }
+  .ec-sub   { font-size: 12px; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+  .ec-score-block { background: var(--surface2); border-radius: 12px; padding: 14px 16px; flex-shrink: 0; display: flex; align-items: center; gap: 16px; }
+  .ec-score-main { flex: 1; text-align: center; }
+  .ec-score-side { text-align: center; border-left: 1px solid var(--border); padding-left: 16px; flex-shrink: 0; min-width: 80px; }
+  .ec-score-side-val { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--text); letter-spacing: 1px; line-height: 1; }
+  .ec-score-lbl { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text3); font-weight: 700; margin-bottom: 4px; }
+  .ec-score-num { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--accent); letter-spacing: 3px; line-height: 1; }
+  .ec-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; flex-shrink: 0; }
+  .ec-stat  { background: var(--surface2); border-radius: 10px; padding: 9px 8px; text-align: center; }
+  .ec-stat-lbl { font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); font-weight: 600; margin-bottom: 3px; }
+  .ec-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--text); letter-spacing: 1px; line-height: 1; }
+  .near-miss-bar { background: var(--surface2); border: 1px solid var(--accent-border); border-radius: 12px; padding: 14px 16px; flex-shrink: 0; display: flex; flex-direction: column; gap: 4px; }
+  .nm-title { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .nm-text  { font-size: 15px; color: var(--text); font-weight: 600; line-height: 1.3; }
+  .nm-sub   { font-size: 12px; color: var(--text2); }
+  .ec-accordion { flex-shrink: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .ec-accordion-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 13px 16px; background: var(--surface2); border: none; cursor: pointer; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); font-weight: 700; font-family: 'Inter', sans-serif; }
+  .ec-accordion-btn svg { width: 14px; height: 14px; transition: transform 0.2s; }
+  .ec-accordion-btn.open svg { transform: rotate(180deg); }
+  .ec-accordion-panel { background: var(--bg); max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
+  .ec-accordion-panel.open { max-height: 160px; }
+  .ec-round-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 14px; border-top: 1px solid var(--border); }
+  .ec-round-lbl { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .ec-round-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .ec-round-val { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--text); letter-spacing: 1px; }
+  .ec-actions { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+  .ec-share-btn { width: 100%; background: var(--accent); color: #000; border: none; border-radius: 12px; padding: 0; height: 46px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.15s; letter-spacing: 0.3px; }
+  .ec-share-btn:hover { opacity: 0.9; }
+  .ec-share-btn svg { width: 18px; height: 18px; }
+  .ec-btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .ec-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0; height: 46px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; text-decoration: none; transition: background 0.15s; }
+  .ec-btn:hover { background: var(--border); }
+  .ec-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .ec-btn.accent { border-color: var(--accent); color: var(--accent); }
+  .ec-btn.accent:hover { background: var(--accent-dim); }
+  .ec-other { flex-shrink: 0; }
+  .ec-other-lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); font-weight: 600; margin-bottom: 8px; }
+  .ec-other-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ec-game-link { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; text-decoration: none; background: var(--surface2); border: 1px solid var(--border2); transition: background 0.15s; }
+  .ec-game-link:hover { background: var(--border); }
+  .ec-game-link span { font-family: 'Bebas Neue', sans-serif; font-size: 16px; }
+
+  /* STATS */
+  .stats-section-label { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text3); font-weight: 700; margin-bottom: 10px; }
+  .stats-big-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .stat-big-card { background: var(--surface2); border: 1px solid var(--border2); border-radius: 14px; padding: 20px 16px; text-align: center; }
+  .stat-big-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; letter-spacing: 2px; color: var(--text); }
+  .stat-big-lbl { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); font-weight: 600; margin-top: 4px; }
+  .stats-best-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .stat-best-card { background: var(--surface2); border: 1px solid rgba(250,204,21,0.15); border-radius: 12px; padding: 14px 10px; text-align: center; }
+  .stat-best-lbl { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); font-weight: 600; margin-bottom: 6px; }
+  .stat-best-val { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--accent); line-height: 1; }
+  .streak-bar { display: flex; gap: 4px; flex-wrap: wrap; }
+  .streak-day { width: 18px; height: 18px; border-radius: 4px; background: var(--border); }
+  .streak-day.played { background: rgba(250,204,21,0.3); }
+  .streak-day.today  { background: var(--accent); }
+
+  /* EXIT SCREEN BUTTONS */
+  .victory-btns { display:flex; gap:6px; }
+  .share-btn { flex:1; background:var(--accent); color:#000; border:none; border-radius:10px; padding:14px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Inter',sans-serif; display:flex; align-items:center; justify-content:center; gap:6px; transition:opacity 0.15s; }
+  .share-btn:hover { opacity:0.9; }
+  .share-btn svg { width:15px; height:15px; flex-shrink:0; }
+  .postgame-actions { display:flex; flex-direction:column; gap:6px; }
+  .action-btn { width:100%; display:flex; align-items:center; justify-content:center; gap:8px; padding:13px; border-radius:10px; border:1px solid var(--border); background:var(--surface2); color:var(--text); font-size:14px; font-weight:600; font-family:'Inter',sans-serif; cursor:pointer; text-decoration:none; transition:background 0.15s; }
+  .action-btn:hover { background:var(--border); }
+  .action-btn svg { width:16px; height:16px; flex-shrink:0; }
+  .action-btn.action-home { border-color:var(--accent); color:var(--accent); }
+  .action-btn.action-home:hover { background:var(--accent-dim); }
+
+  /* AD SLOT */
+  .ad-slot {
+    width: 100%; background: var(--surface); border: 1px dashed var(--border2);
+    border-radius: 12px; height: 120px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 6px; color: var(--text3);
+    flex-shrink: 0;
+  }
+  .ad-slot-label { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; }
+  .ad-slot-size  { font-size: 11px; color: var(--text3); }
+
+  /* SETTINGS */
+  .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text); }
+  .setting-row:last-child { border-bottom: none; }
+  .setting-desc { color: var(--text2); font-size: 12px; margin-top: 2px; }
+  .toggle { width: 44px; height: 24px; background: var(--border); border-radius: 12px; cursor: pointer; position: relative; transition: background 0.2s; border: none; flex-shrink: 0; }
+  .toggle.on { background: var(--accent); }
+  .toggle::after { content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: transform 0.2s; }
+  .toggle.on::after { transform: translateX(20px); }
+
+  /* SHARE */
+  .share-preview { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-size: 12px; color: var(--text2); font-family: monospace; white-space: pre; line-height: 1.6; margin-bottom: 16px; letter-spacing: 0.5px; overflow-x: auto; }
+  .share-platforms { display: flex; flex-direction: column; gap: 8px; }
+  .platform-btn { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border-radius: 10px; border: none; cursor: pointer; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; transition: opacity 0.15s; color: #fff; }
+  .platform-btn:hover { opacity: 0.9; }
+  .x-btn    { background: #000; }
+  .wa-btn   { background: #25D366; }
+  .fb-btn   { background: #1877F2; }
+  .copy-btn { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+
+  /* CATEGORIES */
+  .cat-item { display: flex; align-items: center; gap: 14px; padding: 14px 20px; cursor: pointer; transition: background 0.15s; border-bottom: 1px solid var(--border); }
+  .cat-item:last-child { border-bottom: none; }
+  .cat-item:hover { background: var(--surface2); }
+  .cat-item.active { background: var(--surface2); pointer-events: none; }
+  .cat-icon { width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .cat-icon svg { width: 22px; height: 22px; }
+  .cat-info { flex: 1; }
+  .cat-name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .cat-desc { font-size: 12px; color: var(--text2); }
+  .cat-playing { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); padding: 3px 8px; border: 1px solid var(--accent-border); border-radius: 6px; background: var(--accent-dim); }
+
+  /* Start screen always scrollable so content never clips */
+  #startScreen { overflow-y:auto; }
+
+  @media (max-height:750px) {
+    #startScreen { justify-content:flex-start; padding-top:52px; }
+    .game-identity { padding:14px 0 16px; }
+    .free-play-section { padding:12px 0 14px; }
+    .ad-slot { height:90px; }
+  }
+
+  /* Short screens (≤ 680px tall) */
+  @media (max-height:680px) {
+    .header { height:62px; min-height:62px; }
+    .lower-info { min-height:76px; padding:10px 16px; }
+    #timerDisplay { font-size:34px; }
+    #scoreDisplay { font-size:30px; }
+    .stat-val { font-size:20px; }
+  }
+
+  /* Narrow phones (≤ 390px wide) */
+  @media (max-width:390px) {
+    .header { padding:0 8px; }
+    .header-title { font-size:36px; }
+    .header-icons { width:80px; }
+    .icon-btn { width:40px; height:40px; }
+    .stat-val { font-size:20px; }
+  }
+
+  /* Exit modal — short screens */
+  @media (max-height: 600px) {
+    .header { height:52px; min-height:52px; }
+    .header-title { font-size:34px; }
+    .status-bar { min-height:46px; padding:4px 12px; }
+    .stat-val { font-size:18px; }
+    .lower-info { min-height:62px; padding:6px 14px; }
+    #timerDisplay { font-size:28px; }
+    #scoreDisplay { font-size:26px; }
+    .player-name { font-size:18px; }
+    #timeoutModal .modal-body { padding: 10px 14px; gap: 6px; }
+    .ec-title { font-size: 26px; }
+    .ec-score-num { font-size: 38px; }
+    .ec-score-side-val { font-size: 26px; }
+    .ec-score-block { padding: 8px 12px; }
+    .ec-stats { gap: 4px; }
+    .ec-stat { padding: 5px 6px; }
+    .ec-stat-val { font-size: 17px; }
+    .victory-btns { gap: 5px; }
+    .share-btn { height: 40px; font-size: 13px; }
+    .postgame-actions .action-btn { height: 40px; font-size: 13px; }
+    .postgame-actions { gap: 5px; }
+    .ad-slot { min-height: 60px; max-height: 80px; }
+  }
+  @media (max-height: 500px) {
+    .header { height:48px; min-height:48px; }
+    .status-bar { min-height:40px; padding:3px 10px; }
+    .lower-info { min-height:54px; padding:4px 12px; }
+    #timerDisplay { font-size:24px; }
+    #scoreDisplay { font-size:22px; }
+    .stat-val { font-size:16px; }
+    .ec-accordion { display: none; }
+    .near-miss-bar { display: none !important; }
+    .ad-slot { display: none; }
+    #timeoutModal .modal-body { gap: 5px; padding: 8px 12px; }
+    .ec-score-num { font-size: 32px; }
+    .share-btn { height: 36px; font-size: 12px; }
+    .postgame-actions .action-btn { height: 36px; font-size: 12px; }
+  }
+  @media (max-width: 320px) {
+    .header-title { font-size:30px; }
+    .header-icons { width:70px; }
+    .icon-btn { width:34px; height:34px; }
+    #timerDisplay { font-size:24px; }
+    #scoreDisplay { font-size:22px; }
+    .stat-val { font-size:16px; }
+    .name-row { flex-direction:column; }
+    .start-btn { width:100%; }
+    .game-id-tags { gap:4px; }
+    .game-id-tag { font-size:10px; padding:3px 8px; }
+    .ec-stats { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 441px) { #app { max-width: 536px; border-left: 1px solid #1a1a1a; border-right: 1px solid #1a1a1a; } }
+</style>
+</head>
+<body>
+<div id="app">
+<div id="wrongOverlay"></div>
+<div id="shakeWrap">
+
+<!-- HEADER -->
+<header class="header hidden" id="mainHeader">
+  <div class="header-icons">
+    <a href="../../spot-the-pair-game-4.html#leaderboard" class="icon-btn" title="Exit game" aria-label="Exit game" style="text-decoration:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <button class="icon-btn" id="categoriesBtn" title="All Games" aria-label="All Games">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    </button>
+    <button class="icon-btn" id="helpBtn" title="How to play" aria-label="Help">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="0.5" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="header-center">
+    <a href="../../index.html" class="header-title-link" aria-label="Back to Clickzle home">
+      <div class="header-title">CLICK<span>ZLE</span></div>
+      <div class="header-subtitle">Spot the Pair</div>
+    </a>
+  </div>
+  <div class="header-icons right">
+    <button class="icon-btn" id="statsBtn" title="Stats" aria-label="Statistics">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    </button>
+    <button class="icon-btn" id="muteBtn" title="Mute / Unmute" aria-label="Mute">
+      <svg id="muteIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      <svg id="muteIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+    </button>
+    <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- START SCREEN -->
+<div id="startScreen">
+  <a href="../../index.html" class="start-home-btn" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Home
+  </a>
+  <a href="../../spot-the-pair-game-4.html#leaderboard" class="start-home-btn" style="left:auto;right:14px;" aria-label="Leaderboard">
+    Leaderboard
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+  <img src="../../assets/logoyellowdm.png" alt="Clickzle" class="start-logo-img" id="entranceLogo">
+  <div class="game-identity">
+    <div class="game-id-badge">Game 4 of 5 &mdash; Observation Challenge</div>
+    <div class="game-id-title">Spot the Pair</div>
+    <div class="game-id-challenge">5 Rounds &mdash; One Shot Daily</div>
+    <div class="game-id-desc">20 tiles, one hidden pair. Scan the grid, tap your match, build your combo. One wrong tap resets everything. Five rounds &mdash; one minute each.</div>
+    <div class="game-id-tags">
+      <span class="game-id-tag">Observation</span>
+      <span class="game-id-tag">Focus</span>
+      <span class="game-id-tag">Speed</span>
+    </div>
+  </div>
+  <div class="section-label">Play free &mdash; no account needed</div>
+  <div class="free-play-section">
+    <div class="name-row">
+      <input type="text" class="name-input" id="playerNameInput" placeholder="Enter your name" maxlength="20" autocomplete="off" spellcheck="false">
+      <button class="start-btn" id="startBtn">PLAY</button>
+    </div>
+    <div class="free-note">Play instantly, no account needed. <a href="../../index.html" style="color:var(--accent);text-decoration:underline;font-weight:600;">Login</a> or <a href="../../index.html" style="color:var(--accent);text-decoration:underline;font-weight:600;">create a free account</a> to save your scores and stats and compete on the global leaderboard.</div>
+  </div>
+  <div class="ad-slot" id="adSlot">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    <span class="ad-slot-label">Clickzle Games</span>
+    <span class="ad-slot-size">300 &times; 120</span>
+  </div>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="gameScreen">
+  <div class="status-bar">
+    <div class="stat-block">
+      <div class="stat-lbl">Streak</div>
+      <div class="stat-val accent" id="streakDisplay">0</div>
+      <div class="combo-badge" id="comboBadge">x1</div>
+    </div>
+    <div class="status-centre">
+      <div class="round-dots" id="roundDots">
+        <div class="round-dot active" data-r="1"></div>
+        <div class="round-dot" data-r="2"></div>
+        <div class="round-dot" data-r="3"></div>
+        <div class="round-dot" data-r="4"></div>
+        <div class="round-dot" data-r="5"></div>
+      </div>
+      <div class="round-label" id="roundLabel">ROUND 1 OF 5</div>
+    </div>
+    <div class="stat-block right">
+      <div class="stat-lbl">Best</div>
+      <div class="stat-val" id="bestStreakDisplay">0</div>
+    </div>
+  </div>
+  <div class="grid-wrapper" id="gridWrapper">
+    <div id="gameGrid"></div>
+    <div id="milestoneBanner" class="hidden"><span id="milestoneText">STREAK x2</span></div>
+    <div id="feedbackMsg" class="feedback-msg hidden"></div>
+    <div id="roundOverlay" class="hidden">
+      <div class="ro-header">
+        <div class="ro-label">Round</div>
+        <div class="ro-num" id="roNum">1</div>
+        <div class="ro-of" id="roOf">of 5</div>
+      </div>
+      <div class="ro-tagline" id="roTagline"></div>
+      <div class="ro-ready-bar" id="roReadyBar">GET READY</div>
+      <div class="ro-count" id="roCount"></div>
+      <div class="ro-dots" id="roDots">
+        <div class="ro-dot" data-step="3"></div>
+        <div class="ro-dot" data-step="2"></div>
+        <div class="ro-dot" data-step="1"></div>
+      </div>
+    </div>
+  </div>
+  <div class="progress-bar-wrap"><div id="progressBar"></div></div>
+  <div class="lower-info">
+    <div class="info-left">
+      <div class="player-name" id="playerNameDisplay">&mdash;</div>
+      <div class="game-mode" style="display:flex;flex-direction:column;align-items:flex-start;gap:1px;letter-spacing:2px;"><span>Observation</span><span style="color:var(--text2)">Challenge</span></div>
+    </div>
+    <div class="timer-wrap">
+      <div class="timer-label">Time</div>
+      <div id="timerDisplay">60</div>
+    </div>
+    <div class="info-right">
+      <div class="turns-label">Score</div>
+      <div id="scoreDisplay">0</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /#shakeWrap -->
+
+<!-- PREGAME HTP -->
+<div class="modal-overlay" id="pregameHelpModal">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">HOW TO PLAY</div></div>
+    <div class="modal-body">
+      <div class="help-rules-block">
+        <div class="help-rule">
+          <div class="tile-swatch is-pair">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><polygon points="12,2.5 21,8.9 17.6,19.1 6.4,19.1 3,8.9"/></svg>
+          </div>
+          <div class="help-text"><h4>Find the matching pair</h4><p>20 tiles fill the grid. Exactly one pair of identical icons is hidden among them. All other tiles are unique.</p></div>
+        </div>
+        <div class="help-rule">
+          <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg></div>
+          <div class="help-text"><h4>Tap first, then confirm</h4><p>Tap one tile to select it &mdash; it glows yellow. Find its exact match and tap it. Correct: both dissolve, new grid spawns instantly.</p></div>
+        </div>
+        <div class="help-rule">
+          <div class="tile-swatch is-decoy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><polygon points="12,4.8 14.47,11.8 22,11.5 16.29,16.1 18.47,23.1 12,18.8 5.53,23.1 7.71,16.1 2,11.5 9.53,11.8"/></svg>
+          </div>
+          <div class="help-text"><h4>Watch out for decoys</h4><p>Near-identical icons appear later. They look similar but are not the pair. The pair is always <em>identical</em> &mdash; not just similar.</p></div>
+        </div>
+        <div class="help-rule">
+          <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="help-text"><h4>5 rounds, 1 minute each</h4><p>Score carries. One wrong tap resets your streak and briefly stuns the grid. One chance per day.</p></div>
+        </div>
+      </div>
+      <div class="bonus-section">
+        <div class="bonus-title">Combo &amp; Scoring</div>
+        <div class="bonus-grid">
+          <div class="bonus-card"><div class="bonus-pts">x1&rarr;x5</div><div class="bonus-name">Combo</div><div class="bonus-desc">Every 5 correct pairs raises your multiplier</div></div>
+          <div class="bonus-card"><div class="bonus-pts">Reset</div><div class="bonus-name">Wrong Tap</div><div class="bonus-desc">Incorrect pair resets combo to x1</div></div>
+          <div class="bonus-card"><div class="bonus-pts">+10</div><div class="bonus-name">Per Pair</div><div class="bonus-desc">Base points &times; your current combo</div></div>
+          <div class="bonus-card"><div class="bonus-pts">Speed</div><div class="bonus-name">Bonus</div><div class="bonus-desc">Sub-1.5s reactions earn hidden extra points</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pregame-modal-foot">
+      <label class="dont-show-label"><input type="checkbox" id="dontShowHtp"><span>Don&rsquo;t show again</span></label>
+      <button class="pregame-play-btn" id="pregamePlayBtn">
+        Got it &mdash; Hunt!
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TIMEOUT / END CARD -->
+<div class="modal-overlay" id="timeoutModal">
+  <div class="modal">
+    <div class="modal-body">
+      <div class="ec-header">
+        <div class="ec-title" id="timeoutTitle">GAME OVER</div>
+        <div class="ec-sub"   id="timeoutDate">Spot the Pair &mdash; Daily Puzzle</div>
+      </div>
+      <div class="ec-tiebreak-note" id="ecTiebreakNote" style="display:none;text-align:center;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);font-weight:600;padding:2px 0 4px;">
+        Tiebreaker: Pairs Found &rarr; Avg Reaction &rarr; Accuracy
+      </div>
+      <div class="near-miss-bar" id="nearMissBar" style="display:none;">
+        <div class="nm-title" id="nmTitle">SO CLOSE</div>
+        <div class="nm-text"  id="nmText"></div>
+        <div class="nm-sub"   id="nmSub"></div>
+      </div>
+      <div class="ec-score-block">
+        <div class="ec-score-main">
+          <div class="ec-score-lbl">Final Score</div>
+          <div class="ec-score-num" id="tScore">0</div>
+        </div>
+        <div class="ec-score-side">
+          <div class="ec-score-lbl">Pairs Found</div>
+          <div class="ec-score-side-val" id="tPairs">&mdash;</div>
+        </div>
+      </div>
+      <div class="ec-stats">
+        <div class="ec-stat"><div class="ec-stat-lbl">Best Streak</div><div class="ec-stat-val" id="tBestStreak">&mdash;</div></div>
+        <div class="ec-stat"><div class="ec-stat-lbl">Avg Reaction</div><div class="ec-stat-val" id="tAvgReact">&mdash;</div></div>
+        <div class="ec-stat"><div class="ec-stat-lbl">Accuracy</div><div class="ec-stat-val" id="tAccuracy">&mdash;</div></div>
+      </div>
+      <div class="ec-accordion">
+        <button class="ec-accordion-btn" id="roundAccordionBtn">
+          Round Scores
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="ec-accordion-panel" id="roundAccordionPanel">
+          <div id="roundBreakdown"></div>
+        </div>
+      </div>
+      <div class="ad-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <span class="ad-slot-label">Clickzle Games</span>
+        <span class="ad-slot-size">300 &times; 120</span>
+      </div>
+      <div class="victory-btns">
+        <button class="share-btn" id="shareTimeoutBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          Share Result
+        </button>
+        <button class="share-btn" id="inviteFriendBtn" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          Invite Friend
+        </button>
+      </div>
+      <div class="postgame-actions" id="ecPostgameActions">
+        <a href="../../spot-the-pair-game-4.html#leaderboard" class="action-btn action-home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          View Leaderboard
+        </a>
+        <a href="../../index.html" class="action-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Back to Home
+        </a>
+      </div>
+      <div id="ecOtherGames" style="border-top:1px solid var(--border);margin-top:2px;padding-top:8px;">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);font-weight:600;margin-bottom:6px;">Play Other Games</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+          <a href="../../complete-the-image-game-1.html" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(74,222,128,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#4ade80;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">1</span> Complete the Image</a>
+          <a href="../../follow-the-pattern-game-2.html" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(96,165,250,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#60a5fa;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">2</span> Follow the Pattern</a>
+          <a href="../../hit-the-target-game-3.html"     style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(244,114,182,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#f472b6;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">3</span> Hit the Target</a>
+          <a href="../../next-in-sequence-game-5.html"   style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(167,139,250,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#a78bfa;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">5</span> Next in Sequence</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IN-GAME HELP -->
+<div class="modal-overlay" id="helpModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">HOW TO PLAY</div>
+      <button class="modal-close" data-close="helpModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding:20px 18px 24px;display:flex;flex-direction:column;gap:20px;">
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:10px;flex-shrink:0;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;">
+            <svg style="width:18px;height:18px;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;">Find the matching pair</div>
+            <div style="font-size:13px;color:var(--text2);line-height:1.5;">20 tiles fill the grid. Exactly one pair of identical icons is hidden among them. All other tiles are unique.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:10px;flex-shrink:0;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;">
+            <svg style="width:18px;height:18px;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;">Tap first, then confirm</div>
+            <div style="font-size:13px;color:var(--text2);line-height:1.5;">Tap one tile to select it &mdash; it glows yellow. Find its exact match and tap it. Wrong tap resets your streak. Tap the same tile again to deselect.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:10px;flex-shrink:0;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;">
+            <svg style="width:18px;height:18px;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;">Build your combo</div>
+            <div style="font-size:13px;color:var(--text2);line-height:1.5;">Every 5 correct pairs raises your multiplier: x2, x3, x4, x5. One mistake resets to x1.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:10px;flex-shrink:0;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;">
+            <svg style="width:18px;height:18px;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;">Icons get harder each round</div>
+            <div style="font-size:13px;color:var(--text2);line-height:1.5;">Round 1 is clear. Later rounds pack near-identical decoys. The pair is always <em>identical</em> &mdash; not just similar.</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px;">Scoring</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div style="background:var(--surface2);border-radius:12px;padding:12px 10px;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--accent);line-height:1;">x1&rarr;x5</div>
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin:3px 0 2px;">Combo</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.4;">Every 5 correct pairs raises your multiplier</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:12px;padding:12px 10px;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--accent);line-height:1;">Reset</div>
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin:3px 0 2px;">Wrong Tap</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.4;">Incorrect pair resets combo to x1</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:12px;padding:12px 10px;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--accent);line-height:1;">+10</div>
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin:3px 0 2px;">Per Pair</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.4;">Base points &times; your current combo</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:12px;padding:12px 10px;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--accent);line-height:1;">Speed</div>
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin:3px 0 2px;">Bonus</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.4;">Sub-1.5s reactions earn extra points</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="modal-overlay" id="statsModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">YOUR STATS</div>
+      <button class="modal-close" data-close="statsModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body" style="justify-content:space-between;padding:24px 20px;gap:20px;">
+      <div>
+        <div class="stats-section-label">Overall</div>
+        <div class="stats-big-grid">
+          <div class="stat-big-card"><div class="stat-big-num" id="statPlayed">0</div><div class="stat-big-lbl">Played</div></div>
+          <div class="stat-big-card"><div class="stat-big-num" id="statStreak">0</div><div class="stat-big-lbl">Day Streak</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="stats-section-label">Personal Bests</div>
+        <div class="stats-best-grid">
+          <div class="stat-best-card"><div class="stat-best-lbl">Best Score</div>   <div class="stat-best-val" id="statBestScore">&mdash;</div></div>
+          <div class="stat-best-card"><div class="stat-best-lbl">Best Streak</div>  <div class="stat-best-val" id="statBestStreak">&mdash;</div></div>
+          <div class="stat-best-card"><div class="stat-best-lbl">Best Avg React</div><div class="stat-best-val" id="statFastest">&mdash;</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="stats-section-label" style="margin-bottom:10px;">Last 7 Days</div>
+        <div class="streak-bar" id="streakBar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">SETTINGS</div>
+      <button class="modal-close" data-close="settingsModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="setting-row">
+        <div><div>Sound Effects</div><div class="setting-desc">Match tones, wrong buzz, milestones</div></div>
+        <button class="toggle on" id="soundToggle"></button>
+      </div>
+      <div class="setting-row">
+        <div><div>Light Mode</div><div class="setting-desc">Switch to light theme</div></div>
+        <button class="toggle" id="lightModeToggle"></button>
+      </div>
+      <div class="setting-row" style="border-bottom:none;">
+        <div style="font-size:12px;color:var(--text3);">Clickzle &middot; Spot the Pair &middot; v1.0<br>clickzle.games</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="modal-overlay" id="categoriesModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">ALL GAMES</div>
+      <button class="modal-close" data-close="categoriesModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="cat-item" onclick="location.href='../../complete-the-image-game-1.html'">
+        <div class="cat-icon" style="background:rgba(74,222,128,0.15);color:#4ade80;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg></div>
+        <div class="cat-info"><div class="cat-name">Complete the Image</div><div class="cat-desc">Find the one intact image among six decoys</div></div>
+      </div>
+      <div class="cat-item" onclick="location.href='../../follow-the-pattern-game-2.html'">
+        <div class="cat-icon" style="background:rgba(96,165,250,0.15);color:#60a5fa;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
+        <div class="cat-info"><div class="cat-name">Follow the Pattern</div><div class="cat-desc">Memorise tile sequences and tap them back</div></div>
+      </div>
+      <div class="cat-item" onclick="location.href='../../hit-the-target-game-3.html'">
+        <div class="cat-icon" style="background:rgba(244,114,182,0.15);color:#f472b6;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="cat-info"><div class="cat-name">Hit the Target</div><div class="cat-desc">Tap the target tile before it disappears</div></div>
+      </div>
+      <div class="cat-item active">
+        <div class="cat-icon" style="background:var(--accent-dim);color:var(--accent);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="3"/><circle cx="15" cy="12" r="3"/></svg></div>
+        <div class="cat-info"><div class="cat-name">Spot the Pair</div><div class="cat-desc">Find the two identical icons among 20 tiles</div></div>
+        <div class="cat-playing">Playing</div>
+      </div>
+      <div class="cat-item" onclick="location.href='../../next-in-sequence-game-5.html'">
+        <div class="cat-icon" style="background:rgba(167,139,250,0.15);color:#a78bfa;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 19 12"/><polyline points="13 6 19 12 13 18"/></svg></div>
+        <div class="cat-info"><div class="cat-name">Next in Sequence</div><div class="cat-desc">Predict the next item in every sequence</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SHARE -->
+<div class="modal-overlay" id="shareModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">SHARE</div>
+      <button class="modal-close" data-close="shareModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="share-preview" id="sharePreview"></div>
+      <div class="share-platforms">
+        <button class="platform-btn x-btn" id="shareX">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.255 5.621 5.91-5.621zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Share on X / Twitter
+        </button>
+        <button class="platform-btn wa-btn" id="shareWhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Share on WhatsApp
+        </button>
+        <button class="platform-btn fb-btn" id="shareFacebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Share on Facebook
+        </button>
+        <button class="platform-btn copy-btn" id="shareCopy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy to Clipboard
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /#app -->
+<script>
+'use strict';
+
+// Reveal start screen only after fonts are loaded — prevents layout jump
+document.fonts.ready.then(() => document.body.classList.add('fonts-ready'));
+
+
+// ════════════════════════════════════════════════════════════
+// CONSTANTS
+// ════════════════════════════════════════════════════════════
+const TOTAL_TILES  = 20;
+const TOTAL_ROUNDS = 5;
+const ROUND_MS     = 60000;
+const WARNING_MS   = 15000;
+const CRITICAL_MS  = 8000;
+const STUN_MS      = 220;
+const STATS_KEY    = 'clickzle_stats_pair';
+
+const ICONS = {
+
+  // ══════════════════════════════════════════════════════════════
+  // TIER 1 — 20 bold, clearly distinct icons. One per group.
+  // Each has a vivid unique colour.
+  // ══════════════════════════════════════════════════════════════
+  drop:  {t:1, g:'drop',  c:'#60a5fa', p:`<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" d="M12 3c0 0-7 7.5-7 12a7 7 0 0014 0C19 10.5 12 3 12 3z"/>`},
+  bolt:  {t:1, g:'bolt',  c:'#facc15', p:`<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" fill="currentColor" d="M13 2L4 14h7L9 22l11-13h-7L15 2z"/>`},
+  moon:  {t:1, g:'moon',  c:'#a78bfa', p:`<path stroke-linecap="round" stroke-width="2.4" stroke="currentColor" fill="none" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`},
+  pent:  {t:1, g:'pent',  c:'#34d399', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" points="12,2.5 21,8.9 17.6,19.1 6.4,19.1 3,8.9"/>`},
+  plus:  {t:1, g:'plus',  c:'#f472b6', p:`<line x1="12" y1="3" x2="12" y2="21" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/><line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>`},
+  heart: {t:1, g:'heart', c:'#f87171', p:`<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>`},
+  hex:   {t:1, g:'hex',   c:'#fb923c', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" points="12,2 20.66,7 20.66,17 12,22 3.34,17 3.34,7"/>`},
+  inf:   {t:1, g:'inf',   c:'#22d3ee', p:`<path stroke-linecap="round" stroke-width="2.2" stroke="currentColor" fill="none" d="M12 12C9.8 9 7.5 7.5 5.8 7.5a4.2 4.2 0 000 8.4c1.7 0 4-1.5 6.2-3.9zM12 12c2.2 2.4 4.5 3.9 6.2 3.9a4.2 4.2 0 000-8.4C16.5 7.5 14.2 9 12 12z"/>`},
+  wave:  {t:1, g:'wave',  c:'#a3e635', p:`<path stroke-linecap="round" stroke-width="2.2" stroke="currentColor" fill="none" d="M4 12c1.3-3.5 3-3.5 4.5 0s3.2 3.5 4.5 0 3.2-3.5 4.5 0M4 17c1.3-3.5 3-3.5 4.5 0s3.2 3.5 4.5 0 3.2-3.5 4.5 0"/>`},
+  sprl:  {t:1, g:'sprl',  c:'#e879f9', p:`<path stroke-linecap="round" stroke-width="2.4" stroke="currentColor" fill="none" d="M12 12c0 0 4.5 0 4.5-4C16.5 4.5 13 3 10.5 5S7 10.5 9 14s6.5 4 9 2.5S21.5 9 18.5 6"/>`},
+  diam:  {t:1, g:'diam',  c:'#38bdf8', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" points="12,2 22,12 12,22 2,12"/>`},
+  triu:  {t:1, g:'tri',   c:'#4ade80', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" points="12,3.5 22,20.5 2,20.5"/>`},
+  str5:  {t:1, g:'star',  c:'#fbbf24', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" stroke="currentColor" fill="none" points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>`},
+  shld:  {t:1, g:'shld',  c:'#818cf8', p:`<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`},
+  leaf:  {t:1, g:'leaf',  c:'#86efac', p:`<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" d="M17 8C8 10 5.9 16.2 3.82 22c5.18-3 8.18-9 8.18-9-.72 6.08-5.67 8-5.67 8 0 0 7.67.33 11.17-5.5C20.95 9.83 18 5 18 5l-1 3z"/>`},
+  eyee:  {t:1, g:'eye',   c:'#67e8f9', p:`<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" stroke="currentColor" fill="none" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2.2" fill="none"/>`},
+  bell:  {t:1, g:'bell',  c:'#fda4af', p:`<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" stroke="currentColor" fill="none" d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path stroke-linecap="round" stroke-width="2.2" stroke="currentColor" fill="none" d="M13.73 21a2 2 0 0 1-3.46 0"/>`},
+  arru:  {t:1, g:'arr',   c:'#c084fc', p:`<polyline stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" stroke="currentColor" fill="none" points="5,12 12,5 19,12"/><line x1="12" y1="5" x2="12" y2="20" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>`},
+  circ:  {t:1, g:'circ',  c:'#fdba74', p:`<circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2.6" fill="none"/>`},
+  clvr:  {t:1, g:'clvr',  c:'#6ee7b7', p:`<circle cx="12" cy="7.5" r="3.5" stroke="currentColor" stroke-width="2.2" fill="none"/><circle cx="16.5" cy="12" r="3.5" stroke="currentColor" stroke-width="2.2" fill="none"/><circle cx="12" cy="16.5" r="3.5" stroke="currentColor" stroke-width="2.2" fill="none"/><circle cx="7.5" cy="12" r="3.5" stroke="currentColor" stroke-width="2.2" fill="none"/>`},
+
+  // ══════════════════════════════════════════════════════════════
+  // TIER 2 — Same general "family" as a T1 icon, but RADICALLY
+  // different colour so they can never be confused as identical.
+  // Shape also made noticeably different. Used as decoys R2+.
+  // ══════════════════════════════════════════════════════════════
+
+  // Downward triangle (vs upward) — ORANGE, clearly different from green T1
+  trid:  {t:2, g:'tri',   c:'#f97316', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" points="12,20.5 22,3.5 2,3.5"/>`},
+
+  // 6-point star (vs 5-point) — VIOLET, clearly different from yellow T1
+  str6:  {t:2, g:'star',  c:'#8b5cf6', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" stroke="currentColor" fill="none" points="12,2 14.6,9.4 22,9.4 16.3,14.5 18.5,22 12,17.6 5.5,22 7.7,14.5 2,9.4 9.4,9.4"/>`},
+
+  // Mirrored leaf — ROSE, clearly different from light green T1
+  leafr: {t:2, g:'leaf',  c:'#fb7185', p:`<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" d="M7 8c9 2 11.1 8.2 13.18 14-5.18-3-8.18-9-8.18-9 .72 6.08 5.67 8 5.67 8 0 0-7.67.33-11.17-5.5C3.05 9.83 6 5 6 5l1 3z"/>`},
+
+  // Diagonal arrow (vs straight up) — TEAL, clearly different from purple T1
+  arrd:  {t:2, g:'arr',   c:'#2dd4bf', p:`<line x1="5" y1="19" x2="19" y2="5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><polyline stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" stroke="currentColor" fill="none" points="9,5 19,5 19,15"/>`},
+
+  // Wider (landscape) diamond — RED, clearly different from sky blue T1
+  diamw: {t:2, g:'diam',  c:'#ef4444', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" points="12,5 21,12 12,19 3,12"/>`},
+
+  // Flat-top hexagon (rotated 90deg vs vertex-up) — CYAN, clearly different from orange T1
+  hexfl: {t:2, g:'hex',   c:'#06b6d4', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" stroke="currentColor" fill="none" points="2,12 6.5,4.07 17.5,4.07 22,12 17.5,19.93 6.5,19.93"/>`},
+
+  // ══════════════════════════════════════════════════════════════
+  // TIER 3 — Hardest decoys. Same base shape as T1, very similar
+  // but with one clear distinguishing feature. VERY different
+  // colour from T1 so player can tell they're different icons.
+  // ══════════════════════════════════════════════════════════════
+
+  // Filled/solid star — PINK (vs yellow outline star T1)
+  str5f: {t:3, g:'star',  c:'#ec4899', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" fill="currentColor" points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>`},
+
+  // Hexagon with inner dot (bullseye hex) — LIME (vs orange outline hex T1)
+  hexdot:{t:3, g:'hex',   c:'#84cc16', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" stroke="currentColor" fill="none" points="12,2 20.66,7 20.66,17 12,22 3.34,17 3.34,7"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="2" fill="none"/>`},
+
+  // Nested diamonds (diamond inside diamond) — FUCHSIA (vs sky blue T1)
+  diami: {t:3, g:'diam',  c:'#d946ef', p:`<polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" stroke="currentColor" fill="none" points="12,2 22,12 12,22 2,12"/><polygon stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" stroke="currentColor" fill="none" points="12,6 18,12 12,18 6,12"/>`},
+
+  // Bullseye (circle with inner circle) — LIME GREEN (vs peach outer circle T1)
+  circi: {t:3, g:'circ',  c:'#22c55e', p:`<circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2.4" fill="none"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="2" fill="none"/>`},
+
+};
+
+const ICON_LIST = Object.entries(ICONS).map(([id, d]) => ({ id, ...d }));
+
+// ════════════════════════════════════════════════════════════
+// ROUND CONFIG
+// ════════════════════════════════════════════════════════════
+const ROUND_CONFIG = {
+  1: { label:'Find Your Rhythm', pairTiers:[1],   decoys:0, spawnMs:380 },
+  2: { label:'Eyes Open',        pairTiers:[1],   decoys:1, spawnMs:310 },
+  3: { label:'Stay Focused',     pairTiers:[1,2], decoys:2, spawnMs:250 },
+  4: { label:"Don't Blink",      pairTiers:[1,2], decoys:3, spawnMs:190 },
+  5: { label:'Final Hunt',       pairTiers:[2,3], decoys:4, spawnMs:130 },
+};
+
+const SCORE_TITLES = [
+  { min:0,       title:'KEEP HUNTING'  },
+  { min:3000,    title:'WARMING UP'    },
+  { min:8000,    title:'GETTING THERE' },
+  { min:18000,   title:'GOOD HUNT'     },
+  { min:35000,   title:'SHARP EYES'    },
+  { min:65000,   title:'IMPRESSIVE'    },
+  { min:110000,  title:'OUTSTANDING'   },
+  { min:180000,  title:'ELITE HUNTER'  },
+];
+
+// ════════════════════════════════════════════════════════════
+// SETTINGS
+// ════════════════════════════════════════════════════════════
+let settings = { sound:true, lightMode:false };
+try { Object.assign(settings, JSON.parse(localStorage.getItem('clickzle_settings') || '{}')); } catch(e) {}
+if (settings.lightMode) document.body.classList.add('light');
+
+function saveSettings() {
+  try { localStorage.setItem('clickzle_settings', JSON.stringify(settings)); } catch(e) {}
+}
+function updateEntranceLogo() {
+  const l = document.getElementById('entranceLogo');
+  if (l) l.src = document.body.classList.contains('light')
+    ? '../../assets/logoyellowlm.png'
+    : '../../assets/logoyellowdm.png';
+}
+function applyMuteBtn() {
+  document.getElementById('muteIconOn').style.display  = settings.sound ? '' : 'none';
+  document.getElementById('muteIconOff').style.display = settings.sound ? 'none' : '';
+  document.getElementById('muteBtn').title = settings.sound ? 'Mute sound' : 'Unmute sound';
+  document.getElementById('muteBtn').setAttribute('aria-label', settings.sound ? 'Mute' : 'Unmute');
+}
+function applySettings() {
+  document.getElementById('soundToggle').classList.toggle('on', settings.sound);
+  document.getElementById('lightModeToggle').classList.toggle('on', settings.lightMode);
+  document.body.classList.toggle('light', settings.lightMode);
+  applyMuteBtn();
+  updateEntranceLogo();
+  saveSettings();
+}
+document.getElementById('muteBtn').addEventListener('click', function () {
+  settings.sound = !settings.sound;
+  applyMuteBtn();
+  document.getElementById('soundToggle').classList.toggle('on', settings.sound);
+  saveSettings();
+});
+document.getElementById('soundToggle').addEventListener('click', function () {
+  settings.sound = !settings.sound;
+  this.classList.toggle('on', settings.sound);
+  applyMuteBtn();
+  saveSettings();
+});
+document.getElementById('lightModeToggle').addEventListener('click', function () {
+  settings.lightMode = !settings.lightMode;
+  this.classList.toggle('on', settings.lightMode);
+  document.body.classList.toggle('light', settings.lightMode);
+  updateEntranceLogo();
+  saveSettings();
+});
+applySettings();
+
+// ════════════════════════════════════════════════════════════
+// STATS
+// ════════════════════════════════════════════════════════════
+function getStats()  { try { return JSON.parse(localStorage.getItem(STATS_KEY) || '{}'); } catch(e) { return {}; } }
+function saveStats(s){ try { localStorage.setItem(STATS_KEY, JSON.stringify(s)); } catch(e) {} }
+
+// ════════════════════════════════════════════════════════════
+// AUDIO  (Web Audio API — no files needed)
+// ════════════════════════════════════════════════════════════
+let audioCtx = null;
+function getACtx() {
+  if (!audioCtx) try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+function tone(freq, dur, type, vol, delay) {
+  if (!settings.sound) return;
+  const ctx = getACtx(); if (!ctx) return;
+  try {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    const t = ctx.currentTime + (delay || 0);
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(vol || 0.25, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(t); o.stop(t + dur + 0.02);
+  } catch(e) {}
+}
+function noise(dur, vol, delay) {
+  if (!settings.sound) return;
+  const ctx = getACtx(); if (!ctx) return;
+  try {
+    const buf = ctx.createBuffer(1, ctx.sampleRate * dur, ctx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    const src = ctx.createBufferSource(); src.buffer = buf;
+    const g = ctx.createGain(), f = ctx.createBiquadFilter();
+    f.type = 'bandpass'; f.frequency.value = 1200; f.Q.value = 0.8;
+    const t = ctx.currentTime + (delay || 0);
+    g.gain.setValueAtTime(vol || 0.12, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    src.connect(f); f.connect(g); g.connect(ctx.destination);
+    src.start(t); src.stop(t + dur + 0.02);
+  } catch(e) {}
+}
+function playMatch(combo) {
+  const b = 500 + combo * 65;
+  tone(b * 1.5, 0.06, 'triangle', 0.30);
+  tone(b,       0.20, 'triangle', 0.20, 0.04);
+  noise(0.06, 0.10);
+}
+function playSelect()   { tone(680, 0.07, 'sine', 0.13); }
+function playWrong()    { tone(200, 0.10, 'sawtooth', 0.22); tone(150, 0.18, 'sawtooth', 0.18, 0.06); noise(0.12, 0.18); }
+function playMilestone(){ [440,556,660,880].forEach((f,i) => tone(f,0.20,'sine',0.22, i*0.07)); }
+function playRoundEnd() { [440,550,660].forEach((f,i) => tone(f,0.22,'triangle',0.20, i*0.10)); }
+function playCd(n) { const m={3:330,2:370,1:415}; tone(m[n]||330,0.10,'sine',0.28); }
+function playGo()  { tone(523,0.18,'sine',0.38); tone(659,0.18,'sine',0.28,0.07); }
+
+// ════════════════════════════════════════════════════════════
+// VOICEOVER  (Web Speech API — exactly as G3 Hit the Target)
+// ════════════════════════════════════════════════════════════
+let voiceReady   = false;
+let chosenVoice  = null;
+let _keepaliveId = null;
+
+function initVoice() {
+  if (typeof speechSynthesis === 'undefined') return;
+  speechSynthesis.cancel();
+  voiceReady = true;
+  pickVoice();
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = pickVoice;
+  }
+  // Chrome bug: speech synthesis silently pauses after ~15s.
+  // Keepalive: pause+resume every 10s to prevent it.
+  if (_keepaliveId) clearInterval(_keepaliveId);
+  _keepaliveId = setInterval(() => {
+    if (typeof speechSynthesis === 'undefined') return;
+    if (speechSynthesis.speaking) return; // don't interrupt active speech
+    speechSynthesis.pause();
+    speechSynthesis.resume();
+  }, 10000);
+  // Warm-up: fire a silent utterance so the engine is primed for first real call
+  _warmupVoice();
+}
+
+function _warmupVoice() {
+  try {
+    const u  = new SpeechSynthesisUtterance(' ');
+    u.volume = 0;
+    u.rate   = 2;
+    if (chosenVoice) u.voice = chosenVoice;
+    speechSynthesis.speak(u);
+  } catch(e) {}
+}
+
+function pickVoice() {
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return;
+  const preferredVoices = [
+    'Google UK English Male','Daniel',
+    'Google UK English Female','Google US English',
+    'Samantha','Karen','Victoria','Moira','Tessa','Fred'
+  ];
+  for (const name of preferredVoices) {
+    const v = voices.find(v => v.name === name);
+    if (v) { chosenVoice = v; return; }
+  }
+  chosenVoice = voices.find(v => v.lang.startsWith('en')) || null;
+}
+
+// speak() — cancelFirst=true interrupts any current speech (for countdown numbers)
+//         — cancelFirst=false queues after current (for "Get ready" which we want to complete)
+// onEnd callback called when utterance finishes (optional)
+function speak(text, rate, pitch, cancelFirst, onEnd) {
+  if (!settings.sound || !voiceReady || typeof speechSynthesis === 'undefined') return;
+  if (cancelFirst === undefined) cancelFirst = true;
+  try {
+    if (cancelFirst) speechSynthesis.cancel();
+    const u  = new SpeechSynthesisUtterance(text);
+    u.rate   = rate  || 0.90;
+    u.pitch  = pitch || 1.15;
+    u.volume = 0.95;
+    if (chosenVoice) u.voice = chosenVoice;
+    if (onEnd) u.onend = onEnd;
+    speechSynthesis.speak(u);
+  } catch(e) { if (onEnd) onEnd(); }
+}
+
+// ════════════════════════════════════════════════════════════
+// SEEDED RNG  (same daily puzzle for everyone)
+// ════════════════════════════════════════════════════════════
+let _rng = null;
+function initRng() {
+  const now  = new Date();
+  const seed = ((now.getUTCFullYear() * 10000 + (now.getUTCMonth() + 1) * 100 + now.getUTCDate()) + 4000) % 99991 + 1;
+  let s = seed;
+  _rng = () => { s = (s * 1664525 + 1013904223) & 0xffffffff; return (s >>> 0) / 4294967296; };
+}
+function rnd() { return _rng ? _rng() : Math.random(); }
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rnd() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// ════════════════════════════════════════════════════════════
+// GAME STATE
+// ════════════════════════════════════════════════════════════
+let gs = {};
+function resetGS() {
+  gs = {
+    playerName:    '',
+    score:         0,
+    streak:        0,
+    bestStreak:    0,
+    currentRound:  1,
+    isActive:      false,
+    done:          false,
+    selectedPos:   null,
+    selectTs:      0,
+    stunUntil:     0,
+    grid:          [],
+    pairIconId:    null,
+    totalHits:     0,
+    totalWrongs:   0,
+    pairTimes:     [],
+    roundScores:   [0, 0, 0, 0, 0],
+    roundPairs:    [0, 0, 0, 0, 0],
+    roundScoreStart: 0,
+    roundStartTs:  0,
+    lastSecLeft:   -1,
+    rafId:         null,
+    spawnTimer:    null,
+    wrongsThisRound: 0,
+    inputBlocked:  false,
+    pausedAt:      null,
+  };
+}
+
+// ════════════════════════════════════════════════════════════
+// GRID BUILD
+// ════════════════════════════════════════════════════════════
+function buildGrid(round) {
+  const cfg = ROUND_CONFIG[round];
+
+  // 1. Pick the pair icon from allowed tiers
+  const pairPool = ICON_LIST.filter(ic => cfg.pairTiers.includes(ic.t));
+  const pairIcon = pairPool[Math.floor(rnd() * pairPool.length)];
+  gs.pairIconId  = pairIcon.id;
+
+  // 2. Pick decoys from the same visual group (not the pair itself)
+  const decoyPool = shuffle(ICON_LIST.filter(ic => ic.g === pairIcon.g && ic.id !== pairIcon.id));
+  const decoys    = decoyPool.slice(0, Math.min(cfg.decoys, decoyPool.length));
+  const usedIds   = new Set([pairIcon.id, ...decoys.map(d => d.id)]);
+
+  // 3. Fillers: one icon per visual group (prevents lookalike confusion)
+  const candidates = shuffle(ICON_LIST.filter(ic => !usedIds.has(ic.id) && ic.g !== pairIcon.g));
+  const seenGrps   = new Set();
+  const fillers    = candidates.filter(ic => {
+    if (seenGrps.has(ic.g)) return false;
+    seenGrps.add(ic.g);
+    return true;
+  }).slice(0, 18 - decoys.length);
+
+  // 4. Assemble 20 tiles  [pair A, pair B, ...decoys, ...fillers]
+  const ids = [pairIcon.id, pairIcon.id, ...decoys.map(d => d.id), ...fillers.map(f => f.id)];
+  // Safety pad (should never be needed, but guards against edge-case icon pool exhaustion)
+  while (ids.length < 20) ids.push(fillers[ids.length % Math.max(1, fillers.length)].id);
+  ids.length = 20;
+
+  // 5. Shuffle positions
+  shuffle(ids);
+
+  gs.grid = ids;
+}
+
+// ════════════════════════════════════════════════════════════
+// DOM  –  tile elements
+// ════════════════════════════════════════════════════════════
+function getTile(i) { return document.getElementById('gameGrid').children[i]; }
+
+function renderTile(el, iconId) {
+  const icon = ICONS[iconId]; if (!icon) return;
+  const c = icon.c || '#ffffff';
+  el.style.setProperty('--ic', c);
+  el.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color:${c}">${icon.p}</svg>`;
+}
+
+// Full grid render with staggered wave spawn animation
+function renderGrid() {
+  const grid = document.getElementById('gameGrid');
+  gs.grid.forEach((iconId, i) => {
+    const t = grid.children[i];
+    if (!t) return;
+    // Reset completely
+    t.className = 'tile';
+    t.style.animationDelay = '';
+    t.style.animation      = '';
+    // Force reflow so spawning animation restarts
+    void t.offsetWidth;
+    // Stagger: left-to-right, top-to-bottom wave
+    const col = i % 4, row = Math.floor(i / 4);
+    t.style.animationDelay = (col * 28 + row * 18) + 'ms';
+    t.classList.add('spawning');
+    renderTile(t, iconId);
+  });
+}
+
+function initGridDOM() {
+  const grid = document.getElementById('gameGrid');
+  grid.innerHTML = '';
+  for (let i = 0; i < TOTAL_TILES; i++) {
+    const t = document.createElement('div');
+    t.className   = 'tile';
+    t.dataset.pos = i;
+    t.addEventListener('click', () => handleTileClick(i));
+    grid.appendChild(t);
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+// TILE CLICK
+// ════════════════════════════════════════════════════════════
+function handleTileClick(pos) {
+  if (!gs.isActive || gs.done || gs.inputBlocked) return;
+  if (performance.now() < gs.stunUntil) return;
+  const tile = getTile(pos);
+  if (!tile || tile.classList.contains('matched')) return;
+
+  if (gs.selectedPos === null) {
+    // First tap — select
+    gs.selectedPos = pos;
+    gs.selectTs    = performance.now();
+    tile.classList.add('selected');
+    playSelect();
+    // Tap ripple
+    const rpl = document.createElement('div');
+    rpl.className = 'tile-ripple';
+    tile.appendChild(rpl);
+    setTimeout(() => rpl.remove(), 420);
+
+  } else if (gs.selectedPos === pos) {
+    // Tap same tile again — deselect
+    tile.classList.remove('selected');
+    gs.selectedPos = null;
+
+  } else {
+    // Second tap — evaluate
+    const idA = gs.grid[gs.selectedPos];
+    const idB = gs.grid[pos];
+    if (idA === idB) {
+      onCorrectPair(gs.selectedPos, pos);
+    } else {
+      onWrongPair(gs.selectedPos, pos);
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+// CORRECT PAIR
+// ════════════════════════════════════════════════════════════
+function comboFromStreak(s) {
+  if (s >= 20) return 5;
+  if (s >= 15) return 4;
+  if (s >= 10) return 3;
+  if (s >= 5)  return 2;
+  return 1;
+}
+
+function onCorrectPair(pos1, pos2) {
+  const rt       = Math.round(performance.now() - gs.selectTs);
+  gs.streak++;
+  if (gs.streak > gs.bestStreak) gs.bestStreak = gs.streak;
+  gs.totalHits++;
+  gs.pairTimes.push(rt);
+  gs.roundPairs[gs.currentRound - 1]++;
+
+  const combo      = comboFromStreak(gs.streak);
+  const speedBonus = Math.max(0, Math.floor((1500 - Math.min(rt, 1500)) / 150));
+  const pts        = (10 + speedBonus) * combo;
+  gs.score += pts;
+  gs.roundScores[gs.currentRound - 1] = gs.score - gs.roundScoreStart;
+
+  // Animate the two matched tiles
+  const t1 = getTile(pos1), t2 = getTile(pos2);
+  if (t1) { t1.classList.remove('selected'); t1.classList.add('matched'); }
+  if (t2) {                                  t2.classList.add('matched'); }
+
+  playMatch(combo);
+  showScorePop(t1, pts, combo, speedBonus);
+
+  const ic = ICONS[gs.pairIconId];
+  if (ic) {
+    if (t1) spawnParticles(t1, ic.c);
+    if (t2) spawnParticles(t2, ic.c);
+  }
+
+  if (gs.streak > 0 && gs.streak % 5 === 0) fireMilestone(gs.streak, combo);
+
+  document.getElementById('app').className = combo >= 2 ? 'combo-' + combo : '';
+  updateHUD();
+  gs.selectedPos = null;
+
+  // Full grid rebuild after match
+  const cfg = ROUND_CONFIG[gs.currentRound];
+  gs.spawnTimer = setTimeout(() => {
+    if (!gs.done && gs.isActive) {
+      buildGrid(gs.currentRound);
+      renderGrid();
+
+    }
+  }, cfg.spawnMs);
+}
+
+
+// ════════════════════════════════════════════════════════════
+// WRONG PAIR
+// ════════════════════════════════════════════════════════════
+function onWrongPair(pos1, pos2) {
+  const oldCombo = comboFromStreak(gs.streak);
+  const id1      = gs.grid[pos1];
+  const id2      = gs.grid[pos2];
+  const nearMiss = ICONS[id1] && ICONS[id2] && ICONS[id1].g === ICONS[id2].g;
+
+  gs.streak   = 0;
+  gs.totalWrongs++;
+  gs.wrongsThisRound++;
+  gs.score    = Math.max(0, gs.score - 5);
+  gs.roundScores[gs.currentRound - 1] = gs.score - gs.roundScoreStart;
+  gs.stunUntil = performance.now() + STUN_MS;
+
+  const t1 = getTile(pos1), t2 = getTile(pos2);
+  if (t1) { t1.classList.remove('selected'); t1.classList.add('wrong'); }
+  if (t2) {                                  t2.classList.add('wrong'); }
+
+  // Vignette + screen shake
+  const gw = document.getElementById('gridWrapper');
+  gw.classList.add('stunned');
+  const ov = document.getElementById('wrongOverlay');
+  ov.classList.remove('flash'); void ov.offsetWidth; ov.classList.add('flash');
+  const sw = document.getElementById('shakeWrap');
+  sw.classList.remove('wrong-shake'); void sw.offsetWidth; sw.classList.add('wrong-shake');
+
+  // Feedback
+  showFeedbackMsg(nearMiss ? 'CLOSE...' : 'WRONG!', nearMiss ? '#fbbf24' : '#f87171');
+  if (oldCombo >= 2) showComboBreak(oldCombo);
+
+  // Near-miss: pulse the correct pair so player sees where it was
+  if (nearMiss) setTimeout(() => pulseCorrectPair(), 320);
+
+  playWrong();
+  updateHUD();
+  document.getElementById('app').className = '';
+  gs.selectedPos = null;
+
+  setTimeout(() => {
+    if (t1) t1.classList.remove('wrong');
+    if (t2) t2.classList.remove('wrong');
+    gw.classList.remove('stunned');
+  }, STUN_MS + 80);
+}
+
+// Pulse the current pair tiles — shows player where the match was after near-miss
+function pulseCorrectPair() {
+  gs.grid.forEach((iconId, i) => {
+    if (iconId !== gs.pairIconId) return;
+    const t = getTile(i);
+    if (t && !t.classList.contains('matched')) {
+      t.classList.remove('near-miss-pulse');
+      void t.offsetWidth;
+      t.classList.add('near-miss-pulse');
+      setTimeout(() => t.classList.remove('near-miss-pulse'), 650);
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════════════
+// VISUAL FEEDBACK HELPERS
+// ════════════════════════════════════════════════════════════
+function showScorePop(anchorEl, pts, combo, speedBonus) {
+  if (!anchorEl) return;
+  const gw  = document.getElementById('gridWrapper');
+  const r   = anchorEl.getBoundingClientRect();
+  const gr  = gw.getBoundingClientRect();
+  const pop = document.createElement('div');
+  pop.className       = 'score-pop' + (combo >= 3 ? ' gold' : '');
+  pop.style.left      = (r.left - gr.left + r.width  / 2) + 'px';
+  pop.style.top       = (r.top  - gr.top  + r.height / 2) + 'px';
+  pop.style.transform = 'translate(-50%,-50%)';
+  pop.style.textAlign = 'center';
+  const main = document.createElement('span');
+  main.textContent = '+' + pts;
+  pop.appendChild(main);
+  if (combo > 1 || speedBonus > 0) {
+    const sub = document.createElement('span');
+    sub.className = 'score-pop-sub';
+    const parts = [];
+    if (combo > 1)      parts.push('×' + combo + ' combo');
+    if (speedBonus > 0) parts.push('+' + speedBonus + ' speed');
+    sub.textContent = parts.join('  ');
+    pop.appendChild(sub);
+  }
+  gw.appendChild(pop);
+  setTimeout(() => pop.remove(), 1000);
+}
+
+function spawnParticles(tileEl, color) {
+  const gw   = document.getElementById('gridWrapper');
+  const tr   = tileEl.getBoundingClientRect();
+  const gr   = gw.getBoundingClientRect();
+  const cx   = tr.left - gr.left + tr.width  / 2;
+  const cy   = tr.top  - gr.top  + tr.height / 2;
+  for (let i = 0; i < 10; i++) {
+    const p     = document.createElement('div');
+    const angle = (i / 10) * Math.PI * 2 + Math.random() * 0.6;
+    const dist  = 30 + Math.random() * 34;
+    const size  = 4 + Math.floor(Math.random() * 5);
+    const dur   = 0.45 + Math.random() * 0.25;
+    const dx    = Math.cos(angle) * dist;
+    const dy    = Math.sin(angle) * dist;
+    const br    = i % 2 === 0 ? '50%' : '2px';
+    p.style.cssText = [
+      'position:absolute',
+      `left:${cx}px`, `top:${cy}px`,
+      `width:${size}px`, `height:${size}px`,
+      `border-radius:${br}`,
+      `background:${color}`,
+      'pointer-events:none',
+      'z-index:70',
+      'transform:translate(-50%,-50%)',
+      `animation:particleFly ${dur}s ease-out forwards`,
+      `--dx:${dx}px`, `--dy:${dy}px`,
+    ].join(';');
+    gw.appendChild(p);
+    setTimeout(() => p.remove(), dur * 1000 + 60);
+  }
+}
+
+let milestoneTimer = null;
+function fireMilestone(streak, combo) {
+  const b = document.getElementById('milestoneBanner');
+  const t = document.getElementById('milestoneText');
+  t.textContent = 'STREAK ×' + combo + '  —  ' + streak + ' PAIRS!';
+  b.classList.remove('hidden');
+  clearTimeout(milestoneTimer);
+  milestoneTimer = setTimeout(() => b.classList.add('hidden'), 1400);
+  playMilestone();
+  speak('Streak times ' + combo, 0.95, 1.2, true);
+}
+
+let feedbackTimer = null;
+function showFeedbackMsg(text, color) {
+  const el = document.getElementById('feedbackMsg');
+  if (!el) return;
+  clearTimeout(feedbackTimer);
+  el.textContent   = text;
+  el.style.color   = color;
+  el.style.textShadow = '0 0 20px ' + color;
+  el.classList.remove('hidden');
+  el.style.animation = 'none';
+  void el.offsetWidth;
+  el.style.animation = '';
+  feedbackTimer = setTimeout(() => el.classList.add('hidden'), 850);
+}
+
+function showComboBreak(oldCombo) {
+  const gw = document.getElementById('gridWrapper');
+  const el = document.createElement('div');
+  el.className    = 'combo-break';
+  el.textContent  = 'LOST ×' + oldCombo;
+  gw.appendChild(el);
+  setTimeout(() => el.remove(), 950);
+}
+
+// ════════════════════════════════════════════════════════════
+// HUD
+// ════════════════════════════════════════════════════════════
+function updateHUD() {
+  const combo = comboFromStreak(gs.streak);
+  document.getElementById('streakDisplay').textContent    = gs.streak;
+  document.getElementById('bestStreakDisplay').textContent = gs.bestStreak;
+  document.getElementById('scoreDisplay').textContent     = gs.score.toLocaleString();
+  document.getElementById('playerNameDisplay').textContent = gs.playerName || '—';
+  const badge = document.getElementById('comboBadge');
+  badge.textContent = combo >= 5 ? 'FLOW' : 'x' + combo;
+  badge.className   = 'combo-badge' + (combo >= 2 ? ' c' + combo : '');
+}
+
+function updateTimer(msLeft) {
+  const secs = Math.ceil(msLeft / 1000);
+  const el   = document.getElementById('timerDisplay');
+  if (secs !== gs.lastSecLeft) { gs.lastSecLeft = secs; el.textContent = secs; }
+  document.getElementById('progressBar').style.width = (msLeft / ROUND_MS * 100) + '%';
+
+  const app = document.getElementById('app');
+  if (msLeft <= 5000) {
+    app.classList.add('time-panic');
+  } else {
+    app.classList.remove('time-panic');
+  }
+  if (msLeft <= CRITICAL_MS) {
+    el.className = 'critical';
+    document.getElementById('progressBar').className = 'critical';
+    app.classList.add('time-critical');
+  } else if (msLeft <= WARNING_MS) {
+    el.className = 'warning';
+    document.getElementById('progressBar').className = 'warning';
+  } else {
+    el.className = '';
+    document.getElementById('progressBar').className = '';
+    app.classList.remove('time-critical');
+  }
+}
+
+function updateRoundDots(round) {
+  document.getElementById('roundLabel').textContent = 'ROUND ' + round + ' OF 5';
+  document.querySelectorAll('.round-dot').forEach(d => {
+    const r = parseInt(d.dataset.r);
+    d.className = 'round-dot';
+    if (r < round)  d.classList.add('done');
+    if (r === round) d.classList.add('active');
+  });
+}
+
+// ════════════════════════════════════════════════════════════
+// GAME LOOP
+// ════════════════════════════════════════════════════════════
+function gameLoop() {
+  if (gs.done || !gs.isActive) return;
+  const msLeft = Math.max(0, ROUND_MS - (performance.now() - gs.roundStartTs));
+  updateTimer(msLeft);
+  if (msLeft <= 0) { endRound(); return; }
+  gs.rafId = requestAnimationFrame(gameLoop);
+}
+
+function endRound() {
+  gs.isActive = false;
+  cancelAnimationFrame(gs.rafId);
+  clearTimeout(gs.spawnTimer);
+  // Deselect any pending selection
+  if (gs.selectedPos !== null) {
+    const t = getTile(gs.selectedPos);
+    if (t) t.classList.remove('selected');
+    gs.selectedPos = null;
+  }
+
+  // Reveal the current pair so player sees what they missed
+  // Find the two live (non-matched) tiles holding the pair icon
+  const revealPositions = [];
+  if (gs.pairIconId) {
+    gs.grid.forEach((iconId, i) => {
+      if (iconId === gs.pairIconId) {
+        const t = getTile(i);
+        if (t && !t.classList.contains('matched')) revealPositions.push(i);
+      }
+    });
+  }
+  const REVEAL_MS = 900; // show for 900ms before proceeding
+  if (revealPositions.length === 2) {
+    revealPositions.forEach(i => {
+      const t = getTile(i);
+      if (t) t.classList.add('reveal-pair');
+    });
+    speak('There it is', 0.82, 1.1);
+    setTimeout(() => {
+      revealPositions.forEach(i => {
+        const t = getTile(i);
+        if (t) t.classList.remove('reveal-pair');
+      });
+      proceedEndRound();
+    }, REVEAL_MS);
+  } else {
+    // No pair to reveal (already matched last instant) — proceed immediately
+    proceedEndRound();
+  }
+}
+
+function proceedEndRound() {
+  // Clear any time-critical / time-panic visual state before showing round transition
+  const _app = document.getElementById('app');
+  _app.classList.remove('time-critical', 'time-panic');
+  document.getElementById('timerDisplay').className = '';
+  document.getElementById('progressBar').className  = '';
+
+  playRoundEnd();
+  if (gs.currentRound < TOTAL_ROUNDS) {
+    gs.currentRound++;
+    showRoundTransition(gs.currentRound);
+  } else {
+    gs.done = true;
+    showEndCard();
+  }
+}
+
+// showRoundOverlay replaced by showRoundTransition
+
+
+// ════════════════════════════════════════════════════════════
+// START ROUND / GAME
+// ════════════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════════
+// ROUND TRANSITION  "ROUND X — tagline → 3 → 2 → 1 → GO"
+// Exactly matches G3 Hit the Target
+// ════════════════════════════════════════════════════════════
+function showRoundTransition(round) {
+  const overlay  = document.getElementById('roundOverlay');
+  const roNum    = document.getElementById('roNum');
+  const roOf     = document.getElementById('roOf');
+  const roCount  = document.getElementById('roCount');
+  const readyBar = document.getElementById('roReadyBar');
+  const dots     = document.querySelectorAll('.ro-dot');
+
+  // Animate round number in
+  roNum.classList.remove('ro-num'); void roNum.offsetWidth; roNum.classList.add('ro-num');
+  roNum.textContent = round;
+  roOf.textContent  = 'of 5';
+  document.getElementById('roTagline').textContent = ROUND_CONFIG[round].label || '';
+  roCount.className  = 'ro-count'; roCount.textContent = '';
+  readyBar.className = 'ro-ready-bar'; readyBar.textContent = 'GET READY';
+  dots.forEach(d => d.classList.remove('active','done'));
+
+  overlay.classList.remove('hidden');
+
+  let countdownStarted = false;
+  function beginCountdown() {
+    if (countdownStarted) return;
+    countdownStarted = true;
+    runRoundCount(roCount, readyBar, dots, round, () => {
+      overlay.classList.add('hidden');
+      startRound();
+    });
+  }
+  // 700ms pause so round number animates in before voice fires
+  setTimeout(() => {
+    setTimeout(beginCountdown, 1200); // safety fallback always scheduled first
+    try { pickVoice(); } catch(e) {}
+    speak('Get ready', 0.78, 1.15, false, beginCountdown);
+  }, 700);
+}
+
+function runRoundCount(countEl, readyBar, dots, round, cb) {
+  const steps = [3, 2, 1, 'GO'];
+  let i = 0;
+
+  function step() {
+    const v = steps[i];
+
+    // Show the visual number immediately
+    dots.forEach((d, di) => {
+      d.classList.remove('active', 'done');
+      if (typeof v === 'number') {
+        if (di < 3 - v)        d.classList.add('done');
+        else if (di === 3 - v) d.classList.add('active');
+      } else {
+        d.classList.add('done');
+      }
+    });
+    countEl.classList.remove('exit'); void countEl.offsetWidth;
+    countEl.className   = v === 'GO' ? 'ro-count go' : 'ro-count';
+    countEl.textContent = v;
+
+    if (v === 'GO') {
+      readyBar.className   = 'ro-ready-bar go-state';
+      readyBar.textContent = 'GO!';
+      // Speak GO with cancelFirst=true — interrupts any lingering audio
+      speak('Go', 1.05, 1.2, true);
+      playGo();
+      setTimeout(() => cb(), 500);
+    } else {
+      // Speak the number with cancelFirst=true — each number is a new interrupt
+      speak(String(v), 1.0, 1.15, true);
+      playCd(v);
+      i++;
+      // Hold this number visible for 700ms, then exit animation (180ms), then next step
+      setTimeout(() => {
+        countEl.classList.add('exit');
+        setTimeout(step, 200);
+      }, 700);
+    }
+  }
+  step();
+}
+
+function startRound() {
+  gs.isActive        = true;
+  gs.lastSecLeft     = -1;
+  gs.roundStartTs    = performance.now();
+  gs.roundScoreStart = gs.score;
+  gs.wrongsThisRound = 0;
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('progressBar').className   = '';
+  document.getElementById('app').classList.remove('time-critical');
+  document.getElementById('app').classList.remove('time-panic');
+  document.getElementById('app').className = '';
+  // Block tile input briefly — prevents touch bleed-through from round overlay tap
+  gs.inputBlocked = true;
+  setTimeout(() => { gs.inputBlocked = false; }, 600);
+  updateRoundDots(gs.currentRound);
+  updateHUD();
+  buildGrid(gs.currentRound);
+  renderGrid();
+  gs.rafId = requestAnimationFrame(gameLoop);
+}
+
+function startGame() {
+  const nameEl = document.getElementById('playerNameInput');
+  const name   = nameEl.value.trim();
+  if (name) localStorage.setItem('clickzle_player_name', name);
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('mainHeader').classList.remove('hidden');
+  document.getElementById('gameScreen').classList.add('active');
+  initVoice();
+  initRng();
+  resetGS();
+  gs.playerName = name || localStorage.getItem('clickzle_player_name') || '';
+  initGridDOM();
+  showRoundTransition(1);
+  getACtx();
+}
+
+// ════════════════════════════════════════════════════════════
+// END CARD
+// ════════════════════════════════════════════════════════════
+function showEndCard() {
+  // Kill all in-game visual states — game is over
+  const app = document.getElementById('app');
+  app.classList.remove('time-critical', 'time-panic', 'combo-2', 'combo-3', 'combo-4', 'combo-5');
+  app.style.animation = 'none';
+  app.style.boxShadow = 'none';
+  document.getElementById('gridWrapper').classList.remove('stunned');
+  document.getElementById('milestoneBanner').classList.add('hidden');
+
+  const accuracy = gs.totalHits + gs.totalWrongs > 0
+    ? Math.round(gs.totalHits / (gs.totalHits + gs.totalWrongs) * 100)
+    : 100;
+  const fastest  = gs.pairTimes.length > 0 ? Math.min(...gs.pairTimes) : null;
+  const avgReact = gs.pairTimes.length > 0
+    ? Math.round(gs.pairTimes.reduce((a, b) => a + b, 0) / gs.pairTimes.length)
+    : null;
+  const title    = ([...SCORE_TITLES].reverse().find(t => gs.score >= t.min) || SCORE_TITLES[0]).title;
+
+  document.getElementById('timeoutTitle').textContent = title;
+  document.getElementById('timeoutDate').textContent  =
+    'Spot the Pair — ' + new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+
+  // Near miss / new best bar
+  const st    = getStats();
+  const nmBar = document.getElementById('nearMissBar');
+  nmBar.style.display = 'none';
+  nmBar.style.borderColor = '';
+  nmBar.style.background  = '';
+  const nmTitle = document.getElementById('nmTitle');
+  nmTitle.style.color = '';
+  if (st.bestScore && st.bestScore > gs.score && (st.bestScore - gs.score) / st.bestScore <= 0.12) {
+    nmBar.style.display = 'flex';
+    nmTitle.textContent = 'SO CLOSE';
+    document.getElementById('nmText').textContent =
+      (st.bestScore - gs.score).toLocaleString() + ' points from your best';
+    document.getElementById('nmSub').textContent =
+      'Best: ' + st.bestScore.toLocaleString() + '  —  This run: ' + gs.score.toLocaleString();
+  } else if (!st.bestScore || gs.score > st.bestScore) {
+    nmBar.style.display     = 'flex';
+    nmBar.style.borderColor = 'rgba(74,222,128,0.4)';
+    nmBar.style.background  = 'rgba(74,222,128,0.06)';
+    nmTitle.style.color     = 'var(--green)';
+    nmTitle.textContent     = st.bestScore ? 'NEW BEST' : 'FIRST PLAY';
+    document.getElementById('nmText').textContent = 'Score: ' + gs.score.toLocaleString();
+    document.getElementById('nmSub').textContent  = st.bestScore
+      ? 'Previous best: ' + st.bestScore.toLocaleString()
+      : 'Something to beat tomorrow';
+  }
+
+  const totalPairs = gs.roundPairs.reduce((a, b) => a + b, 0);
+  document.getElementById('tPairs').textContent      = totalPairs;
+  document.getElementById('tScore').textContent      = gs.score.toLocaleString();
+  document.getElementById('tBestStreak').textContent = gs.bestStreak;
+  document.getElementById('tAvgReact').textContent   = avgReact ? avgReact + 'ms' : '—';
+  document.getElementById('tAccuracy').textContent   = accuracy + '%';
+
+  // Round breakdown
+  const bd = document.getElementById('roundBreakdown');
+  bd.innerHTML = '';
+  gs.roundScores.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'ec-round-row';
+    row.innerHTML =
+      `<div class="ec-round-lbl"><div class="ec-round-dot"></div>Round ${i+1} — ${ROUND_CONFIG[i+1].label}</div>` +
+      `<div class="ec-round-val">${s.toLocaleString()}</div>`;
+    bd.appendChild(row);
+  });
+
+  // Share text
+  document.getElementById('sharePreview').textContent = buildShareText(accuracy, avgReact);
+
+  persistStats(gs.score, gs.bestStreak, avgReact);
+  openModal('timeoutModal');
+}
+
+function getPuzzleNumber() {
+  const epoch = new Date('2026-01-01T00:00:00Z');
+  return Math.floor((Date.now() - epoch.getTime()) / 86400000) + 1;
+}
+
+function buildShareText(accuracy, avgReact) {
+  const now    = new Date();
+  const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const dateStr = `${DAYS[now.getUTCDay()]} ${now.getUTCDate()} ${MONTHS[now.getUTCMonth()]} ${now.getUTCFullYear()}`;
+  const CTAS = [
+    "Think you can spot them all? Can you beat me?",
+    "New week, new pairs. Can you beat me?",
+    "Only one puzzle per day. Can you beat me?",
+    "Everyone plays the same puzzle. Can you beat me?",
+    "One puzzle. One chance. Can you beat me?",
+    "It's out there. Can you beat me?",
+    "One shot at today's puzzle. Can you beat me?",
+  ];
+  const cta = CTAS[now.getUTCDay()];
+  return `CLICKzle \u2014 Game 4: Spot the Pair\n` +
+    `${dateStr} \u00b7 Puzzle #${getPuzzleNumber()}\n\n` +
+    `I just completed today's Observation Challenge!\n` +
+    `Score: ${gs.score.toLocaleString()}  |  Best Streak: ${gs.bestStreak}  |  Accuracy: ${accuracy}%\n\n` +
+    `${cta}\n\n` +
+    `Play now: clickzle.games`;
+}
+
+function persistStats(score, bestStreak, avgReact) {
+  const st        = getStats();
+  const today     = new Date().toISOString().split('T')[0];
+  const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+  st.played = (st.played || 0) + 1;
+  if (st.lastDate === yesterday) st.dailyStreak = (st.dailyStreak || 0) + 1;
+  else if (st.lastDate !== today) st.dailyStreak = 1;
+  st.lastDate = today;
+  if (!st.bestScore   || score      > st.bestScore)   st.bestScore   = score;
+  if (!st.bestStreak  || bestStreak > st.bestStreak)  st.bestStreak  = bestStreak;
+  if (avgReact && (!st.bestAvgReact || avgReact < st.bestAvgReact)) st.bestAvgReact = avgReact;
+  if (!st.history) st.history = {};
+  st.history[today] = { played: true };
+  saveStats(st);
+}
+
+function loadStatsModal() {
+  const st = getStats();
+  document.getElementById('statPlayed').textContent     = st.played      || 0;
+  document.getElementById('statStreak').textContent     = st.dailyStreak || 0;
+  document.getElementById('statBestScore').textContent  = st.bestScore   ? st.bestScore.toLocaleString() : '—';
+  document.getElementById('statBestStreak').textContent = st.bestStreak  || '—';
+  document.getElementById('statFastest').textContent    = st.bestAvgReact ? st.bestAvgReact + 'ms avg' : '—';
+  const bar = document.getElementById('streakBar');
+  bar.innerHTML = '';
+  for (let i = 6; i >= 0; i--) {
+    const d  = new Date(Date.now() - i * 86400000).toISOString().split('T')[0];
+    const el = document.createElement('div');
+    el.className = 'streak-day';
+    if (i === 0) el.classList.add('today');
+    else if (st.history && st.history[d] && st.history[d].played) el.classList.add('played');
+    bar.appendChild(el);
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+// MODALS
+// ════════════════════════════════════════════════════════════
+function openModal(id)  { document.getElementById(id)?.classList.add('open'); }
+function closeModal(id) { document.getElementById(id)?.classList.remove('open'); }
+
+function pauseGame() {
+  if (!gs.isActive || gs.done) return;
+  gs.pausedAt = performance.now();
+  gs.isActive = false;
+  cancelAnimationFrame(gs.rafId);
+}
+function resumeGame() {
+  if (gs.done || gs.isActive || !gs.pausedAt) return;
+  gs.roundStartTs += performance.now() - gs.pausedAt;
+  gs.pausedAt = null;
+  gs.isActive = true;
+  gs.rafId = requestAnimationFrame(gameLoop);
+}
+
+document.querySelectorAll('[data-close]').forEach(b =>
+  b.addEventListener('click', () => {
+    closeModal(b.dataset.close);
+    if (b.dataset.close === 'helpModal') resumeGame();
+  })
+);
+document.getElementById('roundAccordionBtn').addEventListener('click', function () {
+  const isOpen = this.classList.toggle('open');
+  document.getElementById('roundAccordionPanel').classList.toggle('open', isOpen);
+  const hide = isOpen ? 'none' : '';
+  document.getElementById('ecPostgameActions').style.display = hide;
+  document.getElementById('ecOtherGames').style.display      = hide;
+});
+document.getElementById('categoriesBtn').addEventListener('click', () => openModal('categoriesModal'));
+document.getElementById('helpBtn').addEventListener('click', () => { pauseGame(); openModal('helpModal'); });
+document.getElementById('statsBtn').addEventListener('click',    () => { loadStatsModal(); openModal('statsModal'); });
+document.getElementById('settingsBtn').addEventListener('click', () => openModal('settingsModal'));
+document.getElementById('inviteFriendBtn').addEventListener('click', () => {
+  const msg = `Can you beat my Clickzle score? Play today's Spot the Pair challenge:\nhttps://clickzle.games`;
+  navigator.clipboard.writeText(msg).then(() => {
+    const btn = document.getElementById('inviteFriendBtn');
+    const orig = btn.innerHTML;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> Link Copied!`;
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  }).catch(() => {
+    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  });
+});
+
+document.getElementById('startBtn').addEventListener('click', () => {
+  if (localStorage.getItem('clickzle_htp_pair_skip') === 'true') startGame();
+  else openModal('pregameHelpModal');
+});
+document.getElementById('playerNameInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('startBtn').click();
+});
+document.getElementById('pregamePlayBtn').addEventListener('click', () => {
+  if (document.getElementById('dontShowHtp').checked)
+    localStorage.setItem('clickzle_htp_pair_skip', 'true');
+  closeModal('pregameHelpModal');
+  startGame();
+});
+
+document.getElementById('shareTimeoutBtn').addEventListener('click', () => openModal('shareModal'));
+document.getElementById('shareX').addEventListener('click', () =>
+  window.open('https://x.com/intent/post?text=' + encodeURIComponent(document.getElementById('sharePreview').textContent), '_blank')
+);
+document.getElementById('shareWhatsApp').addEventListener('click', () =>
+  window.open('https://wa.me/?text=' + encodeURIComponent(document.getElementById('sharePreview').textContent), '_blank')
+);
+document.getElementById('shareFacebook').addEventListener('click', () =>
+  window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://clickzle.games/games/game4/spot-the-pair.html'), '_blank')
+);
+document.getElementById('shareCopy').addEventListener('click', function () {
+  navigator.clipboard?.writeText(document.getElementById('sharePreview').textContent)
+    .then(() => {
+      this.textContent = 'Copied!';
+      setTimeout(() => {
+        this.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy to Clipboard';
+      }, 1800);
+    }).catch(() => {});
+});
+
+// Pre-fill name
+const _sn = localStorage.getItem('clickzle_player_name');
+if (_sn) document.getElementById('playerNameInput').value = _sn;
+
+// Already played today banner
+(function () {
+  try {
+    const st    = getStats();
+    const today = new Date().toISOString().split('T')[0];
+    if (st.history && st.history[today] && st.history[today].played) {
+      const target = document.querySelector('.game-identity');
+      if (!target) return;
+      const c = document.createElement('div');
+      c.style.cssText = 'background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:12px 16px;text-align:center;margin-top:12px;width:100%;max-width:340px;';
+      const h1 = document.createElement('div');
+      h1.style.cssText = "font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--accent);";
+      h1.textContent = 'ALREADY PLAYED';
+      const h2 = document.createElement('div');
+      h2.style.cssText = 'font-size:12px;color:var(--text3);margin-top:4px;margin-bottom:14px;';
+      h2.textContent = 'Come back tomorrow for a new challenge';
+      const gLabel = document.createElement('div');
+      gLabel.style.cssText = 'font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:600;margin-bottom:8px;';
+      gLabel.textContent = 'Try Another Game';
+      const gRow = document.createElement('div');
+      gRow.style.cssText = 'display:flex;gap:8px;justify-content:center;';
+      [
+        ['../../complete-the-image-game-1.html','1','rgba(74,222,128,0.1)','rgba(74,222,128,0.3)','#4ade80'],
+        ['../../follow-the-pattern-game-2.html','2','rgba(96,165,250,0.1)','rgba(96,165,250,0.3)','#60a5fa'],
+        ['../../hit-the-target-game-3.html',    '3','rgba(244,114,182,0.1)','rgba(244,114,182,0.3)','#f472b6'],
+        ['../../next-in-sequence-game-5.html',   '5','rgba(167,139,250,0.1)','rgba(167,139,250,0.3)','#a78bfa'],
+      ].forEach(([href,num,bg,border,col]) => {
+        const a = document.createElement('a');
+        a.href = href;
+        a.style.cssText = 'width:38px;height:38px;border-radius:8px;background:'+bg+';border:1px solid '+border+';color:'+col+';font-family:Bebas Neue,sans-serif;font-size:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;';
+        a.textContent = num;
+        gRow.appendChild(a);
+      });
+      c.appendChild(h1); c.appendChild(h2); c.appendChild(gLabel); c.appendChild(gRow);
+      target.insertAdjacentElement('afterend', c);
+      const reg = document.querySelector('.register-perks');
+      if (reg) reg.style.display = 'none';
+      const fps = document.querySelector('.free-play-section');
+      if (fps) fps.style.display = 'none';
+      const sdiv = document.querySelector('.start-divider');
+      if (sdiv) sdiv.style.marginTop = '16px';
+    }
+  } catch(e) {}
+}());
+</script>
+</body>
+</html>
