@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Clickzle Terms of Use — plain English rules for using the platform.">
+<title>Terms of Use — Clickzle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --bg:#0a0a0a;
+  --surface:#141414;
+  --surface2:#1e1e1e;
+  --border:#222222;
+  --border2:#2e2e2e;
+  --text:#f0f0f0;
+  --text2:#b0b0b0;
+  --text3:#888888;
+  --green:#4ade80;
+  --green-dim:#166534;
+  --green-glow:#1d4d2a;
+  --red:#f87171;
+}
+body.light{
+  --bg:#f4f4f4;
+  --surface:#ffffff;
+  --surface2:#ebebeb;
+  --border:#d0d0d0;
+  --border2:#c0c0c0;
+  --text:#111111;
+  --text2:#444444;
+  --text3:#777777;
+  --green-dim:#bbf7d0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(74,222,128,0.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(74,222,128,0.025) 1px,transparent 1px);
+  background-size:72px 72px;}
+.bg-radial{position:fixed;top:-280px;left:50%;transform:translateX(-50%);
+  width:900px;height:600px;
+  background:radial-gradient(ellipse,rgba(74,222,128,0.07) 0%,transparent 68%);
+  pointer-events:none;z-index:0;}
+body.light .bg-grid{display:none;}
+body.light .bg-radial{opacity:0.22;}
+
+/* Layout */
+.wrap{max-width:860px;margin:0 auto;padding:0 28px;position:relative;z-index:1;}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+body.light .site-header{background:rgba(244,244,244,0.92);}
+.hdr-inner{max-width:1120px;margin:0 auto;padding:0 28px;height:62px;display:flex;align-items:center;justify-content:space-between;}
+.site-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--text);text-decoration:none;}
+.site-logo span{color:var(--green);}
+.hdr-center{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text3);}
+.hdr-reset-label{font-weight:500;white-space:nowrap;color:var(--text2);}
+.hdr-timer{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--text);}
+.hdr-right{display:flex;align-items:center;gap:20px;}
+.nav-link{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;transition:color 0.2s;}
+.nav-link:hover{color:var(--text);}
+.icon-btn{width:34px;height:34px;border-radius:8px;background:transparent;border:1px solid var(--border2);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all 0.2s;}
+.icon-btn:hover{color:var(--text);background:var(--surface);}
+.icon-btn svg{width:15px;height:15px;}
+
+/* Footer */
+.site-footer { border-top:1px solid var(--border); padding:44px 0; position:relative; z-index:1; }
+.ftr-inner {
+  max-width:1120px; margin:0 auto; padding:0 28px;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+}
+.ftr-logo { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px; color:var(--text2); }
+.ftr-logo span { color:var(--green); }
+.ftr-links { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.ftr-link { font-size:13px; color:var(--text3); text-decoration:none; transition:color 0.18s; }
+.ftr-link:hover { color:var(--text2); }
+.ftr-copy {
+  font-size:12px; color:var(--text3); width:100%;
+  text-align:center; margin-top:16px; padding-top:20px;
+  border-top:1px solid var(--border);
+}
+
+/* Page hero */
+.page-hero{padding:72px 0 56px;border-bottom:1px solid var(--border);margin-bottom:64px;}
+.page-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--green);display:block;margin-bottom:16px;}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,80px);letter-spacing:4px;color:var(--text);line-height:1;margin-bottom:20px;}
+.page-lead{font-size:17px;color:var(--text2);line-height:1.75;max-width:620px;}
+.last-updated{font-size:12px;color:var(--text3);margin-top:12px;display:block;}
+
+/* Content */
+.page-body{padding-bottom:80px;}
+.prose h2{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--text);margin:48px 0 16px;}
+.prose h2:first-child{margin-top:0;}
+.prose p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:16px;}
+.prose p:last-child{margin-bottom:0;}
+.prose a{color:var(--green);text-decoration:none;}
+.prose a:hover{text-decoration:underline;}
+.prose ul{list-style:none;margin:0 0 20px;padding:0;}
+.prose ul li{font-size:15px;color:var(--text2);line-height:1.7;padding:6px 0 6px 22px;position:relative;}
+.prose ul li::before{content:'—';position:absolute;left:0;color:var(--text3);}
+.prose strong{color:var(--text);font-weight:600;}
+.divider{height:1px;background:var(--border);margin:40px 0;}
+
+/* Cards */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;}
+.info-card{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px;}
+.info-card-icon{width:40px;height:40px;border-radius:10px;background:var(--green-dim);
+  border:1px solid rgba(74,222,128,0.18);display:flex;align-items:center;justify-content:center;
+  color:var(--green);margin-bottom:16px;}
+.info-card-icon svg{width:20px;height:20px;}
+.info-card-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:var(--text);margin-bottom:8px;}
+.info-card-body{font-size:13px;color:var(--text2);line-height:1.65;}
+
+/* TOC */
+.toc{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:24px 28px;margin-bottom:48px;}
+.toc-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{padding:4px 0;}
+.toc-list a{font-size:14px;color:var(--text2);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.15s;}
+.toc-list a:hover{color:var(--green);}
+.toc-list a::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--text3);flex-shrink:0;}
+
+/* Form */
+.form-name-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{margin-bottom:20px;}
+.form-label{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;font-weight:600;}
+.req{color:var(--red);font-size:13px;}
+.form-input,.form-select,.form-textarea{
+  width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:10px;
+  padding:13px 16px;font-size:15px;color:var(--text);font-family:'DM Sans',sans-serif;
+  outline:none;transition:border-color 0.2s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--green);}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text3);}
+.form-textarea{resize:vertical;min-height:140px;}
+.form-select option{background:var(--bg);}
+body.light .form-select option{background:#fff;}
+.form-hint{font-size:12px;color:var(--text3);margin-top:12px;}
+.form-submit{background:var(--green);color:#000;border:none;border-radius:10px;
+  padding:14px 36px;font-size:15px;font-weight:700;font-family:'DM Sans',sans-serif;
+  cursor:pointer;transition:opacity 0.15s,transform 0.1s;display:inline-flex;align-items:center;gap:8px;}
+.form-submit:hover{opacity:0.9;}.form-submit:active{transform:scale(0.97);}
+.form-submit svg{width:16px;height:16px;}
+.form-success{display:none;background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.25);
+  border-radius:12px;padding:32px;text-align:center;margin-top:24px;}
+.form-success.show{display:block;}
+.form-success-icon{color:var(--green);margin-bottom:12px;}
+.form-success-icon svg{width:40px;height:40px;}
+.form-success-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--text);margin-bottom:8px;}
+.form-success-body{font-size:14px;color:var(--text2);line-height:1.6;}
+
+/* About stats */
+.stat-row{display:flex;gap:36px;margin-top:28px;flex-wrap:wrap;}
+.stat{display:flex;flex-direction:column;gap:3px;}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:2px;color:var(--green);line-height:1;}
+.stat-l{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;}
+.featured-card{background:linear-gradient(135deg,var(--surface) 0%,rgba(74,222,128,0.03) 100%);
+  border:1px solid rgba(74,222,128,0.15);border-radius:16px;padding:38px;margin-bottom:16px;}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media(max-width:640px){
+  .hdr-center{display:none;}
+  .hdr-right .nav-link{display:none;}
+  .hdr-inner{padding:0 16px;}
+  .wrap{padding:0 16px;}
+  .page-hero{padding:48px 0 36px;margin-bottom:44px;}
+  .page-title{font-size:clamp(40px,12vw,64px);letter-spacing:2px;}
+  .page-lead{font-size:15px;}
+  .card-grid{grid-template-columns:1fr;}
+  .info-card{padding:22px;}
+  .form-name-row{grid-template-columns:1fr;}
+  .form-submit{width:100%;justify-content:center;}
+  .featured-card{padding:24px;}
+  .stat-row{gap:20px;}
+  .toc{padding:18px 20px;}
+  .ftr-inner{flex-direction:column;align-items:flex-start;padding:0 16px;gap:14px;}
+  .ftr-links{gap:14px;}
+  .ftr-copy{margin-top:4px;}
+  .prose h2{font-size:22px;}
+  .prose p,.prose ul li{font-size:14px;}
+}
+@media(min-width:641px) and (max-width:900px){
+  .card-grid{grid-template-columns:1fr 1fr;}
+}
+
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-radial"></div>
+<header class="site-header">
+  <div class="hdr-inner">
+    <a href="index.html" class="site-logo">CLICK<span>ZLE</span></a>
+    <div class="hdr-center">
+      <span class="hdr-reset-label">Puzzles reset in:</span>
+      <span class="hdr-timer" id="hdrTimer">00:00:00</span>
+    </div>
+    <div class="hdr-right">
+      <a href="index.html#games" class="nav-link">Games</a>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="page-hero">
+  <div class="wrap">
+    <span class="page-eyebrow">Terms of Use</span>
+    <div class="page-title">Plain English.<br>No surprises.</div>
+    <p class="page-lead">The rules for using Clickzle, kept as short and plain as possible. Using the site means you agree to them.</p>
+    <span class="last-updated">Last updated: March 2026</span>
+  </div>
+</section>
+<section class="page-body">
+  <div class="wrap">
+    <div class="toc reveal">
+      <div class="toc-title">Contents</div>
+      <ol class="toc-list">
+        <li><a href="#using-clickzle">Using Clickzle</a></li>
+        <li><a href="#accounts-terms">Accounts</a></li>
+        <li><a href="#leaderboards-terms">Leaderboards & fair play</a></li>
+        <li><a href="#advertising-terms">Advertising</a></li>
+        <li><a href="#affiliate-disclosure">Affiliate Links Disclosure</a></li>
+        <li><a href="#subscription-service">Subscription Service</a></li>
+        <li><a href="#intellectual-property">Intellectual property</a></li>
+        <li><a href="#fair-use-disclaimer">Fair Use & Image Disclaimer</a></li>
+        <li><a href="#disclaimer">General Disclaimer</a></li>
+        <li><a href="#changes">Changes to these terms</a></li>
+        <li><a href="#contact-terms">Contact</a></li>
+      </ol>
+    </div>
+    <div class="prose reveal">
+      <h2 id="using-clickzle">1. Using Clickzle</h2>
+      <p>clickzle.games ("Clickzle") is a free to use website. You may play any puzzle instantly without charge and without creating an account — your score will be saved locally on your device only. However, accessing the global leaderboards, tracking your stats across devices, maintaining streaks, and having your scores verified for competition requires a free account. You agree not to:</p>
+      <ul>
+        <li>Use automated tools, scripts, or bots to play puzzles or submit scores</li>
+        <li>Attempt to manipulate or reverse-engineer the daily seed system to gain an unfair advantage</li>
+        <li>Attempt to gain unauthorised access to our systems, databases, or any other user's account</li>
+        <li>Scrape, copy, or redistribute Clickzle's puzzle images, game code, or content at scale without written permission</li>
+        <li>Use the platform in any way that violates applicable law</li>
+      </ul>
+      <p>Violations may result in your account being suspended or banned and your scores removed from leaderboards.</p>
+
+      <div class="divider"></div>
+      <h2 id="accounts-terms">2. Accounts</h2>
+      <p>Creating an account is optional but recommended if you want to compete on leaderboards, track your stats across devices, and maintain your daily streak. If you create an account, you are responsible for keeping your credentials secure. You must not create accounts on behalf of others or impersonate another person. If you believe your account has been compromised, contact us immediately via the <a href="contact.html">Contact page</a>. We reserve the right to suspend accounts that violate these terms.</p>
+
+      <div class="divider"></div>
+      <h2 id="leaderboards-terms">3. Leaderboards & fair play</h2>
+      <p>Scores submitted via bots, exploits, or any mechanism other than genuine human play in a standard browser are not permitted. We reserve the right to investigate suspicious scores and remove any entry we reasonably believe was not submitted in good faith. By submitting a score, you represent that it was achieved through honest play. Only scores submitted while logged into a verified account are eligible for leaderboard inclusion.</p>
+
+      <div class="divider"></div>
+      <h2 id="advertising-terms">4. Advertising</h2>
+      <p>Clickzle displays advertising to support the platform. Ads are served by third-party advertising partners. We are not responsible for the content of third-party advertisements. If you encounter an ad you believe is inappropriate or misleading, report it via the <a href="contact.html">Contact page</a>.</p>
+
+      <div class="divider"></div>
+      
+      <!-- Affiliate Links Disclosure -->
+      <h2 id="affiliate-disclosure">5. Affiliate Links Disclosure</h2>
+      <p>Some areas of the Clickzle website may contain affiliate links. This means that if you click on certain links and make a purchase or take a specific action, Clickzle may earn a small commission at no additional cost to you.</p>
+      <p>These links help support the platform and keep our games free for all players. We only promote products or services we genuinely believe are relevant to our audience. Affiliate relationships do not influence our game design, content, or editorial decisions.</p>
+      <p>When you see an affiliate link, it will be clearly marked or disclosed in context. If you have any questions about our affiliate relationships, please <a href="contact.html">contact us</a>.</p>
+
+      <div class="divider"></div>
+      
+      <!-- Subscription Service -->
+      <h2 id="subscription-service">6. Subscription Service</h2>
+      <p>Clickzle may introduce a paid membership service in the future. This optional subscription would provide benefits such as:</p>
+      <ul>
+        <li>A 100% ad-free experience.</li>
+        <li>Removal of affiliate links</li>
+        <li>Additional exclusive features to be announced</li>
+      </ul>
+      <p>Free accounts will continue to have access to all core gameplay. Any subscription service will be optional, with clear terms provided at launch. Pricing, payment terms, and cancellation policies will be disclosed before any charges are incurred. Subscribers will have the right to cancel at any time.</p>
+      <p>Details about subscription tiers, pricing, and features will be announced when available.</p>
+
+      <div class="divider"></div>
+      <h2 id="intellectual-property">7. Intellectual property</h2>
+      <p>Clickzle's game design, code, branding, and written content are owned by Clickzle and protected by applicable intellectual property law.</p>
+
+      <div class="divider"></div>
+      
+      <!-- Fair Use & Image Disclaimer -->
+      <h2 id="fair-use-disclaimer">8. Fair Use & Image Disclaimer</h2>
+      <p>Some images used in Clickzle games are sourced from publicly available internet searches, including Google Images. These images are used under the principles of <strong>fair use</strong> and <strong>fair dealing</strong> for transformative, non-commercial, and entertainment purposes.</p>
+      <p>Our use of these images is:</p>
+      <ul>
+        <li><strong>Transformative:</strong> Images are cropped, sliced, tiled, and incorporated into puzzle mechanics, fundamentally altering their original purpose and context.</li>
+        <li><strong>Non-commercial:</strong> Clickzle games are free to play. Any revenue from advertising supports platform maintenance, not direct image licensing.</li>
+        <li><strong>Educational/Entertainment:</strong> The puzzles are designed as cognitive challenges, not for commercial redistribution of the original images.</li>
+      </ul>
+      <p>We do not claim ownership of any third-party images used in our puzzles. All original copyrights remain with their respective owners. If you are a copyright holder and believe your work has been used in a way that constitutes infringement, please contact us immediately via the <a href="contact.html">Contact page</a>. We will respond promptly and remove any content where valid concerns are raised.</p>
+      <p>Clickzle respects intellectual property rights and expects users to do the same.</p>
+
+      <div class="divider"></div>
+      <h2 id="disclaimer">9. General Disclaimer</h2>
+      <p>Clickzle is provided "as is" without warranty of any kind. We make no guarantees of uptime, data permanence, or uninterrupted service. We are not liable for any loss arising from use of or inability to use the platform. Clickzle is a game, intended for entertainment only.</p>
+
+      <div class="divider"></div>
+      <h2 id="changes">10. Changes to these terms</h2>
+      <p>We may update these terms from time to time. When we do, we'll update the "Last updated" date above. Continued use of Clickzle after changes take effect constitutes acceptance of the revised terms. We'll post a notice on the homepage for any material changes.</p>
+
+      <div class="divider"></div>
+      <h2 id="contact-terms">11. Contact</h2>
+      <p>Questions about these terms or anything else: use the <a href="contact.html">Contact page</a>.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="ftr-inner">
+    <div class="ftr-logo">CLICK<span>ZLE</span></div>
+    <div class="ftr-links">
+      <a href="about.html" class="ftr-link">About</a>
+      <a href="contact.html" class="ftr-link">Contact</a>
+      <a href="privacy.html" class="ftr-link">Privacy</a>
+      <a href="terms.html" class="ftr-link">Terms of Use</a>
+    </div>
+    <div class="ftr-copy">&copy; 2026 Clickzle. All rights reserved.</div>
+  </div>
+</footer>
+<script>
+
+function tick(){
+  const now=new Date();
+  const midnight=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1));
+  let d=Math.max(0,midnight-now);
+  const h=Math.floor(d/3600000);d%=3600000;
+  const m=Math.floor(d/60000);d%=60000;
+  const s=Math.floor(d/1000);
+  document.getElementById('hdrTimer').textContent=
+    String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+setInterval(tick,1000);tick();
+
+let light=localStorage.getItem('clickzle_site_theme')==='light';
+function applyTheme(){
+  document.body.classList.toggle('light',light);
+  document.getElementById('iconSun').style.display=light?'none':'block';
+  document.getElementById('iconMoon').style.display=light?'block':'none';
+}
+applyTheme();
+document.getElementById('themeToggle').addEventListener('click',()=>{
+  light=!light;localStorage.setItem('clickzle_site_theme',light?'light':'dark');applyTheme();
+});
+
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revealObs.unobserve(e.target);}});
+},{threshold:0.08,rootMargin:'0px 0px -32px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+
+</script>
+</body>
+</html>

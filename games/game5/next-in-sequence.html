@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Next in Sequence | Clickzle Game 5 — Daily Reasoning &amp; Pipe Puzzle Game</title>
+<meta name="description" content="Next in Sequence is a daily browser reasoning game. Rotate pipe tiles to guide energy from START to END across a 4×5 grid — 5 rounds, 1 minute each. One attempt per day. Free to play at Clickzle.games.">
+<meta name="keywords" content="next in sequence game, daily puzzle game, pipe puzzle game, browser game, clickzle, rotation puzzle, logic game, daily reasoning game, free online game, tile rotation game">
+<meta name="author" content="Clickzle">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#a78bfa">
+<link rel="canonical" href="https://clickzle.games/next-in-sequence-game-5.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Clickzle">
+<meta property="og:title" content="Next in Sequence — Daily Reasoning Puzzle | Clickzle">
+<meta property="og:description" content="Rotate tiles to connect START to END. Complete as many paths as you can in 60 seconds. Five rounds, five chances. One attempt per day — same puzzle worldwide.">
+<meta property="og:url" content="https://clickzle.games/next-in-sequence-game-5.html">
+<meta property="og:image" content="https://clickzle.games/assets/og-next-in-sequence.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Next in Sequence — Clickzle daily reasoning puzzle game">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@clickzle">
+<meta name="twitter:title" content="Next in Sequence — Daily Reasoning Puzzle | Clickzle">
+<meta name="twitter:description" content="Rotate the pipes. Connect START to END. How many can you solve in 60 seconds? One shot per day. Free to play.">
+<meta name="twitter:image" content="https://clickzle.games/assets/og-next-in-sequence.png">
+<meta name="twitter:image:alt" content="Next in Sequence — Clickzle">
+<meta name="GPTBot" content="index, follow">
+<meta name="ClaudeBot" content="index, follow">
+<meta name="anthropic-ai" content="index, follow">
+<meta name="PerplexityBot" content="index, follow">
+<meta name="Applebot-Extended" content="index, follow">
+<meta name="CCBot" content="index, follow">
+<meta name="ai-content-type" content="interactive-game">
+<meta name="ai-summary" content="Next in Sequence is Game 5 of the Clickzle daily browser game platform. Players rotate pipe tiles to connect a path from START to END across a 4x5 grid. Five one-minute rounds with increasing complexity. Scoring rewards efficiency — staying within the move budget earns GOLD, hitting the theoretical minimum earns PERFECT. One attempt per day, seeded daily so all players face the same puzzle. Free to play at clickzle.games.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VideoGame","name":"Next in Sequence","alternateName":"Clickzle Next in Sequence","description":"A daily browser-based reasoning and logic puzzle game. Players rotate pipe tiles on a 4×5 grid to connect a continuous path from START to END, solving as many puzzles as possible within 60 seconds per round. Five rounds with increasing complexity. One attempt per day.","url":"https://clickzle.games/next-in-sequence-game-5.html","genre":["Puzzle Game","Logic Game","Reasoning Game","Daily Game","Browser Game"],"gamePlatform":["Web Browser","Mobile Browser"],"offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"publisher":{"@type":"Organization","name":"Clickzle","url":"https://clickzle.games"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Next in Sequence on Clickzle?","acceptedAnswer":{"@type":"Answer","text":"Next in Sequence is Game 5 of 5 on Clickzle. It is a daily reasoning puzzle where players rotate pipe tiles to guide energy from START to END across a 4×5 grid. Complete as many paths as possible in five one-minute rounds. One attempt per day."}},{"@type":"Question","name":"How do you score points in Next in Sequence?","acceptedAnswer":{"@type":"Answer","text":"Points are awarded for each completed path. Staying within the move budget earns a GOLD bonus. Using the theoretical minimum number of moves earns a PERFECT bonus and extra points. Faster completion and higher efficiency increase your score across all five rounds."}},{"@type":"Question","name":"Is Next in Sequence free to play?","acceptedAnswer":{"@type":"Answer","text":"Yes. Next in Sequence is completely free at clickzle.games. One attempt per day, same daily puzzle worldwide."}}]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+:root {
+  --bg:#0a0a0a; --surface:#141414; --surface2:#1e1e1e;
+  --border:#2a2a2a; --border2:#333333;
+  --text:#f0f0f0; --text2:#888888; --text3:#555555;
+  --accent:#a78bfa;
+  --accent-dim:rgba(167,139,250,0.08);
+  --accent-border:rgba(167,139,250,0.22);
+  --accent-glow:rgba(167,139,250,0.45);
+  --green:#4ade80; --red:#f87171; --amber:#fbbf24;
+}
+body.light {
+  --bg:#f4f4f4; --surface:#ffffff; --surface2:#ebebeb;
+  --border:#d0d0d0; --border2:#c0c0c0;
+  --text:#111111; --text2:#555555; --text3:#999999;
+  --accent-dim:rgba(167,139,250,0.12);
+  --accent-border:rgba(120,80,200,0.30);
+}
+html,body {
+  width:100%; height:100%; background:#000;
+  display:flex; justify-content:center; align-items:center;
+  font-family:'Inter',sans-serif; overflow:hidden;
+  touch-action:manipulation;
+}
+#app {
+  width:100%; max-width:440px;
+  height:100dvh; max-height:100dvh;
+  background:var(--bg); display:flex; flex-direction:column;
+  position:relative; overflow:hidden; touch-action:manipulation;
+}
+@media(min-width:441px){#app{max-width:536px;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;}}
+
+/* ── HEADER ── */
+.header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 12px; height:80px; min-height:80px;
+  border-bottom:1px solid var(--border); background:var(--bg);
+  position:relative; z-index:10;
+}
+.header.hidden { display:none; }
+.header-icons { display:flex; gap:2px; width:120px; flex-shrink:0; }
+.header-icons.right { justify-content:flex-end; }
+.icon-btn {
+  width:38px; height:38px; display:flex; align-items:center; justify-content:center;
+  background:none; border:none; cursor:pointer; color:var(--text2);
+  border-radius:8px; transition:background 0.15s,color 0.15s; flex-shrink:0;
+  text-decoration:none;
+}
+.icon-btn:hover { background:var(--surface2); color:var(--text); }
+.icon-btn:active { transform:scale(0.92); }
+.icon-btn svg { width:20px; height:20px; }
+.header-center { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; line-height:1; }
+.header-title-link { text-decoration:none; display:flex; flex-direction:column; align-items:center; transition:opacity 0.15s; }
+.header-title-link:hover { opacity:0.75; }
+.header-title { font-family:'Bebas Neue',sans-serif; font-size:42px; letter-spacing:4px; color:var(--text); line-height:1; }
+.header-title span { color:var(--accent); }
+.header-subtitle { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--text2); margin-top:3px; }
+
+/* ── START SCREEN ── */
+#startScreen {
+  flex:1; display:flex; flex-direction:column; align-items:center;
+  justify-content:center; padding:32px 28px; gap:0; overflow:hidden; position:relative;
+  visibility:hidden;
+}
+body.fonts-ready #startScreen { visibility:visible; transition:opacity 0.18s ease; }
+.start-home-btn {
+  position:absolute; top:14px; left:14px;
+  display:flex; align-items:center; gap:7px; color:var(--text2);
+  text-decoration:none; font-size:12px; font-weight:600;
+  letter-spacing:1px; text-transform:uppercase; padding:8px 10px;
+  border-radius:8px; transition:background 0.15s,color 0.15s; z-index:5;
+}
+.start-home-btn:hover { background:var(--surface2); color:var(--text); }
+.start-home-btn svg { width:16px; height:16px; flex-shrink:0; }
+.start-logo-img { width:120px; display:block; margin:0 auto 4px; }
+.game-identity { text-align:center; padding:20px 0 24px; }
+.game-id-badge { display:inline-block; font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:6px; }
+.game-id-title { font-family:'Bebas Neue',sans-serif; font-size:38px; letter-spacing:3px; color:var(--text); line-height:1; margin-bottom:4px; }
+.game-id-challenge { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); margin-bottom:10px; }
+.game-id-desc { font-size:14px; color:var(--text2); line-height:1.55; max-width:300px; margin:0 auto 12px; }
+.game-id-tags { display:flex; justify-content:center; gap:6px; flex-wrap:wrap; }
+.game-id-tag { font-size:12px; font-weight:600; letter-spacing:0.5px; padding:4px 10px; border-radius:20px; background:var(--accent-dim); border:1px solid var(--accent-border); color:var(--accent); }
+.section-label { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--text2); font-weight:600; width:100%; margin-bottom:8px; margin-top:20px; }
+.free-play-section { padding:20px 0 16px; width:100%; }
+.name-row { display:flex; gap:8px; width:100%; }
+.name-input {
+  flex:1; background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; padding:12px 16px; font-size:15px; color:var(--text);
+  font-family:'Inter',sans-serif; outline:none; transition:border-color 0.2s;
+}
+.name-input:focus { border-color:var(--accent); }
+.name-input::placeholder { color:var(--text3); }
+.start-btn {
+  background:var(--accent); color:#000; border:none; border-radius:10px;
+  padding:12px 22px; font-size:15px; font-weight:700; font-family:'Inter',sans-serif;
+  cursor:pointer; letter-spacing:0.5px; transition:opacity 0.15s,transform 0.1s; white-space:nowrap;
+}
+.start-btn:hover { opacity:0.9; }
+.start-btn:active { transform:scale(0.96); }
+.free-note { font-size:11px; color:var(--text2); text-align:center; margin-top:8px; line-height:1.5; }
+.ad-slot {
+  width:100%; background:var(--surface); border:1px dashed var(--border2);
+  border-radius:12px; height:120px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:6px;
+  color:var(--text3); margin-top:16px; flex-shrink:0;
+}
+.ad-slot svg { width:24px; height:24px; stroke:currentColor; }
+.ad-slot-label { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; font-weight:700; color:var(--text2); }
+.ad-slot-size { font-size:11px; color:var(--text2); }
+
+/* ── GAME SCREEN ── */
+#gameScreen { flex:1; display:none; flex-direction:column; overflow:hidden; min-height:0; }
+#gameScreen.active { display:flex; }
+
+.status-bar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 16px; min-height:56px; flex-shrink:0;
+  border-bottom:1px solid var(--border);
+}
+.stat-block { display:flex; flex-direction:column; gap:2px; min-width:72px; }
+.stat-block.right { align-items:flex-end; }
+.stat-lbl { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); font-weight:600; }
+.stat-val { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:1px; color:var(--text); line-height:1; }
+.stat-val.accent { color:var(--accent); }
+.combo-badge { font-size:11px; font-weight:700; letter-spacing:1px; padding:2px 7px; border-radius:12px; border:1px solid var(--border2); background:var(--surface2); color:var(--text2); display:inline-block; transition:all 0.2s; }
+.status-centre { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.round-dots { display:flex; gap:5px; align-items:center; }
+.round-dot { width:7px; height:7px; border-radius:50%; background:var(--border2); transition:all 0.25s; }
+.round-dot.done { background:var(--text3); }
+.round-dot.active { background:var(--accent); transform:scale(1.4); box-shadow:0 0 6px 2px var(--accent-glow); }
+.round-label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text); font-weight:700; background:var(--accent-dim); padding:4px 12px; border-radius:12px; }
+
+.progress-container { padding:8px 16px; background:var(--surface2); border-bottom:1px solid var(--border); flex-shrink:0; }
+.rot-counter { display:flex; align-items:center; justify-content:space-between; font-size:11px; color:var(--text2); margin-bottom:6px; letter-spacing:0.5px; }
+.rot-counter span { font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--accent); }
+.completion-bar { height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
+.completion-fill { height:100%; width:0%; background:var(--accent); border-radius:3px; transition:width 0.2s ease; }
+
+.grid-wrapper {
+  flex:1; display:flex; min-height:0; position:relative;
+  padding:12px;
+  background-image:radial-gradient(rgba(255,255,255,0.03) 1px,transparent 1px);
+  background-size:20px 20px;
+}
+#gameGrid {
+  display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(5,1fr);
+  gap:10px; flex:1; min-height:0; z-index:1; touch-action:manipulation; width:100%;
+}
+.tile {
+  background:var(--surface); border-radius:14px; border:2px solid var(--border);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  transition:transform 0.12s cubic-bezier(0.34,1.56,0.64,1),border-color 0.18s,background 0.18s,box-shadow 0.22s;
+  position:relative; overflow:hidden;
+}
+.tile:active { transform:scale(0.91); }
+.tile.rotating { animation:tileRotate 0.13s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+@keyframes tileRotate { 0%{transform:rotate(0deg) scale(1)} 50%{transform:rotate(45deg) scale(0.92)} 100%{transform:rotate(90deg) scale(1)} }
+.tile.sweep-glow { animation:sweepPulse 0.22s ease-out forwards; }
+@keyframes sweepPulse { 0%{box-shadow:0 0 0 0 rgba(167,139,250,0.9)} 100%{box-shadow:0 0 0 14px rgba(167,139,250,0)} }
+.tile canvas { width:88%; height:88%; display:block; }
+.tile.glow { box-shadow:0 0 0 3px var(--accent-glow),inset 0 0 12px var(--accent-dim); border-color:var(--accent); background:var(--accent-dim); }
+.tile.start { border:3px solid var(--accent); box-shadow:0 0 16px var(--accent-glow),inset 0 0 16px rgba(167,139,250,0.3); background:rgba(167,139,250,0.15); }
+.tile.start::after { content:"START"; position:absolute; top:5px; left:5px; font-size:9px; font-weight:900; color:var(--accent); background:rgba(0,0,0,0.75); padding:2px 5px; border-radius:4px; letter-spacing:1px; }
+.tile.end { border:3px solid var(--green); box-shadow:0 0 16px rgba(74,222,128,0.5),inset 0 0 16px rgba(74,222,128,0.3); background:rgba(74,222,128,0.15); }
+.tile.end::after { content:"END"; position:absolute; top:5px; right:5px; font-size:9px; font-weight:900; color:var(--green); background:rgba(0,0,0,0.75); padding:2px 5px; border-radius:4px; letter-spacing:1px; }
+.tile.wrong { animation:tileShake 0.22s ease-in-out; }
+/* Fixed (locked) tile — amber/gold: "already solved, route through me" */
+.tile.fixed-tile {
+  border-color:rgba(251,191,36,0.55);
+  background:rgba(251,191,36,0.07);
+  cursor:not-allowed;
+  box-shadow:inset 0 0 8px rgba(251,191,36,0.08);
+}
+/* Padlock badge top-right */
+.tile.fixed-tile::after {
+  content:'🔒';
+  position:absolute; top:3px; right:4px;
+  font-size:8px; line-height:1; pointer-events:none;
+  opacity:0.75;
+}
+/* When flow passes through it — glow replaces amber tint */
+.tile.fixed-tile.glow {
+  border-color:var(--accent);
+  background:var(--accent-dim);
+  box-shadow:0 0 0 3px var(--accent-glow),inset 0 0 12px var(--accent-dim);
+}
+.tile.fixed-tile.glow::after { display:none; }
+/* Shake when player tries to click it */
+.tile.fixed-blocked { animation:blockedShake 0.22s ease-in-out; }
+@keyframes blockedShake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-4px)} 60%{transform:translateX(3px)} }
+
+/* Budget bar */
+.budget-bar-wrap { height:4px; flex-shrink:0; background:var(--border); position:relative; overflow:hidden; }
+#budgetBar { position:absolute; left:0; top:0; height:100%; background:var(--green); transition:width 0.1s linear, background 0.3s; }
+#budgetBar.warn { background:var(--amber); }
+#budgetBar.over { background:var(--red); animation:budgetPulse 0.35s ease-in-out infinite; }
+@keyframes budgetPulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.budget-label { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); font-weight:600; }
+.budget-val { font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--green); transition:color 0.3s; }
+.budget-val.warn { color:var(--amber); }
+.budget-val.over { color:var(--red); }
+.tile.solved { border-color:var(--green); box-shadow:0 0 0 3px rgba(74,222,128,0.4),inset 0 0 12px rgba(74,222,128,0.15); background:rgba(74,222,128,0.08); }
+@keyframes tileShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)} }
+
+.action-bar {
+  display:flex; align-items:center; justify-content:center;
+  padding:9px 16px; background:var(--surface2); border-top:1px solid var(--border);
+  flex-shrink:0; font-size:13px; color:var(--text); text-align:center; font-weight:500;
+}
+.action-hint { transition:color 0.2s; }
+.action-hint.success { color:var(--green); font-weight:700; }
+.action-hint.warning { color:var(--amber); }
+.action-hint.critical { color:var(--red); font-weight:700; }
+
+/* ── LOWER INFO — timer locked centre ── */
+.lower-info {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 16px; min-height:64px; flex-shrink:0;
+  border-top:1px solid var(--border); position:relative;
+}
+.info-left { display:flex; flex-direction:column; gap:2px; }
+.info-right { display:flex; flex-direction:column; align-items:flex-end; gap:2px; }
+.player-name { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:2px; color:var(--text); line-height:1; }
+.game-mode { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); font-weight:600; display:flex; flex-direction:column; align-items:flex-start; gap:1px; }
+.timer-wrap { position:absolute; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:2px; }
+.timer-label { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); font-weight:600; }
+#timerDisplay { font-family:'Bebas Neue',sans-serif; font-size:36px; letter-spacing:2px; color:var(--text); line-height:1; transition:color 0.3s; }
+#timerDisplay.warning { color:var(--amber); }
+#timerDisplay.critical { color:var(--red); animation:timerPulse 0.38s ease-in-out infinite; }
+@keyframes timerPulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.1)} }
+.turns-label { font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); font-weight:600; }
+#scoreDisplay { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:1px; color:var(--text); line-height:1; }
+/* Start screen always scrollable so content never clips */
+#startScreen { overflow-y:auto; }
+
+/* Short screens (≤ 680px tall) — header & lower-info shrink */
+@media(max-height:680px) {
+  .header { height:62px; min-height:62px; }
+  .lower-info { min-height:76px; padding:10px 16px; }
+  #timerDisplay { font-size:34px; }
+  #scoreDisplay { font-size:30px; }
+  .stat-val { font-size:20px; }
+}
+
+@media(max-height:750px) {
+  #startScreen { justify-content:flex-start; padding-top:52px; }
+  .game-identity { padding:14px 0 16px; }
+  .free-play-section { padding:12px 0 14px; }
+  .ad-slot { height:90px; }
+}
+
+/* Narrow phones (≤ 390px wide) */
+@media(max-width:390px) {
+  .header { padding:0 8px; }
+  .header-title { font-size:36px; }
+  .header-icons { width:80px; }
+  .icon-btn { width:40px; height:40px; }
+  .stat-val { font-size:20px; }
+}
+
+/* Very short screens (≤ 600px tall) — compact game UI */
+@media(max-height:600px) {
+  .header { height:52px; min-height:52px; }
+  .header-title { font-size:34px; }
+  .status-bar { min-height:46px; padding:4px 12px; }
+  .stat-val { font-size:18px; }
+  .lower-info { min-height:62px; padding:6px 14px; }
+  #timerDisplay { font-size:28px; }
+  #scoreDisplay { font-size:26px; }
+  .player-name { font-size:18px; }
+  .progress-container { padding:4px 12px; }
+  /* Exit modal compact */
+  #timeoutModal .modal-body { padding:10px 14px; gap:6px; }
+  .ec-score-block { padding:8px 12px; }
+  .ec-score-num { font-size:38px; }
+  .ec-stats { gap:4px; }
+  .ec-stat { padding:5px 6px; }
+  .ec-stat-val { font-size:17px; }
+  .victory-btns { gap:5px; }
+  .share-btn { height:40px; font-size:13px; }
+  .postgame-actions .action-btn { height:40px; font-size:13px; }
+  .postgame-actions { gap:5px; }
+  .ad-slot { height:80px; }
+}
+
+/* Landscape phones (short + wide) — ultra compact */
+@media(max-height:500px) {
+  .header { height:48px; min-height:48px; }
+  .status-bar { min-height:40px; padding:3px 10px; }
+  .lower-info { min-height:54px; padding:4px 12px; }
+  #timerDisplay { font-size:24px; }
+  #scoreDisplay { font-size:22px; }
+  .stat-val { font-size:16px; }
+  .progress-container { display:none; }
+  .budget-bar-wrap { display:none; }
+  .ec-accordion { display:none; }
+  .ad-slot { display:none; }
+  #timeoutModal .modal-body { gap:5px; padding:8px 12px; }
+  .ec-score-num { font-size:32px; }
+  .share-btn { height:36px; font-size:12px; }
+  .postgame-actions .action-btn { height:36px; font-size:12px; }
+}
+
+/* Ultra-small screens (≤ 320px wide — iPhone SE 1st gen) */
+@media(max-width:320px) {
+  .header-title { font-size:30px; }
+  .header-icons { width:70px; }
+  .icon-btn { width:34px; height:34px; }
+  #timerDisplay { font-size:24px; }
+  #scoreDisplay { font-size:22px; }
+  .stat-val { font-size:16px; }
+  .name-row { flex-direction:column; }
+  .start-btn { width:100%; }
+  .game-id-tags { gap:4px; }
+  .game-id-tag { font-size:10px; padding:3px 8px; }
+  .ec-stats { grid-template-columns:1fr 1fr; }
+}
+
+/* ── ROUND OVERLAY ── */
+#roundOverlay {
+  position:absolute; inset:0; z-index:100; background:var(--bg);
+  display:none; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+}
+#roundOverlay:not(.hidden) { display:flex; }
+.ro-round-num { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:3px; color:var(--text2); text-transform:uppercase; }
+.ro-num { font-family:'Bebas Neue',sans-serif; font-size:120px; color:var(--text); line-height:0.9; letter-spacing:4px; animation:roNumIn 0.22s cubic-bezier(0.22,1.8,0.36,1) forwards; }
+@keyframes roNumIn { from{transform:scale(0.45);opacity:0}to{transform:scale(1);opacity:1} }
+.ro-tagline { font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); font-weight:600; }
+.ro-ready-bar { font-size:13px; letter-spacing:3px; text-transform:uppercase; color:var(--text2); padding:8px 20px; border:1px solid var(--border2); border-radius:8px; animation:roReadyPulse 1s ease-in-out infinite; }
+@keyframes roReadyPulse { 0%,100%{opacity:0.5}50%{opacity:1} }
+.ro-count { font-family:'Bebas Neue',sans-serif; font-size:130px; color:#fff; line-height:1; animation:roCountIn 0.18s cubic-bezier(0.22,1.8,0.36,1) forwards; min-width:120px; text-align:center; }
+.ro-count.go { color:var(--accent); font-size:100px; letter-spacing:10px; text-shadow:0 0 80px var(--accent-glow); }
+.ro-count.exit { animation:roCountOut 0.18s ease-in forwards; }
+@keyframes roCountIn { from{transform:scale(1.7);opacity:0}to{transform:scale(1);opacity:1} }
+@keyframes roCountOut { from{transform:scale(1);opacity:1}to{transform:scale(0.4);opacity:0} }
+.ro-dots { display:flex; gap:10px; margin-top:22px; }
+.ro-dot { width:10px; height:10px; border-radius:50%; background:var(--border2); transition:background 0.15s,transform 0.15s; }
+.ro-dot.done { background:var(--text3); }
+.ro-dot.active { background:#fff; transform:scale(1.4); }
+
+/* ── MODAL BASE ── */
+.modal-overlay {
+  position:absolute; inset:0; background:rgba(0,0,0,0.85); z-index:200;
+  display:flex; align-items:center; justify-content:center; padding:20px;
+  backdrop-filter:blur(4px); opacity:0; pointer-events:none; transition:opacity 0.25s;
+}
+.modal-overlay.open { opacity:1; pointer-events:all; }
+.modal {
+  background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  width:100%; max-width:380px; overflow:hidden; transform:translateY(20px);
+  transition:transform 0.25s ease; max-height:calc(100dvh - 60px); overflow-y:auto;
+}
+.modal-overlay.open .modal { transform:translateY(0); }
+
+/* ── FULL-INTERFACE MODALS — anchored to #app via position:absolute ──
+   #app has position:relative, so inset:0 = exactly the game interface size */
+#timeoutModal, #pregameHelpModal, #helpModal, #shareModal,
+#statsModal, #settingsModal, #gamesModal {
+  padding:0; align-items:stretch; justify-content:stretch;
+  background:var(--bg); backdrop-filter:none;
+}
+#timeoutModal .modal, #pregameHelpModal .modal, #helpModal .modal,
+#shareModal .modal, #statsModal .modal, #settingsModal .modal, #gamesModal .modal {
+  max-width:none; width:100%; height:100%; max-height:100%;
+  border-radius:0; border:none; transform:none;
+  display:flex; flex-direction:column; overflow:hidden;
+}
+#timeoutModal.open .modal, #pregameHelpModal.open .modal, #helpModal.open .modal,
+#shareModal.open .modal, #statsModal.open .modal, #settingsModal.open .modal,
+#gamesModal.open .modal { transform:none; }
+#timeoutModal .modal, #pregameHelpModal .modal { border-top:2px solid var(--accent); }
+#timeoutModal .modal-body, #pregameHelpModal .modal-body {
+  flex:1; display:flex; flex-direction:column; justify-content:space-between;
+  padding:14px 18px 16px; gap:12px; min-height:0; overflow-y:auto;
+}
+#helpModal .modal-body, #shareModal .modal-body, #statsModal .modal-body,
+#settingsModal .modal-body, #gamesModal .modal-body {
+  flex:1; display:flex; flex-direction:column; padding:20px; gap:16px; overflow-y:auto;
+}
+
+.modal-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--surface); z-index:1; }
+#helpModal .modal-header, #shareModal .modal-header, #statsModal .modal-header,
+#settingsModal .modal-header, #pregameHelpModal .modal-header, #timeoutModal .modal-header { background:var(--bg); }
+.modal-title { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:2px; color:var(--text); }
+.modal-close { background:none; border:none; cursor:pointer; color:var(--text2); padding:6px; border-radius:6px; display:flex; align-items:center; justify-content:center; transition:background 0.15s; }
+.modal-close:hover { background:var(--surface2); color:var(--text); }
+.modal-close svg { width:18px; height:18px; }
+.modal-body { padding:20px; display:flex; flex-direction:column; gap:16px; }
+
+/* ── PREGAME HTP ── */
+.help-rules-block { display:flex; flex-direction:column; gap:16px; }
+.help-rule { display:flex; gap:14px; align-items:flex-start; }
+.help-icon { width:36px; height:36px; border-radius:10px; flex-shrink:0; background:var(--accent-dim); border:1px solid var(--accent-border); display:flex; align-items:center; justify-content:center; }
+.help-icon svg { width:18px; height:18px; color:var(--accent); }
+.help-text h4 { font-size:15px; font-weight:700; color:var(--text); margin-bottom:4px; }
+.help-text p { font-size:13px; color:var(--text2); line-height:1.55; }
+.pregame-modal-foot { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:16px 20px; border-top:1px solid var(--border); background:var(--surface2); flex-wrap:wrap; border-radius:0 0 0 0; }
+.dont-show-label { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text2); cursor:pointer; }
+.dont-show-label input { width:15px; height:15px; accent-color:var(--accent); cursor:pointer; }
+.pregame-play-btn { background:var(--accent); color:#000; border:none; border-radius:10px; padding:11px 20px; font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:1.5px; cursor:pointer; display:flex; align-items:center; gap:8px; transition:opacity 0.15s; }
+.pregame-play-btn:hover { opacity:0.88; }
+.pregame-play-btn svg { width:13px; height:13px; }
+
+/* ── END CARD (timeout modal) ── */
+.ec-header { text-align:center; flex-shrink:0; }
+.ec-title { font-family:'Bebas Neue',sans-serif; font-size:44px; color:var(--accent); letter-spacing:4px; line-height:1; }
+.ec-sub { font-size:11px; color:var(--text3); letter-spacing:2px; text-transform:uppercase; margin-top:2px; }
+
+/* Big score block */
+.ec-score-block { background:var(--surface2); border-radius:12px; padding:14px 16px; text-align:center; flex-shrink:0; }
+.ec-score-lbl { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--text3); font-weight:700; margin-bottom:4px; }
+.ec-score-num { font-family:'Bebas Neue',sans-serif; font-size:56px; color:var(--accent); letter-spacing:3px; line-height:1; }
+
+/* Stats row — 3 columns */
+.ec-stats { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; flex-shrink:0; }
+.ec-stat { background:var(--surface2); border-radius:10px; padding:9px 8px; text-align:center; }
+.ec-stat-lbl { font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); font-weight:600; margin-bottom:3px; }
+.ec-stat-val { font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--text); letter-spacing:1px; line-height:1; }
+
+/* Accordion for score breakdown */
+.ec-accordion { flex-shrink:0; border-radius:10px; overflow:hidden; border:1px solid var(--border); }
+.ec-accordion-btn {
+  width:100%; display:flex; align-items:center; justify-content:space-between;
+  padding:9px 14px; background:var(--surface2); border:none; cursor:pointer;
+  font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--text2);
+  font-weight:700; font-family:'Inter',sans-serif;
+}
+.ec-accordion-btn svg { width:14px; height:14px; transition:transform 0.2s; }
+.ec-accordion-btn.open svg { transform:rotate(180deg); }
+.ec-accordion-panel {
+  background:var(--bg); max-height:0; overflow:hidden;
+  transition:max-height 0.25s ease;
+}
+.ec-accordion-panel.open { max-height:320px; }
+.ec-breakdown-row { display:flex; justify-content:space-between; align-items:center; padding:6px 14px; border-top:1px solid var(--border); }
+.ec-breakdown-lbl { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--text3); font-weight:600; display:flex; align-items:center; gap:6px; }
+.ec-breakdown-lbl svg { width:12px; height:12px; flex-shrink:0; }
+.ec-breakdown-val { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--text); letter-spacing:1px; }
+
+/* Victory buttons — share */
+.victory-btns { display:flex; gap:6px; flex-shrink:0; }
+.share-btn {
+  flex:1; display:flex; align-items:center; justify-content:center; gap:6px;
+  background:var(--accent); color:#000; border:none; border-radius:10px;
+  padding:0; height:46px; font-size:14px; font-weight:700; cursor:pointer;
+  font-family:'Inter',sans-serif; transition:opacity 0.15s;
+}
+.share-btn:hover { opacity:0.9; }
+.share-btn:active { transform:scale(0.96); }
+.share-btn svg { width:14px; height:14px; flex-shrink:0; }
+
+/* Postgame action buttons */
+.postgame-actions { display:flex; flex-direction:column; gap:6px; flex-shrink:0; }
+.action-btn {
+  width:100%; display:flex; align-items:center; justify-content:center; gap:8px;
+  padding:0; height:46px; border-radius:10px; border:1px solid var(--border);
+  background:var(--surface2); color:var(--text); font-size:14px; font-weight:600;
+  font-family:'Inter',sans-serif; cursor:pointer; text-decoration:none;
+  transition:background 0.15s;
+}
+.action-btn:hover { background:var(--border); }
+.action-btn svg { width:14px; height:14px; flex-shrink:0; }
+.action-btn.action-home { border-color:var(--accent); color:var(--accent); }
+.action-btn.action-home:hover { background:var(--accent-dim); }
+
+/* Other games grid */
+.ec-other-games { border-top:1px solid var(--border); padding-top:8px; flex-shrink:0; }
+.ec-other-lbl { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); font-weight:600; margin-bottom:6px; }
+.ec-games-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px; }
+.ec-game-link { display:flex; align-items:center; justify-content:center; gap:5px; padding:7px 6px; border-radius:7px; background:var(--surface2); font-size:11px; font-weight:600; text-decoration:none; transition:background 0.15s; }
+.ec-game-num { font-family:'Bebas Neue',sans-serif; font-size:15px; }
+
+/* ── GAMES MODAL — cat list ── */
+.cat-item { display:flex; align-items:center; gap:16px; padding:15px 0; border-bottom:1px solid var(--border); cursor:pointer; transition:opacity 0.12s; }
+.cat-item:last-child { border-bottom:none; }
+.cat-item.active { cursor:default; }
+.cat-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.cat-icon svg { width:22px; height:22px; }
+.cat-info { flex:1; min-width:0; }
+.cat-name { font-size:15px; font-weight:700; color:var(--text); margin-bottom:3px; }
+.cat-desc { font-size:12px; color:var(--text2); }
+.cat-playing { font-size:11px; font-weight:700; letter-spacing:1px; color:var(--accent); text-transform:uppercase; flex-shrink:0; }
+
+/* ── SHARE MODAL ── */
+.share-preview { background:var(--surface2); border-radius:10px; padding:14px; font-size:12px; font-family:monospace; white-space:pre-wrap; line-height:1.6; color:var(--text2); }
+.share-platforms { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.platform-btn { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border-radius:10px; border:1px solid var(--border); background:var(--surface2); color:var(--text); font-size:13px; font-weight:600; cursor:pointer; font-family:'Inter',sans-serif; transition:background 0.15s; }
+.platform-btn:hover { background:var(--border); }
+.platform-btn.x-btn { background:#000; border-color:#333; }
+.platform-btn.wa-btn { background:#25D366; border-color:#25D366; color:#000; }
+.platform-btn.copy-btn { grid-column:span 2; }
+
+/* ── SETTINGS / STATS ── */
+.setting-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); font-size:14px; color:var(--text2); }
+.setting-row:last-child { border-bottom:none; }
+.setting-desc { color:var(--text2); font-size:12px; margin-top:2px; }
+.toggle { width:44px; height:24px; background:var(--border); border-radius:12px; cursor:pointer; position:relative; border:none; }
+.toggle.on { background:var(--accent); }
+.toggle::after { content:''; position:absolute; width:18px; height:18px; background:white; border-radius:50%; top:3px; left:3px; transition:transform 0.2s; }
+.toggle.on::after { transform:translateX(20px); }
+.stats-section-label { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--text2); font-weight:700; margin-bottom:10px; }
+.stats-big-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+.stat-big-card { background:var(--surface2); border-radius:12px; padding:16px; text-align:center; }
+.stat-big-num { font-family:'Bebas Neue',sans-serif; font-size:40px; letter-spacing:2px; color:var(--accent); line-height:1; }
+.stat-big-lbl { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text2); margin-top:4px; font-weight:600; }
+.streak-bar { display:flex; gap:4px; flex-wrap:wrap; }
+.streak-day { width:28px; height:28px; border-radius:6px; background:var(--border); }
+.streak-day.played { background:rgba(167,139,250,0.3); }
+.streak-day.today { background:var(--accent); }
+
+
+
+
+#app.time-warning .action-hint { color:var(--amber); }
+#app.time-critical { animation:criticalGlow 0.42s ease-in-out infinite; }
+@keyframes criticalGlow { 0%,100%{box-shadow:inset 0 0 0 0 rgba(248,113,113,0)} 50%{box-shadow:inset 0 0 40px 4px rgba(248,113,113,0.12)} }
+
+/* ── HEARTBEAT (last 10s of each round) ── */
+#app.heartbeat { animation:heartbeatGlow 0.85s ease-in-out infinite; }
+@keyframes heartbeatGlow {
+  0%   { box-shadow:inset 0 0 0 0 rgba(248,113,113,0); }
+  14%  { box-shadow:inset 0 0 0 6px rgba(248,113,113,0.55),0 0 40px 8px rgba(248,113,113,0.18); }
+  28%  { box-shadow:inset 0 0 0 2px rgba(248,113,113,0.15); }
+  42%  { box-shadow:inset 0 0 0 5px rgba(248,113,113,0.4),0 0 30px 6px rgba(248,113,113,0.12); }
+  100% { box-shadow:inset 0 0 0 0 rgba(248,113,113,0); }
+}
+/* Heartbeat NEVER overlaps tiles — pointer-events stay on tiles */
+#app.heartbeat #gameGrid { pointer-events:all; }
+#timerDisplay.heartbeat { color:var(--red) !important; animation:heartbeatTimer 0.85s ease-in-out infinite; }
+@keyframes heartbeatTimer { 0%,100%{transform:scale(1)} 14%{transform:scale(1.18)} 28%{transform:scale(1)} 42%{transform:scale(1.11)} }
+
+/* ── MID-ROUND COMPLETION FLASH ── */
+#completionFlash {
+  position:absolute; inset:0; z-index:50; pointer-events:none;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:rgba(74,222,128,0.08); opacity:0;
+  transition:opacity 0.12s ease;
+}
+#completionFlash.active { opacity:1; }
+.cf-pts { font-family:'Bebas Neue',sans-serif; font-size:56px; letter-spacing:4px; color:var(--green); line-height:1; text-shadow:0 0 40px rgba(74,222,128,0.8); }
+.cf-label { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--green); font-weight:700; margin-top:4px; }
+
+/* ── COMPLETIONS BADGE ── */
+.completions-badge {
+  display:inline-flex; align-items:center; gap:5px;
+  background:rgba(74,222,128,0.1); border:1px solid rgba(74,222,128,0.3);
+  border-radius:12px; padding:2px 8px;
+  font-size:11px; font-weight:700; color:var(--green); letter-spacing:0.5px;
+  transition:all 0.2s;
+}
+.completions-badge.bump { animation:badgeBump 0.22s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes badgeBump { 0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)} }
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- HEADER -->
+<header class="header hidden" id="mainHeader">
+  <div class="header-icons">
+    <a href="../../index.html" class="icon-btn" title="Exit game" aria-label="Exit game">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <button class="icon-btn" id="categoriesBtn" title="All games" aria-label="All games">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    </button>
+    <button class="icon-btn" id="helpBtn" title="How to play" aria-label="Help">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="0.5" fill="currentColor"/></svg>
+    </button>
+  </div>
+  <div class="header-center">
+    <a href="../../index.html" class="header-title-link" aria-label="Clickzle home">
+      <div class="header-title">CLICK<span>ZLE</span></div>
+      <div class="header-subtitle">Next in Sequence</div>
+    </a>
+  </div>
+  <div class="header-icons right">
+    <button class="icon-btn" id="statsBtn" title="Stats" aria-label="Statistics">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    </button>
+    <button class="icon-btn" id="muteBtn" title="Toggle sound" aria-label="Toggle sound">
+      <svg id="muteBtnIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+    </button>
+    <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- START SCREEN -->
+<div id="startScreen">
+  <a href="../../index.html" class="start-home-btn" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Home
+  </a>
+  <a href="../../next-in-sequence-game-5.html#leaderboard" class="start-home-btn" style="left:auto;right:14px;" aria-label="Leaderboard">
+    Leaderboard
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+  <img src="../../assets/logopurpledm.png" alt="Clickzle" class="start-logo-img" id="entranceLogo">
+  <div class="game-identity">
+    <div class="game-id-badge">Game 5 of 5 &mdash; Reasoning Challenge</div>
+    <div class="game-id-title">Next in Sequence</div>
+    <div class="game-id-challenge">Reasoning Challenge</div>
+    <div class="game-id-desc">Rotate tiles to guide energy from START to END. Complete the path as many times as you can in 60 seconds — speed is everything. Five rounds, one attempt per day.</div>
+    <div class="game-id-tags">
+      <span class="game-id-tag">Pipe Rotation</span>
+      <span class="game-id-tag">Flow Puzzle</span>
+      <span class="game-id-tag">Daily Challenge</span>
+    </div>
+  </div>
+  <div class="section-label" id="playFreeLabel">Play free &mdash; no account needed</div>
+  <div class="free-play-section" id="freePlaySection">
+    <div class="name-row">
+      <input type="text" class="name-input" id="playerNameInput" placeholder="Enter your name" maxlength="20" autocomplete="off" spellcheck="false">
+      <button class="start-btn" id="startBtn">PLAY</button>
+    </div>
+    <div class="free-note">Play instantly, no account needed. <a href="../../index.html" style="color:var(--accent);text-decoration:underline;font-weight:600;">Login</a> or <a href="../../index.html" style="color:var(--accent);text-decoration:underline;font-weight:600;">create a free account</a> to save your scores and stats and compete on the global leaderboard.</div>
+  </div>
+  <div class="ad-slot" id="adSlot">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    <span class="ad-slot-label">Clickzle Games</span>
+    <span class="ad-slot-size">300 &times; 120</span>
+  </div>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="gameScreen">
+  <!-- Status bar -->
+  <div class="status-bar">
+    <div class="stat-block">
+      <div class="stat-lbl">Round</div>
+      <div class="stat-val accent" id="currentRoundDisplay">1</div>
+    </div>
+    <div class="status-centre">
+      <div class="round-dots" id="roundDots"></div>
+      <div class="completions-badge" id="completionsBadge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="completionsCount">0</span> solved
+      </div>
+    </div>
+    <div class="stat-block right">
+      <div class="stat-lbl">Score</div>
+      <div class="stat-val" id="scoreDisplayTop">0</div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="progress-container">
+    <div class="rot-counter" style="margin-bottom:4px;">
+      <span>MOVES: <span id="rotationsUsed" style="color:var(--text2)">0</span> / <span class="budget-val" id="budgetVal">—</span></span>
+      <span>CONNECTED: <span id="correctCount" style="color:var(--text2)">0</span>/<span id="totalTiles">20</span></span>
+    </div>
+    <div class="completion-bar"><div class="completion-fill" id="completionFill"></div></div>
+  </div>
+  <!-- Budget bar -->
+  <div class="budget-bar-wrap"><div id="budgetBar" style="width:100%;"></div></div>
+
+  <!-- Grid -->
+  <div class="grid-wrapper">
+    <div id="gameGrid"></div>
+    <!-- Mid-round completion flash -->
+    <div id="completionFlash">
+      <div class="cf-pts" id="cfPts">+500</div>
+      <div class="cf-label" id="cfLabel">PATH SOLVED</div>
+    </div>
+      <!-- Round transition overlay -->
+    <div id="roundOverlay" class="hidden">
+      <div class="ro-round-num">Round</div>
+      <div class="ro-num" id="roNum">1</div>
+      <div class="ro-tagline" id="roTagline">Find Your Flow</div>
+      <div class="ro-ready-bar" id="roReadyBar">GET READY</div>
+      <div class="ro-count" id="roCount"></div>
+      <div class="ro-dots" id="roDots">
+        <div class="ro-dot"></div>
+        <div class="ro-dot"></div>
+        <div class="ro-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action bar -->
+  <div class="action-bar" style="justify-content:space-between;padding:9px 16px;">
+    <div class="action-hint" id="actionHint">Connect START to END</div>
+    <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);font-weight:700;flex-shrink:0;margin-left:12px;">EFF <span id="liveEff" style="color:var(--accent)">—</span></div>
+  </div>
+
+  <!-- Lower info -->
+  <div class="lower-info">
+    <div class="info-left">
+      <div class="player-name" id="playerNameDisplay">&mdash;</div>
+      <div class="game-mode" id="roundLabel">
+        <span>Reasoning Challenge</span>
+      </div>
+    </div>
+    <div class="timer-wrap">
+      <div class="timer-label">Time</div>
+      <div id="timerDisplay">60</div>
+    </div>
+    <div class="info-right">
+      <div class="turns-label">Score</div>
+      <div id="scoreDisplay">0</div>
+    </div>
+  </div><!-- end lower-info -->
+</div><!-- end gameScreen -->
+
+<!-- ═══ ALL MODALS — inside #app so position:absolute anchors to game container ═══ -->
+
+<!-- ═══ PREGAME HTP MODAL ═══ -->
+<div class="modal-overlay" id="pregameHelpModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">HOW TO PLAY</div>
+    </div>
+    <div class="modal-body">
+      <div class="help-rules-block">
+
+        <div class="help-rule">
+          <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          <div class="help-text"><h4>Connect Start to End</h4><p>Tap any tile to rotate it 90&deg;. Connect a pipe path from <strong>START</strong> to <strong>END</strong>. When the path is complete the round counts and a fresh puzzle appears — timer keeps running.</p></div>
+        </div>
+
+        <div style="background:var(--surface2);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);font-weight:700;margin-bottom:2px;">Tile types</div>
+
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:34px;height:34px;border-radius:8px;flex-shrink:0;border:2px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;">
+              <svg width="22" height="22" viewBox="0 0 100 100"><line x1="8" y1="50" x2="92" y2="50" stroke="#2d2d4a" stroke-width="22" stroke-linecap="round"/><line x1="8" y1="50" x2="92" y2="50" stroke="#3d3d5e" stroke-width="10" stroke-linecap="round"/></svg>
+            </div>
+            <div style="font-size:13px;color:var(--text2);"><strong style="color:var(--text);">Normal tile</strong> — tap to rotate 90°. Each tap uses 1 move from your budget.</div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:34px;height:34px;border-radius:8px;flex-shrink:0;border:2px solid rgba(251,191,36,0.55);background:rgba(251,191,36,0.07);display:flex;align-items:center;justify-content:center;position:relative;">
+              <svg width="22" height="22" viewBox="0 0 100 100"><line x1="8" y1="50" x2="92" y2="50" stroke="#2d2d4a" stroke-width="22" stroke-linecap="round"/><line x1="8" y1="50" x2="92" y2="50" stroke="#3d3d5e" stroke-width="10" stroke-linecap="round"/></svg>
+              <span style="position:absolute;top:1px;right:2px;font-size:7px;opacity:0.8;">🔒</span>
+            </div>
+            <div style="font-size:13px;color:var(--text2);"><strong style="color:var(--amber);">Locked tile 🔒</strong> — already in the correct position. Can't be rotated. The path runs through it — use it as a hint.</div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:34px;height:34px;border-radius:8px;flex-shrink:0;border:2px solid var(--accent);background:var(--accent-dim);display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px var(--accent-glow);">
+              <svg width="22" height="22" viewBox="0 0 100 100"><line x1="8" y1="50" x2="92" y2="50" stroke="#a78bfa" stroke-width="22" stroke-linecap="round"/><line x1="8" y1="50" x2="92" y2="50" stroke="#ddd6fe" stroke-width="10" stroke-linecap="round"/></svg>
+            </div>
+            <div style="font-size:13px;color:var(--text2);"><strong style="color:var(--accent);">Live tile</strong> — purple glow means signal is flowing through this tile. Connect all the way to END to complete the puzzle.</div>
+          </div>
+
+        </div>
+
+        <div class="help-rule">
+          <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div class="help-text"><h4>Move budget &amp; scoring</h4><p>Each puzzle has a <strong>move budget</strong> shown at the top. Stay within it for <strong style="color:var(--amber);">GOLD</strong>. Hit the theoretical minimum for <strong style="color:#fbbf24;">PERFECT ★</strong> and a big bonus. Going over budget only hurts your score — you can still complete the puzzle.</p></div>
+        </div>
+
+        <div class="help-rule">
+          <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="help-text"><h4>5 rounds, 1 minute each</h4><p>60 seconds per round. Puzzles get harder after each solve. Score carries across all five rounds. One attempt per day — same sequence worldwide.</p></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="pregame-modal-foot">
+      <label class="dont-show-label">
+        <input type="checkbox" id="dontShowHtp">
+        <span>Don't show again</span>
+      </label>
+      <button class="pregame-play-btn" id="pregamePlayBtn">
+        GOT IT &mdash; START GAME
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ END CARD ═══ -->
+<div class="modal-overlay" id="timeoutModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="ecTitle">COMPLETE</div>
+    </div>
+    <div class="modal-body">
+
+      <div class="ec-header">
+        <div class="ec-sub" id="ecDate">— Next in Sequence</div>
+      </div>
+
+      <div class="ec-score-block">
+        <div class="ec-score-lbl">Total Score</div>
+        <div class="ec-score-num" id="ecScore">0</div>
+      </div>
+
+      <div class="ec-stats">
+        <div class="ec-stat">
+          <div class="ec-stat-lbl">Puzzles Solved</div>
+          <div class="ec-stat-val" id="ecTotalSolved">0</div>
+        </div>
+        <div class="ec-stat">
+          <div class="ec-stat-lbl">Efficiency</div>
+          <div class="ec-stat-val" id="ecEfficiency">0%</div>
+        </div>
+        <div class="ec-stat">
+          <div class="ec-stat-lbl">Best Round</div>
+          <div class="ec-stat-val" id="ecRoundsWon">0</div>
+        </div>
+      </div>
+
+      <div class="ec-accordion">
+        <button class="ec-accordion-btn" id="ecBreakdownBtn">
+          <span>Score Breakdown</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="ec-accordion-panel" id="ecBreakdownPanel">
+          <div style="padding:6px 14px 4px;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700;">Tiebreaker Order</div>
+          <div class="ec-breakdown-row"><span class="ec-breakdown-lbl" style="color:var(--text2);">① Puzzles Solved</span><span class="ec-breakdown-val" id="ecTotalSolvedAcc">—</span></div>
+          <div class="ec-breakdown-row"><span class="ec-breakdown-lbl" style="color:var(--text2);">② Efficiency</span><span class="ec-breakdown-val" id="ecEfficiencyAcc">—</span></div>
+          <div class="ec-breakdown-row"><span class="ec-breakdown-lbl" style="color:var(--text2);">③ Perfect Solves</span><span class="ec-breakdown-val" id="ecPerfect">0</span></div>
+          <div style="padding:6px 14px 4px;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:700;margin-top:2px;">Full Breakdown</div>
+          <div class="ec-breakdown-row"><span class="ec-breakdown-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778"/></svg>Total Rotations</span><span class="ec-breakdown-val" id="ecRotations">0</span></div>
+          <div class="ec-breakdown-row"><span class="ec-breakdown-lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Rank Today</span><span class="ec-breakdown-val" id="ecRank">#&mdash;</span></div>
+        </div>
+      </div>
+
+      <div class="ad-slot" style="height:120px;flex-shrink:0;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <span class="ad-slot-label">Clickzle Games</span>
+        <span class="ad-slot-size">300 &times; 120</span>
+      </div>
+
+      <div class="victory-btns">
+        <button class="share-btn" id="shareTimeoutBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          Share Result
+        </button>
+        <button class="share-btn" id="inviteFriendBtn" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          Invite Friend
+        </button>
+      </div>
+
+      <div class="postgame-actions">
+        <a href="../../next-in-sequence-game-5.html#leaderboard" class="action-btn action-home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          View Leaderboard
+        </a>
+        <a href="../../index.html" class="action-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Back to Home
+        </a>
+      </div>
+
+      <div class="ec-other-games">
+        <div class="ec-other-lbl">Try Another Game</div>
+        <div class="ec-games-grid">
+          <a href="../../complete-the-image-game-1.html" class="ec-game-link" style="border:1px solid rgba(74,222,128,0.3);color:#4ade80;"><span class="ec-game-num">1</span> Complete the Image</a>
+          <a href="../../follow-the-pattern-game-2.html" class="ec-game-link" style="border:1px solid rgba(96,165,250,0.3);color:#60a5fa;"><span class="ec-game-num">2</span> Follow the Pattern</a>
+          <a href="../../hit-the-target-game-3.html" class="ec-game-link" style="border:1px solid rgba(244,114,182,0.3);color:#f472b6;"><span class="ec-game-num">3</span> Hit the Target</a>
+          <a href="../../spot-the-pair-game-4.html" class="ec-game-link" style="border:1px solid rgba(250,204,21,0.3);color:#facc15;"><span class="ec-game-num">4</span> Spot the Pair</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SHARE MODAL ═══ -->
+<div class="modal-overlay" id="shareModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">SHARE</div>
+      <button class="modal-close" data-close="shareModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="share-preview" id="sharePreview"></div>
+      <div class="share-platforms">
+        <button class="platform-btn x-btn" id="shareX"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Post on X</button>
+        <button class="platform-btn wa-btn" id="shareWhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.531 5.856L.057 23.25l5.565-1.456A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.371l-.359-.213-3.305.866.882-3.217-.234-.371A9.818 9.818 0 1 1 12 21.818z"/></svg> WhatsApp</button>
+        <button class="platform-btn copy-btn" id="shareCopy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HELP MODAL ═══ -->
+<div class="modal-overlay" id="helpModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">HOW TO PLAY</div>
+      <button class="modal-close" data-close="helpModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="help-rules-block">
+
+        <div style="background:var(--surface2);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;margin-bottom:4px;">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);font-weight:700;margin-bottom:2px;">Tile types</div>
+
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:34px;height:34px;border-radius:8px;flex-shrink:0;border:2px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;">
+              <svg width="22" height="22" viewBox="0 0 100 100"><line x1="8" y1="50" x2="92" y2="50" stroke="#2d2d4a" stroke-width="22" stroke-linecap="round"/><line x1="8" y1="50" x2="92" y2="50" stroke="#3d3d5e" stroke-width="10" stroke-linecap="round"/></svg>
+            </div>
+            <div style="font-size:13px;color:var(--text2);"><strong style="color:var(--text);">Normal</strong> — tap to rotate 90°, costs 1 move.</div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:34px;height:34px;border-radius:8px;flex-shrink:0;border:2px solid rgba(251,191,36,0.55);background:rgba(251,191,36,0.07);display:flex;align-items:center;justify-content:center;position:relative;">
+              <svg width="22" height="22" viewBox="0 0 100 100"><line x1="8" y1="50" x2="92" y2="50" stroke="#2d2d4a" stroke-width="22" stroke-linecap="round"/><line x1="8" y1="50" x2="92" y2="50" stroke="#3d3d5e" stroke-width="10" stroke-linecap="round"/></svg>
+              <span style="position:absolute;top:1px;right:2px;font-size:7px;opacity:0.8;">🔒</span>
+            </div>
+            <div style="font-size:13px;color:var(--text2);"><strong style="color:var(--amber);">Locked 🔒</strong> — already correct, can't rotate. The path goes through it — it's a free hint.</div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:34px;height:34px;border-radius:8px;flex-shrink:0;border:2px solid var(--accent);background:var(--accent-dim);display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px var(--accent-glow);">
+              <svg width="22" height="22" viewBox="0 0 100 100"><line x1="8" y1="50" x2="92" y2="50" stroke="#a78bfa" stroke-width="22" stroke-linecap="round"/><line x1="8" y1="50" x2="92" y2="50" stroke="#ddd6fe" stroke-width="10" stroke-linecap="round"/></svg>
+            </div>
+            <div style="font-size:13px;color:var(--text2);"><strong style="color:var(--accent);">Live</strong> — signal flowing through this tile. Connect to END to complete.</div>
+          </div>
+
+        </div>
+
+        <div class="help-rule">
+          <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <div class="help-text"><h4>Move budget</h4><p>The bar at the top shows your budget. Stay within it for <strong style="color:var(--amber);">GOLD</strong>. Hit the minimum for <strong style="color:#fbbf24;">PERFECT ★</strong>. Going over only costs score — puzzle still counts.</p></div>
+        </div>
+
+        <div class="help-rule">
+          <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="help-text"><h4>Chain completions</h4><p>Each solve spawns a harder puzzle — timer keeps running. Score more by solving fast and efficiently.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SETTINGS MODAL ═══ -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">SETTINGS</div>
+      <button class="modal-close" data-close="settingsModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="setting-row">
+        <div><div style="font-size:14px;color:var(--text);font-weight:600;">Sound Effects</div></div>
+        <button class="toggle on" id="soundToggle" aria-label="Toggle sound"></button>
+      </div>
+      <div class="setting-row">
+        <div><div style="font-size:14px;color:var(--text);font-weight:600;">Light Mode</div></div>
+        <button class="toggle" id="lightModeToggle" aria-label="Toggle light mode"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STATS MODAL ═══ -->
+<div class="modal-overlay" id="statsModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">YOUR STATS</div>
+      <button class="modal-close" data-close="statsModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="stats-section-label">Overall</div>
+      <div class="stats-big-grid">
+        <div class="stat-big-card"><div class="stat-big-num" id="statPlayed">0</div><div class="stat-big-lbl">Played</div></div>
+        <div class="stat-big-card"><div class="stat-big-num" id="statBestScore">0</div><div class="stat-big-lbl">Best Score</div></div>
+        <div class="stat-big-card"><div class="stat-big-num" id="statBestEff">—</div><div class="stat-big-lbl">Best Efficiency</div></div>
+        <div class="stat-big-card"><div class="stat-big-num" id="statStreak">0</div><div class="stat-big-lbl">Day Streak</div></div>
+      </div>
+      <div class="stats-section-label">Last 7 Days</div>
+      <div class="streak-bar" id="streakBarEl"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ OTHER GAMES MODAL ═══ -->
+<div class="modal-overlay" id="gamesModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">ALL GAMES</div>
+      <button class="modal-close" data-close="gamesModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="cat-item" onclick="location.href='../../complete-the-image-game-1.html'">
+        <div class="cat-icon" style="background:rgba(74,222,128,0.15);color:#4ade80;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>
+        </div>
+        <div class="cat-info"><div class="cat-name">Complete the Image</div><div class="cat-desc">Find the one intact image among six decoys</div></div>
+      </div>
+      <div class="cat-item" onclick="location.href='../../follow-the-pattern-game-2.html'">
+        <div class="cat-icon" style="background:rgba(96,165,250,0.15);color:#60a5fa;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+        </div>
+        <div class="cat-info"><div class="cat-name">Follow the Pattern</div><div class="cat-desc">Memorise tile sequences and tap them back</div></div>
+      </div>
+      <div class="cat-item" onclick="location.href='../../hit-the-target-game-3.html'">
+        <div class="cat-icon" style="background:rgba(244,114,182,0.15);color:#f472b6;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <div class="cat-info"><div class="cat-name">Hit the Target</div><div class="cat-desc">Tap the target tile the instant it appears</div></div>
+      </div>
+      <div class="cat-item" onclick="location.href='../../spot-the-pair-game-4.html'">
+        <div class="cat-icon" style="background:rgba(250,204,21,0.15);color:#facc15;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="9" height="9" rx="1"/><rect x="13" y="3" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
+        </div>
+        <div class="cat-info"><div class="cat-name">Spot the Pair</div><div class="cat-desc">Find matching pairs before time runs out</div></div>
+      </div>
+      <div class="cat-item active">
+        <div class="cat-icon" style="background:rgba(167,139,250,0.15);color:#a78bfa;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 19 12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </div>
+        <div class="cat-info"><div class="cat-name">Next in Sequence</div><div class="cat-desc">Rotate tiles to connect START to END</div></div>
+        <div class="cat-playing">Playing</div>
+      </div>
+      <div class="cat-item" onclick="location.href='../../leaderboard.html'">
+        <div class="cat-icon" style="background:rgba(251,146,60,0.15);color:#fb923c;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="cat-info"><div class="cat-name">Leaderboard</div><div class="cat-desc">See today's top scores and rankings</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /#app -->
+
+<script>
+'use strict';
+
+// ── FONTS READY ──────────────────────────────────────────────────────────────
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => document.body.classList.add('fonts-ready'));
+} else {
+  document.body.classList.add('fonts-ready');
+}
+
+// ── SETTINGS ─────────────────────────────────────────────────────────────────
+const STATS_KEY = 'clickzle_stats_sequence';
+let settings = { sound: true, lightMode: false };
+try { Object.assign(settings, JSON.parse(localStorage.getItem('clickzle_settings') || '{}')); } catch(e) {}
+if (settings.lightMode) document.body.classList.add('light');
+
+function saveSettings() { localStorage.setItem('clickzle_settings', JSON.stringify(settings)); }
+function applySettings() {
+  document.getElementById('soundToggle').classList.toggle('on', settings.sound);
+  document.getElementById('lightModeToggle').classList.toggle('on', settings.lightMode);
+  document.body.classList.toggle('light', settings.lightMode);
+  const logo = document.getElementById('entranceLogo');
+  if (logo) logo.src = settings.lightMode ? '../../assets/logopurplelm.png' : '../../assets/logopurpledm.png';
+}
+applySettings();
+
+document.getElementById('soundToggle').addEventListener('click', function() {
+  settings.sound = !settings.sound; this.classList.toggle('on', settings.sound); saveSettings();
+});
+document.getElementById('lightModeToggle').addEventListener('click', function() {
+  settings.lightMode = !settings.lightMode; applySettings(); saveSettings();
+});
+
+// ── STATS ─────────────────────────────────────────────────────────────────────
+function getStats() { try { return JSON.parse(localStorage.getItem(STATS_KEY) || '{}'); } catch { return {}; } }
+function saveStats(s) { localStorage.setItem(STATS_KEY, JSON.stringify(s)); }
+
+// ── AUDIO ─────────────────────────────────────────────────────────────────────
+let audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx && settings.sound) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+function tone(freq, dur, type, vol, delay) {
+  if (!settings.sound) return;
+  const ctx = getAudioCtx(); if (!ctx) return;
+  try {
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    o.type = type || 'sine';
+    o.frequency.value = freq;
+    g.gain.value = vol || 0.15;
+    const t = ctx.currentTime + (delay || 0);
+    o.start(t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.stop(t + dur);
+  } catch(e) {}
+}
+function playRotate()  { tone(440, 0.06, 'sine', 0.08); }
+function playConnect() { tone(660, 0.08, 'sine', 0.12); tone(880, 0.08, 'sine', 0.10, 0.05); }
+function playComplete(){ tone(523, 0.15, 'sine', 0.20); tone(659, 0.15, 'sine', 0.18, 0.08); tone(784, 0.25, 'sine', 0.22, 0.16); }
+function playTimeout() { tone(300, 0.4, 'sawtooth', 0.15); tone(200, 0.5, 'sawtooth', 0.12, 0.2); }
+function playCd(n)     { const m={3:330,2:370,1:415}; tone(m[n]||330, 0.10, 'sine', 0.18); }
+function playGo()      { tone(523, 0.18, 'sine', 0.22); tone(659, 0.18, 'sine', 0.18, 0.08); }
+function playBeep(s)   { if (s <= 8) tone(880, 0.06, 'sine', 0.1); else tone(660, 0.06, 'sine', 0.08); }
+function playFixedTileBlock() {
+  tone(220, 0.06, 'square', 0.18); // short dull thud — "no"
+}
+function playBudgetWarn() {
+  tone(440, 0.08, 'sawtooth', 0.12); tone(330, 0.10, 'sawtooth', 0.10, 0.06);
+}
+function playPerfectBonus() {
+  tone(784,0.12,'sine',0.30); tone(1047,0.12,'sine',0.28,0.08);
+  tone(1319,0.15,'sine',0.26,0.17); tone(1568,0.20,'sine',0.30,0.27);
+}
+function playHeartbeat() {
+  if (!settings.sound) return;
+  // Double-thud like a heartbeat — low thump + second quieter thump
+  tone(55,  0.12, 'sine',     0.55);
+  tone(48,  0.10, 'triangle', 0.40, 0.08);
+  tone(55,  0.09, 'sine',     0.30, 0.28);
+  tone(48,  0.08, 'triangle', 0.22, 0.34);
+}
+
+// ── VOICE ─────────────────────────────────────────────────────────────────────
+let voiceReady = false;
+let chosenVoice = null;
+
+function initVoice() {
+  if (typeof speechSynthesis === 'undefined') return;
+  voiceReady = true;
+  pickVoice();
+  if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = pickVoice;
+  _warmupVoice();
+}
+
+function _warmupVoice() {
+  try {
+    const u = new SpeechSynthesisUtterance('');
+    u.volume = 0; speechSynthesis.speak(u);
+  } catch(e) {}
+}
+
+function pickVoice() {
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return;
+  // Priority: UK English variants first (clear and authoritative), then US, then any English.
+  // No gender preference — we use whichever is available on the device.
+  const preferred = [
+    'Daniel','Google UK English Male','Google UK English Female',
+    'Arthur','Google US English','Alex','Samantha','Karen','Rishi','Moira'
+  ];
+  for (const name of preferred) {
+    const v = voices.find(v => v.name === name);
+    if (v) { chosenVoice = v; return; }
+  }
+  // Fallback: prefer en-GB, then en-US, then any English
+  chosenVoice = voices.find(v => v.lang === 'en-GB')
+    || voices.find(v => v.lang === 'en-US')
+    || voices.find(v => v.lang.startsWith('en'))
+    || null;
+}
+
+function speak(text, rate, pitch, cancelFirst, onEnd) {
+  if (!settings.sound || !voiceReady || typeof speechSynthesis === 'undefined') { if (onEnd) onEnd(); return; }
+  if (cancelFirst === undefined) cancelFirst = true;
+  try {
+    if (cancelFirst) speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate  = rate  || 0.90;
+    u.pitch = pitch || 1.15;
+    u.volume = 0.95;
+    if (chosenVoice) u.voice = chosenVoice;
+    if (onEnd) u.onend = onEnd;
+    speechSynthesis.speak(u);
+  } catch(e) { if (onEnd) onEnd(); }
+}
+
+// ── SEEDED RNG + DAILY SEED ───────────────────────────────────────────────────
+function seededRandom(seed) {
+  let x = Math.sin(seed + 1) * 10000;
+  return function() { x = Math.sin(x) * 10000; return x - Math.floor(x); };
+}
+function getDailySeed() {
+  const d = new Date();
+  return parseInt(d.getUTCFullYear().toString() + (d.getUTCMonth()+1).toString().padStart(2,'0') + d.getUTCDate().toString().padStart(2,'0'));
+}
+
+// ── ROUND CONFIG ──────────────────────────────────────────────────────────────
+// Base config per round — puzzle 1 of each round starts here
+const ROUND_CONFIG = [
+  { label:'Find Your Flow',    tagline:'Simple path',      pathMin:5,  allowLeft:false, nonEdge:false, maxRot:1, noisy:0.20 },
+  { label:'Follow the Signal', tagline:'Getting longer',   pathMin:8,  allowLeft:false, nonEdge:false, maxRot:2, noisy:0.40 },
+  { label:'Stay Sharp',        tagline:'Branching paths',  pathMin:10, allowLeft:true,  nonEdge:false, maxRot:2, noisy:0.55 },
+  { label:'Don\'t Break Flow', tagline:'Complex routing',  pathMin:12, allowLeft:true,  nonEdge:true,  maxRot:3, noisy:0.72 },
+  { label:'Final Signal',      tagline:'Maximum pressure', pathMin:14, allowLeft:true,  nonEdge:true,  maxRot:3, noisy:0.88 }
+];
+
+// Difficulty ALWAYS increases with each successive puzzle in a round.
+// step = puzzleNum-1, capped at 8 so there's always room to grow.
+function getPuzzleConfig() {
+  const base    = ROUND_CONFIG[gs.currentRound - 1];
+  const step    = Math.min(gs.puzzleNum - 1, 8);
+  const pathMin = base.pathMin + step * 2;
+  return {
+    ...base,
+    pathMin,
+    maxRot:    base.maxRot   + Math.floor(step / 2),
+    allowLeft: base.allowLeft || step >= 2,
+    nonEdge:   base.nonEdge  || step >= 5,
+    noisy:     Math.min(0.96, base.noisy + step * 0.05),
+    minExtra:  1 + Math.floor(step / 2),
+    budget:    Math.max(pathMin + 3 + Math.max(0, 4 - step), pathMin + 2),
+  };
+}
+const gs = {
+  grid:             [],
+  pipeType:         [],
+  isFixed:          [],
+  startR:0, startC:0, endR:0, endC:0,
+  totalScore:       0,
+  currentRound:     1,
+  isActive:         false,
+  timerRaf:         null,
+  playerName:       '',
+  inputLocked:      false,
+  roundStartTs:     0,
+  lastPressureBeep: -1,
+  done:             false,
+  // per-round
+  roundCompletions: 0,   // puzzles solved this round
+  roundScore:       0,   // score earned this round
+  // per-puzzle
+  puzzleNum:        1,   // which puzzle within this round (1-based, drives difficulty + seed)
+  puzzleRotations:  0,   // rotations on current puzzle
+  puzzleStartTs:    0,   // when this specific puzzle started
+  // totals
+  totalSolved:      0,   // total puzzles solved across all rounds
+  bestRound:        0,   // best completions in a single round
+  totalRotations:   0,   // all rotations across all puzzles
+  // milestone flags
+  _spoke30:         false,
+  _spoke15:         false,
+  // rotation budget per puzzle (set by getPuzzleConfig)
+  rotBudget:        0,
+  rotUsed:          0,  // rotations used on current puzzle
+  perfectCount:     0,  // perfect solves this session
+};
+
+// ── BOARD GENERATION ──────────────────────────────────────────────────────────
+const ROWS = 5, COLS = 4;
+// 4 directions: 0=N 1=E 2=S 3=W
+const DIRECTIONS = [[-1,0],[0,1],[1,0],[0,-1]];
+
+function generateBoard() {
+  const config   = getPuzzleConfig();
+  const baseSeed = getDailySeed() + gs.currentRound * 100003 + gs.puzzleNum * 7919;
+
+  // Retry up to 25 times with different seed offsets until a valid (solvable) path is found.
+  // A valid path is one where END is reached via adjacent steps only — no non-adjacent appends.
+  for (let attempt = 0; attempt < 25; attempt++) {
+    const seed = baseSeed + attempt * 998244353;
+    const rand = seededRandom(seed);
+
+    // Place START/END with enforced minimum Manhattan distance — always well-separated
+    const minDist = Math.max(5, Math.min(ROWS + COLS - 2, 4 + Math.floor(config.pathMin / 3)));
+    let bestStartR = 0, bestStartC = 0, bestEndR = ROWS-1, bestEndC = COLS-1, bestDist = 0;
+    let placeAttempts = 0;
+    do {
+      let sr, sc, er, ec;
+      if (config.nonEdge) {
+        sc = Math.floor(rand() * 2);
+        ec = COLS - 1 - Math.floor(rand() * 2);
+      } else {
+        sc = 0; ec = COLS - 1;
+      }
+      sr = Math.floor(rand() * ROWS);
+      er = Math.floor(rand() * ROWS);
+      const d = Math.abs(sr - er) + Math.abs(sc - ec);
+      if (d > bestDist) { bestDist = d; bestStartR=sr; bestStartC=sc; bestEndR=er; bestEndC=ec; }
+      gs.startR = sr; gs.startC = sc; gs.endR = er; gs.endC = ec;
+      placeAttempts++;
+    } while (
+      Math.abs(gs.startR - gs.endR) + Math.abs(gs.startC - gs.endC) < minDist &&
+      placeAttempts < 50
+    );
+    // If we exhausted attempts, fall back to the best placement found
+    if (Math.abs(gs.startR - gs.endR) + Math.abs(gs.startC - gs.endC) < minDist) {
+      gs.startR = bestStartR; gs.startC = bestStartC;
+      gs.endR   = bestEndR;   gs.endC   = bestEndC;
+    }
+
+    // Build solution path — wander to hit pathMin length, then head toward end
+    let r = gs.startR, c = gs.startC;
+    const path    = [[r, c]];
+    const visited = Array(ROWS).fill().map(() => Array(COLS).fill(false));
+    visited[r][c] = true;
+    let pathAttempts = 0;
+
+    while (!(r === gs.endR && c === gs.endC) && pathAttempts < 600) {
+      pathAttempts++;
+      const needsLength = path.length < config.pathMin;
+      const distToEnd   = Math.abs(r - gs.endR) + Math.abs(c - gs.endC);
+      let candidates = [[r-1,c],[r+1,c],[r,c+1],[r,c-1]]
+        .filter(([nr,nc]) => nr>=0 && nr<ROWS && nc>=0 && nc<COLS && !visited[nr][nc])
+        .filter(([,nc]) => config.allowLeft || nc >= gs.startC);
+
+      // When path is long enough and END is close, force movement only toward END
+      if (!needsLength && distToEnd <= 3) {
+        const closing = candidates.filter(([nr,nc]) =>
+          Math.abs(nr-gs.endR)+Math.abs(nc-gs.endC) < distToEnd);
+        if (closing.length > 0) candidates = closing;
+      }
+
+      const moves = [];
+      candidates.forEach(([nr, nc]) => {
+        const newDist = Math.abs(nr - gs.endR) + Math.abs(nc - gs.endC);
+        // When building length: prefer tiles that move AWAY from end (snaking)
+        // When at target length: prefer tiles that close in on end
+        const w = needsLength ? (newDist >= distToEnd ? 3 : 1) : (newDist < distToEnd ? 3 : 1);
+        for (let i = 0; i < w; i++) moves.push([nr, nc]);
+      });
+
+      if (moves.length === 0) break;
+      const [nr, nc] = moves[Math.floor(rand() * moves.length)];
+      r = nr; c = nc;
+      visited[r][c] = true;
+      path.push([r, c]);
+    }
+
+    // Validate: END must be reached via adjacent steps only.
+    // A non-adjacent force-append would produce wrong pipe directions and an unsolvable puzzle.
+    const [lastR, lastC] = path[path.length - 1];
+    const reachedEnd = (lastR === gs.endR && lastC === gs.endC);
+    if (!reachedEnd) {
+      const adjacent = Math.abs(lastR - gs.endR) + Math.abs(lastC - gs.endC) === 1;
+      if (!adjacent) continue; // path stuck far from END — retry with different seed
+      path.push([gs.endR, gs.endC]);
+      visited[gs.endR][gs.endC] = true;
+    }
+
+    // Assign pipe types AND compute the correct solution rotation for each path tile.
+    // Bug fix: fixed tiles must use the actual solution rotation, not always rot=0.
+    // (e.g. a N-S straight pipe needs rot=1, not rot=0 which would show it E-W)
+    gs.pipeType = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+    const solRot = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+
+    for (let i = 0; i < path.length; i++) {
+      const [pr, pc] = path[i];
+      const prev = i > 0 ? path[i-1] : null;
+      const next = i < path.length-1 ? path[i+1] : null;
+      let openDirs = new Set();
+      if (prev) { const dr=pr-prev[0],dc=pc-prev[1]; openDirs.add(dr===-1?2:dr===1?0:dc===-1?1:3); }
+      if (next) { const dr=next[0]-pr,dc=next[1]-pc; openDirs.add(dr===-1?0:dr===1?2:dc===1?1:3); }
+      const arr = [...openDirs].sort((a,b)=>a-b);
+      if (openDirs.size === 2) {
+        if ((arr[0]===0&&arr[1]===2)||(arr[0]===1&&arr[1]===3)) {
+          gs.pipeType[pr][pc] = 0; // straight pipe
+          solRot[pr][pc] = (arr[0]===0 && arr[1]===2) ? 1 : 0; // N-S → rot1, E-W → rot0
+        } else {
+          gs.pipeType[pr][pc] = 1; // elbow pipe
+          // Elbow solution rotations: getOpenDirs(type=1,rot) = [rot%4,(rot+1)%4]
+          // [N,E]=[0,1]→rot0  [E,S]=[1,2]→rot1  [S,W]=[2,3]→rot2  [W,N]=[0,3]→rot3
+          if      (arr[0]===0&&arr[1]===1) solRot[pr][pc] = 0;
+          else if (arr[0]===1&&arr[1]===2) solRot[pr][pc] = 1;
+          else if (arr[0]===2&&arr[1]===3) solRot[pr][pc] = 2;
+          else                             solRot[pr][pc] = 3; // [0,3] W-N
+        }
+      } else {
+        // Single opening (START or END) — straight pipe
+        gs.pipeType[pr][pc] = 0;
+        const d = arr.length > 0 ? arr[0] : 1;
+        // N(0) or S(2) → N-S orientation rot=1; E(1) or W(3) → E-W orientation rot=0
+        solRot[pr][pc] = (d === 0 || d === 2) ? 1 : 0;
+      }
+    }
+
+    // Noise tiles — higher rounds get more T/cross shapes
+    const noisy = config.noisy || 0.2;
+    for (let row = 0; row < ROWS; row++) {
+      for (let col = 0; col < COLS; col++) {
+        if (!visited[row][col]) {
+          const rv = rand();
+          if      (rv < (1-noisy)*0.5)  gs.pipeType[row][col] = 0;
+          else if (rv < (1-noisy)*0.9)  gs.pipeType[row][col] = 1;
+          else if (rv < 1-noisy*0.1)    gs.pipeType[row][col] = 2;
+          else                           gs.pipeType[row][col] = 3;
+        }
+      }
+    }
+
+    // Scramble rotations — path tiles always offset ≥ minExtra from their solution rotation.
+    // Fixed tiles keep their correct solution rotation so the path hint is always accurate.
+    const minExtra = config.minExtra || 1;
+    gs.grid    = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+    gs.isFixed = Array(ROWS).fill().map(() => Array(COLS).fill(false));
+
+    // Mark ~15–25% of non-start/end path tiles as fixed (increases with difficulty)
+    const fixedRatio = Math.min(0.28, 0.08 + (gs.puzzleNum - 1) * 0.025);
+    for (let i = 1; i < path.length - 1; i++) {
+      const [row,col] = path[i];
+      if (rand() < fixedRatio) gs.isFixed[row][col] = true;
+    }
+
+    for (let row = 0; row < ROWS; row++) {
+      for (let col = 0; col < COLS; col++) {
+        if (visited[row][col]) {
+          if (gs.isFixed[row][col]) {
+            // Fixed: use the correct solution rotation for this tile's pipe direction
+            gs.grid[row][col] = solRot[row][col];
+          } else {
+            // Scramble: offset from solution rotation, ensure it differs from solution
+            const sol = solRot[row][col];
+            let rot = (sol + minExtra + Math.floor(rand() * (config.maxRot + 1)) + Math.floor(rand()*2)) % 4;
+            if (rot === sol) rot = (sol + 1) % 4;
+            gs.grid[row][col] = rot;
+          }
+        } else {
+          gs.grid[row][col] = Math.floor(rand() * 4);
+        }
+      }
+    }
+
+    // Store rotation budget on game state for use during play
+    gs.rotBudget = config.budget;
+    gs.rotUsed   = 0;
+    return; // valid board generated successfully
+  }
+}
+
+// ── PIPE DRAWING ──────────────────────────────────────────────────────────────
+function drawPipe(canvas, type, rot, glowing, celebrating) {
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.height = 100;
+  ctx.clearRect(0, 0, 100, 100);
+
+  const baseCol  = '#2d2d4a';
+  const glowCol  = celebrating ? '#86efac' : '#a78bfa';
+  const glowSoft = celebrating ? 'rgba(134,239,172,0.4)' : 'rgba(167,139,250,0.35)';
+  const darkCol  = glowing ? glowCol : baseCol;
+
+  function strokePath(w, col, shadow, shadowBlur) {
+    if (shadow) { ctx.shadowColor = shadow; ctx.shadowBlur = shadowBlur || 12; }
+    else { ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
+    ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.stroke();
+  }
+
+  // Orthogonal pipes — draw inside rotation transform
+  ctx.save();
+  ctx.translate(50, 50);
+  ctx.rotate(rot * Math.PI / 2);
+  ctx.translate(-50, -50);
+
+  function drawSegments() {
+    switch(type) {
+      case 0: ctx.beginPath(); ctx.moveTo(8,50); ctx.lineTo(92,50); break;
+      case 1: ctx.beginPath(); ctx.moveTo(50,8); ctx.lineTo(50,50); ctx.lineTo(92,50); break;
+      case 2:
+        ctx.beginPath(); ctx.moveTo(8,50); ctx.lineTo(92,50); strokePath(22,darkCol,glowing?glowSoft:null,16);
+        ctx.beginPath(); ctx.moveTo(50,8); ctx.lineTo(50,50); break;
+      case 3:
+        ctx.beginPath(); ctx.moveTo(8,50); ctx.lineTo(92,50); strokePath(22,darkCol,glowing?glowSoft:null,16);
+        ctx.beginPath(); ctx.moveTo(50,8); ctx.lineTo(50,92); break;
+    }
+  }
+
+  if (glowing) { drawSegments(); strokePath(28, glowSoft, glowSoft, 20); }
+  drawSegments(); strokePath(22, darkCol, glowing ? glowSoft : null, glowing ? 16 : 0);
+  drawSegments(); strokePath(10, glowing ? (celebrating ? '#bbf7d0' : '#ddd6fe') : '#3d3d5e', null, 0);
+
+  if ((type === 2 || type === 3) && glowing) {
+    ctx.shadowColor = glowSoft; ctx.shadowBlur = 10;
+    ctx.fillStyle = glowCol;
+    ctx.beginPath(); ctx.arc(50,50,7,0,Math.PI*2); ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+
+  ctx.restore();
+}
+
+// ── CONNECTION LOGIC ──────────────────────────────────────────────────────────
+function getOpenDirs(r, c) {
+  const type = gs.pipeType[r][c];
+  const rot  = gs.grid[r][c];
+  if (type === 0) return (rot % 2 === 0) ? [1,3] : [0,2];
+  if (type === 1) return [rot%4, (rot+1)%4];
+  if (type === 2) return [rot%4, (rot+1)%4, (rot+3)%4];
+  return [0,1,2,3]; // type 3 = cross
+}
+
+
+function isConnected(r1,c1,r2,c2) {
+  if (Math.abs(r1-r2)+Math.abs(c1-c2) !== 1) return false;
+  const dr=r2-r1, dc=c2-c1;
+  let d1,d2;
+  if(dr===-1){d1=0;d2=2;}else if(dr===1){d1=2;d2=0;}
+  else if(dc===1){d1=1;d2=3;}else{d1=3;d2=1;}
+  return getOpenDirs(r1,c1).includes(d1) && getOpenDirs(r2,c2).includes(d2);
+}
+
+function computeFlow() {
+  const vis = Array(ROWS).fill().map(() => Array(COLS).fill(false));
+  const q = [[gs.startR, gs.startC]];
+  vis[gs.startR][gs.startC] = true;
+  while (q.length) {
+    const [r,c] = q.shift();
+    for (let d=0;d<4;d++) {
+      const nr=r+DIRECTIONS[d][0], nc=c+DIRECTIONS[d][1];
+      if (nr>=0&&nr<ROWS&&nc>=0&&nc<COLS&&!vis[nr][nc]&&isConnected(r,c,nr,nc)) {
+        vis[nr][nc]=true; q.push([nr,nc]);
+      }
+    }
+  }
+  return vis;
+}
+
+function applyGlow(flowMap) {
+  let count = 0;
+  for (let r=0;r<ROWS;r++) for (let c=0;c<COLS;c++) {
+    const tile   = document.getElementById(`tile_${r}_${c}`);
+    const canvas = tile.querySelector('canvas');
+    const glow   = flowMap[r][c];
+    tile.classList.toggle('glow', glow);
+    drawPipe(canvas, gs.pipeType[r][c], gs.grid[r][c], glow);
+    if (glow) count++;
+  }
+  document.getElementById('correctCount').textContent = count;
+  document.getElementById('completionFill').style.width = `${(count/20)*100}%`;
+  return count;
+}
+
+// ── BOARD BUILD ───────────────────────────────────────────────────────────────
+function buildBoard() {
+  const grid = document.getElementById('gameGrid');
+  grid.innerHTML = '';
+  for (let r=0;r<ROWS;r++) for (let c=0;c<COLS;c++) {
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.id = `tile_${r}_${c}`;
+    if (r===gs.startR&&c===gs.startC) tile.classList.add('start');
+    if (r===gs.endR  &&c===gs.endC)   tile.classList.add('end');
+    if (gs.isFixed?.[r]?.[c])          tile.classList.add('fixed-tile');
+    const canvas = document.createElement('canvas');
+    drawPipe(canvas, gs.pipeType[r][c], gs.grid[r][c], false);
+    tile.appendChild(canvas);
+    tile.addEventListener('click', () => handleTileClick(r,c));
+    grid.appendChild(tile);
+  }
+  document.getElementById('actionHint').textContent = 'Connect START to END';
+  document.getElementById('actionHint').className = 'action-hint';
+}
+
+// ── BUDGET BAR UPDATE ────────────────────────────────────────────────────────
+function updateBudgetBar() {
+  const budget  = gs.rotBudget || 0;
+  const used    = gs.rotUsed   || 0;
+  const bar     = document.getElementById('budgetBar');
+  const val     = document.getElementById('budgetVal');
+  if (!bar || !budget) return;
+  const pct  = Math.max(0, Math.min(100, ((budget - used) / budget) * 100));
+  const over = used > budget;
+  const warn = !over && pct <= 30;
+  bar.style.width    = pct + '%';
+  bar.className      = over ? 'over' : warn ? 'warn' : '';
+  if (val) {
+    val.textContent  = Math.max(0, budget - used);
+    val.className    = 'budget-val' + (over ? ' over' : warn ? ' warn' : '');
+  }
+  if (over && used === budget + 1) playBudgetWarn();
+}
+
+// ── TILE CLICK ────────────────────────────────────────────────────────────────
+function handleTileClick(r, c) {
+  if (!gs.isActive || gs.inputLocked) return;
+  gs.inputLocked = true;
+
+  // Fixed tiles cannot be rotated
+  if (gs.isFixed[r][c]) {
+    playFixedTileBlock();
+    gs.inputLocked = false;
+    return;
+  }
+
+  // Budget check — if over budget, flash warning but still allow (no hard stop, just scoring penalty)
+  gs.grid[r][c] = (gs.grid[r][c] + 1) % 4;
+  gs.puzzleRotations++;
+  gs.rotUsed++;
+  gs.totalRotations++;
+  document.getElementById('rotationsUsed').textContent = gs.puzzleRotations;
+  updateBudgetBar();
+  playRotate();
+
+  const tileEl = document.getElementById(`tile_${r}_${c}`);
+  tileEl.classList.remove('rotating');
+  void tileEl.offsetWidth;
+  tileEl.classList.add('rotating');
+  setTimeout(() => tileEl.classList.remove('rotating'), 120);
+
+  const flowMap = computeFlow();
+  const count   = applyGlow(flowMap);
+
+  // Live efficiency (per-puzzle)
+  const config = getPuzzleConfig();
+  const effNow = gs.puzzleRotations <= config.pathMin
+    ? 100
+    : Math.max(0, Math.round(100 - ((gs.puzzleRotations - config.pathMin) / (config.pathMin * 2)) * 100));
+  const liveEffEl = document.getElementById('liveEff');
+  if (liveEffEl) {
+    liveEffEl.textContent = effNow + '%';
+    liveEffEl.style.color = effNow >= 70 ? 'var(--accent)' : effNow >= 40 ? 'var(--amber)' : 'var(--red)';
+  }
+
+  if (count > 1) {
+    playConnect();
+    const prevFlow = gs._lastFlow || [];
+    for (let row=0;row<ROWS;row++) for (let col=0;col<COLS;col++) {
+      if (flowMap[row][col] && !(prevFlow[row] && prevFlow[row][col])) {
+        const t = document.getElementById(`tile_${row}_${col}`);
+        t.classList.remove('sweep-glow');
+        void t.offsetWidth;
+        t.classList.add('sweep-glow');
+        setTimeout(() => t.classList.remove('sweep-glow'), 200);
+      }
+    }
+  }
+  gs._lastFlow = flowMap.map(row => [...row]);
+
+  if (flowMap[gs.endR][gs.endC]) {
+    playComplete();
+    completePuzzle();
+    return;
+  }
+
+  setTimeout(() => { gs.inputLocked = false; }, 80);
+}
+
+// ── CHECK FLOW (initial) ──────────────────────────────────────────────────────
+function checkInitialFlow() {
+  const flowMap = computeFlow();
+  applyGlow(flowMap);
+  if (flowMap[gs.endR][gs.endC]) {
+    // Already solved (rare) — scramble more
+    generateBoard();
+    buildBoard();
+    setTimeout(checkInitialFlow, 100);
+  }
+}
+
+// ── HUD UPDATE ────────────────────────────────────────────────────────────────
+function updateHUD() {
+  document.getElementById('scoreDisplay').textContent    = gs.totalScore.toLocaleString();
+  document.getElementById('scoreDisplayTop').textContent = gs.totalScore.toLocaleString();
+  document.getElementById('playerNameDisplay').textContent = gs.playerName || '—';
+  const crd = document.getElementById('currentRoundDisplay');
+  if (crd) crd.textContent = gs.currentRound;
+  // Round label in lower-info
+  const roundLbl = document.getElementById('roundLabel');
+  if (roundLbl) roundLbl.innerHTML = `<span>Reasoning Challenge</span>`;
+  // Round progress dots
+  const dotsEl = document.getElementById('roundDots');
+  if (dotsEl) {
+    dotsEl.innerHTML = '';
+    for (let i=1;i<=5;i++) {
+      const d = document.createElement('div');
+      d.className = 'round-dot';
+      if (i < gs.currentRound)  d.classList.add('done');
+      if (i === gs.currentRound) d.classList.add('active');
+      dotsEl.appendChild(d);
+    }
+  }
+}
+
+// ── TIMER ─────────────────────────────────────────────────────────────────────
+let _heartbeatInterval = null;
+
+function startTimer() {
+  stopTimer();
+  gs.roundStartTs = performance.now();
+  gs.lastPressureBeep = -1;
+  gs._spoke30 = false;
+  gs._spoke15 = false;
+  gs._heartbeatOn = false;
+
+  function tick(now) {
+    if (!gs.isActive) return;
+    const left = Math.max(0, 60000 - (now - gs.roundStartTs));
+    const secs = Math.ceil(left / 1000);
+    const el   = document.getElementById('timerDisplay');
+    const app  = document.getElementById('app');
+    el.textContent = secs;
+
+    // ── 30s milestone ──
+    if (left <= 30000 && left > 29500 && !gs._spoke30) {
+      gs._spoke30 = true;
+      const hint = document.getElementById('actionHint');
+      hint.textContent = 'HALFWAY — KEEP THE SIGNAL FLOWING';
+      hint.className = 'action-hint warning';
+      speak('Halfway', 0.88, 1.1, true);
+      setTimeout(() => {
+        if (gs.isActive) { hint.textContent = 'Connect START to END'; hint.className = 'action-hint'; }
+      }, 2200);
+    }
+
+    // ── 15s milestone ──
+    if (left <= 15000 && left > 14500 && !gs._spoke15) {
+      gs._spoke15 = true;
+      speak('Fifteen seconds', 0.92, 1.1, true);
+    }
+
+    // ── 10s: heartbeat kicks in ──
+    if (left <= 10000 && !gs._heartbeatOn) {
+      gs._heartbeatOn = true;
+      app.classList.add('heartbeat');
+      el.classList.add('heartbeat');
+      // Heartbeat fires every 850ms matching the CSS animation
+      _heartbeatInterval = setInterval(() => {
+        if (!gs.isActive) { clearInterval(_heartbeatInterval); return; }
+        playHeartbeat();
+      }, 850);
+      playHeartbeat(); // fire immediately
+    }
+
+    // ── 8s: tick beeps on top of heartbeat ──
+    if (left <= 8000) {
+      el.classList.remove('warning');
+      if (secs !== gs.lastPressureBeep) { gs.lastPressureBeep = secs; playBeep(secs); }
+    } else if (left <= 15000) {
+      el.classList.remove('heartbeat');
+      el.className = 'warning';
+    } else {
+      el.className = '';
+    }
+
+    if (left <= 0) { timeOut(); return; }
+    gs.timerRaf = requestAnimationFrame(tick);
+  }
+  gs.timerRaf = requestAnimationFrame(tick);
+}
+
+function stopTimer() {
+  if (gs.timerRaf) { cancelAnimationFrame(gs.timerRaf); gs.timerRaf = null; }
+  if (_heartbeatInterval) { clearInterval(_heartbeatInterval); _heartbeatInterval = null; }
+  const app = document.getElementById('app');
+  const el  = document.getElementById('timerDisplay');
+  app.classList.remove('time-critical', 'heartbeat');
+  el.className = '';
+}
+
+// ── TIMEOUT — round clock hits zero ───────────────────────────────────────────
+function timeOut() {
+  gs.isActive = false;
+  stopTimer();
+  gs.inputLocked = true;
+  playTimeout();
+
+  // Record best round
+  if (gs.roundCompletions > gs.bestRound) gs.bestRound = gs.roundCompletions;
+
+  const hint = document.getElementById('actionHint');
+
+  // Round-end voice + hint based on performance
+  let endMsg, endVoice;
+  if (gs.roundCompletions === 0) {
+    endMsg = "TIME'S UP — NO COMPLETIONS"; endVoice = 'Time up';
+  } else if (gs.roundCompletions === 1) {
+    endMsg = `TIME'S UP — 1 PUZZLE SOLVED`; endVoice = 'Time up';
+  } else if (gs.roundCompletions <= 3) {
+    endMsg = `TIME'S UP — ${gs.roundCompletions} SOLVED`; endVoice = 'Good effort';
+  } else {
+    endMsg = `TIME'S UP — ${gs.roundCompletions} SOLVED — SHARP!`; endVoice = 'Sharp work';
+  }
+  hint.textContent = endMsg;
+  hint.className = 'action-hint warning';
+  speak(endVoice, 0.88, 1.1, true);
+
+  setTimeout(() => {
+    if (gs.currentRound < 5) {
+      gs.currentRound++;
+      showRoundTransition(gs.currentRound);
+    } else {
+      gs.done = true;
+      showEndCard();
+    }
+  }, 1400);
+}
+
+// ── COMPLETE PUZZLE — timer keeps running, next puzzle spawns ─────────────────
+function completePuzzle() {
+  gs.inputLocked = true;  // lock during flash
+  gs.roundCompletions++;
+  gs.totalSolved++;
+
+
+
+  // Score this puzzle — budget-aware tiers
+  const config    = getPuzzleConfig();
+  const timeOnPuzzle = performance.now() - gs.puzzleStartTs;
+  const speedPts  = timeOnPuzzle < 10000 ? 180 : timeOnPuzzle < 20000 ? 100 : timeOnPuzzle < 35000 ? 40 : 0;
+  const budget    = config.budget;
+  const used      = gs.rotUsed;
+  const basePts   = 120 + gs.currentRound * 50;
+  const chainBonus = gs.roundCompletions >= 4 ? 120 : gs.roundCompletions >= 2 ? 50 : 0;
+
+  // Tier: PERFECT (≤ pathMin), GOLD (within budget), SILVER (1–3 over), FAIL (4+ over)
+  let tierPts = 0, tierLabel = '', tierVoice = '';
+  if (used <= config.pathMin) {
+    tierPts = 400 + gs.currentRound * 80; // PERFECT
+    tierLabel = 'PERFECT!'; tierVoice = 'Perfect';
+    gs.perfectCount++;
+    playPerfectBonus();
+  } else if (used <= budget) {
+    tierPts = 200 + gs.currentRound * 40; // GOLD — within budget
+    tierLabel = 'CLEAN!'; tierVoice = '';
+  } else if (used <= budget + 3) {
+    tierPts = 80; // SILVER — slightly over
+    tierLabel = 'CLOSE!'; tierVoice = '';
+  } else {
+    tierPts = 0; // over budget — base only
+    tierLabel = 'OVER BUDGET'; tierVoice = 'Over budget';
+  }
+  const effPts = tierPts; // replaces old effPts
+  const puzzlePts = basePts + effPts + speedPts + chainBonus;
+  gs.totalScore  += puzzlePts;
+  gs.roundScore  += puzzlePts;
+  updateHUD();
+
+  // Action hint feedback — themed, varies by efficiency
+  const hint = document.getElementById('actionHint');
+  const msgs = gs.puzzleRotations <= config.pathMin
+    ? ['PERFECT ROUTE!','CLEAN LINE!','FLAWLESS SIGNAL!','ZERO WASTE!']
+    : effPts >= 150
+    ? ['SIGNAL LOCKED!','FLOW COMPLETE!','PATH CLEAR!','CONNECTION MADE!','CIRCUIT CLOSED!']
+    : ['FLOW CONNECTED!','LINK ESTABLISHED!','PATH ROUTED!','SIGNAL THROUGH!'];
+  const msg = msgs[gs.roundCompletions % msgs.length];
+  hint.textContent = `${msg}  +${puzzlePts}`;
+  hint.className = 'action-hint success';
+
+  // Sweep the solved path green
+  const flowMap = computeFlow();
+  const pathTiles = [];
+  for (let row=0;row<ROWS;row++) for (let col=0;col<COLS;col++) {
+    if (flowMap[row][col]) pathTiles.push([row,col]);
+  }
+  pathTiles.forEach(([row,col], i) => {
+    setTimeout(() => {
+      const tile   = document.getElementById(`tile_${row}_${col}`);
+      const canvas = tile.querySelector('canvas');
+      tile.classList.add('solved');
+      drawPipe(canvas, gs.pipeType[row][col], gs.grid[row][col], true, true);
+    }, i * 25);
+  });
+
+  // Completion flash overlay
+  const flashEl  = document.getElementById('completionFlash');
+  const flashPts = document.getElementById('cfPts');
+  const flashLbl = document.getElementById('cfLabel');
+  if (flashEl) {
+    flashPts.textContent = '+' + puzzlePts;
+    flashLbl.textContent = tierLabel || (gs.roundCompletions >= 4 ? 'CHAIN BONUS!' : gs.roundCompletions >= 2 ? 'KEEP FLOWING' : 'PUZZLE SOLVED');
+    flashEl.classList.add('active');
+    setTimeout(() => flashEl.classList.remove('active'), 420);
+  }
+
+  // Badge bump
+  const badge = document.getElementById('completionsBadge');
+  const countEl = document.getElementById('completionsCount');
+  if (countEl) countEl.textContent = gs.roundCompletions;
+  if (badge) {
+    badge.classList.remove('bump');
+    void badge.offsetWidth;
+    badge.classList.add('bump');
+    // Gold badge for high chains
+    badge.style.background = gs.roundCompletions >= 5
+      ? 'rgba(251,191,36,0.15)' : gs.roundCompletions >= 3
+      ? 'rgba(74,222,128,0.15)' : '';
+    badge.style.borderColor = gs.roundCompletions >= 5
+      ? 'rgba(251,191,36,0.5)' : gs.roundCompletions >= 3
+      ? 'rgba(74,222,128,0.45)' : '';
+    badge.style.color = gs.roundCompletions >= 5
+      ? 'var(--amber)' : 'var(--green)';
+  }
+
+  // Voice line — short, punchy, flow-themed
+  const voiceLines = tierVoice
+    ? [tierVoice]
+    : gs.puzzleRotations <= config.pathMin
+    ? ['Perfect','Clean route','Zero waste']
+    : gs.roundCompletions >= 5
+    ? ['On fire','Flow state','Keep going']
+    : gs.roundCompletions >= 3
+    ? ['Again','Keep it up','Nice flow','Sharp']
+    : ['Good','Nice path','Signal locked','Flow'];
+  if (!tierVoice || tierVoice !== '') speak(voiceLines[gs.totalSolved % voiceLines.length], 0.95, 1.2, true);
+
+  // Next puzzle after brief delay (timer still runs throughout)
+  const delay = pathTiles.length * 25 + 320;
+  setTimeout(() => {
+    if (!gs.isActive) return; // timer expired during flash
+    gs.puzzleNum++;
+    gs.puzzleRotations = 0;
+    gs.rotUsed         = 0;
+    gs.puzzleStartTs   = performance.now();
+    gs._lastFlow       = null;
+    generateBoard();
+    buildBoard();
+    setTimeout(checkInitialFlow, 200);
+    hint.textContent = 'Connect START to END';
+    hint.className   = 'action-hint';
+    document.getElementById('rotationsUsed').textContent = '0';
+    document.getElementById('completionFill').style.width = '0%';
+    document.getElementById('correctCount').textContent   = '0';
+    const liveEffEl = document.getElementById('liveEff');
+    if (liveEffEl) { liveEffEl.textContent = '—'; liveEffEl.style.color = ''; }
+    updateBudgetBar();
+    gs.inputLocked = false;
+  }, delay);
+}
+
+// ── ROUND TRANSITION ──────────────────────────────────────────────────────────
+function showRoundTransition(round) {
+  const overlay  = document.getElementById('roundOverlay');
+  const roNum    = document.getElementById('roNum');
+  const roCount  = document.getElementById('roCount');
+  const readyBar = document.getElementById('roReadyBar');
+  const dots     = document.querySelectorAll('#roDots .ro-dot');
+  const config   = ROUND_CONFIG[round-1];
+
+  roNum.textContent = round;
+  roNum.style.animation = 'none'; void roNum.offsetWidth;
+  roNum.style.animation = 'roNumIn 0.22s cubic-bezier(0.22,1.8,0.36,1) forwards';
+  document.getElementById('roTagline').textContent = config.tagline;
+  roCount.className = 'ro-count'; roCount.textContent = '';
+  readyBar.style.cssText = ''; readyBar.textContent = 'GET READY';
+  dots.forEach(d => d.classList.remove('active','done'));
+  overlay.classList.remove('hidden');
+
+  let countdownStarted = false;
+  function beginCountdown() {
+    if (countdownStarted) return;
+    countdownStarted = true;
+    runRoundCount(roCount, readyBar, dots, () => {
+      overlay.classList.add('hidden');
+      startRound();
+    });
+  }
+  setTimeout(() => {
+    setTimeout(beginCountdown, 1200); // safety fallback
+    try { pickVoice(); } catch(e) {}
+    speak('Get ready', 0.78, 1.15, false, beginCountdown);
+  }, 700);
+}
+
+function runRoundCount(countEl, readyBar, dots, cb) {
+  const steps = [3, 2, 1, 'GO'];
+  let i = 0;
+  const dotMap = {3:0, 2:1, 1:2};
+  function step() {
+    const v = steps[i];
+    dots.forEach(d => d.classList.remove('active','done'));
+    if (typeof v === 'number' && dotMap[v] !== undefined) {
+      dots.forEach((d,di) => {
+        if (di < dotMap[v])   d.classList.add('done');
+        if (di === dotMap[v]) d.classList.add('active');
+      });
+    } else if (v === 'GO') { dots.forEach(d => d.classList.add('done')); }
+    countEl.classList.remove('exit','go'); void countEl.offsetWidth;
+    countEl.className = v === 'GO' ? 'ro-count go' : 'ro-count';
+    countEl.textContent = v;
+    if (v === 'GO') {
+      readyBar.style.cssText = 'font-family:Bebas Neue,sans-serif;font-size:16px;letter-spacing:4px;color:var(--accent);padding:8px 20px;border:1px solid var(--accent);border-radius:8px;animation:none;';
+      readyBar.textContent = 'GO!';
+      speak('Go', 1.05, 1.2, true);
+      playGo();
+      setTimeout(cb, 500);
+    } else {
+      speak(String(v), 1.0, 1.15, true);
+      playCd(v);
+      i++;
+      setTimeout(() => { countEl.classList.add('exit'); setTimeout(step, 200); }, 780);
+    }
+  }
+  step();
+}
+
+// ── START ROUND ───────────────────────────────────────────────────────────────
+function startRound() {
+  // Per-round reset
+  gs.roundCompletions = 0;
+  gs.roundScore       = 0;
+  gs.puzzleNum        = 1;
+  gs.puzzleRotations  = 0;
+  gs.puzzleStartTs    = performance.now();
+  gs._lastFlow        = null;
+  gs.isActive         = true;
+  gs.inputLocked      = false;
+
+  document.getElementById('completionFill').style.width = '0%';
+  document.getElementById('correctCount').textContent   = '0';
+  document.getElementById('rotationsUsed').textContent  = '0';
+  document.getElementById('app').classList.remove('time-critical');
+
+  // Reset completions badge
+  const badge   = document.getElementById('completionsBadge');
+  const countEl = document.getElementById('completionsCount');
+  if (countEl) countEl.textContent = '0';
+  if (badge) {
+    badge.style.background = ''; badge.style.borderColor = ''; badge.style.color = '';
+  }
+  const liveEffEl = document.getElementById('liveEff');
+  if (liveEffEl) { liveEffEl.textContent = '—'; liveEffEl.style.color = ''; }
+
+  generateBoard();
+  buildBoard();
+  updateBudgetBar();
+  updateHUD();
+  speak('Round ' + gs.currentRound, 0.88, 1.1, true);
+  startTimer();
+  setTimeout(checkInitialFlow, 300);
+}
+
+// ── SHOW END CARD ─────────────────────────────────────────────────────────────
+function showEndCard() {
+  stopTimer();
+  playTimeout();
+
+  const today  = new Date();
+  const dd     = String(today.getDate()).padStart(2,'0');
+  const mm     = String(today.getMonth()+1).padStart(2,'0');
+  const yyyy   = today.getFullYear();
+  const dateStr = `${dd}/${mm}/${yyyy}`;
+
+  const eff = gs.totalRotations === 0 ? 0
+    : Math.max(0, Math.min(100, Math.round(100 - (gs.totalRotations / Math.max(1, gs.totalRotations + 30)) * 100)));
+
+  // Title based on totalSolved
+  const titles = [
+    [30,'SIGNAL MASTER'],[20,'FLOW LEGEND'],[12,'SHARP ROUTER'],
+    [7,'GOOD SIGNAL'],[3,'GETTING FLOW'],[0,'KEEP ROUTING']
+  ];
+  const title = titles.find(([t]) => gs.totalSolved >= t)?.[1] || 'KEEP ROUTING';
+
+  document.getElementById('ecTitle').textContent    = title;
+  document.getElementById('ecDate').textContent     = `${dateStr} \u2014 Next in Sequence`;
+  document.getElementById('ecScore').textContent    = gs.totalScore.toLocaleString();
+  document.getElementById('ecRank').textContent     = '#\u2014';
+  document.getElementById('ecTotalSolved').textContent    = gs.totalSolved;
+  document.getElementById('ecTotalSolvedAcc').textContent = gs.totalSolved;
+  document.getElementById('ecEfficiencyAcc').textContent  = eff + '%';
+  document.getElementById('ecRotations').textContent      = gs.totalRotations;
+  document.getElementById('ecEfficiency').textContent  = eff + '%';
+  document.getElementById('ecRoundsWon').textContent   = gs.bestRound + ' (best round)';
+  document.getElementById('ecPerfect').textContent     = gs.perfectCount;
+
+  // Share text
+  const shareText =
+    `${dateStr} \u2014 Clickzle — Next in Sequence (Game 5)\n\n` +
+    `Puzzles Solved: ${gs.totalSolved}\n` +
+    `Best Round: ${gs.bestRound} solved\n` +
+    `Total Score: ${gs.totalScore.toLocaleString()}\n` +
+    `Efficiency: ${eff}%\n\n` +
+    `Can you beat it?\nhttps://clickzle.games/games/game5/next-in-sequence.html`;
+  document.getElementById('sharePreview').textContent = shareText;
+
+  updateStats();
+  openModal('timeoutModal');
+}
+
+function updateStats() {
+  const st    = getStats();
+  const today = new Date().toISOString().split('T')[0];
+  st.played   = (st.played || 0) + 1;
+  if (!st.bestScore  || gs.totalScore  > st.bestScore)  st.bestScore  = gs.totalScore;
+  if (!st.bestSolved || gs.totalSolved > st.bestSolved) st.bestSolved = gs.totalSolved;
+  const eff = gs.totalRotations === 0 ? 0
+    : Math.max(0, Math.min(100, Math.round(100 - (gs.totalRotations / Math.max(1, gs.totalRotations + 30)) * 100)));
+  if (!st.bestEff || eff > st.bestEff) st.bestEff = eff;
+  const yesterday = new Date(); yesterday.setDate(yesterday.getDate()-1);
+  const yKey = yesterday.toISOString().split('T')[0];
+  if (st.history?.[yKey]?.played) st.streak = (st.streak || 0) + 1;
+  else if (!st.history?.[today]?.played) st.streak = 1;
+  st.history = st.history || {};
+  st.history[today] = { played:true, score:gs.totalScore, solved:gs.totalSolved };
+  saveStats(st);
+}
+
+// ── STATS MODAL LOAD ──────────────────────────────────────────────────────────
+function loadStats() {
+  const st = getStats();
+  document.getElementById('statPlayed').textContent    = st.played     || 0;
+  document.getElementById('statBestScore').textContent = (st.bestScore ||0).toLocaleString();
+  document.getElementById('statBestEff').textContent   = st.bestEff != null ? st.bestEff+'%' : '—';
+  document.getElementById('statStreak').textContent    = st.streak     || 0;
+  // Repurpose one card for best puzzles solved if element exists
+  const bsEl = document.getElementById('statBestScore');
+  if (bsEl && st.bestSolved) {
+    const solvedCard = bsEl.closest('.stat-big-card');
+    if (solvedCard) {
+      const lbl = solvedCard.querySelector('.stat-big-lbl');
+      if (lbl) lbl.textContent = 'Best Solved';
+      bsEl.textContent = st.bestSolved || 0;
+    }
+  }
+  const bar = document.getElementById('streakBarEl');
+  bar.innerHTML = '';
+  const today = new Date().toISOString().split('T')[0];
+  for (let i=6;i>=0;i--) {
+    const d = new Date(); d.setDate(d.getDate()-i);
+    const key = d.toISOString().split('T')[0];
+    const el = document.createElement('div');
+    el.className = 'streak-day';
+    if (key === today)                el.classList.add('today');
+    else if (st.history?.[key]?.played) el.classList.add('played');
+    bar.appendChild(el);
+  }
+}
+
+// ── START GAME ────────────────────────────────────────────────────────────────
+function startGame() {
+  const name = document.getElementById('playerNameInput').value.trim();
+  if (!name) {
+    const inp = document.getElementById('playerNameInput');
+    inp.focus(); inp.style.borderColor='var(--red)';
+    setTimeout(()=>inp.style.borderColor='',1000);
+    return;
+  }
+  gs.playerName = name;
+  localStorage.setItem('clickzle_player_name', name);
+  document.getElementById('playerNameDisplay').textContent = name;
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('mainHeader').classList.remove('hidden');
+  document.getElementById('gameScreen').classList.add('active');
+
+  // Reset state
+  gs.totalScore=0; gs.currentRound=1;
+  gs.totalSolved=0; gs.bestRound=0; gs.totalRotations=0;
+  gs.roundCompletions=0; gs.roundScore=0;
+  gs.puzzleNum=1; gs.puzzleRotations=0;
+  gs.done=false; gs.perfectCount=0;
+
+  initVoice();
+  showRoundTransition(1);
+}
+
+// ── MODAL HELPERS ─────────────────────────────────────────────────────────────
+function openModal(id)  { document.getElementById(id)?.classList.add('open'); }
+function closeModal(id) { document.getElementById(id)?.classList.remove('open'); }
+document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => closeModal(b.dataset.close)));
+// Click outside to close utility modals (not pregame or end card)
+document.querySelectorAll('.modal-overlay').forEach(o => o.addEventListener('click', e => {
+  if (e.target === o && !['pregameHelpModal','timeoutModal'].includes(o.id)) closeModal(o.id);
+}));
+
+// ── ACCORDION ─────────────────────────────────────────────────────────────────
+const _accBtn   = document.getElementById('ecBreakdownBtn');
+const _accPanel = document.getElementById('ecBreakdownPanel');
+if (_accBtn) {
+  _accBtn.addEventListener('click', () => {
+    const isOpen = _accBtn.classList.toggle('open');
+    _accPanel.classList.toggle('open', isOpen);
+  });
+}
+
+// ── SHARE ─────────────────────────────────────────────────────────────────────
+document.getElementById('shareTimeoutBtn').addEventListener('click', () => openModal('shareModal'));
+document.getElementById('inviteFriendBtn').addEventListener('click', () => {
+  const msg = `Can you beat my Clickzle score? Play today's Next in Sequence challenge:\nhttps://clickzle.games`;
+  navigator.clipboard.writeText(msg).then(() => {
+    const btn = document.getElementById('inviteFriendBtn');
+    const orig = btn.innerHTML;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> Link Copied!`;
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  }).catch(() => {
+    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  });
+});
+document.getElementById('shareX').addEventListener('click', () =>
+  window.open('https://x.com/intent/post?text=' + encodeURIComponent(document.getElementById('sharePreview').textContent), '_blank')
+);
+document.getElementById('shareWhatsApp').addEventListener('click', () =>
+  window.open('https://wa.me/?text=' + encodeURIComponent(document.getElementById('sharePreview').textContent), '_blank')
+);
+document.getElementById('shareCopy').addEventListener('click', function() {
+  navigator.clipboard?.writeText(document.getElementById('sharePreview').textContent)
+    .then(() => {
+      this.textContent = 'Copied!';
+      setTimeout(() => { this.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy to Clipboard'; }, 1800);
+    }).catch(() => {});
+});
+
+// ── HEADER BUTTONS ────────────────────────────────────────────────────────────
+document.getElementById('helpBtn')?.addEventListener('click',       () => openModal('helpModal'));
+document.getElementById('statsBtn')?.addEventListener('click',      () => { loadStats(); openModal('statsModal'); });
+document.getElementById('settingsBtn')?.addEventListener('click',   () => openModal('settingsModal'));
+document.getElementById('categoriesBtn')?.addEventListener('click', () => openModal('gamesModal'));
+
+// Mute button
+(function() {
+  const muteBtn  = document.getElementById('muteBtn');
+  const muteIcon = document.getElementById('muteBtnIcon');
+  const SOUND_SVG = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+  const MUTE_SVG  = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+  function updateMuteIcon() {
+    if (!muteIcon) return;
+    muteIcon.innerHTML = settings.sound ? SOUND_SVG : MUTE_SVG;
+    if (muteBtn) muteBtn.style.color = settings.sound ? '' : 'var(--red)';
+  }
+  updateMuteIcon();
+  muteBtn?.addEventListener('click', () => {
+    settings.sound = !settings.sound;
+    saveSettings();
+    updateMuteIcon();
+    // Also keep settings modal toggle in sync
+    const tog = document.getElementById('soundToggle');
+    if (tog) { tog.classList.toggle('on', settings.sound); }
+  });
+})();
+
+// ── PLAY BUTTON ───────────────────────────────────────────────────────────────
+const savedName = localStorage.getItem('clickzle_player_name');
+if (savedName) document.getElementById('playerNameInput').value = savedName;
+
+document.getElementById('startBtn').addEventListener('click', () => {
+  if (localStorage.getItem('clickzle_htp_sequence_skip') === '1') startGame();
+  else openModal('pregameHelpModal');
+});
+document.getElementById('playerNameInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    if (localStorage.getItem('clickzle_htp_sequence_skip') === '1') startGame();
+    else openModal('pregameHelpModal');
+  }
+});
+
+document.getElementById('pregamePlayBtn').addEventListener('click', () => {
+  if (document.getElementById('dontShowHtp').checked) localStorage.setItem('clickzle_htp_sequence_skip','1');
+  closeModal('pregameHelpModal');
+  startGame();
+});
+
+// ── AUDIO UNLOCK ──────────────────────────────────────────────────────────────
+document.body.addEventListener('touchstart', () => getAudioCtx(), {once:true});
+
+// ── ALREADY PLAYED BANNER ─────────────────────────────────────────────────────
+// Note: localStorage is client-side only — a determined user can clear it via DevTools.
+// The authoritative one-game-per-day enforcement must happen server-side (Cloudflare Worker
+// records the submission and rejects duplicate scores for the same player + date).
+// This banner is a UX convenience, not a security gate.
+(function() {
+  try {
+    const st    = JSON.parse(localStorage.getItem(STATS_KEY) || '{}');
+    const today = new Date().toISOString().split('T')[0];
+    if (!(st.history && st.history[today] && st.history[today].played)) return;
+
+    const target = document.querySelector('.game-identity');
+    if (!target) return;
+    const pfl  = document.getElementById('playFreeLabel');
+    const fps  = document.getElementById('freePlaySection');
+    const adsl = document.getElementById('adSlot');
+    if (pfl)  pfl.style.display  = 'none';
+    if (fps)  fps.style.display  = 'none';
+    if (adsl) adsl.style.marginTop = '12px';
+
+    const c = document.createElement('div');
+    c.style.cssText = 'background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:12px 16px;text-align:center;margin-top:12px;width:100%;max-width:340px;';
+    const h1 = document.createElement('div');
+    h1.style.cssText = "font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--accent);";
+    h1.textContent = 'ALREADY PLAYED';
+    const h2 = document.createElement('div');
+    h2.style.cssText = 'font-size:12px;color:var(--text2);margin-top:4px;margin-bottom:14px;';
+    h2.textContent = 'Come back tomorrow for a new challenge';
+    const gLabel = document.createElement('div');
+    gLabel.style.cssText = 'font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);font-weight:600;margin-bottom:8px;';
+    gLabel.textContent = 'Try Another Game';
+    const gRow = document.createElement('div');
+    gRow.style.cssText = 'display:flex;gap:8px;justify-content:center;';
+    [
+      ['../../complete-the-image-game-1.html','1','rgba(74,222,128,0.1)','rgba(74,222,128,0.3)','#4ade80'],
+      ['../../follow-the-pattern-game-2.html','2','rgba(96,165,250,0.1)','rgba(96,165,250,0.3)','#60a5fa'],
+      ['../../hit-the-target-game-3.html',   '3','rgba(244,114,182,0.1)','rgba(244,114,182,0.3)','#f472b6'],
+      ['../../spot-the-pair-game-4.html',    '4','rgba(250,204,21,0.1)', 'rgba(250,204,21,0.3)', '#facc15'],
+    ].forEach(([href,num,bg,border,col]) => {
+      const a = document.createElement('a');
+      a.href = href;
+      a.style.cssText = 'width:38px;height:38px;border-radius:8px;background:'+bg+';border:1px solid '+border+';color:'+col+';font-family:Bebas Neue,sans-serif;font-size:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;';
+      a.textContent = num;
+      gRow.appendChild(a);
+    });
+    c.appendChild(h1); c.appendChild(h2); c.appendChild(gLabel); c.appendChild(gRow);
+    target.insertAdjacentElement('afterend', c);
+  } catch(e) {}
+}());
+</script>
+</body>
+</html>

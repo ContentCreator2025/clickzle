@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Speed the Difference — Clickzle Observation Challenge. Daily puzzle game.">
+<title>Speed the Difference — Clickzle Observation Challenge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══ TOKENS ═══════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#0a0a0a;
+  --surface:#141414;
+  --surface2:#1e1e1e;
+  --border:#222222;
+  --border2:#2e2e2e;
+  --text:#f0f0f0;
+  --text2:#888888;
+  --text3:#555555;
+  --green:#4ade80;
+  --green-dim:#166534;
+  --green-glow:#1d4d2a;
+  --accent:#60a5fa;
+  --accent-dim:color-mix(in srgb,#60a5fa 10%,transparent);
+  --accent-border:color-mix(in srgb,#60a5fa 22%,transparent);
+}
+body.light{
+  --bg:#f4f4f4;
+  --surface:#ffffff;
+  --surface2:#ebebeb;
+  --border:#d0d0d0;
+  --border2:#c0c0c0;
+  --text:#111111;
+  --text2:#555555;
+  --text3:#999999;
+  --green-dim:#bbf7d0;
+}
+
+/* ═══ RESET ════════════════════════════════════════════════════════════════ */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+}
+
+/* ═══ BACKGROUND ════════════════════════════════════════════════════════════ */
+.bg-grid {
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(color-mix(in srgb,#60a5fa 3%,transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb,#60a5fa 3%,transparent) 1px, transparent 1px);
+  background-size:72px 72px;
+}
+.bg-radial {
+  position:fixed; top:-280px; left:50%; transform:translateX(-50%);
+  width:900px; height:600px;
+  background:radial-gradient(ellipse, color-mix(in srgb,#60a5fa 7%,transparent) 0%, transparent 68%);
+  pointer-events:none; z-index:0;
+}
+body.light .bg-grid  { display:none; }
+body.light .bg-radial { opacity:0.22; }
+
+/* ═══ LAYOUT ════════════════════════════════════════════════════════════════ */
+.wrap { max-width:1120px; margin:0 auto; padding:0 28px; position:relative; z-index:1; }
+
+/* ═══ HEADER ════════════════════════════════════════════════════════════════ */
+.site-header {
+  position:sticky; top:0; z-index:100;
+  background:rgba(10,10,10,0.88); backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+body.light .site-header { background:rgba(244,244,244,0.92); }
+/* Grid layout ensures center is always perfectly centred */
+.hdr-inner {
+  max-width:1120px; margin:0 auto; padding:0 28px;
+  height:62px;
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center;
+}
+.site-logo {
+  font-family:'Bebas Neue',sans-serif; font-size:26px;
+  letter-spacing:3px; color:var(--text); text-decoration:none;
+  justify-self:start;
+}
+.site-logo span { color:var(--green); }
+.hdr-center {
+  display:flex; align-items:center; gap:8px;
+  font-size:12px; color:var(--text3); letter-spacing:0.3px;
+  justify-self:center;
+}
+.hdr-reset-label { font-weight:500; white-space:nowrap; }
+.hdr-timer {
+  font-family:'Bebas Neue',sans-serif; font-size:18px;
+  letter-spacing:2px; color:var(--text2);
+}
+.hdr-right {
+  display:flex; align-items:center; gap:20px;
+  justify-self:end;
+}
+.nav-link {
+  font-size:13px; font-weight:500; color:var(--text2);
+  text-decoration:none; transition:color 0.2s;
+}
+.nav-link:hover { color:var(--text); }
+.nav-other-games {
+  display:flex; align-items:center; gap:8px;
+  font-size:13px; font-weight:500; color:var(--text2);
+}
+.nav-game-num {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:24px; height:24px; border-radius:6px;
+  border:1px solid var(--border2); background:var(--surface2);
+  font-size:11px; font-weight:700; color:var(--text3);
+  text-decoration:none; transition:all 0.18s; font-family:'DM Sans',sans-serif;
+}
+.nav-game-num:hover { opacity:0.85; }
+.nav-game-num[data-game="1"] {
+  color:#4ade80;
+  border-color:color-mix(in srgb,#4ade80 35%,transparent);
+  background:color-mix(in srgb,#4ade80 8%,transparent);
+}
+.nav-game-num[data-game="1"]:hover {
+  border-color:#4ade80;
+  background:color-mix(in srgb,#4ade80 18%,transparent);
+  color:#4ade80;
+}
+.nav-game-num[data-game="2"] {
+  color:#60a5fa;
+  border-color:color-mix(in srgb,#60a5fa 35%,transparent);
+  background:color-mix(in srgb,#60a5fa 8%,transparent);
+}
+.nav-game-num[data-game="2"]:hover {
+  border-color:#60a5fa;
+  background:color-mix(in srgb,#60a5fa 18%,transparent);
+  color:#60a5fa;
+}
+.nav-game-num[data-game="3"] {
+  color:#f472b6;
+  border-color:color-mix(in srgb,#f472b6 35%,transparent);
+  background:color-mix(in srgb,#f472b6 8%,transparent);
+}
+.nav-game-num[data-game="3"]:hover {
+  border-color:#f472b6;
+  background:color-mix(in srgb,#f472b6 18%,transparent);
+  color:#f472b6;
+}
+.nav-game-num[data-game="4"] {
+  color:#facc15;
+  border-color:color-mix(in srgb,#facc15 35%,transparent);
+  background:color-mix(in srgb,#facc15 8%,transparent);
+}
+.nav-game-num[data-game="4"]:hover {
+  border-color:#facc15;
+  background:color-mix(in srgb,#facc15 18%,transparent);
+  color:#facc15;
+}
+.nav-game-num[data-game="5"] {
+  color:#a78bfa;
+  border-color:color-mix(in srgb,#a78bfa 35%,transparent);
+  background:color-mix(in srgb,#a78bfa 8%,transparent);
+}
+.nav-game-num[data-game="5"]:hover {
+  border-color:#a78bfa;
+  background:color-mix(in srgb,#a78bfa 18%,transparent);
+  color:#a78bfa;
+}
+.icon-btn {
+  width:34px; height:34px; border-radius:8px;
+  background:transparent; border:1px solid var(--border2);
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  color:var(--text2); transition:all 0.2s;
+}
+.icon-btn:hover { color:var(--text); background:var(--surface); }
+.icon-btn svg { width:15px; height:15px; }
+@media(max-width:600px) { .hdr-center { display:none; } }
+
+/* ═══ HERO ══════════════════════════════════════════════════════════════════ */
+.hero {
+  min-height:60vh;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:80px 0 60px;
+  position:relative;
+  background:linear-gradient(180deg, var(--surface) 0%, rgba(20,20,20,0) 100%);
+  border-bottom:1px solid var(--border);
+}
+body.light .hero {
+  background:linear-gradient(180deg, var(--surface2) 0%, rgba(235,235,235,0) 100%);
+}
+.hero-badge {
+  display:inline-block;
+  font-size:11px; font-weight:600;
+  letter-spacing:2px; text-transform:uppercase;
+  color:var(--accent); background:var(--accent-dim);
+  border:1px solid var(--accent-border);
+  padding:6px 14px; border-radius:6px;
+  margin-bottom:20px;
+}
+.hero-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(48px,10vw,84px);
+  letter-spacing:4px; color:var(--text);
+  margin:0 0 12px; line-height:1;
+}
+.hero-title span { color:var(--accent); }
+.hero-subtitle {
+  font-size:14px; font-weight:500;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--text3); margin:0 0 32px;
+}
+.hero-desc {
+  max-width:560px; margin:0 auto 36px;
+  font-size:17px; line-height:1.7; color:var(--text2);
+}
+.hero-stats {
+  display:flex; justify-content:center; gap:48px;
+  margin-bottom:40px;
+}
+.hero-stat-value {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:36px; letter-spacing:2px;
+  color:var(--accent); line-height:1; margin-bottom:4px;
+}
+.hero-stat-label {
+  font-size:11px; letter-spacing:1px;
+  text-transform:uppercase; color:var(--text3);
+}
+.hero-cta {
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--accent); color:#000;
+  font-size:14px; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase;
+  text-decoration:none; padding:16px 40px;
+  border-radius:12px; transition:opacity 0.15s, transform 0.1s;
+}
+.hero-cta:hover { opacity:0.88; }
+.hero-cta:active { transform:scale(0.97); }
+.hero-cta svg { width:16px; height:16px; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(22px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.reveal { opacity:0; animation:fadeUp 0.55s ease forwards; }
+.reveal.d1 { animation-delay:0.1s; }
+.reveal.d2 { animation-delay:0.2s; }
+.reveal.d3 { animation-delay:0.3s; }
+.reveal.d4 { animation-delay:0.4s; }
+
+/* ═══ SECTION HEADERS ═══════════════════════════════════════════════════════ */
+.sec-head { display:flex; align-items:baseline; gap:14px; margin-bottom:32px; }
+.sec-title {
+  font-family:'Bebas Neue',sans-serif; font-size:34px;
+  letter-spacing:3px; color:var(--text);
+}
+.sec-title span { color:var(--accent); }
+.sec-tag {
+  font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--text3); padding:3px 9px;
+  border:1px solid var(--border2); border-radius:4px;
+}
+
+/* ═══ LEADERBOARD ════════════════════════════════════════════════════════════ */
+.lb-section { padding:60px 0 80px; }
+.lb-panel {
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:20px; overflow:hidden;
+}
+.lb-tabs-wrap {
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+  padding:16px 20px;
+}
+.lb-period-wrap { display:flex; gap:8px; }
+.lb-period-tab {
+  padding:7px 20px; border-radius:20px;
+  font-size:11px; font-weight:700;
+  letter-spacing:0.6px; text-transform:uppercase;
+  border:1px solid var(--border2); color:var(--text3);
+  background:transparent; cursor:pointer;
+  transition:all 0.15s; white-space:nowrap;
+  font-family:'DM Sans',sans-serif;
+}
+.lb-period-tab:hover  { color:var(--text2); border-color:var(--text3); }
+.lb-period-tab.active { background:var(--accent); border-color:var(--accent); color:#000; }
+.lb-panel-head {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:24px 32px 0;
+}
+.lb-panel-cat-name {
+  font-family:'Bebas Neue',sans-serif; font-size:28px;
+  letter-spacing:3px; color:var(--text);
+}
+.lb-panel-cat-sub {
+  font-size:10px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--text3); margin-top:3px;
+}
+.lb-play-btn {
+  background:var(--accent); color:#000;
+  border:none; border-radius:9px;
+  padding:11px 26px; font-size:12px; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase;
+  font-family:'DM Sans',sans-serif;
+  text-decoration:none; cursor:pointer;
+  display:inline-flex; align-items:center; gap:7px;
+  transition:opacity 0.15s, transform 0.1s; flex-shrink:0;
+}
+.lb-play-btn:hover  { opacity:0.88; }
+.lb-play-btn:active { transform:scale(0.97); }
+.lb-play-btn svg { width:13px; height:13px; }
+.lb-table-wrap { padding:20px 0 0; overflow-x:auto; }
+.lb-table {
+  width:100%; border-collapse:collapse; font-size:13px;
+  table-layout:fixed;
+}
+.lb-table thead tr { border-bottom:1px solid var(--border); }
+.lb-table thead th {
+  padding:10px 20px 12px;
+  font-size:9px; letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--text3); font-weight:600;
+  text-align:left; white-space:nowrap;
+  overflow:hidden;
+}
+/* Hard column widths — never flex with content */
+.lb-table thead th:first-child { width:72px;  text-align:center; padding-left:20px; }
+.lb-table thead th:nth-child(2){ width:auto; }
+.lb-table thead th:nth-child(3){ width:80px;  text-align:center; }
+.lb-table thead th:nth-child(4){ width:140px; text-align:right; }
+.lb-table thead th:nth-child(5){ width:110px; text-align:right; }
+.lb-table thead th:last-child  { width:140px; text-align:right; padding-right:28px; }
+.lb-table tbody tr {
+  border-bottom:1px solid var(--border);
+  transition:background 0.12s; cursor:default;
+}
+.lb-table tbody tr:last-child { border-bottom:none; }
+.lb-table tbody tr:nth-child(odd) { background:rgba(255,255,255,0.012); }
+.lb-table tbody tr:hover { background:color-mix(in srgb,#60a5fa 4%,transparent); }
+.lb-table td {
+  padding:12px 20px; vertical-align:middle;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.lb-table td:first-child { text-align:center; padding-left:20px; }
+.lb-table td:nth-child(3) { text-align:center; }
+.lb-table td:nth-child(4) { text-align:right; }
+.lb-table td:nth-child(5) { text-align:right; }
+.lb-table td:last-child   { text-align:right; padding-right:28px; }
+@keyframes goldPulse {
+  0%,100% { box-shadow:inset 4px 0 0 #EAC100, 0 0 0 0 rgba(234,193,0,0); }
+  50%      { box-shadow:inset 4px 0 0 #EAC100, 0 0 18px 2px rgba(234,193,0,0.15); }
+}
+.lb-table tbody tr.lb-top1 {
+  animation:goldPulse 2.8s ease-in-out infinite;
+  background:linear-gradient(90deg,rgba(234,193,0,0.09) 0%,rgba(234,193,0,0.02) 55%,transparent 100%);
+  border-bottom:1px solid rgba(234,193,0,0.18);
+  box-shadow:inset 4px 0 0 #EAC100;
+}
+.lb-top1 td { padding-top:22px; padding-bottom:22px; }
+.lb-table tbody tr.lb-top2 {
+  background:linear-gradient(90deg,rgba(148,163,184,0.07) 0%,rgba(148,163,184,0.01) 55%,transparent 100%);
+  border-bottom:1px solid rgba(148,163,184,0.12);
+  box-shadow:inset 4px 0 0 #8A9BA8;
+}
+.lb-top2 td { padding-top:18px; padding-bottom:18px; }
+.lb-table tbody tr.lb-top3 {
+  background:linear-gradient(90deg,rgba(180,83,9,0.07) 0%,rgba(180,83,9,0.01) 55%,transparent 100%);
+  border-bottom:2px solid var(--border);
+  box-shadow:inset 4px 0 0 #9B6B47;
+}
+.lb-top3 td { padding-top:15px; padding-bottom:15px; }
+.lb-rank-num { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1px; line-height:1; color:var(--text3); }
+.lb-rank-num.top1 { font-size:40px; color:#EAC100; }
+.lb-rank-num.top2 { font-size:30px; color:#8A9BA8; }
+.lb-rank-num.top3 { font-size:24px; color:#9B6B47; }
+.lb-player-cell { display:flex; align-items:center; gap:12px; overflow:hidden; min-width:0; }
+.lb-avatar {
+  width:32px; height:32px; border-radius:50%;
+  background:transparent; border:1.5px solid var(--text3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; color:var(--text3);
+  flex-shrink:0; letter-spacing:0.5px;
+}
+.lb-top1 .lb-avatar { width:46px; height:46px; font-size:16px; background:rgba(255,204,0,0.12); border-color:rgba(255,204,0,0.55); color:#FFCC00; }
+.lb-top2 .lb-avatar { width:40px; height:40px; font-size:14px; background:rgba(148,163,184,0.1); border-color:rgba(148,163,184,0.45); color:#94a3b8; }
+.lb-top3 .lb-avatar { width:36px; height:36px; font-size:12px; background:rgba(180,83,9,0.1); border-color:rgba(180,83,9,0.45); color:#b45309; }
+.lb-pname { font-size:14px; font-weight:500; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.lb-top1 .lb-pname { font-size:18px; font-weight:700; }
+.lb-top2 .lb-pname { font-size:16px; font-weight:600; }
+.lb-top3 .lb-pname { font-size:15px; font-weight:600; }
+.lb-streak { font-size:9px; font-weight:700; letter-spacing:0.5px; padding:2px 6px; border-radius:3px; background:rgba(251,191,36,0.12); color:#fbbf24; margin-left:6px; flex-shrink:0; }
+.lb-flag-cell { display:flex; align-items:center; justify-content:center; }
+.lb-flag-cell img { width:30px; height:21px; border-radius:3px; object-fit:cover; border:1px solid rgba(255,255,255,0.12); display:block; }
+.lb-top1 .lb-flag-cell img { width:36px; height:25px; }
+.lb-top2 .lb-flag-cell img { width:32px; height:22px; }
+.lb-score-val { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:1px; color:var(--accent); font-variant-numeric:tabular-nums; }
+.lb-top1 .lb-score-val { font-size:20px; }
+.lb-top2 .lb-score-val { font-size:18px; }
+.lb-time-val { font-size:13px; color:var(--text2); font-weight:500; font-variant-numeric:tabular-nums; letter-spacing:0.3px; }
+.lb-clicks-val { font-size:13px; color:var(--text3); }
+.lb-extra-wrap { max-height:0; overflow:hidden; transition:max-height 0.55s cubic-bezier(0.4,0,0.2,1); }
+.lb-table-extra {
+  width:100%; border-collapse:collapse; font-size:13px;
+  table-layout:fixed;
+}
+.lb-table-extra td {
+  padding:12px 20px; vertical-align:middle;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  border-bottom:1px solid var(--border);
+}
+.lb-table-extra tbody tr:last-child td { border-bottom:none; }
+.lb-table-extra td:first-child  { text-align:center; padding-left:20px; width:72px; }
+.lb-table-extra td:nth-child(2) { width:auto; }
+.lb-table-extra td:nth-child(3) { text-align:center; width:80px; }
+.lb-table-extra td:nth-child(4) { text-align:right; width:140px; }
+.lb-table-extra td:nth-child(5) { text-align:right; width:110px; }
+.lb-table-extra td:last-child   { text-align:right; padding-right:28px; width:140px; }
+.lb-table-extra tbody tr:nth-child(odd) { background:rgba(255,255,255,0.012); }
+.lb-table-extra tbody tr:hover { background:color-mix(in srgb,#60a5fa 4%,transparent); }
+.lb-panel-foot {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 32px; border-top:1px solid var(--border);
+}
+.lb-foot-left { font-size:12px; color:var(--text3); }
+.lb-foot-left strong { color:var(--text2); font-weight:600; }
+.lb-top100-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:12px; font-weight:600; color:var(--accent);
+  background:none; border:none; cursor:pointer;
+  padding:0; font-family:'DM Sans',sans-serif;
+  transition:opacity 0.15s;
+}
+.lb-top100-btn:hover { opacity:0.75; }
+.lb-top100-btn svg { width:14px; height:14px; transition:transform 0.3s; }
+.lb-top100-btn.expanded svg { transform:rotate(90deg); }
+
+/* ═══ NOTIFICATIONS ═════════════════════════════════════════════════════════ */
+.notify-section { padding:40px 0; }
+.notify-card {
+  display:flex; align-items:center; gap:24px;
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:16px; padding:28px 36px;
+}
+.notify-bell {
+  width:52px; height:52px; border-radius:14px;
+  background:var(--accent-dim); border:1px solid var(--accent-border);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.notify-bell svg { width:26px; height:26px; color:var(--accent); }
+.notify-copy { flex:1; }
+.notify-title { font-size:17px; font-weight:600; color:var(--text); margin-bottom:5px; }
+.notify-title span { color:var(--accent); }
+.notify-body { font-size:13px; color:var(--text2); line-height:1.55; }
+.notify-btn {
+  background:var(--accent); color:#000;
+  border:none; border-radius:10px;
+  padding:12px 28px; font-size:12px; font-weight:700;
+  letter-spacing:0.5px; cursor:pointer; transition:opacity 0.15s;
+  font-family:'DM Sans',sans-serif; white-space:nowrap;
+}
+.notify-btn:hover { opacity:0.88; }
+.notify-btn.confirmed { background:var(--surface2); color:var(--text2); cursor:default; }
+@media(max-width:640px) { .notify-card { flex-direction:column; text-align:center; } }
+
+/* ═══ ABOUT ═════════════════════════════════════════════════════════════════ */
+.about-section { padding:60px 0; }
+.about-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:24px; }
+.about-card { background:var(--surface); border:1px solid var(--border2); border-radius:16px; padding:32px; }
+.about-card.featured { grid-row:span 2; }
+.about-eyebrow { display:inline-block; font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
+.about-heading { font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:2px; color:var(--text); margin-bottom:16px; }
+.about-body { font-size:14px; line-height:1.7; color:var(--text2); }
+.about-body strong { color:var(--accent); }
+.stat-row { display:flex; gap:32px; margin-top:28px; padding-top:20px; border-top:1px solid var(--border); }
+.stat-n { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; color:var(--accent); line-height:1; }
+.stat-l { font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--text3); margin-top:2px; }
+@media(max-width:768px) { .about-grid { grid-template-columns:1fr; } .about-card.featured { grid-row:auto; } }
+
+/* ═══ HOW TO PLAY ═══════════════════════════════════════════════════════════ */
+.howto-section { padding:60px 0; }
+.step-list { list-style:none; }
+.step-item { display:flex; gap:20px; padding:24px 0; border-bottom:1px solid var(--border); }
+.step-item:first-child { padding-top:0; }
+.step-item:last-child  { border-bottom:none; }
+.step-bullet {
+  flex-shrink:0; width:36px; height:36px; margin-top:2px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:8px;
+  background:var(--accent-dim); border:1px solid var(--accent-border);
+  color:var(--accent);
+}
+.step-bullet svg { width:16px; height:16px; }
+.step-title { font-size:17px; font-weight:600; color:var(--text); margin-bottom:8px; }
+.step-body  { font-size:14px; line-height:1.7; color:var(--text2); }
+.step-body strong { color:var(--accent); }
+
+/* ═══ OTHER GAMES ════════════════════════════════════════════════════════════ */
+.other-games-section { padding:60px 0 80px; border-top:1px solid var(--border); }
+.other-games-grid { display:grid; gap:20px; }
+@media(max-width:720px) { .other-games-grid { grid-template-columns:1fr !important; } }
+.og-card {
+  position:relative; overflow:hidden;
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:16px; padding:28px 28px 24px;
+  text-decoration:none; display:block;
+  transition:border-color 0.18s, transform 0.18s;
+}
+.og-card:hover { transform:translateY(-2px); border-color:var(--og-col); }
+.og-num {
+  position:absolute; right:16px; bottom:-10px;
+  font-family:'Bebas Neue',sans-serif; font-size:96px; letter-spacing:-2px;
+  color:var(--og-col); opacity:0.12; line-height:1;
+  user-select:none; pointer-events:none;
+}
+.og-badge {
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:10px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--og-col);
+  background:color-mix(in srgb,var(--og-col) 10%,transparent);
+  border:1px solid color-mix(in srgb,var(--og-col) 22%,transparent);
+  padding:4px 12px; border-radius:20px; margin-bottom:14px;
+}
+.og-badge-dot { width:5px; height:5px; border-radius:50%; background:var(--og-col); flex-shrink:0; }
+.og-title { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; color:var(--text); margin-bottom:4px; line-height:1.1; }
+.og-title span { color:var(--og-col); }
+.og-subtitle { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:12px; }
+.og-desc { font-size:13px; line-height:1.6; color:var(--text2); margin-bottom:16px; }
+.og-stats { display:flex; gap:20px; padding-top:14px; border-top:1px solid var(--border); margin-bottom:18px; }
+.og-stat-val { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; color:var(--og-col); line-height:1; margin-bottom:2px; }
+.og-stat-lbl { font-size:9px; letter-spacing:1px; text-transform:uppercase; color:var(--text3); }
+.og-link { display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:600; color:var(--og-col); text-decoration:none; transition:opacity 0.15s; }
+.og-link:hover { opacity:0.75; }
+.og-link svg { width:13px; height:13px; }
+
+/* ═══ FOOTER ════════════════════════════════════════════════════════════════ */
+.site-footer { border-top:1px solid var(--border); padding:44px 0; position:relative; z-index:1; }
+.ftr-inner {
+  max-width:1120px; margin:0 auto; padding:0 28px;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+}
+.ftr-logo { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px; color:var(--text2); }
+.ftr-logo span { color:var(--green); }
+.ftr-links { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.ftr-link { font-size:13px; color:var(--text3); text-decoration:none; transition:color 0.18s; }
+.ftr-link:hover { color:var(--text2); }
+.ftr-copy {
+  font-size:12px; color:var(--text3); width:100%;
+  text-align:center; margin-top:16px; padding-top:20px;
+  border-top:1px solid var(--border);
+}
+
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-radial"></div>
+
+<!-- ═══ HEADER ══════════════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="hdr-inner">
+    <a href="index.html" class="site-logo">CLICK<span>ZLE</span></a>
+    <div class="hdr-center">
+      <span class="hdr-reset-label">Puzzles reset in:</span>
+      <span class="hdr-timer" id="hdrTimer">00:00:00</span>
+    </div>
+    <div class="hdr-right">
+      <span class="nav-link nav-other-games">
+        Other Games
+        <a href="complete-the-image-game-1.html" class="nav-game-num" data-game="1">1</a>
+        <a href="hit-the-target-game-3.html" class="nav-game-num" data-game="3">3</a>
+        <a href="answer-the-question-game-4.html" class="nav-game-num" data-game="4">4</a>
+        <a href="guess-the-answer-game-5.html" class="nav-game-num" data-game="5">5</a>
+      </span>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-badge reveal d1">Game 2 of 5</div>
+    <h1 class="hero-title reveal d2">Spot the <span>Difference</span></h1>
+    <p class="hero-subtitle reveal d2">Observation Challenge</p>
+    <p class="hero-desc reveal d3">The screen splits in two. Both halves show the same image — but differences are hidden between them. Tap the square where you spot a difference. Find them all before the clock runs out.</p>
+    <div class="hero-stats reveal d3">
+      <div class="hero-stat">
+        <div class="hero-stat-value">90s</div>
+        <div class="hero-stat-label">Time Limit</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">5-7</div>
+        <div class="hero-stat-label">Differences</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">Daily</div>
+        <div class="hero-stat-label">New Puzzle</div>
+      </div>
+    </div>
+    <a href="#" class="hero-cta reveal d4">
+      Play Now
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ LEADERBOARD ══════════════════════════════════════════════════════════ -->
+<section class="lb-section" id="leaderboard">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title" id="lbSectionTitle">Daily <span>Leaderboard</span></div>
+      <div class="sec-tag" id="lbSectionTag">Today &middot; Resets midnight UTC</div>
+    </div>
+    <div class="lb-panel">
+      <div class="lb-tabs-wrap">
+        <div class="lb-period-wrap">
+          <button class="lb-period-tab active" data-period="today">Today</button>
+          <button class="lb-period-tab" data-period="month">This Month</button>
+          <button class="lb-period-tab" data-period="alltime">All Time</button>
+        </div>
+      </div>
+      <div class="lb-panel-head">
+        <div>
+          <div class="lb-panel-cat-name">Speed the Difference</div>
+          <div class="lb-panel-cat-sub" id="lbPanelSub">Observation Challenge &mdash; Today's Rankings</div>
+        </div>
+        <a href="#" class="lb-play-btn">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </a>
+      </div>
+      <div class="lb-table-wrap">
+        <table class="lb-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>Country</th>
+              <th id="lbThTime">Time</th>
+              <th id="lbThClicks">Found</th>
+              <th id="lbThScore">Score</th>
+            </tr>
+          </thead>
+          <tbody id="lbBodyTop"></tbody>
+        </table>
+        <div class="lb-extra-wrap" id="lbExtraWrap">
+          <table class="lb-table-extra">
+            <tbody id="lbBodyExtra"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="lb-panel-foot">
+        <div class="lb-foot-left">
+          <strong id="lbPlayerCount">0</strong> <span id="lbPeriodLabel">players today</span>
+        </div>
+        <button class="lb-top100-btn" id="lbExpandBtn" onclick="toggleExpand()">
+          View Top 100
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ NOTIFICATIONS ═══════════════════════════════════════════════════════ -->
+<section class="notify-section">
+  <div class="wrap">
+    <div class="notify-card">
+      <div class="notify-bell">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+      </div>
+      <div class="notify-copy">
+        <div class="notify-title">Never miss a puzzle. <span>Get reminded.</span></div>
+        <div class="notify-body">Enable daily reminders and we'll notify you the moment a new puzzle drops at midnight UTC.</div>
+      </div>
+      <button class="notify-btn" id="notifyBtn">Enable Reminders</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IS ═════════════════════════════════════════════════════════════ -->
+<section class="about-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">What is <span>Speed the Difference?</span></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-card featured">
+        <span class="about-eyebrow">The Game</span>
+        <div class="about-heading">Same image. Hidden differences.</div>
+        <div class="about-body">Speed the Difference splits the interface into two halves — top and bottom. Both show the same image, but the bottom half contains hidden changes. The entire interface is divided into small squares. Tap any square where you think a difference exists.<br><br>Correct — it lights up and counts toward your total. Wrong — time penalty. Find every difference before the clock expires to complete the puzzle.<br><br>90 seconds. 5 to 7 differences per puzzle. Fresh images every day.</div>
+        <div class="stat-row"><div class="stat"><div class="stat-n">90s</div><div class="stat-l">Time Limit</div></div><div class="stat"><div class="stat-n">5-7</div><div class="stat-l">Differences</div></div><div class="stat"><div class="stat-n">Daily</div><div class="stat-l">New Puzzle</div></div></div>
+      </div>
+      <div class="about-card">
+        <span class="about-eyebrow">Free to Play</span>
+        <div class="about-heading">No account needed to start</div>
+        <div class="about-body">Every puzzle is completely free. Jump straight in without signing up. Create a free account to unlock leaderboard access and protect your streak across all devices.</div>
+      </div>
+      <div class="about-card">
+        <span class="about-eyebrow">New Every Day</span>
+        <div class="about-heading">Fresh challenges at midnight UTC</div>
+        <div class="about-body">Every puzzle is generated from a daily seed — every player on Earth plays the exact same challenge on the same day. Archives are preserved permanently.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW TO PLAY ═════════════════════════════════════════════════════════ -->
+<section class="howto-section" id="how-to-play">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">How to <span>Play</span></div>
+      <div class="sec-tag">30 seconds to learn</div>
+    </div>
+    <ol class="step-list">
+      <li class="step-item">
+        <div class="step-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="step-title">Study both halves</div>
+          <div class="step-body">The top half is the original. The bottom half looks identical — but contains hidden differences. Take a moment to scan before you tap.</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="step-title">Tap the square where you see a difference</div>
+          <div class="step-body">The interface is divided into small squares. Tap a square to mark it as different. Correct marks light up in your accent colour.</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="step-title">Wrong taps cost time</div>
+          <div class="step-body">An incorrect tap adds a time penalty. Think before you mark — accuracy matters as much as speed.</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="step-title">Find all differences to complete the puzzle</div>
+          <div class="step-body">Once you've found every difference the puzzle is complete. Your time is locked in and your score is calculated.</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-bullet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>
+          <div class="step-title">Race the clock</div>
+          <div class="step-body">You have 90 seconds. Finding all differences early means a higher score. Every second counts.</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══ OTHER GAMES ══════════════════════════════════════════════════════════ -->
+<section class="other-games-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">Other <span>Games</span></div>
+      <div class="sec-tag">4 More Daily Challenges</div>
+    </div>
+    <div class="other-games-grid" style="grid-template-columns:repeat(2, 1fr)">
+      
+      <a href="complete-the-image-game-1.html" class="og-card" style="--og-col:#4ade80">
+        <div class="og-num">1</div>
+        <div class="og-badge"><span class="og-badge-dot"></span>Game 1 of 5</div>
+        <div class="og-title">Complete the <span>Image</span></div>
+        <div class="og-subtitle">Perception Challenge</div>
+        <div class="og-desc">Six images sliced into tiles. Find the one intact image by cycling tile faces. Watch for the glitch flash.</div>
+        <div class="og-stats"><div><div class="og-stat-val">5:00</div><div class="og-stat-lbl">Time</div></div><div><div class="og-stat-val">20</div><div class="og-stat-lbl">Tiles</div></div><div><div class="og-stat-val">6</div><div class="og-stat-lbl">Images</div></div></div>
+        <span class="og-link">View Game <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </a>
+      <a href="hit-the-target-game-3.html" class="og-card" style="--og-col:#f472b6">
+        <div class="og-num">3</div>
+        <div class="og-badge"><span class="og-badge-dot"></span>Game 3 of 5</div>
+        <div class="og-title">Hit the <span>Target</span></div>
+        <div class="og-subtitle">Reaction Challenge</div>
+        <div class="og-desc">80 tiles flip at random — tap the target the instant it appears or lose it forever.</div>
+        <div class="og-stats"><div><div class="og-stat-val">30s</div><div class="og-stat-lbl">Time</div></div><div><div class="og-stat-val">80</div><div class="og-stat-lbl">Tiles</div></div><div><div class="og-stat-val">Daily</div><div class="og-stat-lbl">Puzzle</div></div></div>
+        <span class="og-link">View Game <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </a>
+      <a href="answer-the-question-game-4.html" class="og-card" style="--og-col:#facc15">
+        <div class="og-num">4</div>
+        <div class="og-badge"><span class="og-badge-dot"></span>Game 4 of 5</div>
+        <div class="og-title">Answer the <span>Question</span></div>
+        <div class="og-subtitle">Knowledge Challenge</div>
+        <div class="og-desc">Answer multiple choice questions to flip tiles and reveal a hidden image. Identify it to score.</div>
+        <div class="og-stats"><div><div class="og-stat-val">90s</div><div class="og-stat-lbl">Time</div></div><div><div class="og-stat-val">4</div><div class="og-stat-lbl">Options</div></div><div><div class="og-stat-val">Daily</div><div class="og-stat-lbl">Puzzle</div></div></div>
+        <span class="og-link">View Game <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </a>
+      <a href="guess-the-answer-game-5.html" class="og-card" style="--og-col:#a78bfa">
+        <div class="og-num">5</div>
+        <div class="og-badge"><span class="og-badge-dot"></span>Game 5 of 5</div>
+        <div class="og-title">Guess the <span>Answer</span></div>
+        <div class="og-subtitle">Recognition Challenge</div>
+        <div class="og-desc">Tiles reveal a hidden image one by one. Identify it from as little as possible for maximum points.</div>
+        <div class="og-stats"><div><div class="og-stat-val">60s</div><div class="og-stat-lbl">Time</div></div><div><div class="og-stat-val">20</div><div class="og-stat-lbl">Tiles</div></div><div><div class="og-stat-val">Daily</div><div class="og-stat-lbl">Puzzle</div></div></div>
+        <span class="og-link">View Game <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="ftr-inner">
+    <div class="ftr-logo">CLICK<span>ZLE</span></div>
+    <div class="ftr-links">
+      <a href="about.html" class="ftr-link">About</a>
+      <a href="contact.html" class="ftr-link">Contact</a>
+      <a href="privacy.html" class="ftr-link">Privacy</a>
+      <a href="terms.html" class="ftr-link">Terms of Use</a>
+    </div>
+    <div class="ftr-copy">&copy; 2026 Clickzle. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+// ── COUNTDOWN ─────────────────────────────────────────────────────────────────
+function tick() {
+  const now = new Date();
+  const midnight = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
+  let d = Math.max(0, midnight - now);
+  const h = Math.floor(d / 3600000); d %= 3600000;
+  const m = Math.floor(d / 60000);   d %= 60000;
+  const s = Math.floor(d / 1000);
+  document.getElementById('hdrTimer').textContent =
+    String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+}
+setInterval(tick, 1000); tick();
+
+// ── MOCK DATA ─────────────────────────────────────────────────────────────────
+const NAMES = ['EagleEye', 'SharpFocus', 'DiffHunter', 'SpotPro', 'ObserverX', 'DetailSpy', 'NitpickQ', 'FocusNerd', 'VisionPro', 'CriticalEye', 'ScanMaster', 'CompareQ', 'FindItFast', 'HiddenDiff', 'QuickScan', 'DoubleVision', 'SpotCheck', 'ErrorHunt', 'PixelSpy', 'DiffFinder', 'LookAlive', 'TwoImages', 'MatchMaker', 'FindAll', 'SpotLight', 'CloseWatch', 'GlitchHunt', 'SeeMore', 'LookDiff', 'EyePro', 'FindFast', 'ScanQ', 'ObserveX', 'WatchNerd', 'DetailPro', 'FocusMaster', 'FindHidden', 'SpotNerd', 'LookPro', 'SeeAll', 'DiffMaster', 'QuickEye', 'SearchPro', 'HuntNerd', 'FinderQ', 'SpotterX', 'LookMaster', 'EyeNerd', 'SeeNerd', 'HideSeek', 'DiffPro', 'SpotFast', 'LookFast', 'SeeFast', 'FindNerd', 'SpotMaster', 'EyeMaster', 'LookNerd', 'SeeMaster', 'FindMaster', 'SpotSpy', 'EyeSpy', 'LookSpy', 'SeeSpy', 'FindSpy', 'SpotQ', 'EyeQ', 'LookQ', 'SeeQ', 'FindQ', 'SpotNerd2', 'EyeNerd2', 'LookNerd2', 'SeeNerd2', 'FindNerd2', 'SpotPro2', 'EyePro2', 'LookPro2', 'SeePro2', 'FindPro2', 'SpotHunt', 'EyeHunt', 'LookHunt', 'SeeHunt', 'FindHunt', 'SpotFast2', 'EyeFast', 'LookFast2', 'SeeFast2', 'FindFast2', 'SpotAll', 'EyeAll', 'LookAll', 'SeeAll2', 'FindAll2', 'SpotCheck2', 'EyeCheck', 'LookCheck', 'SeeCheck'];
+const COUNTRIES = ['gb', 'us', 'de', 'fr', 'br', 'jp', 'kr', 'ca', 'au', 'nl', 'se', 'it', 'es', 'pt', 'mx', 'za', 'in', 'nz', 'ar', 'pl'];
+
+function makeRng(seed) {
+  let s = seed;
+  return function() {
+    s = (s * 1664525 + 1013904223) & 0xffffffff;
+    return (s >>> 0) / 4294967296;
+  };
+}
+function fmtTime(ms) {
+  const m  = Math.floor(ms / 60000);
+  const s  = Math.floor((ms % 60000) / 1000);
+  const ml = ms % 1000;
+  return String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0') + ':' + String(ml).padStart(3,'0');
+}
+
+function generateDaily() {
+  const today = new Date();
+  const seed = (today.getUTCFullYear() * 10000 + (today.getUTCMonth()+1) * 100 + today.getUTCDate() + 2000) % 99991 + 1;
+  const rng = makeRng(seed);
+  const entries = [];
+  for (let i = 0; i < 100; i++) {
+    const timeMs = Math.floor(rng() * 262000) + 8000;
+    const clicks = Math.floor(rng() * 88) + 12;
+    const score  = Math.max(0, 10000 - Math.floor(timeMs / 1000) * 30 - clicks);
+    entries.push({ name:NAMES[i], time:fmtTime(timeMs), timeMs, clicks, score, streak:Math.floor(rng()*24), country:COUNTRIES[Math.floor(rng()*COUNTRIES.length)] });
+  }
+  entries.sort((a,b) => b.score-a.score || a.timeMs-b.timeMs || a.clicks-b.clicks);
+  return entries;
+}
+function generateMonthly() {
+  const rng = makeRng(15659);
+  const daysIn = new Date().getUTCDate();
+  const entries = [];
+  for (let i = 0; i < 100; i++) {
+    const played = Math.min(daysIn, Math.floor(daysIn*0.5 + rng()*daysIn*0.5) + 1);
+    const avgS   = Math.floor(rng()*180) + 20;
+    const bestMs = Math.max(8000,(avgS - Math.floor(rng()*50))*1000);
+    const total  = Math.max(0, Math.floor(played*(10000-avgS*30)));
+    entries.push({ name:NAMES[i], time:fmtTime(bestMs), timeMs:bestMs, clicks:played, score:total, streak:Math.floor(rng()*daysIn), country:COUNTRIES[Math.floor(rng()*COUNTRIES.length)] });
+  }
+  entries.sort((a,b) => b.score-a.score || b.clicks-a.clicks || a.timeMs-b.timeMs);
+  return entries;
+}
+function generateAllTime() {
+  const rng = makeRng(6283);
+  const entries = [];
+  for (let i = 0; i < 100; i++) {
+    const bestMs = Math.floor(rng()*120000)+8000;
+    const bestCl = Math.floor(rng()*60)+10;
+    const score  = Math.max(0,10000-Math.floor(bestMs/1000)*30-bestCl);
+    entries.push({ name:NAMES[i], time:fmtTime(bestMs), timeMs:bestMs, clicks:Math.floor(rng()*280)+20, score, streak:Math.floor(rng()*180), country:COUNTRIES[Math.floor(rng()*COUNTRIES.length)] });
+  }
+  entries.sort((a,b) => b.score-a.score || a.timeMs-b.timeMs);
+  return entries;
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+let activePeriod = 'today';
+let isExpanded   = false;
+const COL3_LABEL = 'Found';
+
+function rowHTML(p, i, extra) {
+  const rank   = i + 1;
+  const rC     = !extra ? (rank===1?'top1':rank===2?'top2':rank===3?'top3':'') : '';
+  const trC    = !extra ? (rank===1?'lb-top1':rank===2?'lb-top2':rank===3?'lb-top3':'') : '';
+  const init   = p.name.slice(0,2).toUpperCase();
+  const streak = p.streak >= 3 ? `<span class="lb-streak">${p.streak}d</span>` : '';
+  const flag   = `<img src="https://flagcdn.com/40x30/${p.country}.png" srcset="https://flagcdn.com/80x60/${p.country}.png 2x" alt="${p.country.toUpperCase()}" width="30" height="21">`;
+  const col3   = activePeriod === 'today' ? p.clicks : (activePeriod === 'month' ? p.clicks + ' played' : p.clicks + ' played');
+  return `<tr class="${trC}">
+    <td><span class="lb-rank-num ${rC}">${rank}</span></td>
+    <td><div class="lb-player-cell"><div class="lb-avatar">${init}</div><span class="lb-pname">${p.name}</span>${streak}</div></td>
+    <td><div class="lb-flag-cell">${flag}</div></td>
+    <td><span class="lb-time-val">${p.time}</span></td>
+    <td><span class="lb-clicks-val">${col3}</span></td>
+    <td><span class="lb-score-val">${p.score.toLocaleString()}</span></td>
+  </tr>`;
+}
+
+function renderLeaderboard(data) {
+  document.getElementById('lbBodyTop').innerHTML   = data.slice(0,10).map((p,i) => rowHTML(p,i,false)).join('');
+  document.getElementById('lbBodyExtra').innerHTML = data.slice(10).map((p,i) => rowHTML(p,i+10,true)).join('');
+  document.getElementById('lbPlayerCount').textContent = data.length;
+  if (isExpanded) {
+    const w = document.getElementById('lbExtraWrap');
+    w.style.maxHeight = w.scrollHeight + 'px';
+  }
+}
+
+function toggleExpand() {
+  const wrap = document.getElementById('lbExtraWrap');
+  const btn  = document.getElementById('lbExpandBtn');
+  isExpanded = !isExpanded;
+  if (isExpanded) {
+    wrap.style.maxHeight = wrap.scrollHeight + 'px';
+    btn.classList.add('expanded');
+    btn.innerHTML = 'Show Less <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+    setTimeout(() => document.getElementById('leaderboard').scrollIntoView({behavior:'smooth',block:'nearest'}), 100);
+  } else {
+    wrap.style.maxHeight = '0';
+    btn.classList.remove('expanded');
+    btn.innerHTML = 'View Top 100 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+  }
+}
+
+function setPeriod(p) {
+  activePeriod = p;
+  isExpanded   = false;
+  const wrap = document.getElementById('lbExtraWrap');
+  wrap.style.maxHeight = '0';
+  const btn = document.getElementById('lbExpandBtn');
+  btn.classList.remove('expanded');
+  btn.innerHTML = 'View Top 100 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+  document.querySelectorAll('.lb-period-tab').forEach(t => t.classList.toggle('active', t.dataset.period === p));
+  const titles = { today:'Daily <span>Leaderboard</span>', month:'Monthly <span>Standings</span>', alltime:'All Time <span>Hall of Fame</span>' };
+  document.getElementById('lbSectionTitle').innerHTML = titles[p];
+  const tags = { today:'Today · Resets midnight UTC', month:'This Month · Cumulative score · Prizes coming soon', alltime:'All Time · Best single score ever' };
+  document.getElementById('lbSectionTag').textContent = tags[p];
+  const subs = { today:'Observation Challenge — Today’s Rankings', month:'Observation Challenge — ' + new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'}), alltime:'Observation Challenge — Hall of Fame' };
+  document.getElementById('lbPanelSub').textContent = subs[p];
+  document.getElementById('lbThTime').textContent   = p === 'today' ? 'Time'       : 'Best Time';
+  document.getElementById('lbThClicks').textContent = p === 'today' ? COL3_LABEL   : 'Puzzles';
+  document.getElementById('lbThScore').textContent  = p === 'today' ? 'Score'      : p === 'month' ? 'Monthly' : 'Best Score';
+  document.getElementById('lbPeriodLabel').textContent = p === 'today' ? 'players today' : p === 'month' ? 'players this month' : 'all-time players';
+  renderLeaderboard(p === 'today' ? generateDaily() : p === 'month' ? generateMonthly() : generateAllTime());
+}
+
+document.querySelectorAll('.lb-period-tab').forEach(t => t.addEventListener('click', () => setPeriod(t.dataset.period)));
+renderLeaderboard(generateDaily());
+
+// ── NOTIFICATIONS ─────────────────────────────────────────────────────────────
+const notifyBtn = document.getElementById('notifyBtn');
+if (localStorage.getItem('clickzle_notify') === 'granted') { notifyBtn.textContent = 'Reminders enabled'; notifyBtn.classList.add('confirmed'); }
+notifyBtn.addEventListener('click', async () => {
+  if (notifyBtn.classList.contains('confirmed')) return;
+  if (!('Notification' in window)) { alert('Your browser does not support push notifications.'); return; }
+  const perm = await Notification.requestPermission();
+  if (perm === 'granted') {
+    localStorage.setItem('clickzle_notify','granted');
+    notifyBtn.textContent = 'Reminders enabled';
+    notifyBtn.classList.add('confirmed');
+    setTimeout(() => new Notification('Clickzle', { body:"You're all set. We'll notify you when tomorrow's puzzle drops." }), 500);
+  } else { alert('Notifications blocked. Enable them in your browser settings.'); }
+});
+
+// ── THEME ─────────────────────────────────────────────────────────────────────
+let light = localStorage.getItem('clickzle_site_theme') === 'light';
+function applyTheme() {
+  document.body.classList.toggle('light', light);
+  document.getElementById('iconSun').style.display  = light ? 'none'  : 'block';
+  document.getElementById('iconMoon').style.display = light ? 'block' : 'none';
+}
+applyTheme();
+document.getElementById('themeToggle').addEventListener('click', () => {
+  light = !light;
+  localStorage.setItem('clickzle_site_theme', light ? 'light' : 'dark');
+  applyTheme();
+});
+</script>
+</body>
+</html>

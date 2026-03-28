@@ -1,0 +1,3112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Clickzle — Follow the Pattern | Daily Memory Challenge</title>
+
+  <!-- Primary SEO -->
+  <meta name="description" content="Watch a growing sequence of tiles light up, then repeat it perfectly. A new daily memory challenge every day. Free to play — no account needed. Compete on the global leaderboard.">
+  <meta name="keywords" content="memory game, pattern game, daily memory challenge, clickzle follow the pattern, sequence game, brain game, cognitive game">
+  <meta name="author" content="Clickzle">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://clickzle.games/games/game2/follow-the-pattern.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://clickzle.games/games/game2/follow-the-pattern.html">
+  <meta property="og:title" content="Clickzle — Follow the Pattern | Daily Memory Challenge">
+  <meta property="og:description" content="Watch the pattern. Remember the sequence. Repeat it. A Simon-style daily memory challenge — one game per day. Free, no signup. Compete globally.">
+  <meta property="og:image" content="https://clickzle.games/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Clickzle">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://clickzle.games/games/game2/follow-the-pattern.html">
+  <meta name="twitter:title" content="Clickzle — Follow the Pattern | Daily Memory Challenge">
+  <meta name="twitter:description" content="Watch the pattern. Remember the sequence. Repeat it. A Simon-style daily memory challenge — one game per day. Free, no signup. Compete globally.">
+  <meta name="twitter:image" content="https://clickzle.games/assets/og-image.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Clickzle — Follow the Pattern",
+    "description": "A daily memory challenge where you watch and repeat an ever-growing tile sequence. One challenge per day, free to play.",
+    "url": "https://clickzle.games/games/game2/follow-the-pattern.html",
+    "applicationCategory": "Game",
+    "operatingSystem": "Web",
+    "gamePlatform": "Web Browser",
+    "genre": "Memory",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Clickzle",
+      "url": "https://clickzle.games"
+    }
+  }
+  </script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ─── DARK THEME ─── */
+  :root {
+    --bg: #0a0a0f;
+    --surface: #141420;
+    --surface2: #1e1e30;
+    --border: #2a2a40;
+    --border2: #333350;
+    --text: #f0f0f0;
+    --text2: #888;
+    --text3: #888;
+    --accent: #60a5fa;
+    --accent-dim: rgba(96,165,250,0.08);
+    --accent-border: rgba(96,165,250,0.18);
+    --accent-glow: rgba(96,165,250,0.45);
+    --green: #4ade80;
+    --green-dim: #166534;
+    --amber: #fbbf24;
+    --red: #f87171;
+  }
+  body.light {
+    --bg: #f4f4f4;
+    --surface: #ffffff;
+    --surface2: #ebebeb;
+    --border: #d0d0d0;
+    --border2: #c0c0c0;
+    --text: #111111;
+    --text2: #555555;
+    --text3: #999999;
+    --accent-dim: rgba(96,165,250,0.1);
+    --green-dim: #bbf7d0;
+  }
+  body.light { background: #d8d8d8; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #000;
+    display: flex; justify-content: center; align-items: center;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+  }
+
+  #app {
+    width: 100%; max-width: 440px;
+    height: 100dvh; max-height: 100dvh;
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+
+  #app.time-critical { animation: criticalGlow 0.42s ease-in-out infinite; }
+  .ro-dot { width:10px;height:10px;border-radius:50%;background:var(--border2);transition:background 0.15s,transform 0.15s; }
+  .ro-dot.done   { background:var(--text3); }
+  .ro-dot.active { background:#fff;transform:scale(1.4); }
+  @keyframes roNumIn    { from{transform:scale(0.45);opacity:0} to{transform:scale(1);opacity:1} }
+  @keyframes roReadyPulse { 0%,100%{opacity:0.8} 50%{opacity:1} }
+  .ro-ready-bar-go { animation:none!important;border-color:var(--accent);color:var(--accent); }
+  /* Round dots in status bar */
+  .round-dots { display:flex;gap:6px;align-items:center; }
+  .round-dot  { width:8px;height:8px;border-radius:50%;background:var(--border2);transition:background 0.15s; }
+  .round-dot.done   { background:var(--text3); }
+  .round-dot.active { background:var(--accent); }
+  @keyframes criticalGlow {
+    0%, 100% { box-shadow: none; }
+    50% { box-shadow: inset 0 0 0 3px rgba(248,113,113,0.85), 0 0 40px 8px rgba(248,113,113,0.4); }
+  }
+  #app.wrong-flash { animation: wrongVignette 0.45s ease-out forwards; }
+  @keyframes wrongVignette {
+    0%   { box-shadow: inset 0 0 0 4px rgba(248,113,113,0.0); }
+    20%  { box-shadow: inset 0 0 0 6px rgba(248,113,113,0.9), 0 0 40px 8px rgba(248,113,113,0.4); }
+    100% { box-shadow: inset 0 0 0 4px rgba(248,113,113,0.0); }
+  }
+  #app.heartbeat { animation: heartbeatGlow 0.6s ease-in-out infinite; }
+  @keyframes heartbeatGlow {
+    0%, 100% { box-shadow: none; }
+    50% { box-shadow: inset 0 0 0 3px rgba(96,165,250,0.5), 0 0 30px 6px rgba(96,165,250,0.25); }
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px; height: 80px; min-height: 80px;
+    border-bottom: 1px solid var(--border); background: var(--bg); z-index: 10;
+    position: relative;
+  }
+  .header.hidden { display: none; }
+  .header-icons { display: flex; gap: 2px; width: 136px; flex-shrink: 0; }
+  .header-icons.right { width: 92px; justify-content: flex-end; }
+  .icon-btn {
+    width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer; color: var(--text2);
+    border-radius: 8px; transition: background 0.15s, color 0.15s; flex-shrink: 0;
+    position: relative; z-index: 2;
+  }
+  .icon-btn:hover { background: var(--surface2); color: var(--text); }
+  .icon-btn:active { transform: scale(0.92); }
+  .icon-btn svg { width: 20px; height: 20px; }
+  .header-center { position: absolute; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; pointer-events: none; }
+  .header-center a { pointer-events: all; }
+  .header-title-link { text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: opacity 0.15s; }
+  .header-title-link:hover { opacity: 0.75; }
+  .header-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 4px; color: var(--text); line-height: 1; }
+  .header-title span { color: var(--accent); }
+  .header-subtitle { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text2); margin-top: 3px; }
+
+  /* ─── START SCREEN ─── */
+  #startScreen {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 32px 28px; gap: 0; overflow: hidden; position: relative;
+    visibility: hidden;
+  }
+  body.fonts-ready #startScreen { visibility: visible; transition: opacity 0.18s ease; }
+  .start-home-btn {
+    position: absolute; top: 14px; left: 14px;
+    display: flex; align-items: center; gap: 7px; color: var(--text3);
+    text-decoration: none; font-size: 12px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; padding: 8px 10px;
+    border-radius: 8px; transition: background 0.15s, color 0.15s; z-index: 5;
+  }
+  .start-home-btn:hover { background: var(--surface2); color: var(--text); }
+  .start-home-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .start-logo-img { width: 120px; display: block; margin: 0 auto 4px; }
+  .game-identity { text-align: center; padding: 20px 0 24px; }
+  .game-id-badge { display: inline-block; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+  .game-id-title { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: 3px; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .game-id-challenge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); margin-bottom: 10px; }
+  .game-id-desc { font-size: 15px; color: var(--text2); line-height: 1.55; max-width: 300px; margin: 0 auto 12px; }
+  .game-id-tags { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  .game-id-tag { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 20px; background: var(--accent-dim); border: 1px solid var(--accent-border); color: var(--accent); }
+  .section-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--text2); font-weight: 600; width: 100%; margin-bottom: 8px; margin-top: 4px; }
+  .free-play-section { padding: 20px 0 24px; width: 100%; margin-bottom: 6px; }
+  .name-row { display: flex; gap: 8px; width: 100%; }
+  .name-input {
+    flex: 1; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 16px; font-size: 15px; color: var(--text);
+    font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s;
+  }
+  .name-input:focus { border-color: var(--accent); }
+  .name-input::placeholder { color: var(--text3); }
+  .start-btn {
+    background: var(--accent); color: #000; border: none; border-radius: 10px;
+    padding: 12px 22px; font-size: 15px; font-weight: 700; font-family: 'Inter', sans-serif;
+    cursor: pointer; letter-spacing: 0.5px; transition: opacity 0.15s, transform 0.1s; white-space: nowrap;
+  }
+  .start-btn:hover { opacity: 0.9; }
+  .start-btn:active { transform: scale(0.96); }
+  .free-note { font-size: 11px; color: var(--text2); text-align: center; margin-top: 8px; line-height: 1.5; }
+  .start-divider { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 16px; }
+  .start-divider::before, .start-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .start-divider span { font-size: 10px; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; white-space: nowrap; }
+  .register-section {
+    width: 100%; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 16px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .register-headline { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--text); line-height: 1.1; }
+  .register-headline span { color: var(--accent); }
+  .register-tagline { font-size: 13px; color: var(--text); line-height: 1.55; margin-top: -4px; }
+  .register-perks { display: flex; flex-direction: column; gap: 8px; margin: 2px 0; }
+  .register-perk { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text2); }
+  .register-perk svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
+  .register-perk strong { color: var(--text); }
+  .register-btns { display: flex; flex-direction: column; gap: 8px; margin-top: 2px; }
+  .btn-create { width: 100%; background: var(--accent); color: #000; border: none; border-radius: 10px; padding: 13px; font-size: 14px; font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer; letter-spacing: 0.3px; transition: opacity 0.15s, transform 0.1s; }
+  .btn-create:hover { opacity: 0.9; }
+  .btn-create:active { transform: scale(0.97); }
+  .btn-login { width: 100%; background: transparent; color: var(--text2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+  .btn-login:hover { border-color: var(--accent); color: var(--text); }
+
+  /* ─── GAME SCREEN ─── */
+  #gameScreen { flex: 1; display: none; flex-direction: column; overflow: hidden; }
+  #gameScreen.active { display: flex; }
+
+  /* ─── STATUS BAR ─── */
+  /* Layout: [Seq left] [Phase badge centre] [Combo + Score right] */
+  .status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    min-height: 72px;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  /* Left — sequence number */
+  .seq-block { display: flex; flex-direction: column; gap: 1px; }
+  .seq-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); font-weight: 600; }
+  .seq-length { font-family: 'Bebas Neue', sans-serif; font-size: 34px; letter-spacing: 2px; color: var(--accent); line-height: 1; }
+  .seq-length.bump { animation: seqBump 0.25s cubic-bezier(0.34,1.56,0.64,1); }
+  @keyframes seqBump { 0%{transform:scale(1)}50%{transform:scale(1.35)}100%{transform:scale(1)} }
+  @keyframes badgePop { 0%{transform:scale(0.85);opacity:0.5}100%{transform:scale(1);opacity:1} }
+
+  /* Centre — phase badge locked to true 50% */
+  .phase-badge-wrap { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+  .phase-badge-wrap .phase-badge { pointer-events: none; }
+  .phase-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px; letter-spacing: 2px;
+    padding: 7px 16px; border-radius: 8px;
+    white-space: nowrap; text-align: center;
+  }
+  .phase-badge.watch {
+    background: rgba(96,165,250,0.15); color: var(--accent);
+    border: 2px solid rgba(96,165,250,0.5);
+    animation: watchPulse 1s ease-in-out infinite;
+  }
+  @keyframes watchPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(96,165,250,0.3); }
+    50%       { box-shadow: 0 0 0 6px rgba(96,165,250,0); }
+  }
+  .phase-badge.input {
+    background: rgba(74,222,128,0.15); color: var(--green);
+    border: 2px solid rgba(74,222,128,0.5);
+    animation: inputPulse 0.6s ease-in-out infinite;
+  }
+  @keyframes inputPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
+    50%       { box-shadow: 0 0 0 6px rgba(74,222,128,0); }
+  }
+  .phase-badge.celebrate { background: rgba(251,191,36,0.15); color: var(--amber); border: 2px solid rgba(251,191,36,0.5); }
+  .phase-badge.ready     { background: var(--surface2); color: var(--text2); border: 2px solid var(--border); }
+
+  /* Right — combo + score side by side */
+  .right-stats { display: flex; align-items: center; gap: 14px; justify-content: flex-end; }
+  .combo-block { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+  .combo-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); font-weight: 600; }
+  #comboDisplay { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--text2); line-height: 1; }
+  .score-live { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+  .score-live-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); font-weight: 600; }
+  .score-live-val { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--text); line-height: 1; }
+  .score-live-val.score-up { animation: scoreUp 0.3s ease-out; }
+  @keyframes scoreUp { 0%{transform:scale(1)}40%{transform:scale(1.2)}100%{transform:scale(1)} }
+
+  /* ─── GRID ─── */
+  .grid-wrapper { flex: 1; display: flex; min-height: 0; position: relative; width: 100%; }
+  #gameGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 0; width: 100%; height: 100%; flex: 1;
+    border: 2px solid var(--border);
+    border-radius: 4px; overflow: hidden;
+  }
+
+  /* ─── TILES ─── */
+  .tile {
+    position: relative; cursor: pointer; overflow: hidden;
+    background: var(--surface2);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .tile:nth-child(4n)   { border-right: none; }
+  .tile:nth-child(n+17) { border-bottom: none; }
+  .tile.watch-phase { cursor: default; }
+  .tile.input-phase { cursor: pointer; }
+
+  .tile-inner { width: 100%; height: 100%; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .tile-num { font-family: 'Bebas Neue', sans-serif; font-size: 14px; color: rgba(255,255,255,0.06); user-select: none; pointer-events: none; position: absolute; bottom: 4px; right: 6px; line-height: 1; }
+
+  /* Active flash during WATCH */
+  .tile.tile-active {
+    background: var(--accent) !important;
+    box-shadow: 0 0 0 0 transparent;
+  }
+  .tile-ripple {
+    position: absolute; inset: 0; border-radius: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.35) 0%, rgba(96,165,250,0.0) 70%);
+    animation: rippleExpand 0.55s ease-out forwards;
+    pointer-events: none;
+  }
+  @keyframes rippleExpand { 0%{transform:scale(0.3);opacity:1}100%{transform:scale(2.5);opacity:0} }
+
+  /* Correct tap */
+  .tile.tile-correct { background: var(--green) !important; animation: tileCorrect 0.28s ease-out forwards; }
+  @keyframes tileCorrect { 0%{transform:scale(1.0)}40%{transform:scale(1.08)}100%{transform:scale(1.0)} }
+
+  /* Physical press */
+  .tile.tile-press { animation: tilePress 0.08s ease-out forwards; }
+  @keyframes tilePress { 0%{transform:scale(1)}50%{transform:scale(0.93)}100%{transform:scale(1)} }
+
+  /* Wrong tap */
+  .tile.tile-wrong { background: var(--red) !important; animation: tileWrong 0.35s ease-out forwards; }
+  @keyframes tileWrong { 0%{transform:scale(1.0)}20%{transform:scale(1.1) rotate(-2deg)}50%{transform:scale(0.95) rotate(2deg)}100%{transform:scale(1.0) rotate(0deg)} }
+
+  /* Afterglow */
+  .tile.tile-afterglow { box-shadow: inset 0 0 8px 2px rgba(74,222,128,0.2); }
+
+  /* Combo glow */
+  .tile.combo-1 { box-shadow: 0 0 6px 1px rgba(74,222,128,0.25); }
+  .tile.combo-2 { box-shadow: 0 0 10px 2px rgba(74,222,128,0.45); }
+  .tile.combo-3 { box-shadow: 0 0 16px 4px rgba(74,222,128,0.65); }
+
+  /* Score float pop */
+  .score-float {
+    position: fixed; pointer-events: none; z-index: 9999;
+    font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 2px;
+    color: var(--green); text-shadow: 0 0 20px rgba(74,222,128,0.8), 0 2px 8px rgba(0,0,0,0.6);
+    animation: scoreFloat 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  @keyframes scoreFloat {
+    0%   { opacity: 1; margin-top: 0;    scale: 0.7; }
+    20%  { opacity: 1; margin-top: -12px; scale: 1.1; }
+    100% { opacity: 0; margin-top: -70px; scale: 1; }
+  }
+
+  /* Sequence complete cascade */
+  .tile.tile-win { animation: tileCascadeWin 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+  @keyframes tileCascadeWin {
+    0%   { transform:scale(1);    background:var(--surface2); }
+    40%  { transform:scale(1.12); background:var(--accent); box-shadow:0 0 16px 4px var(--accent-glow); }
+    70%  { transform:scale(0.97); }
+    100% { transform:scale(1);    background:var(--surface2); }
+  }
+
+  /* Grid dim during watch */
+  #gameGrid.watching .tile:not(.tile-active) { opacity: 0.3; transition: opacity 0.15s; }
+
+  /* ─── PHASE OVERLAY ─── */
+  #phaseOverlay {
+    position: absolute; inset: 0; z-index: 15;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: rgba(7,7,15,0.88); backdrop-filter: blur(3px);
+    opacity: 0; pointer-events: none; transition: opacity 0.18s;
+  }
+  #phaseOverlay.show { opacity: 1; pointer-events: none; }
+  #phaseOverlay.fadeout { opacity: 0; transition: opacity 0.18s; }
+  .phase-overlay-main {
+    font-family: 'Bebas Neue', sans-serif; font-size: 88px; letter-spacing: 6px;
+    line-height: 1; text-align: center;
+  }
+  .phase-overlay-main.watch { color: var(--accent); text-shadow: 0 0 60px rgba(96,165,250,0.5); }
+  .phase-overlay-main.input { color: var(--green); text-shadow: 0 0 60px rgba(74,222,128,0.5); }
+  .phase-overlay-sub { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 12px; text-align: center; }
+
+  /* Sequence complete grid pulse */
+  #gameGrid.seq-pulse { animation: seqPulse 0.4s ease-out forwards; }
+  @keyframes seqPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(96,165,250,0.0); }
+    40%  { box-shadow: 0 0 0 6px rgba(96,165,250,0.5), 0 0 40px 10px rgba(96,165,250,0.3); }
+    100% { box-shadow: 0 0 0 2px rgba(96,165,250,0.0); }
+  }
+
+  /* Victory flash */
+  #victoryFlash { position: absolute; inset: 0; background: rgba(96,165,250,0.22); pointer-events: none; opacity: 0; z-index: 5; }
+  #victoryFlash.flash { animation: flashBurst 0.7s ease-out forwards; }
+  @keyframes flashBurst { 0%{opacity:1}100%{opacity:0} }
+
+  /* Sequence score popup */
+  #seqScorePopup {
+    position: absolute; inset: 0; z-index: 9990;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    pointer-events: none; opacity: 0;
+  }
+  #seqScorePopup.show { animation: seqPopIn 1.1s cubic-bezier(0.22,1,0.36,1) forwards; }
+  @keyframes seqPopIn {
+    0%   { opacity: 0; transform: scale(0.55); }
+    18%  { opacity: 1; transform: scale(1.05); }
+    50%  { opacity: 1; transform: scale(1.0); }
+    82%  { opacity: 1; transform: scale(1.0); }
+    100% { opacity: 0; transform: scale(1.03); }
+  }
+  #seqScorePopup .seq-pop-label {
+    font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 5px;
+    color: rgba(255,255,255,0.6); text-transform: uppercase; margin-bottom: 4px;
+  }
+  #seqScorePopup .seq-pop-pts {
+    font-family: 'Bebas Neue', sans-serif; font-size: 100px; letter-spacing: 4px; line-height: 1;
+    color: var(--green); text-shadow: 0 0 50px rgba(74,222,128,0.8), 0 0 100px rgba(74,222,128,0.4);
+  }
+
+  /* SO CLOSE message */
+  #soCloseMsg {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 4px;
+    color: var(--amber); text-shadow: 0 0 30px rgba(251,191,36,0.6);
+    pointer-events: none; z-index: 10; opacity: 0; white-space: nowrap;
+  }
+  #soCloseMsg.show { animation: soCloseAnim 1.1s ease-out forwards; }
+  @keyframes soCloseAnim {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+    20%  { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    70%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  }
+
+  /* ─── COUNTDOWN OVERLAY ─── */
+  .countdown-overlay {
+    position: absolute;
+    top: 80px; /* below header */
+    left: 0; right: 0; bottom: 0;
+    z-index: 50;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(7,7,15,0.88); backdrop-filter: blur(3px);
+    pointer-events: all;
+  }
+  .countdown-overlay.hidden { display: none; }
+  #roundOverlay { display: none; }
+  #roundOverlay:not(.hidden) { display: flex; }
+  .countdown-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 140px; line-height: 1; letter-spacing: 4px;
+    color: #fff; text-shadow: 0 0 60px rgba(255,255,255,0.25);
+    animation: cdPop 0.18s cubic-bezier(0.22,1.8,0.36,1) forwards;
+    will-change: transform, opacity;
+  }
+  .countdown-num.go { color: var(--accent); font-size: 100px; text-shadow: 0 0 80px var(--accent-glow); letter-spacing: 8px; }
+  @keyframes cdPop { 0%{transform:scale(1.5);opacity:0}100%{transform:scale(1);opacity:1} }
+  @keyframes cdShrink { 0%{transform:scale(1);opacity:1}100%{transform:scale(0.6);opacity:0} }
+  .countdown-num.exit { animation: cdShrink 0.22s ease-in forwards; }
+
+  /* ─── PROGRESS BAR ─── */
+  .progress-bar-wrap { height: 8px; background: var(--border); flex-shrink: 0; position: relative; overflow: hidden; }
+  #progressBar { position: absolute; left: 0; top: 0; height: 100%; width: 100%; background: var(--accent); transition: width 0.12s linear, background 0.4s ease; transform-origin: left center; }
+  #progressBar.warning { background: var(--amber); }
+  #progressBar.critical { background: var(--red); animation: barGlow 0.42s ease-in-out infinite; }
+  @keyframes barGlow { 0%,100%{box-shadow:0 0 4px 1px rgba(248,113,113,0.4)}50%{box-shadow:0 0 18px 5px rgba(248,113,113,0.85)} }
+
+  /* ─── LOWER INFO ─── */
+  .lower-info {
+    padding: 14px 24px 18px; display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border); gap: 8px; min-height: 90px; flex-shrink: 0;
+    position: relative;
+  }
+  .info-left { display: flex; flex-direction: column; gap: 4px; }
+  .player-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--text); line-height: 1; }
+  .game-mode { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); display: flex; align-items: center; gap: 4px; }
+  .game-mode svg { width: 11px; height: 11px; }
+  .timer-wrap { position: absolute; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .timer-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); font-weight: 600; }
+  #timerDisplay { font-family: 'Bebas Neue', monospace; font-size: 42px; letter-spacing: 2px; color: var(--text); line-height: 1; transition: color 0.3s; white-space: nowrap; }
+  #timerDisplay.warning { color: var(--amber); }
+  #timerDisplay.critical { color: var(--red); animation: timerPulse 0.38s ease-in-out infinite; }
+  @keyframes timerPulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.12)} }
+  .info-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+  .turns-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); font-weight: 600; }
+  #seqDisplay { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--text); line-height: 1; }
+
+  /* ─── MODALS ─── */
+  .modal-overlay {
+    position: absolute; inset: 0; background: rgba(0,0,0,0.85); z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px; backdrop-filter: blur(4px);
+    opacity: 0; pointer-events: none; transition: opacity 0.25s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  body.light .modal-overlay { background: rgba(0,0,0,0.5); }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    width: 100%; max-width: 380px; overflow: hidden;
+    transform: translateY(20px); transition: transform 0.25s ease;
+    max-height: calc(100dvh - 60px); overflow-y: auto;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: var(--surface); z-index: 1;
+  }
+  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--text); }
+  .modal-close { background: none; border: none; cursor: pointer; color: var(--text2); padding: 6px; border-radius: 6px; transition: background 0.15s; display: flex; align-items: center; justify-content: center; }
+  .modal-close svg { width: 18px; height: 18px; }
+  .modal-close:hover { background: var(--surface2); color: var(--text); }
+  .modal-body { padding: 20px; }
+
+  /* ─── FULL SCREEN — Victory, Timeout, Pregame ─── */
+  #victoryModal, #timeoutModal, #pregameHelpModal {
+    padding: 0; align-items: stretch; justify-content: stretch;
+    background: var(--bg); backdrop-filter: none;
+  }
+  #victoryModal .modal, #timeoutModal .modal, #pregameHelpModal .modal {
+    max-width: none; width: 100%; height: 100%; max-height: 100%;
+    border-radius: 0; border: none; transform: none; overflow: hidden; display: flex; flex-direction: column;
+  }
+  #victoryModal.open .modal, #timeoutModal.open .modal, #pregameHelpModal.open .modal { transform: none; }
+  #victoryModal .modal   { border-top: 2px solid var(--accent); }
+  #timeoutModal .modal   { border-top: 2px solid var(--red); }
+  #pregameHelpModal .modal { border-top: 2px solid var(--accent); }
+  #victoryModal .modal-body, #timeoutModal .modal-body {
+    flex: 1; display: flex; flex-direction: column; justify-content: flex-start;
+    gap: 12px; padding: 14px 16px 12px; min-height: 0; overflow: hidden;
+  }
+  #pregameHelpModal .modal-body {
+    flex: 1; display: flex; flex-direction: column; justify-content: space-between;
+    padding: 15px 20px 20px; gap: 16px; min-height: 0; overflow: hidden;
+  }
+
+  /* ─── FULL SCREEN — all in-game modals ─── */
+  #shareModal, #helpModal, #statsModal, #settingsModal, #categoriesModal {
+    padding: 0; align-items: stretch; justify-content: stretch;
+    background: var(--bg); backdrop-filter: none;
+  }
+  #shareModal .modal, #helpModal .modal, #statsModal .modal, #settingsModal .modal, #categoriesModal .modal {
+    max-width: none; width: 100%; height: 100%; max-height: 100%;
+    border-radius: 0; border: none; border-top: 1px solid var(--border2);
+    transform: none; display: flex; flex-direction: column; overflow: hidden;
+  }
+  #shareModal.open .modal, #helpModal.open .modal, #statsModal.open .modal,
+  #settingsModal.open .modal, #categoriesModal.open .modal { transform: none; }
+  #shareModal .modal-body, #helpModal .modal-body, #statsModal .modal-body, #settingsModal .modal-body {
+    flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 28px 24px; gap: 0; overflow-y: auto;
+  }
+  #helpModal .modal-body { justify-content: space-between; padding: 15px 20px 20px; gap: 16px; overflow: hidden; }
+  #categoriesModal .modal-body { flex: 1; overflow-y: auto; padding: 0 20px; }
+
+  /* Victory compact sizing */
+  #victoryModal .victory-header-text { font-size: 34px; margin-bottom: 0; }
+  #victoryModal .victory-sub         { font-size: 10px; margin-bottom: 0; letter-spacing: 1.5px; }
+  #victoryModal .score-breakdown { padding: 8px 10px; gap: 3px; margin-bottom: 0; border-radius: 10px; }
+  #victoryModal .score-row.big   { padding: 8px 12px; margin: 1px 0; border-radius: 6px; }
+  #victoryModal .score-row.big .score-label { font-size: 11px; letter-spacing: 0.5px; gap: 5px; }
+  #victoryModal .score-row.big .score-val   { font-size: 24px; letter-spacing: 1px; }
+  #victoryModal .score-row.big.total .score-val { font-size: 28px; }
+  #victoryModal .score-row.big.rank  .score-val { font-size: 24px; }
+  /* Always-visible score section — match Game 1 sizes */
+  #timeoutModal .score-breakdown { padding: 8px 10px; gap: 3px; margin-bottom: 0; border-radius: 10px; }
+  #timeoutModal .score-row.big   { padding: 8px 12px; margin: 1px 0; border-radius: 6px; }
+  #timeoutModal .score-row.big .score-label { font-size: 11px; letter-spacing: 0.5px; gap: 5px; }
+  #timeoutModal .score-row.big .score-val   { font-size: 24px; letter-spacing: 1px; }
+  #timeoutModal .score-row.big.total .score-val { font-size: 28px; }
+  #timeoutModal .score-row.big.rank  .score-val { font-size: 28px; }
+  /* Breakdown panel rows — readable but compact enough to fit */
+  #timeoutModal #tBreakdownPanel .score-breakdown { padding: 4px 8px; gap: 1px; border-radius: 6px; }
+  #timeoutModal #tBreakdownPanel .score-row.big { padding: 7px 10px; margin: 1px 0; border-radius: 5px; }
+  #timeoutModal #tBreakdownPanel .score-row.big .score-label { font-size: 11px; gap: 5px; }
+  #timeoutModal #tBreakdownPanel .score-row.big .score-val { font-size: 19px; letter-spacing: 0.5px; }
+  #timeoutModal #tBreakdownPanel .score-row.big.bonus-earned .score-val { color: var(--accent); }
+  /* Round scorecard grid */
+  .round-scorecard { display: grid; grid-template-columns: repeat(5,1fr); gap: 4px; margin-top: 0; }
+  .round-scorecard-cell { text-align: center; background: var(--bg); border-radius: 6px; padding: 6px 2px; }
+  .round-scorecard-cell .rc-num { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); }
+  .round-scorecard-cell .rc-label { font-size: 8px; color: var(--text3); letter-spacing: 0.3px; margin: 1px 0 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .round-scorecard-cell .rc-score { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px; color: var(--text); line-height: 1; }
+  /* 4-stat scorecard grid */
+  .stat-scorecard { display: grid; grid-template-columns: repeat(4,1fr); gap: 4px; margin-top: 0; }
+  .stat-scorecard-cell { text-align: center; background: var(--bg); border-radius: 6px; padding: 6px 2px; }
+  .stat-scorecard-cell .sc-label { font-size: 8px; color: var(--text3); letter-spacing: 0.3px; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .stat-scorecard-cell .sc-score { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px; color: var(--text); line-height: 1; }
+  /* Bonus items — same 4px gap as the grids */
+  #timeoutModal #tBreakdownPanel #tBonuses { display: flex; flex-direction: column; gap: 4px; }
+  #victoryModal .victory-btns { gap: 6px; }
+  #victoryModal .share-btn    { padding: 0; height: 46px; font-size: 14px; }
+  #victoryModal .share-btn svg { width: 14px; height: 14px; }
+  #victoryModal .postgame-actions { gap: 6px; margin-top: 0; }
+  #victoryModal .postgame-actions .action-btn { padding: 0; height: 46px; font-size: 14px; border-radius: 10px; }
+  #victoryModal .postgame-actions .action-btn svg { width: 14px; height: 14px; }
+  #timeoutModal .victory-btns { gap: 6px; }
+  #timeoutModal .share-btn    { padding: 0; height: 46px; font-size: 14px; }
+  #timeoutModal .share-btn svg { width: 14px; height: 14px; }
+  #timeoutModal .postgame-actions { gap: 6px; margin-top: 0; }
+  #timeoutModal .postgame-actions .action-btn { padding: 0; height: 46px; font-size: 14px; border-radius: 10px; }
+  #timeoutModal .postgame-actions .action-btn svg { width: 14px; height: 14px; }
+
+  /* ── vTopSection ── */
+  #vTopSection { display: flex; flex-direction: column; gap: 6px; }
+
+  /* ── Accordion close button (victory) ── */
+  #vCollapseBtn {
+    display: none; width: 100%; align-items: center; justify-content: center;
+    gap: 6px; padding: 8px 0; background: none; border: none;
+    border-top: 1px solid var(--border); cursor: pointer; color: var(--text2);
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    font-family: inherit; transition: color 0.15s;
+  }
+  #vCollapseBtn.show { display: flex; }
+  #vCollapseBtn:hover { color: var(--text); }
+
+  /* ── Victory actions slide-away ── */
+  #victoryActions { display: flex; flex-direction: column; gap: 6px; }
+  #victoryActions.slide-away { display: none; }
+
+  /* ── Timeout top section + accordion ── */
+  #tTopSection { display: flex; flex-direction: column; gap: 6px; }
+  #tCollapseBtn {
+    display: none; width: 100%; align-items: center; justify-content: center;
+    gap: 6px; padding: 8px 0; background: none; border: none;
+    border-top: 1px solid var(--border); cursor: pointer; color: var(--text2);
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    font-family: inherit; transition: color 0.15s;
+  }
+  #tCollapseBtn.show { display: flex; }
+  #tCollapseBtn:hover { color: var(--text); }
+  #timeoutActions { display: flex; flex-direction: column; gap: 6px; }
+  #timeoutActions.slide-away { display: none; }
+  #timeoutModal .victory-sub { font-size: 10px; margin-bottom: 0; letter-spacing: 1.5px; }
+
+  /* ── Ad Slot ── */
+  .ad-slot {
+    width: 100%; background: var(--surface); border: 1px dashed var(--border2);
+    border-radius: 12px; height: 120px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 6px; color: var(--text3);
+    flex-shrink: 0;
+  }
+  .ad-slot-label { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; }
+  .ad-slot-size { font-size: 11px; color: var(--text3); }
+
+  /* ─── SCORE BREAKDOWN ─── */
+  .victory-header-text {
+    font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 4px;
+    color: var(--accent); text-align: center; line-height: 1; margin-bottom: 4px;
+  }
+  .victory-sub { font-size: 12px; color: var(--text3); text-align: center; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  .score-breakdown { background: var(--surface2); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+  .score-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+  .score-label { color: var(--text2); display: flex; align-items: center; gap: 6px; }
+  .score-label svg { width: 13px; height: 13px; flex-shrink: 0; }
+  .score-val { font-weight: 700; color: var(--text); font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 1px; }
+  .score-row.big { background: var(--bg); border-radius: 8px; padding: 10px 14px; margin: 2px 0; }
+  .score-row.big .score-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; color: var(--text3); }
+  .score-row.big .score-val   { font-size: 28px; letter-spacing: 2px; }
+  .score-row.big.total .score-val { color: var(--accent); font-size: 32px; }
+  .score-row.big.rank  .score-val { color: #EAC100; font-size: 28px; }
+  .score-row.bonus-earned .score-val { color: var(--green); }
+  #vBonuses { border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px; display: none; }
+
+  /* ─── ROUND BREAKDOWN & BONUS ROWS ─── */
+  .ec-round-row { display: flex; justify-content: space-between; align-items: center; background: var(--bg); border-radius: 6px; padding: 7px 12px; margin: 2px 0; }
+  .ec-round-lbl { display: flex; align-items: center; gap: 7px; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 700; color: var(--text3); }
+  .ec-round-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .ec-round-val { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; color: var(--text); font-weight: 700; }
+  .ec-bonus-row { display: flex; justify-content: space-between; align-items: center; background: var(--bg); border-radius: 6px; padding: 7px 12px; margin: 2px 0; font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 700; color: var(--text3); }
+  .ec-bonus-row span:last-child { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; }
+
+  /* ─── VICTORY BUTTONS ─── */
+  .victory-btns { display: flex; gap: 8px; }
+  .share-btn {
+    flex: 1; background: var(--accent); color: #000; border: none; border-radius: 10px;
+    padding: 12px; font-size: 14px; font-weight: 700; cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s; font-family: 'Inter', sans-serif;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .share-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .share-btn:hover { opacity: 0.9; }
+  .share-btn:active { transform: scale(0.96); }
+  .postgame-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .postgame-actions .action-btn {
+    width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--text); font-size: 14px; font-weight: 600;
+    font-family: 'Inter', sans-serif; cursor: pointer; text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .postgame-actions .action-btn:hover { background: var(--border); }
+  .postgame-actions .action-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .postgame-actions .action-btn.action-home { border-color: var(--accent); color: var(--accent); }
+  .postgame-actions .action-btn.action-home:hover { background: var(--accent-dim); }
+
+  /* ─── PREGAME MODAL FOOT ─── */
+  .pregame-modal-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 14px; padding: 16px 20px; border-top: 1px solid var(--border);
+    background: var(--surface2); flex-wrap: wrap;
+  }
+  .dont-show-label { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text3); cursor: pointer; user-select: none; }
+  .dont-show-label input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  .dont-show-label:hover { color: var(--text2); }
+  .pregame-play-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #0a0a0a; border: none; border-radius: 10px;
+    padding: 11px 20px; font-family: 'Bebas Neue', sans-serif; font-size: 16px;
+    letter-spacing: 1.5px; cursor: pointer; transition: opacity 0.15s, transform 0.1s; white-space: nowrap;
+  }
+  .pregame-play-btn:hover { opacity: 0.88; }
+  .pregame-play-btn:active { transform: scale(0.97); }
+  .pregame-play-btn svg { width: 13px; height: 13px; }
+
+  /* ─── HELP MODAL ─── */
+  .help-rules-block { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+  .help-rule { display: flex; gap: 16px; align-items: center; flex: 1; border-bottom: 1px solid var(--border); padding: 0; }
+  .help-rule:last-child { border-bottom: none; }
+  .help-icon { color: var(--accent); flex-shrink: 0; width: 36px; height: 36px; background: var(--accent-dim); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .help-icon svg { width: 18px; height: 18px; }
+  .help-text h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; line-height: 1.2; }
+  .help-text p  { font-size: 13px; color: var(--text2); line-height: 1.5; }
+  .bonus-section { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .bonus-title { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .bonus-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; flex: 1; min-height: 0; }
+  .bonus-card { background: var(--surface2); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+  .bonus-pts  { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--accent); line-height: 1; }
+  .bonus-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .bonus-desc { font-size: 11px; color: var(--text3); line-height: 1.4; margin-top: 2px; }
+
+  /* ─── STATS MODAL ─── */
+  .stats-section-label { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text3); font-weight: 700; margin-bottom: 10px; }
+  .stats-big-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-big-card { background: var(--surface2); border: 1px solid var(--border2); border-radius: 14px; padding: 20px 16px; text-align: center; }
+  .stat-big-num { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; letter-spacing: 2px; color: var(--text); }
+  .stat-big-lbl { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); font-weight: 600; margin-top: 4px; }
+  .stats-best-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .stat-best-card { background: var(--surface2); border: 1px solid rgba(96,165,250,0.15); border-radius: 12px; padding: 14px 10px; text-align: center; }
+  .stat-best-lbl { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); font-weight: 600; margin-bottom: 6px; }
+  .stat-best-val { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--accent); line-height: 1; }
+  .streak-bar { display: flex; gap: 4px; flex-wrap: wrap; }
+  .streak-day { width: 18px; height: 18px; border-radius: 4px; background: var(--border); }
+  .streak-day.played { background: var(--accent-dim); border: 1px solid var(--accent-border); }
+  .streak-day.today { background: var(--accent); }
+
+  /* ─── SETTINGS ─── */
+  .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text); }
+  .setting-row:last-child { border-bottom: none; }
+  .setting-desc { color: var(--text2); font-size: 12px; margin-top: 2px; }
+  .toggle { width: 44px; height: 24px; background: var(--border); border-radius: 12px; cursor: pointer; position: relative; transition: background 0.2s; border: none; flex-shrink: 0; }
+  .toggle.on { background: var(--accent); }
+  .toggle::after { content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: transform 0.2s; }
+  .toggle.on::after { transform: translateX(20px); }
+
+  /* ─── CATEGORIES / GAMES MODAL ─── */
+  .cat-item { display: flex; align-items: center; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.12s; }
+  .cat-item:last-child { border-bottom: none; }
+  .cat-item.active { cursor: default; }
+  .cat-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cat-icon svg { width: 22px; height: 22px; }
+  .cat-info { flex: 1; min-width: 0; }
+  .cat-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .cat-desc { font-size: 12px; color: var(--text3); line-height: 1.4; }
+  .cat-playing { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--accent); text-transform: uppercase; flex-shrink: 0; }
+
+  /* ─── SHARE MODAL ─── */
+  .share-preview { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-size: 12px; color: var(--text2); font-family: monospace; white-space: pre; line-height: 1.6; margin-bottom: 16px; letter-spacing: 0.5px; }
+  .share-platforms { display: flex; flex-direction: column; gap: 8px; }
+  .platform-btn { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border-radius: 10px; border: none; cursor: pointer; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; transition: opacity 0.15s, transform 0.1s; color: #fff; }
+  .platform-btn:hover { opacity: 0.9; }
+  .platform-btn:active { transform: scale(0.97); }
+  .x-btn  { background: #000; }
+  body.light .x-btn { background: #111; }
+  .wa-btn { background: #25D366; }
+  .fb-btn { background: #1877F2; }
+  .copy-btn { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  .platform-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* ─── BONUS UNLOCK BANNER ─── */
+  #bonusBanner {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    z-index: 30;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: 14px;
+    padding: 12px 22px;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    box-shadow: 0 0 40px 8px rgba(96,165,250,0.35);
+    white-space: nowrap;
+  }
+  #bonusBanner.show {
+    animation: bonusBannerPop 1.8s cubic-bezier(0.22,1.4,0.36,1) forwards;
+  }
+  @keyframes bonusBannerPop {
+    0%   { opacity:0; transform:translate(-50%,-50%) scale(0.7); }
+    15%  { opacity:1; transform:translate(-50%,-50%) scale(1.08); }
+    25%  { transform:translate(-50%,-50%) scale(1.0); }
+    70%  { opacity:1; transform:translate(-50%,-60%) scale(1.0); }
+    100% { opacity:0; transform:translate(-50%,-70%) scale(0.95); }
+  }
+  .bonus-banner-pts {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px; letter-spacing: 3px; line-height: 1;
+    color: var(--accent);
+  }
+  .bonus-banner-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px; letter-spacing: 2px;
+    color: var(--text); margin-top: 2px;
+  }
+  .bonus-banner-desc {
+    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text2); margin-top: 3px;
+  }
+
+  /* ─── PARTICLES ─── */
+  .particle { position: absolute; width: 8px; height: 8px; border-radius: 50%; pointer-events: none; z-index: 200; }
+  @keyframes particleFly { 0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0} }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-height: 680px) {
+    .header { height: 64px; min-height: 64px; }
+    .lower-info { min-height: 72px; padding: 10px 16px; }
+    #timerDisplay { font-size: 32px; }
+    .status-bar { min-height: 62px; padding: 6px 12px; }
+  }
+  @media (min-width: 441px) {
+    #app { max-width: 536px; border-left: 1px solid #1a1a1a; border-right: 1px solid #1a1a1a; }
+  }
+  /* ── Modal mobile responsiveness ── */
+  @media (max-height: 620px) {
+    #victoryModal .modal-body, #timeoutModal .modal-body { padding: 6px 12px; }
+    #victoryModal .victory-header-text { font-size: 26px; }
+    #victoryModal .score-breakdown, #timeoutModal .score-breakdown { padding: 5px 8px; gap: 2px; }
+    #victoryModal .score-row.big, #timeoutModal .score-row.big { padding: 5px 10px; margin: 1px 0; }
+    #victoryModal .score-row.big .score-val, #timeoutModal .score-row.big .score-val { font-size: 20px; }
+    #victoryModal .score-row.big.total .score-val, #timeoutModal .score-row.big.total .score-val { font-size: 22px; }
+    #victoryModal .share-btn, #timeoutModal .share-btn { height: 38px; font-size: 13px; }
+    #victoryModal .postgame-actions .action-btn, #timeoutModal .postgame-actions .action-btn { height: 38px; font-size: 13px; }
+    #victoryModal .victory-btns, #timeoutModal .victory-btns { gap: 4px; }
+    #victoryModal .postgame-actions, #timeoutModal .postgame-actions { gap: 4px; }
+    #pregameHelpModal .modal-body { padding: 10px 16px 14px; gap: 10px; }
+    #helpModal .modal-body { padding: 10px 16px 14px; gap: 10px; }
+  }
+  @media (max-width: 360px) {
+    .modal-header { padding: 12px 14px; }
+    .modal-body { padding: 14px; }
+    #victoryModal .modal-body, #timeoutModal .modal-body { padding: 6px 10px; }
+    #shareModal .modal-body, #statsModal .modal-body, #settingsModal .modal-body { padding: 20px 14px; }
+    .share-btn { font-size: 13px; }
+    .action-btn { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <!-- ═══ HEADER ═══ -->
+  <header class="header hidden" id="mainHeader">
+    <div class="header-icons">
+      <a href="../../follow-the-pattern-game-2.html#leaderboard" class="icon-btn" title="Exit game" aria-label="Exit game" style="text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+      <button class="icon-btn" id="categoriesBtn" title="All Games" aria-label="All Games">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      </button>
+      <button class="icon-btn" id="helpBtn" title="How to play" aria-label="Help">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="0.5" fill="currentColor"/></svg>
+      </button>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html" class="header-title-link" aria-label="Back to Clickzle home">
+        <div class="header-title">CLICK<span>ZLE</span></div>
+        <div class="header-subtitle">Follow the Pattern</div>
+      </a>
+    </div>
+    <div class="header-icons right">
+      <button class="icon-btn" id="statsBtn" title="Stats" aria-label="Statistics">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </button>
+      <button class="icon-btn" id="muteBtn" title="Mute / Unmute" aria-label="Mute">
+        <!-- Sound ON icon (default) -->
+        <svg id="muteIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        <!-- Sound OFF icon (hidden by default) -->
+        <svg id="muteIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+      </button>
+      <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══ START SCREEN ═══ -->
+  <div id="startScreen">
+    <a href="../../index.html" class="start-home-btn" aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Home
+    </a>
+
+    <!-- Leaderboard link -->
+    <a href="../../follow-the-pattern-game-2.html#leaderboard" class="start-home-btn" style="left:auto;right:14px;" aria-label="Leaderboard">
+      Leaderboard
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+    <img src="../../assets/logobluedm.png" alt="Clickzle" class="start-logo-img" id="entranceLogo">
+    <div class="game-identity">
+      <div class="game-id-badge">Game 2 of 5 &mdash; Memory Challenge</div>
+      <div class="game-id-title">Follow the Pattern</div>
+      <div class="game-id-challenge">Daily Challenge &mdash; Same sequence worldwide</div>
+      <div class="game-id-desc">Tiles flash in sequence. Memorise the order. Tap them back exactly. Five rounds, one minute each.</div>
+      <div class="game-id-tags">
+        <span class="game-id-tag">Sequence Memory</span>
+        <span class="game-id-tag">Spatial Recall</span>
+        <span class="game-id-tag">Speed</span>
+      </div>
+    </div>
+    <div class="section-label" id="playFreeLabel">Play free &mdash; no account needed</div>
+    <div class="free-play-section" id="freePlaySection">
+      <div class="name-row">
+        <input type="text" class="name-input" id="playerNameInput" placeholder="Enter your name" maxlength="20" autocomplete="off" spellcheck="false">
+        <button class="start-btn" id="startBtn">PLAY</button>
+      </div>
+      <div class="free-note">Play instantly, no account needed. <a href="../../index.html" style="color:var(--accent);text-decoration:underline;font-weight:600;">Login</a> or <a href="../../index.html" style="color:var(--accent);text-decoration:underline;font-weight:600;">create a free account</a> to save your scores and stats and compete on the global leaderboard.</div>
+    </div>
+    <div class="ad-slot" id="adSlot">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      <span class="ad-slot-label">Clickzle Games</span>
+      <span class="ad-slot-size">300 &times; 120</span>
+    </div>
+
+  </div>
+
+  <!-- ═══ GAME SCREEN ═══ -->
+  <div id="gameScreen">
+    <div class="status-bar">
+      <!-- Left: sequence number -->
+      <div class="seq-block">
+        <div class="seq-label">Sequence</div>
+        <div class="seq-length" id="seqLengthDisplay">2</div>
+      </div>
+      <!-- Centre: round indicator + dots + phase badge -->
+      <div class="phase-badge-wrap" style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <div id="roundLabel" style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);font-weight:600;text-align:center;white-space:nowrap;">ROUND 1 OF 5</div>
+        <div class="round-dots" id="roundDots">
+          <div class="round-dot active" data-r="1"></div>
+          <div class="round-dot" data-r="2"></div>
+          <div class="round-dot" data-r="3"></div>
+          <div class="round-dot" data-r="4"></div>
+          <div class="round-dot" data-r="5"></div>
+        </div>
+        <div class="phase-badge ready" id="phaseBadge">Ready</div>
+      </div>
+      <!-- Right: combo + score -->
+      <div class="right-stats">
+        <div class="combo-block">
+          <div class="combo-label">Combo</div>
+          <div id="comboDisplay">&times;1</div>
+        </div>
+        <div class="score-live">
+          <div class="score-live-label">Score</div>
+          <div class="score-live-val" id="scoreLiveDisplay">0</div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-wrapper">
+      <div id="gameGrid"></div>
+      <div id="victoryFlash"></div>
+      <div id="seqScorePopup">
+        <div class="seq-pop-label">Sequence Bonus</div>
+        <div class="seq-pop-pts" id="seqPopPts">+0</div>
+      </div>
+      <div id="soCloseMsg">SO CLOSE!</div>
+      <div id="bonusBanner">
+        <div class="bonus-banner-pts" id="bonusBannerPts">+500</div>
+        <div class="bonus-banner-name" id="bonusBannerName">PERFECT GAME</div>
+        <div class="bonus-banner-desc" id="bonusBannerDesc">Zero errors</div>
+      </div>
+      <div id="phaseOverlay">
+        <div class="phase-overlay-main watch" id="phaseOverlayMain">WATCH</div>
+        <div class="phase-overlay-sub" id="phaseOverlaySub">Remember the sequence</div>
+      </div>
+    </div>
+    <div id="roundOverlay" class="hidden" style="position:absolute;inset:0;z-index:50;background:rgba(7,7,15,0.95);flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+      <div style="display:flex;align-items:baseline;gap:8px;">
+        <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);font-weight:700;">Round</div>
+        <div id="roNum" style="font-family:'Bebas Neue',sans-serif;font-size:80px;color:var(--accent);line-height:1;animation:roNumIn 0.22s cubic-bezier(0.22,1.8,0.36,1) forwards;">1</div>
+        <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);font-weight:700;">of 5</div>
+      </div>
+      <div id="roTagline" style="font-size:14px;color:rgba(255,255,255,0.75);letter-spacing:1px;min-height:20px;"></div>
+      <div id="roReadyBar" style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:4px;color:#ffffff;padding:8px 20px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;animation:roReadyPulse 1s ease-in-out infinite;">GET READY</div>
+      <div id="roCount" style="font-family:'Bebas Neue',sans-serif;font-size:130px;color:#ffffff;line-height:1;min-width:120px;text-align:center;"></div>
+      <div style="display:flex;gap:10px;margin-top:10px;" id="roDots">
+        <div class="ro-dot" data-step="3"></div>
+        <div class="ro-dot" data-step="2"></div>
+        <div class="ro-dot" data-step="1"></div>
+      </div>
+    </div>
+    <div id="countdownOverlay" class="countdown-overlay hidden">
+      <div id="countdownNum" class="countdown-num"></div>
+    </div>
+    <div class="progress-bar-wrap"><div id="progressBar"></div></div>
+    <div class="lower-info">
+      <div class="info-left">
+        <div class="player-name" id="playerNameDisplay">&mdash;</div>
+        <div class="game-mode" style="flex-direction:column;align-items:flex-start;gap:1px;letter-spacing:2px;">
+          <span>Memory</span>
+          <span>Challenge</span>
+        </div>
+      </div>
+      <div class="timer-wrap">
+        <div class="timer-label">Time</div>
+        <div id="timerDisplay">60</div>
+      </div>
+      <div class="info-right">
+        <div class="turns-label">Completed</div>
+        <div id="seqDisplay">0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ VICTORY MODAL ═══ -->
+  <div class="modal-overlay" id="victoryModal">
+    <div class="modal">
+      <div class="modal-body">
+
+        <!-- TOP SECTION: header + scores + accordion -->
+        <div id="vTopSection">
+
+          <!-- Header -->
+          <div class="victory-header-text">PATTERN MASTERED!</div>
+          <div class="victory-sub" id="victoryDate">Follow the Pattern &mdash; Daily Challenge</div>
+
+          <!-- Score + Rank always visible -->
+          <div class="score-breakdown" style="margin-bottom:0;">
+            <div class="score-row big total">
+              <span class="score-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span id="vScoreLabel">Total Score</span>
+              </span>
+              <span class="score-val" id="vScore">&mdash;</span>
+            </div>
+            <div class="score-row big rank">
+              <span class="score-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                Rank Today
+              </span>
+              <span class="score-val" id="vRank">#&mdash;</span>
+            </div>
+          </div>
+
+          <!-- Score breakdown accordion -->
+          <div style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px;">
+            <button id="vBreakdownBtn" style="width:100%;background:none;border:none;padding:10px 0;cursor:pointer;display:flex;align-items:center;justify-content:space-between;color:var(--text2);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:inherit;">
+              <span>View Score Breakdown</span>
+              <svg id="vBreakdownArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div id="vBreakdownPanel" style="display:none;">
+              <div class="score-breakdown" style="margin-bottom:0;padding-bottom:8px;">
+                <div class="score-row big">
+                  <span class="score-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+                    Sequences Completed
+                  </span>
+                  <span class="score-val" id="vSequences">&mdash;</span>
+                </div>
+                <div class="score-row big">
+                  <span class="score-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Correct Tiles
+                  </span>
+                  <span class="score-val" id="vTiles">&mdash;</span>
+                </div>
+                <div class="score-row big">
+                  <span class="score-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    Longest Sequence
+                  </span>
+                  <span class="score-val" id="vLongest">&mdash;</span>
+                </div>
+                <div class="score-row big">
+                  <span class="score-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Best Players Today
+                  </span>
+                  <span class="score-val" id="vBestToday" style="color:var(--accent);">&mdash;</span>
+                </div>
+                <div class="score-row big" id="vSubtotalRow">
+                  <span class="score-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Subtotal
+                  </span>
+                  <span class="score-val" id="vSubtotal">&mdash;</span>
+                </div>
+                <div id="vBonuses"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Close breakdown — only visible when accordion open -->
+          <button id="vCollapseBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><polyline points="18 15 12 9 6 15"/></svg>
+            Close Breakdown
+          </button>
+
+        </div><!-- end #vTopSection -->
+
+        <!-- All action buttons — slide away when breakdown is open -->
+        <div id="victoryActions" style="margin-top:auto;">
+
+          <!-- Primary actions -->
+          <div class="victory-btns">
+            <button class="share-btn" id="shareBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+              Share Result
+            </button>
+            <button class="share-btn" id="inviteFriendBtn" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+              Invite Friend
+            </button>
+          </div>
+
+          <!-- Secondary actions -->
+          <div class="postgame-actions">
+            <a href="../../follow-the-pattern-game-2.html" class="action-btn action-home">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              View Leaderboard
+            </a>
+            <a href="../../index.html" class="action-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              Back to Home
+            </a>
+          </div>
+
+          <!-- Other games -->
+          <div style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px;">
+            <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);font-weight:600;margin-bottom:6px;">Play Other Games</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+              <a href="../../complete-the-image-game-1.html" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(74,222,128,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#4ade80;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">1</span> Complete the Image</a>
+              <a href="../../hit-the-target-game-3.html" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(244,114,182,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#f472b6;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">3</span> Hit the Target</a>
+              <a href="../../spot-the-pair-game-4.html" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(250,204,21,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#facc15;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">4</span> Spot the Pair</a>
+              <a href="../../next-in-sequence-game-5.html" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(167,139,250,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#a78bfa;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">5</span> Next in Sequence</a>
+            </div>
+          </div>
+
+        </div><!-- end #victoryActions -->
+
+      </div><!-- end .modal-body -->
+
+      <!-- AD SLOT — always visible, pinned to bottom -->
+      <div class="ad-slot" style="margin:0 16px 14px;flex-shrink:0;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <span class="ad-slot-label">Clickzle Games</span>
+        <span class="ad-slot-size">300 &times; 120</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ END CARD ═══ -->
+  <div class="modal-overlay" id="timeoutModal">
+    <div class="modal">
+      <div class="modal-body">
+
+        <!-- TOP SECTION: header + score + accordion -->
+        <div id="tTopSection">
+
+          <!-- Header -->
+          <div class="victory-header-text" id="tTitle">GAME OVER</div>
+          <div class="victory-sub" id="tDate">Follow the Pattern &mdash; Daily Challenge</div>
+
+          <!-- Final Score + Rank always visible -->
+          <div class="score-breakdown" style="margin-bottom:0;">
+            <div class="score-row big total">
+              <span class="score-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Final Score
+              </span>
+              <span class="score-val" id="tScore">0</span>
+            </div>
+            <div class="score-row big rank">
+              <span class="score-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                Rank Today
+              </span>
+              <span class="score-val" id="tRank">#&mdash;</span>
+            </div>
+          </div>
+
+          <!-- Score breakdown accordion -->
+          <div style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px;">
+            <button id="tBreakdownBtn" style="width:100%;background:none;border:none;padding:10px 0;cursor:pointer;display:flex;align-items:center;justify-content:space-between;color:var(--text2);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:inherit;">
+              <span>View Score Breakdown</span>
+              <svg id="tBreakdownArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div id="tBreakdownPanel" style="display:none;">
+              <div class="score-breakdown" style="margin-bottom:0;padding-bottom:8px;">
+                <!-- R1–R5 scorecard — top -->
+                <div id="roundBreakdown"></div>
+                <!-- Bonuses (shown only if earned) -->
+                <div id="tBonuses" style="display:none;border-top:1px solid var(--border);padding-top:6px;margin-top:4px;"></div>
+                <!-- 4-stat grid — bottom -->
+                <div style="border-top:1px solid var(--border);margin-top:4px;padding-top:6px;">
+                  <div class="stat-scorecard">
+                    <div class="stat-scorecard-cell">
+                      <div class="sc-label">Sequences</div>
+                      <div class="sc-score" id="tSequences">&mdash;</div>
+                    </div>
+                    <div class="stat-scorecard-cell">
+                      <div class="sc-label">Longest Seq</div>
+                      <div class="sc-score" id="tLongest">&mdash;</div>
+                    </div>
+                    <div class="stat-scorecard-cell">
+                      <div class="sc-label">Best Combo</div>
+                      <div class="sc-score" id="tCombo">&mdash;</div>
+                    </div>
+                    <div class="stat-scorecard-cell">
+                      <div class="sc-label">Correct Tiles</div>
+                      <div class="sc-score" id="tTiles">&mdash;</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Close breakdown — only visible when accordion open -->
+          <button id="tCollapseBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><polyline points="18 15 12 9 6 15"/></svg>
+            Close Breakdown
+          </button>
+
+        </div><!-- end #tTopSection -->
+
+        <!-- All action buttons -->
+        <div id="timeoutActions" style="margin-top:auto;">
+
+          <!-- Primary action -->
+          <div class="victory-btns">
+            <button class="share-btn" id="shareTimeoutBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+              Share Result
+            </button>
+            <button class="share-btn" id="inviteFriendTimeoutBtn" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+              Invite Friend
+            </button>
+          </div>
+
+          <!-- Secondary actions -->
+          <div class="postgame-actions">
+            <a href="../../follow-the-pattern-game-2.html" class="action-btn action-home">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              View Leaderboard
+            </a>
+            <a href="../../index.html" class="action-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              Back to Home
+            </a>
+          </div>
+
+          <!-- Other games -->
+          <div style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px;">
+            <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);font-weight:600;margin-bottom:6px;">Play Other Games</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+              <a href="../../complete-the-image-game-1.html" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(74,222,128,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#4ade80;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">1</span> Complete the Image</a>
+              <a href="../../hit-the-target-game-3.html" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(244,114,182,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#f472b6;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">3</span> Hit the Target</a>
+              <a href="../../spot-the-pair-game-4.html" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(250,204,21,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#facc15;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">4</span> Spot the Pair</a>
+              <a href="../../next-in-sequence-game-5.html" style="display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 6px;border-radius:7px;border:1px solid rgba(167,139,250,0.3);background:var(--surface2);font-size:11px;font-weight:600;text-decoration:none;color:#a78bfa;"><span style="font-family:'Bebas Neue',sans-serif;font-size:15px;">5</span> Next in Sequence</a>
+            </div>
+          </div>
+
+        </div><!-- end #timeoutActions -->
+
+      </div><!-- end .modal-body -->
+
+      <!-- AD SLOT — always visible, pinned to bottom -->
+      <div class="ad-slot" style="margin:0 16px 14px;flex-shrink:0;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <span class="ad-slot-label">Clickzle Games</span>
+        <span class="ad-slot-size">300 &times; 120</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ PREGAME HELP MODAL ═══ -->
+  <div class="modal-overlay" id="pregameHelpModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">HOW TO PLAY</div>
+        <button class="modal-close" data-close="pregameHelpModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-body">
+        <div class="help-rules-block">
+          <div class="help-rule">
+            <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <div class="help-text"><h4>WATCH the tiles flash</h4><p>The grid dims and tiles light up one at a time. Each tile plays a unique musical tone. Watch carefully and memorise the sequence.</p></div>
+          </div>
+          <div class="help-rule">
+            <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg></div>
+            <div class="help-text"><h4>YOUR TURN — tap them back</h4><p>When the badge says YOUR TURN, tap the tiles in the exact order they flashed. Correct tiles glow green.</p></div>
+          </div>
+          <div class="help-rule">
+            <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div>
+            <div class="help-text"><h4>Sequences grow longer</h4><p>Each completed sequence adds one more tile. A large <strong>SEQUENCE BONUS</strong> score pops on screen showing exactly what you earned. A wrong tile ends the sequence and costs you those points.</p></div>
+          </div>
+          <div class="help-rule">
+            <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="help-text"><h4>5 rounds, 1 minute each</h4><p>A 3-2-1-GO countdown fires before each round. Complete as many sequences as possible in each minute. Score accumulates across all five rounds.</p></div>
+          </div>
+        </div>
+        <div class="bonus-section">
+          <div class="bonus-title">Bonus Points</div>
+          <div class="bonus-grid" style="grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;">
+            <div class="bonus-card"><div class="bonus-pts">+500</div><div class="bonus-name">Perfect Game</div><div class="bonus-desc">Zero errors all session</div></div>
+            <div class="bonus-card"><div class="bonus-pts">+300</div><div class="bonus-name">Combo Master</div><div class="bonus-desc">15+ tiles in a row</div></div>
+            <div class="bonus-card"><div class="bonus-pts">+150</div><div class="bonus-name">Combo Great</div><div class="bonus-desc">8+ tiles in a row</div></div>
+            <div class="bonus-card"><div class="bonus-pts">+300</div><div class="bonus-name">Memory Master</div><div class="bonus-desc">Reach sequence 12+</div></div>
+            <div class="bonus-card"><div class="bonus-pts">+150</div><div class="bonus-name">Memory Great</div><div class="bonus-desc">Reach sequence 8+</div></div>
+            <div class="bonus-card"><div class="bonus-pts">+75</div><div class="bonus-name">Memory Good</div><div class="bonus-desc">Reach sequence 5+</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pregame-modal-foot">
+        <label class="dont-show-label">
+          <input type="checkbox" id="dontShowHtp">
+          <span>Don&rsquo;t show this again</span>
+        </label>
+        <button class="pregame-play-btn" id="pregamePlayBtn">
+          Got it &mdash; Start countdown
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ HELP MODAL ═══ -->
+  <div class="modal-overlay" id="helpModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">HOW TO PLAY</div>
+        <button class="modal-close" data-close="helpModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-body">
+        <div class="help-rules-block">
+          <div class="help-rule">
+            <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <div class="help-text"><h4>WATCH the tiles flash</h4><p>Grid dims. Tiles light up one at a time in sequence, each with a unique musical tone. Memorise the order.</p></div>
+          </div>
+          <div class="help-rule">
+            <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg></div>
+            <div class="help-text"><h4>YOUR TURN — tap them back</h4><p>Badge turns green. Tap tiles in the exact order. Correct = green flash. Wrong = red flash and sequence resets.</p></div>
+          </div>
+          <div class="help-rule">
+            <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div>
+            <div class="help-text"><h4>Sequences grow longer</h4><p>Each completion adds one more tile. Combo multiplier builds without errors — breaking it feels painful.</p></div>
+          </div>
+          <div class="help-rule">
+            <div class="help-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="help-text"><h4>5 rounds, 1 minute each</h4><p>Five rounds, one minute each. Same daily chellenge for every player worldwide. Score accumulates across all rounds. Bonus points for perfect rounds and long combos.</p></div>
+          </div>
+        </div>
+        <div class="bonus-section">
+          <div class="bonus-title">Bonus Points</div>
+          <div class="bonus-grid" style="grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;">
+            <div class="bonus-card"><div class="bonus-pts">+500</div><div class="bonus-name">Perfect Game</div><div class="bonus-desc">Zero errors all session</div></div>
+            <div class="bonus-card"><div class="bonus-pts">+300</div><div class="bonus-name">Combo Master</div><div class="bonus-desc">15+ tiles in a row</div></div>
+            <div class="bonus-card"><div class="bonus-pts">+150</div><div class="bonus-name">Combo Great</div><div class="bonus-desc">8+ tiles in a row</div></div>
+            <div class="bonus-card"><div class="bonus-pts">+300</div><div class="bonus-name">Memory Master</div><div class="bonus-desc">Reach sequence 12+</div></div>
+            <div class="bonus-card"><div class="bonus-pts">+150</div><div class="bonus-name">Memory Great</div><div class="bonus-desc">Reach sequence 8+</div></div>
+            <div class="bonus-card"><div class="bonus-pts">+75</div><div class="bonus-name">Memory Good</div><div class="bonus-desc">Reach sequence 5+</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STATS MODAL ═══ -->
+  <div class="modal-overlay" id="statsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">YOUR STATS</div>
+        <button class="modal-close" data-close="statsModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-body" style="justify-content:space-between;padding:24px 20px;gap:20px;">
+        <div>
+          <div class="stats-section-label">Overall</div>
+          <div class="stats-big-grid">
+            <div class="stat-big-card"><div class="stat-big-num" id="statPlayed">0</div><div class="stat-big-lbl">Played</div></div>
+            <div class="stat-big-card"><div class="stat-big-num" id="statStreak">0</div><div class="stat-big-lbl">Day Streak</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="stats-section-label">Personal Bests</div>
+          <div class="stats-best-grid">
+            <div class="stat-best-card"><div class="stat-best-lbl">Best Score</div><div class="stat-best-val" id="statBestScore">&mdash;</div></div>
+            <div class="stat-best-card"><div class="stat-best-lbl">Most Seqs</div><div class="stat-best-val" id="statBestSeq">&mdash;</div></div>
+            <div class="stat-best-card"><div class="stat-best-lbl">Longest Seq</div><div class="stat-best-val" id="statBestLongest">&mdash;</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="stats-section-label" style="margin-bottom:10px;">Last 7 Days</div>
+          <div class="streak-bar" id="streakBar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SETTINGS MODAL ═══ -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">SETTINGS</div>
+        <button class="modal-close" data-close="settingsModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-row">
+          <div><div>Sound Effects</div><div class="setting-desc">Tile tones and game sounds</div></div>
+          <button class="toggle on" id="soundToggle"></button>
+        </div>
+        <div class="setting-row">
+          <div><div>Light Mode</div><div class="setting-desc">Switch to light theme</div></div>
+          <button class="toggle" id="lightModeToggle"></button>
+        </div>
+        <div class="setting-row" style="border-bottom:none;">
+          <div style="font-size:12px;color:var(--text3);">Clickzle &middot; Follow the Pattern &middot; v1.0<br>clickzle.games</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CATEGORIES / ALL GAMES MODAL ═══ -->
+  <div class="modal-overlay" id="categoriesModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">ALL GAMES</div>
+        <button class="modal-close" data-close="categoriesModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-body">
+        <div class="cat-item" onclick="location.href='../../complete-the-image-game-1.html'">
+          <div class="cat-icon" style="background:rgba(74,222,128,0.15);color:#4ade80;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>
+          </div>
+          <div class="cat-info"><div class="cat-name">Complete the Image</div><div class="cat-desc">Find the one intact image among six decoys</div></div>
+        </div>
+        <div class="cat-item active">
+          <div class="cat-icon" style="background:var(--accent-dim);color:var(--accent);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+          </div>
+          <div class="cat-info"><div class="cat-name">Follow the Pattern</div><div class="cat-desc">Memorise tile sequences and tap them back</div></div>
+          <div class="cat-playing">Playing</div>
+        </div>
+        <div class="cat-item" onclick="location.href='../../hit-the-target-game-3.html'">
+          <div class="cat-icon" style="background:rgba(244,114,182,0.15);color:#f472b6;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <div class="cat-info"><div class="cat-name">Hit the Target</div><div class="cat-desc">Tap the target tile the instant it appears</div></div>
+        </div>
+        <div class="cat-item" onclick="location.href='../../spot-the-pair-game-4.html'">
+          <div class="cat-icon" style="background:rgba(250,204,21,0.15);color:#facc15;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="9" height="9" rx="1"/><rect x="13" y="3" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
+          </div>
+          <div class="cat-info"><div class="cat-name">Spot the Pair</div><div class="cat-desc">Find matching pairs before time runs out</div></div>
+        </div>
+        <div class="cat-item" onclick="location.href='../../next-in-sequence-game-5.html'">
+          <div class="cat-icon" style="background:rgba(167,139,250,0.15);color:#a78bfa;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 19 12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </div>
+          <div class="cat-info"><div class="cat-name">Next in Sequence</div><div class="cat-desc">Predict the next item in every sequence</div></div>
+        </div>
+        <div class="cat-item" onclick="location.href='../../leaderboard.html'">
+          <div class="cat-icon" style="background:rgba(251,146,60,0.15);color:#fb923c;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div class="cat-info"><div class="cat-name">Leaderboard</div><div class="cat-desc">See today's top scores and rankings</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SHARE MODAL ═══ -->
+  <div class="modal-overlay" id="shareModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">SHARE</div>
+        <button class="modal-close" data-close="shareModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-body">
+        <div class="share-preview" id="sharePreview"></div>
+        <div class="share-platforms">
+          <button class="platform-btn x-btn" id="shareX">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.255 5.621 5.91-5.621zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Share on X / Twitter
+          </button>
+          <button class="platform-btn wa-btn" id="shareWhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Share on WhatsApp
+          </button>
+          <button class="platform-btn fb-btn" id="shareFacebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Share on Facebook
+          </button>
+          <button class="platform-btn copy-btn" id="shareCopy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy to Clipboard
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /#app -->
+
+<script>
+
+// ═══════════════════════════════════════════════════════
+// CONSTANTS
+// ═══════════════════════════════════════════════════════
+const COLS       = 4;
+const ROWS       = 5;
+const TOTAL_TILES = COLS * ROWS; // 20
+const ROUND_MS    = 60000;  // 1 minute per round
+const TOTAL_ROUNDS = 5;
+const WARNING_MS   = 15000;  // 15s warning
+const CRITICAL_MS  = 8000;   // 8s critical
+const PRESSURE_MS  = 8000;
+
+// Round configuration — labels and taglines
+const ROUND_CONFIG = {
+  1: { label: 'Warm Up',     tagline: 'Get your memory going' },
+  2: { label: 'Eyes Open',   tagline: 'Focus is everything' },
+  3: { label: 'Stay Sharp',  tagline: 'Sequences are growing' },
+  4: { label: "Don't Slip",  tagline: 'One mistake costs it all' },
+  5: { label: 'Final Test',  tagline: 'Everything on the line' },
+};
+
+// Pentatonic major scale across 20 tiles — creates melodic sequences
+// Each tile has a unique musical pitch
+const TILE_TONES = [
+  261, 294, 329, 392, 440,   // C4 D4 E4 G4 A4
+  523, 587, 659, 784, 880,   // C5 D5 E5 G5 A5
+  1047, 1175, 1319, 1568, 1760, // C6 D6 E6 G6 A6
+  2093, 2349, 2637, 3136, 3520  // C7 D7 E7 G7 A7
+];
+
+// ═══════════════════════════════════════════════════════
+// GAME STATE
+// ═══════════════════════════════════════════════════════
+const gs = {
+  playerName:       '',
+  audioCtx:         null,
+  timerInterval:    null,
+  isActive:         false,
+  hasStarted:       false,
+  done:             false,
+  lastPressureBeep: -1,
+
+  // Round state
+  currentRound:      1,
+  roundScores:       [],
+  roundScoreStart:   0,
+  wrongsThisRound:   0,
+  perfectRounds:     0,
+  rafId:             null,
+  roundStartTs:      0,
+  lastSecLeft:       -1,
+  roundSeqs:         [],  // sequences completed per round
+  seqsAtRoundStart:  0,
+  tapsThisRound:     0,
+
+  // Pattern game state
+  dailySequence:    [],
+  seqPos:           0,
+  currentSeq:       [],
+  seqLength:        2,
+  inputPos:         0,
+  phase:            'idle',
+  tileEls:          [],
+
+  // Scoring
+  score:            0,
+  correctTiles:     0,
+  sequencesCompleted: 0,
+  longestSequence:  0,
+  noErrors:         true,
+  combo:            0,       // consecutive correct tiles without error
+  maxCombo:         0,
+  heartbeatActive:  false,
+  unlockedBonuses:  new Set(), // tracks which bonuses have been announced
+};
+
+const settings = (() => {
+  try { return JSON.parse(localStorage.getItem('clickzle_settings') || '{}'); }
+  catch(e) { return {}; }
+})();
+settings.sound     = settings.sound     !== false;
+settings.lightMode = settings.lightMode === true;
+
+// ═══════════════════════════════════════════════════════
+// SEEDED RANDOM
+// ═══════════════════════════════════════════════════════
+function getDailySeed() {
+  const now = new Date();
+  return now.getUTCFullYear() * 10000 + (now.getUTCMonth() + 1) * 100 + now.getUTCDate();
+}
+function seededRand(seed) {
+  let s = seed;
+  return () => { s = (s * 1664525 + 1013904223) & 0xffffffff; return (s >>> 0) / 0xffffffff; };
+}
+function getPuzzleNumber() {
+  const epoch = new Date('2026-01-01T00:00:00Z');
+  return Math.floor((Date.now() - epoch.getTime()) / 86400000) + 1;
+}
+
+// ═══════════════════════════════════════════════════════
+// AUDIO
+// ═══════════════════════════════════════════════════════
+function initAudio() {
+  if (!gs.audioCtx) gs.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+}
+function playTone(freq, dur, vol = 0.25, type = 'sine', delay = 0) {
+  if (!settings.sound || !gs.audioCtx) return;
+  try {
+    const osc  = gs.audioCtx.createOscillator();
+    const gain = gs.audioCtx.createGain();
+    osc.connect(gain); gain.connect(gs.audioCtx.destination);
+    osc.type = type; osc.frequency.value = freq;
+    const t = gs.audioCtx.currentTime + delay / 1000;
+    gain.gain.setValueAtTime(vol, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + dur / 1000);
+    osc.start(t); osc.stop(t + dur / 1000);
+  } catch(e) {}
+}
+
+// Each tile plays its unique pentatonic tone
+// Octave layering: seq 1-4 = base, 5-8 = +upper octave, 9+ = richer harmony
+function playTileTone(tileIdx, loud = false) {
+  const freq = TILE_TONES[tileIdx];
+  const vol  = loud ? 0.35 : 0.22;
+  const len  = gs.seqLength || 2;
+  playTone(freq, 200, vol, 'sine');
+  playTone(freq * 2, 120, vol * 0.18, 'sine', 20);
+  if (len >= 5) playTone(freq * 3, 90, vol * 0.12, 'sine', 35);
+  if (len >= 9) playTone(freq * 4, 70, vol * 0.08, 'sine', 50);
+}
+
+// Correct tap: warm affirming tone
+function playCorrect(tileIdx) {
+  playTileTone(tileIdx, true);
+}
+
+// Wrong tap: melody collapse — descending wah-wah
+function playWrong() {
+  // Descending wah effect — more psychologically impactful than static noise
+  [320, 240, 180, 130].forEach((f, i) =>
+    playTone(f, 120, 0.28 - i * 0.04, 'sawtooth', i * 70)
+  );
+}
+
+// Bonus unlock fanfare — ascending arpeggio, feels like collecting rings
+function playBonusUnlock(tier) {
+  if (!settings.sound || !gs.audioCtx) return;
+  // tier 1 = small (+75/+150), tier 2 = big (+300/+500)
+  if (tier === 2) {
+    [523,659,784,1046,1318,1568].forEach((f,i) => playTone(f, 180, 0.28, 'sine', i * 55));
+    setTimeout(() => { playTone(2093, 400, 0.18, 'sine'); playTone(1760, 350, 0.12, 'sine', 60); }, 360);
+  } else {
+    [523,659,784,1046,1318].forEach((f,i) => playTone(f, 160, 0.24, 'sine', i * 50));
+  }
+}
+
+// Heartbeat tick for final 10 seconds
+function playHeartbeat() {
+  playTone(80, 60, 0.3, 'sine');
+  setTimeout(() => playTone(80, 50, 0.22, 'sine'), 180);
+}
+
+// Sequence complete: rising chord celebration
+function playSequenceComplete(length) {
+  const base = 400 + length * 40;
+  [base, base * 1.25, base * 1.5, base * 2].forEach((f, i) =>
+    playTone(f, 220, 0.28, 'sine', i * 55)
+  );
+  playTone(base * 2.5, 350, 0.18, 'sine', 260);
+}
+
+// Victory: full cinematic fanfare
+function playVictory() {
+  [523, 659, 784, 1046, 1318].forEach((f, i) => playTone(f, 220, 0.30, 'sine', i * 80));
+  [659, 784, 988, 1318].forEach((f, i) => playTone(f, 180, 0.14, 'sine', 60 + i * 80));
+  setTimeout(() => { playTone(2093, 350, 0.12); playTone(1760, 400, 0.10, 'sine', 80); }, 480);
+}
+
+function playTimeout() { playTone(300, 600, 0.4, 'sawtooth'); playTone(180, 900, 0.35, 'sawtooth', 250); }
+
+function playCountdownTick(n) {
+  const freq = 280 + (5 - n) * 55;
+  const vol  = 0.28 + (5 - n) * 0.07;
+  playTone(freq, 90, vol, 'sine');
+  playTone(freq * 1.5, 55, vol * 0.4, 'sine', 60);
+}
+function playGoSound() {
+  [523, 659, 784].forEach((f, i) => playTone(f, 280, 0.32, 'sine', i * 30));
+  playTone(1046, 380, 0.22, 'sine', 80);
+}
+
+function playCountdownBeep(sec) {
+  if (!settings.sound || !gs.audioCtx) return;
+  const t = Math.max(0, (20 - sec) / 20);
+  const freq = 500 + t * 900;
+  const vol  = 0.28 + t * 0.42;
+  const wave = sec <= 5 ? 'square' : 'sine';
+  playTone(freq, 90, vol, wave);
+  if (sec <= 10) playTone(freq * 1.5, 60, vol * 0.6, 'square', 70);
+  if (sec <= 5)  playTone(freq * 2,   40, vol * 0.4, 'square', 140);
+}
+
+// ═══════════════════════════════════════════════════════
+// VOICE SYNTHESIS  (Web Speech API — same as G3/G4)
+// ═══════════════════════════════════════════════════════
+let voiceReady   = false;
+let chosenVoice  = null;
+let _keepaliveId = null;
+
+function initVoice() {
+  if (typeof speechSynthesis === 'undefined') return;
+  speechSynthesis.cancel();
+  voiceReady = true;
+  pickVoice();
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = pickVoice;
+  }
+  if (_keepaliveId) clearInterval(_keepaliveId);
+  _keepaliveId = setInterval(() => {
+    if (typeof speechSynthesis === 'undefined') return;
+    if (speechSynthesis.speaking) return;
+    speechSynthesis.pause();
+    speechSynthesis.resume();
+  }, 10000);
+  _warmupVoice();
+}
+
+function _warmupVoice() {
+  try {
+    const u  = new SpeechSynthesisUtterance(' ');
+    u.volume = 0; u.rate = 2;
+    if (chosenVoice) u.voice = chosenVoice;
+    speechSynthesis.speak(u);
+  } catch(e) {}
+}
+
+function pickVoice() {
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return;
+  const preferredVoices = ['Google UK English Male','Daniel','Google UK English Female','Google US English','Samantha','Karen','Victoria','Moira','Tessa','Fred'];
+  for (const name of preferredVoices) {
+    const v = voices.find(v => v.name === name);
+    if (v) { chosenVoice = v; return; }
+  }
+  const h = voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('female'));
+  if (h) { chosenVoice = h; return; }
+  chosenVoice = voices.find(v => v.lang.startsWith('en')) || null;
+}
+
+function speak(text, rate, pitch, cancelFirst, onEnd) {
+  if (!settings.sound || !voiceReady || typeof speechSynthesis === 'undefined') return;
+  if (cancelFirst === undefined) cancelFirst = true;
+  try {
+    if (cancelFirst) speechSynthesis.cancel();
+    const u  = new SpeechSynthesisUtterance(text);
+    u.rate   = rate  || 0.90;
+    u.pitch  = pitch || 1.15;
+    u.volume = 0.95;
+    if (chosenVoice) u.voice = chosenVoice;
+    if (onEnd) u.onend = onEnd;
+    speechSynthesis.speak(u);
+  } catch(e) { if (onEnd) onEnd(); }
+}
+
+// ═══════════════════════════════════════════════════════
+// BONUS UNLOCK — fires once when each threshold is first crossed
+// ═══════════════════════════════════════════════════════
+function showBonusUnlock(pts, name, desc, tier) {
+  const banner = document.getElementById('bonusBanner');
+  const ptsEl  = document.getElementById('bonusBannerPts');
+  const nameEl = document.getElementById('bonusBannerName');
+  const descEl = document.getElementById('bonusBannerDesc');
+
+  ptsEl.textContent  = '+' + pts;
+  nameEl.textContent = name;
+  descEl.textContent = desc;
+
+  // Colour by tier
+  ptsEl.style.color = tier === 2 ? 'var(--accent)' : 'var(--green)';
+  banner.style.borderColor = tier === 2 ? 'var(--accent)' : 'var(--green)';
+  banner.style.boxShadow   = tier === 2
+    ? '0 0 40px 8px rgba(96,165,250,0.4)'
+    : '0 0 30px 6px rgba(74,222,128,0.35)';
+
+  banner.classList.remove('show');
+  void banner.offsetWidth;
+  banner.classList.add('show');
+  setTimeout(() => banner.classList.remove('show'), 1900);
+
+  playBonusUnlock(tier);
+  spawnBonusParticles(tier);
+}
+
+function spawnBonusParticles(tier) {
+  const app    = document.getElementById('app');
+  const banner = document.getElementById('bonusBanner');
+  const br     = banner.getBoundingClientRect();
+  const ar     = app.getBoundingClientRect();
+  const cx = br.left + br.width / 2 - ar.left;
+  const cy = br.top  + br.height / 2 - ar.top;
+  const colors = tier === 2
+    ? ['#60a5fa','#93c5fd','#ffffff','#818cf8','#a5f3fc','#fbbf24']
+    : ['#4ade80','#86efac','#ffffff','#fbbf24','#6ee7b7'];
+  const count = tier === 2 ? 28 : 18;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const angle = (i / count) * Math.PI * 2 + Math.random() * 0.5;
+    const dist  = (tier === 2 ? 100 : 70) * (0.7 + Math.random() * 0.6);
+    const size  = 4 + Math.floor(Math.random() * 6);
+    p.style.cssText =
+      `left:${cx}px;top:${cy}px;width:${size}px;height:${size}px;` +
+      `border-radius:${Math.random()>0.5?'50%':'2px'};` +
+      `background:${colors[i%colors.length]};` +
+      `--dx:${Math.cos(angle)*dist}px;--dy:${Math.sin(angle)*dist}px;` +
+      `animation:particleFly ${0.6+Math.random()*0.5}s ease-out forwards;`;
+    app.appendChild(p);
+    setTimeout(() => p.remove(), 1200);
+  }
+}
+
+function checkBonusUnlocks() {
+  // Combo milestones
+  if (gs.maxCombo >= 8 && !gs.unlockedBonuses.has('combo_great')) {
+    gs.unlockedBonuses.add('combo_great');
+    showBonusUnlock(150, 'COMBO GREAT', '8 tiles in a row!', 1);
+  }
+  if (gs.maxCombo >= 15 && !gs.unlockedBonuses.has('combo_master')) {
+    gs.unlockedBonuses.add('combo_master');
+    showBonusUnlock(300, 'COMBO MASTER', '15 tiles in a row!', 2);
+  }
+  // Memory milestones — checked after sequenceComplete updates longestSequence
+  if (gs.longestSequence >= 5 && !gs.unlockedBonuses.has('mem_good')) {
+    gs.unlockedBonuses.add('mem_good');
+    showBonusUnlock(75, 'MEMORY GOOD', 'Sequence 5 reached!', 1);
+  }
+  if (gs.longestSequence >= 8 && !gs.unlockedBonuses.has('mem_great')) {
+    gs.unlockedBonuses.add('mem_great');
+    showBonusUnlock(150, 'MEMORY GREAT', 'Sequence 8 reached!', 1);
+  }
+  if (gs.longestSequence >= 12 && !gs.unlockedBonuses.has('mem_master')) {
+    gs.unlockedBonuses.add('mem_master');
+    showBonusUnlock(300, 'MEMORY MASTER', 'Sequence 12 reached!', 2);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// PHASE OVERLAY — big full-screen WATCH / YOUR TURN flash
+// ═══════════════════════════════════════════════════════
+function showPhaseOverlay(phase, sub, duration, cb) {
+  const overlay = document.getElementById('phaseOverlay');
+  const main    = document.getElementById('phaseOverlayMain');
+  const subEl   = document.getElementById('phaseOverlaySub');
+  main.textContent = phase;
+  subEl.textContent = sub;
+  main.className = 'phase-overlay-main';
+  void main.offsetWidth; // reflow to restart animation
+  main.classList.add(phase === 'WATCH' ? 'watch' : 'input');
+  main.style.animation = 'none';
+  void main.offsetWidth;
+  main.style.animation = 'cdPop 0.22s cubic-bezier(0.22,1.8,0.36,1) forwards';
+  overlay.classList.remove('fadeout');
+  overlay.classList.add('show');
+  setTimeout(() => {
+    overlay.classList.add('fadeout');
+    setTimeout(() => { overlay.classList.remove('show','fadeout'); if (cb) cb(); }, 180);
+  }, duration);
+}
+
+// ═══════════════════════════════════════════════════════
+// PRE-GAME COUNTDOWN
+// ═══════════════════════════════════════════════════════
+function runCountdown() {
+  const overlay = document.getElementById('countdownOverlay');
+  const numEl   = document.getElementById('countdownNum');
+  overlay.classList.remove('hidden');
+  initAudio();
+  const steps = [3, 2, 1, 'GO'];
+  let i = 0;
+  function showStep() {
+    const val = steps[i];
+    numEl.classList.remove('exit', 'go');
+    void numEl.offsetWidth;
+    numEl.textContent = val;
+    if (val === 'GO') { numEl.classList.add('go'); playGoSound(); }
+    else { playCountdownTick(val); }
+    i++;
+    if (i < steps.length) {
+      setTimeout(() => { numEl.classList.add('exit'); setTimeout(showStep, 220); }, 780);
+    } else {
+      setTimeout(() => {
+        numEl.classList.add('exit');
+        setTimeout(() => {
+          overlay.classList.add('hidden');
+          gs.hasStarted = true;
+          gs.isActive   = true;
+          startTimer();
+          startNextSequence();
+        }, 200);
+      }, 600);
+    }
+  }
+  showStep();
+}
+
+// Soft difficulty ramp — let players stabilise at certain lengths
+// Instead of strict +1, repeat some lengths before escalating
+const SEQ_RAMP = [2,3,4,5,6,7,8,8,9,9,10,10,11,11,12,12,13,14,15,16,17,18,19,20];
+function nextSeqLength(current) {
+  const idx = SEQ_RAMP.indexOf(current);
+  if (idx === -1 || idx >= SEQ_RAMP.length - 1) return current + 1;
+  return SEQ_RAMP[idx + 1];
+}
+
+// ═══════════════════════════════════════════════════════
+// INIT GAME — build grid, generate daily sequence
+// ═══════════════════════════════════════════════════════
+function initGame() {
+  const rand = seededRand(getDailySeed() + 200); // +200 offsets from game 1 seed
+
+  // Generate a long seeded sequence of tile indices (enough for a full game)
+  gs.dailySequence = [];
+  for (let i = 0; i < 500; i++) {
+    gs.dailySequence.push(Math.floor(rand() * TOTAL_TILES));
+  }
+
+  gs.seqPos               = 0;
+  gs.seqLength             = SEQ_RAMP[0]; // start at 2
+  gs.inputPos              = 0;
+  gs.phase                 = 'idle';
+  gs.score                 = 0;
+  gs.correctTiles          = 0;
+  gs.sequencesCompleted    = 0;
+  gs.longestSequence       = 0;
+  gs.noErrors              = true;
+  gs.combo                 = 0;
+  gs.maxCombo              = 0;
+  gs.unlockedBonuses       = new Set();
+  gs.heartbeatActive       = false;
+  gs.isActive              = false;
+  gs.hasStarted            = false;
+  gs.done                  = false;
+  gs.lastPressureBeep      = -1;
+  gs.currentRound          = 1;
+  gs.roundScores           = [];
+  gs.roundScoreStart       = 0;
+  gs.wrongsThisRound       = 0;
+  gs.tapsThisRound         = 0;
+  gs.perfectRounds         = 0;
+  gs.roundSeqs             = [];
+  gs.seqsAtRoundStart      = 0;
+
+  createGrid();
+  updateHUD();
+  setPhaseBadge('ready');
+  document.getElementById('seqLengthDisplay').textContent = gs.seqLength;
+  document.getElementById('scoreLiveDisplay').textContent = '0';
+  document.getElementById('seqDisplay').textContent       = '0';
+  const combEl = document.getElementById('comboDisplay');
+  if (combEl) { combEl.textContent = '×1'; combEl.style.color = 'var(--text3)'; }
+  document.getElementById('gameScreen').classList.add('active');
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('progressBar').style.transition = '';
+  document.getElementById('progressBar').className = '';
+  document.getElementById('app').classList.remove('time-critical');
+  document.getElementById('app').classList.remove('heartbeat');
+  document.getElementById('gameGrid').classList.remove('watching');
+}
+
+// ═══════════════════════════════════════════════════════
+// CREATE GRID
+// ═══════════════════════════════════════════════════════
+function createGrid() {
+  const grid = document.getElementById('gameGrid');
+  grid.innerHTML = '';
+  gs.tileEls = [];
+  for (let i = 0; i < TOTAL_TILES; i++) {
+    const tile  = document.createElement('div');
+    tile.className = 'tile watch-phase';
+    tile.dataset.idx = i;
+    const inner = document.createElement('div');
+    inner.className = 'tile-inner';
+    const num = document.createElement('div');
+    num.className = 'tile-num';
+    num.textContent = i + 1;
+    inner.appendChild(num);
+    tile.appendChild(inner);
+    tile.addEventListener('pointerdown', (e) => { e.preventDefault(); handleTileClick(i); });
+    grid.appendChild(tile);
+    gs.tileEls.push(tile);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// SEQUENCE LOGIC
+// ═══════════════════════════════════════════════════════
+function buildCurrentSeq() {
+  // Pull next seqLength tiles from the daily sequence
+  gs.currentSeq = [];
+  for (let i = 0; i < gs.seqLength; i++) {
+    const pos = (gs.seqPos + i) % gs.dailySequence.length;
+    gs.currentSeq.push(gs.dailySequence[pos]);
+  }
+}
+
+// ── PERFORMANCE-DRIVEN ACCELERATION ────────────────────────────────────────
+// Mirrors G3 Hit the Target — combo earned through accuracy unlocks speed.
+// Wrong tap resets combo to 0 → instant loss of acceleration.
+// combo 1 (default): 900ms pause, base flash speed
+// combo 2 (5+  streak): 600ms pause, 10% faster flashes
+// combo 3 (10+ streak): 400ms pause, 20% faster flashes
+// combo 4 (15+ streak): 300ms pause, 30% faster flashes
+// combo 5 (20+ streak): 200ms pause, 40% faster flashes — elite pace
+function getAdaptivePause() {
+  const combo = Math.min(5, 1 + Math.floor(gs.combo / 5));
+  if (combo >= 5) return 200;
+  if (combo >= 4) return 300;
+  if (combo >= 3) return 400;
+  if (combo >= 2) return 600;
+  return 900;
+}
+function getAdaptiveFlashScale() {
+  const combo = Math.min(5, 1 + Math.floor(gs.combo / 5));
+  if (combo >= 5) return 0.60;
+  if (combo >= 4) return 0.70;
+  if (combo >= 3) return 0.80;
+  if (combo >= 2) return 0.90;
+  return 1.0;
+}
+
+function startNextSequence() {
+  if (!gs.isActive || gs.done) return;
+  buildCurrentSeq();
+  gs.inputPos = 0;
+  gs.phase = 'watch';
+  setPhaseBadge('watch');
+  document.getElementById('gameGrid').classList.add('watching');
+  setAllTilesPhase('watch-phase');
+
+  // Show sequence with delays
+  const flashScale    = getAdaptiveFlashScale();
+  const flashDuration = Math.max(130, Math.round((380 - gs.seqLength * 14) * flashScale));
+  const flashGap      = Math.max(35,  Math.round((148 - gs.seqLength * 7)  * flashScale));
+
+  const delay = 350; // short pause before first flash
+
+  gs.currentSeq.forEach((tileIdx, i) => {
+    setTimeout(() => {
+      if (!gs.isActive) return;
+      flashTileActive(tileIdx, flashDuration);
+      playTileTone(tileIdx);
+    }, delay + i * (flashDuration + flashGap));
+  });
+
+  // Open input the moment the last tile STARTS flashing — no dead time
+  const lastTileStart = delay + (gs.currentSeq.length - 1) * (flashDuration + flashGap);
+  setTimeout(() => {
+    if (!gs.isActive || gs.phase !== 'watch') return;
+    gs.phase = 'input';
+    setPhaseBadge('input');
+    document.getElementById('gameGrid').classList.remove('watching');
+    setAllTilesPhase('input-phase');
+  }, lastTileStart + flashDuration);
+}
+
+function flashTileActive(tileIdx, duration) {
+  const tile = gs.tileEls[tileIdx];
+  if (!tile) return;
+  tile.classList.add('tile-active');
+  // Add ripple
+  const ripple = document.createElement('div');
+  ripple.className = 'tile-ripple';
+  tile.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 600);
+  setTimeout(() => tile.classList.remove('tile-active'), duration);
+}
+
+function setAllTilesPhase(phaseClass) {
+  gs.tileEls.forEach(t => {
+    t.classList.remove('watch-phase', 'input-phase');
+    t.classList.add(phaseClass);
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// TILE CLICK
+// ═══════════════════════════════════════════════════════
+function handleTileClick(idx) {
+  if (gs.done || gs.phase !== 'input' || !gs.isActive) return;
+
+  initAudio();
+  gs.tapsThisRound++;
+  const expected = gs.currentSeq[gs.inputPos];
+
+  if (idx === expected) {
+    // ── CORRECT TAP ────────────────────────────────────────
+    const tile = gs.tileEls[idx];
+
+    // Haptic — short confirming pulse
+    if (navigator.vibrate) navigator.vibrate(18);
+
+    // Physical press animation
+    tile.classList.add('tile-press');
+    setTimeout(() => tile.classList.remove('tile-press'), 100);
+
+    tile.classList.remove('tile-wrong');
+    void tile.offsetWidth;
+    tile.classList.add('tile-correct');
+    setTimeout(() => tile.classList.remove('tile-correct'), 350);
+
+    playCorrect(idx);
+
+    // Combo tracking
+    gs.combo++;
+    if (gs.combo > gs.maxCombo) { gs.maxCombo = gs.combo; checkBonusUnlocks(); }
+    updateComboDisplay();
+
+    // Combo glow on tile
+    tile.classList.remove('combo-1','combo-2','combo-3');
+    if (gs.combo >= 6) tile.classList.add('combo-3');
+    else if (gs.combo >= 3) tile.classList.add('combo-2');
+    else if (gs.combo >= 1) tile.classList.add('combo-1');
+    setTimeout(() => tile.classList.remove('combo-1','combo-2','combo-3'), 500);
+
+    gs.correctTiles++;
+    gs.inputPos++;
+
+    // Score = 10 × combo multiplier
+    const comboMult = Math.min(3, 1 + Math.floor(gs.combo / 5));
+    const pts = 10 * comboMult;
+    updateScore(pts);
+
+    // Score float — fixed position over tile centre
+    const floatEl = document.createElement('div');
+    floatEl.className = 'score-float';
+    floatEl.textContent = '+' + pts;
+    const tRect = tile.getBoundingClientRect();
+    floatEl.style.left = (tRect.left + tRect.width / 2) + 'px';
+    floatEl.style.top  = (tRect.top  + tRect.height / 2) + 'px';
+    document.body.appendChild(floatEl);
+    setTimeout(() => floatEl.remove(), 950);
+
+    // Ripple
+    const ripple = document.createElement('div');
+    ripple.className = 'tile-ripple';
+    ripple.style.background = 'radial-gradient(circle at center, rgba(74,222,128,0.4) 0%, transparent 70%)';
+    tile.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+
+    // Afterglow
+    setTimeout(() => {
+      tile.classList.add('tile-afterglow');
+      setTimeout(() => tile.classList.remove('tile-afterglow'), 400);
+    }, 50);
+
+    if (gs.inputPos === gs.currentSeq.length) {
+      sequenceComplete();
+    }
+  } else {
+    // ── WRONG TAP ────────────────────────────────────────
+    const isNearMiss = gs.inputPos === gs.currentSeq.length - 1;
+    const tile = gs.tileEls[idx];
+    tile.classList.remove('tile-correct');
+    void tile.offsetWidth;
+    tile.classList.add('tile-wrong');
+    setTimeout(() => tile.classList.remove('tile-wrong'), 400);
+    playWrong();
+    if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
+    gs.noErrors = false;
+    gs.wrongsThisRound++;
+
+    // Combo reset
+    gs.combo = 0;
+    updateComboDisplay();
+
+    // Red vignette
+    const app = document.getElementById('app');
+    app.classList.remove('wrong-flash');
+    void app.offsetWidth;
+    app.classList.add('wrong-flash');
+    setTimeout(() => app.classList.remove('wrong-flash'), 500);
+
+    // Near-miss SO CLOSE
+    if (isNearMiss) {
+      const msg = document.getElementById('soCloseMsg');
+      msg.classList.remove('show');
+      void msg.offsetWidth;
+      msg.classList.add('show');
+      setTimeout(() => msg.classList.remove('show'), 1200);
+    }
+
+    gs.seqPos += gs.seqLength;
+    gs.seqLength = SEQ_RAMP[0]; // always reset to 2
+    gs.inputPos = 0;
+    gs.phase = 'idle';
+    setPhaseBadge('ready');
+    setAllTilesPhase('watch-phase');
+
+    setTimeout(() => {
+      if (gs.isActive && !gs.done) {
+        document.getElementById('seqLengthDisplay').textContent = gs.seqLength;
+        const el = document.getElementById('seqLengthDisplay');
+        el.classList.remove('bump');
+        void el.offsetWidth;
+        startNextSequence();
+      }
+    }, isNearMiss ? 1000 : 700);
+  }
+}
+
+function sequenceComplete() {
+  gs.phase = 'celebrate';
+  setPhaseBadge('celebrate');
+  gs.sequencesCompleted++;
+  if (gs.seqLength > gs.longestSequence) { gs.longestSequence = gs.seqLength; checkBonusUnlocks(); }
+
+  // Sequence bonus = length × 10 (bigger score spike)
+  const comboMult = Math.min(3, 1 + Math.floor(gs.combo / 5));
+  const bonus = gs.seqLength * 10 * comboMult;
+  updateScore(bonus);
+
+  playSequenceComplete(gs.seqLength);
+
+  // Grid pulse on sequence complete
+  const grid = document.getElementById('gameGrid');
+  grid.classList.remove('seq-pulse');
+  void grid.offsetWidth;
+  grid.classList.add('seq-pulse');
+  setTimeout(() => grid.classList.remove('seq-pulse'), 400);
+
+  // Sequence score popup
+  const seqPop = document.getElementById('seqScorePopup');
+  document.getElementById('seqPopPts').textContent = '+' + bonus;
+  seqPop.classList.remove('show');
+  void seqPop.offsetWidth;
+  seqPop.classList.add('show');
+  setTimeout(() => seqPop.classList.remove('show'), 1050);
+
+  // Cascade win animation
+  const ORDER = [10,11,6,7,14,15,9,12,5,8,13,16,2,3,17,18,1,4,19,0];
+  ORDER.forEach((tileIdx, i) => {
+    setTimeout(() => {
+      if (gs.tileEls[tileIdx]) {
+        gs.tileEls[tileIdx].classList.remove('tile-win');
+        void gs.tileEls[tileIdx].offsetWidth;
+        gs.tileEls[tileIdx].classList.add('tile-win');
+        setTimeout(() => gs.tileEls[tileIdx].classList.remove('tile-win'), 550);
+      }
+    }, i * 30);
+  });
+
+  // Soft ramp — use SEQ_RAMP not strict +1
+  gs.seqPos += gs.seqLength;
+  gs.seqLength = nextSeqLength(gs.seqLength);
+
+  // Update HUD
+  setTimeout(() => {
+    document.getElementById('seqDisplay').textContent = gs.sequencesCompleted;
+    const el = document.getElementById('seqLengthDisplay');
+    el.textContent = gs.seqLength;
+    el.classList.remove('bump');
+    void el.offsetWidth;
+    el.classList.add('bump');
+  }, 200);
+
+  const seqPause = getAdaptivePause();
+  setTimeout(() => {
+    if (gs.isActive && !gs.done) {
+      gs.phase = 'idle';
+      setAllTilesPhase('watch-phase');
+      startNextSequence();
+    }
+  }, seqPause);
+}
+
+function updateScore(pts) {
+  gs.score += pts;
+  const el = document.getElementById('scoreLiveDisplay');
+  el.textContent = gs.score.toLocaleString();
+  el.classList.remove('score-up');
+  void el.offsetWidth;
+  el.classList.add('score-up');
+  setTimeout(() => el.classList.remove('score-up'), 350);
+}
+
+function updateComboDisplay() {
+  const el = document.getElementById('comboDisplay');
+  if (!el) return;
+  const mult = Math.min(3, 1 + Math.floor(gs.combo / 5));
+  const speedCombo = Math.min(5, 1 + Math.floor(gs.combo / 5));
+  // Show speed indicator at combo 3+ so player knows they've unlocked acceleration
+  el.textContent = speedCombo >= 3 ? '×' + mult + ' FAST' : '×' + mult;
+  el.style.color = mult === 3 ? 'var(--accent)' : mult === 2 ? 'var(--green)' : 'var(--text3)';
+  if (mult > 1) {
+    el.classList.remove('score-up');
+    void el.offsetWidth;
+    el.classList.add('score-up');
+    setTimeout(() => el.classList.remove('score-up'), 350);
+  }
+}
+
+function setPhaseBadge(phase) {
+  const el = document.getElementById('phaseBadge');
+  el.className = 'phase-badge ' + phase;
+  el.textContent = phase === 'watch' ? 'WATCH' :
+                   phase === 'input' ? 'YOUR TURN' :
+                   phase === 'celebrate' ? 'SEQUENCE!' : 'Ready';
+  // Pop animation on change
+  el.style.animation = 'none';
+  void el.offsetWidth;
+  el.style.animation = 'badgePop 0.25s cubic-bezier(0.34,1.56,0.64,1) forwards';
+}
+
+// ═══════════════════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════════════════
+function gameLoop() {
+  if (gs.done || !gs.isActive) return;
+  const msLeft = Math.max(0, ROUND_MS - (performance.now() - gs.roundStartTs));
+  updateTimerDisplay(msLeft);
+  if (msLeft <= 0) { endRound(); return; }
+  gs.rafId = requestAnimationFrame(gameLoop);
+}
+
+function startTimer() {
+  gs.roundStartTs = performance.now();
+  gs.rafId = requestAnimationFrame(gameLoop);
+}
+
+function stopTimer() {
+  cancelAnimationFrame(gs.rafId);
+  gs.isActive = false;
+  document.getElementById('app').classList.remove('time-critical');
+  document.getElementById('app').classList.remove('heartbeat');
+  document.getElementById('app').classList.remove('time-panic');
+}
+
+function updateTimerDisplay(msLeft) {
+  const secs = Math.ceil(Math.max(0, msLeft) / 1000);
+  const el   = document.getElementById('timerDisplay');
+  const bar  = document.getElementById('progressBar');
+  if (secs !== gs.lastSecLeft) { gs.lastSecLeft = secs; el.textContent = secs; }
+  bar.style.width = (Math.max(0, msLeft) / ROUND_MS * 100) + '%';
+  const app = document.getElementById('app');
+  if (msLeft <= CRITICAL_MS) {
+    el.className = 'critical'; bar.className = 'critical';
+    app.classList.add('time-critical');
+  } else if (msLeft <= WARNING_MS) {
+    el.className = 'warning'; bar.className = 'warning';
+    app.classList.remove('time-critical');
+  } else {
+    el.className = ''; bar.className = '';
+    app.classList.remove('time-critical');
+  }
+}
+
+function updateHUD() {
+  updateTimerDisplay(ROUND_MS);
+}
+
+// ═══════════════════════════════════════════════════════
+// BONUSES
+// ═══════════════════════════════════════════════════════
+// Seeded "best today" — gives players a target to beat
+function getBestTodaySeq() {
+  const r = seededRand(getDailySeed() + 9999);
+  return Math.floor(r() * 6) + 12; // 12-17 — realistic top player target
+}
+
+function calcBonuses() {
+  const bonuses = [];
+  if (gs.noErrors) bonuses.push({ label: 'Perfect Game', pts: 500 });
+  if (gs.maxCombo >= 15) bonuses.push({ label: 'Combo Master', pts: 300 });
+  else if (gs.maxCombo >= 8) bonuses.push({ label: 'Combo Great', pts: 150 });
+  if (gs.longestSequence >= 12) bonuses.push({ label: 'Memory Master', pts: 300 });
+  else if (gs.longestSequence >= 8) bonuses.push({ label: 'Memory Great', pts: 150 });
+  else if (gs.longestSequence >= 5) bonuses.push({ label: 'Memory Good',  pts:  75 });
+  return bonuses;
+}
+
+// ═══════════════════════════════════════════════════════
+// ROUND MANAGEMENT
+// ═══════════════════════════════════════════════════════
+function updateRoundDots(round) {
+  document.getElementById('roundLabel') && (document.getElementById('roundLabel').textContent = 'ROUND ' + round + ' OF 5');
+  document.querySelectorAll('#roundDots .round-dot').forEach(d => {
+    const r = parseInt(d.dataset.r);
+    d.className = 'round-dot';
+    if (r < round)  d.classList.add('done');
+    if (r === round) d.classList.add('active');
+  });
+}
+
+function endRound() {
+  gs.isActive = false;
+  cancelAnimationFrame(gs.rafId);
+  gs.phase = 'idle';
+  setPhaseBadge('ready');
+  setAllTilesPhase('watch-phase');
+  stopTimer();
+
+  // Perfect round bonus
+  const seqsThisRound = gs.sequencesCompleted - gs.seqsAtRoundStart;
+  if (gs.tapsThisRound > 0 && gs.wrongsThisRound === 0 && seqsThisRound >= 2) {
+    gs.perfectRounds++;
+    gs.score += 50;
+    const pb = document.getElementById('bonusBanner');
+    const ptsEl  = document.getElementById('bonusBannerPts');
+    const nameEl = document.getElementById('bonusBannerName');
+    const descEl = document.getElementById('bonusBannerDesc');
+    if (pb && ptsEl && nameEl && descEl) {
+      ptsEl.textContent  = '+50';
+      nameEl.textContent = 'PERFECT ROUND';
+      descEl.textContent = 'Zero errors this round!';
+      ptsEl.style.color  = 'var(--green)';
+      pb.style.borderColor = 'var(--green)';
+      pb.classList.remove('show'); void pb.offsetWidth; pb.classList.add('show');
+      setTimeout(() => pb.classList.remove('show'), 1800);
+      speak('Perfect round', 0.82, 1.2, true);
+    }
+  }
+
+  gs.roundScores[gs.currentRound - 1] = gs.score - gs.roundScoreStart;
+  gs.roundSeqs[gs.currentRound - 1]  = gs.sequencesCompleted - gs.seqsAtRoundStart;
+
+  // Score-based round comment — varies by accuracy and sequences
+  // Perfect round already announced, skip comment for it
+  function getRoundComment() {
+    if (gs.tapsThisRound > 0 && gs.wrongsThisRound === 0 && seqsThisRound >= 2) return null;
+    const wrongsThisRound = gs.wrongsThisRound;
+    const seqScore = seqsThisRound;
+    // Too many errors relative to sequences
+    if (wrongsThisRound > seqScore * 2 + 1) {
+      const poor = ['Too many errors','Stay focused','Trust your memory','Watch more carefully'];
+      return poor[gs.currentRound % poor.length];
+    }
+    // Outstanding — 7+ sequences, clean
+    if (seqScore >= 7 && wrongsThisRound <= 1) {
+      const great = ['Outstanding round','Sharp memory','Excellent work','Impressive'];
+      return great[gs.currentRound % great.length];
+    }
+    // Good — 4+ sequences
+    if (seqScore >= 4) {
+      const good = ['Not bad','Well done','Solid work','Great effort'];
+      return good[gs.currentRound % good.length];
+    }
+    // Below average — 2–3 sequences
+    if (seqScore >= 2) {
+      const avg = ['Room to improve','Getting there','You can do better','Push harder'];
+      return avg[gs.currentRound % avg.length];
+    }
+    // Poor — 1 sequence
+    if (seqScore === 1) {
+      const bad = ['Try harder','Pick up the pace','That\'s not enough','Step it up'];
+      return bad[gs.currentRound % bad.length];
+    }
+    // Zero sequences
+    const zero = ['No sequences this round','Concentrate harder','Focus up','Stay in it'];
+    return zero[gs.currentRound % zero.length];
+  }
+
+  const isPerfect = gs.wrongsThisRound === 0 && seqsThisRound >= 4;
+  const comment   = getRoundComment();
+  const commentDelay = isPerfect ? 1200 : 100;
+
+  if (gs.currentRound < TOTAL_ROUNDS) {
+    // Speak comment, then show transition after a beat
+    setTimeout(() => {
+      if (comment) speak(comment, 0.88, 1.1, true);
+      setTimeout(() => {
+        gs.currentRound++;
+        showRoundTransition(gs.currentRound, comment);
+      }, comment ? 1400 : 600);
+    }, commentDelay);
+  } else {
+    setTimeout(() => { gs.done = true; showEndCard(); }, isPerfect ? 1900 : 800);
+  }
+}
+
+function showRoundTransition(round, prevComment) {
+  const overlay  = document.getElementById('roundOverlay');
+  const roNum    = document.getElementById('roNum');
+  const roCount  = document.getElementById('roCount');
+  const readyBar = document.getElementById('roReadyBar');
+  const dots     = document.querySelectorAll('#roDots .ro-dot');
+
+  roNum.textContent = round;
+  roNum.style.animation = 'none'; void roNum.offsetWidth;
+  roNum.style.animation = 'roNumIn 0.22s cubic-bezier(0.22,1.8,0.36,1) forwards';
+  document.getElementById('roTagline').textContent = prevComment || (ROUND_CONFIG[round] ? ROUND_CONFIG[round].tagline : '');
+  roCount.className = 'ro-count'; roCount.textContent = '';
+  readyBar.style.display = '';
+  readyBar.style.color = '#ffffff';
+  readyBar.style.border = '1px solid rgba(255,255,255,0.2)';
+  readyBar.textContent   = 'GET READY';
+  dots.forEach(d => d.classList.remove('active','done'));
+  overlay.classList.remove('hidden');
+
+  let countdownStarted = false;
+  function beginCountdown() {
+    if (countdownStarted) return;
+    countdownStarted = true;
+    runRoundCount(roCount, readyBar, dots, () => {
+      overlay.classList.add('hidden');
+      startRound();
+    });
+  }
+  // 700ms pause so round number animates in before voice fires
+  setTimeout(() => {
+    setTimeout(beginCountdown, 1200); // safety fallback always scheduled first
+    try { pickVoice(); } catch(e) {}
+    speak('Get ready', 0.78, 1.15, false, beginCountdown);
+  }, 700);
+}
+
+function runRoundCount(countEl, readyBar, dots, cb) {
+  const steps = [3, 2, 1, 'GO'];
+  let i = 0;
+  function step() {
+    const v = steps[i];
+    // Update dots (only 3 dots — map last 3 numbers)
+    const dotMap = {3:0, 2:1, 1:2};
+    dots.forEach(d => d.classList.remove('active','done'));
+    if (typeof v === 'number' && v <= 3) {
+      dots.forEach((d, di) => {
+        if (di < dotMap[v])      d.classList.add('done');
+        if (di === dotMap[v])    d.classList.add('active');
+      });
+    } else if (v === 'GO') {
+      dots.forEach(d => d.classList.add('done'));
+    }
+    countEl.classList.remove('exit', 'go'); void countEl.offsetWidth;
+    countEl.className   = v === 'GO' ? 'ro-count go' : 'ro-count';
+    countEl.textContent = v;
+    if (v === 'GO') {
+      readyBar.style.display = 'none';
+      speak('Go', 1.05, 1.2, true);
+      playGoSound();
+      setTimeout(cb, 500);
+    } else {
+      speak(String(v), 1.0, 1.15, true);
+      playCountdownTick(v);
+      i++;
+      setTimeout(() => { countEl.classList.add('exit'); setTimeout(step, 220); }, 780);
+    }
+  }
+  step();
+}
+
+function startRound() {
+  gs.isActive        = true;
+  gs.lastSecLeft     = -1;
+  gs.lastPressureBeep = -1;
+  gs.roundScoreStart = gs.score;
+  gs.wrongsThisRound    = 0;
+  gs.heartbeatActive    = false;
+  gs.seqsAtRoundStart   = gs.sequencesCompleted;
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('progressBar').className   = '';
+  document.getElementById('app').classList.remove('time-critical','heartbeat','time-panic','wrong-flash');
+  updateRoundDots(gs.currentRound);
+  speak('Round ' + gs.currentRound, 0.88, 1.1, true);
+  startTimer();
+  startNextSequence();
+}
+
+function showEndCard() {
+  playTimeout();
+  setAllTilesPhase('watch-phase');
+  setPhaseBadge('ready');
+
+  const bonuses  = calcBonuses();
+  const bonusPts = bonuses.reduce((s, b) => s + b.pts, 0);
+  const total    = gs.score + bonusPts;
+
+  const dd = String(new Date().getDate()).padStart(2,'0');
+  const mm = String(new Date().getMonth()+1).padStart(2,'0');
+  const yyyy = new Date().getFullYear();
+
+  // Score title
+  const TITLES = [
+    [35000,'MEMORY MASTER'],[20000,'OUTSTANDING'],[12000,'IMPRESSIVE'],
+    [6000,'SHARP MIND'],[3000,'GOOD MEMORY'],[1500,'GETTING THERE'],
+    [500,'WARMING UP'],[0,'KEEP TRYING']
+  ];
+  const title = TITLES.find(([t]) => total >= t)?.[1] || 'KEEP TRYING';
+
+  document.getElementById('tTitle').textContent     = title;
+  const DAYS2 = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const MONTHS2 = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const now2 = new Date();
+  const dateStr2 = DAYS2[now2.getUTCDay()] + ' ' + now2.getUTCDate() + ' ' + MONTHS2[now2.getUTCMonth()] + ' ' + now2.getUTCFullYear();
+  document.getElementById('tDate').textContent = 'Challenge #' + getPuzzleNumber() + ' \u00b7 ' + dateStr2;
+  document.getElementById('tSequences').textContent = gs.sequencesCompleted;
+  document.getElementById('tLongest').textContent   = gs.longestSequence;
+  document.getElementById('tCombo').textContent     = gs.maxCombo;
+  document.getElementById('tTiles').textContent     = gs.correctTiles;
+  document.getElementById('tScore').textContent     = total.toLocaleString();
+
+  // Round breakdown — 5-column scorecard grid
+  const bd = document.getElementById('roundBreakdown');
+  bd.innerHTML = '';
+  const grid = document.createElement('div');
+  grid.className = 'round-scorecard';
+  for (let r = 1; r <= TOTAL_ROUNDS; r++) {
+    const cfg = ROUND_CONFIG[r];
+    const cell = document.createElement('div');
+    cell.className = 'round-scorecard-cell';
+    cell.innerHTML =
+      '<div class="rc-num">R' + r + '</div>' +
+      '<div class="rc-label">' + cfg.label + '</div>' +
+      '<div class="rc-score">' + (gs.roundScores[r-1] || 0).toLocaleString() + '</div>';
+    grid.appendChild(cell);
+  }
+  bd.appendChild(grid);
+
+  // Bonus display
+  const bonusWrap = document.getElementById('tBonuses');
+  if (bonuses.length) {
+    bonusWrap.innerHTML = bonuses.map(b =>
+      '<div class="score-row big bonus-earned"><span class="score-label">' + b.label + '</span><span class="score-val" style="color:var(--accent)">+' + b.pts + '</span></div>'
+    ).join('');
+    bonusWrap.style.display = 'block';
+  } else {
+    bonusWrap.style.display = 'none';
+  }
+
+  // Share text — completion wording
+  document.getElementById('sharePreview').textContent = buildShareText();
+
+  updateStats(total);
+  openModal('timeoutModal');
+}
+
+// ═══════════════════════════════════════════════════════
+// VICTORY — only if player somehow fills all 5 min
+// (Most games end via timeout — this fires if they clear a massive sequence at exactly 0)
+// ═══════════════════════════════════════════════════════
+function showVictory() {
+  gs.done = true;
+  stopTimer();
+  playVictory();
+
+  const flash = document.getElementById('victoryFlash');
+  flash.classList.add('flash');
+  setTimeout(() => flash.classList.remove('flash'), 700);
+
+  const bonuses  = calcBonuses();
+  const bonusPts = bonuses.reduce((s, b) => s + b.pts, 0);
+  const base     = gs.score;
+  const total    = base + bonusPts;
+
+  const bestSeqTodayV = getBestTodaySeq();
+  document.getElementById('vSequences').textContent = gs.sequencesCompleted;
+  document.getElementById('vTiles').textContent     = gs.correctTiles;
+  document.getElementById('vLongest').textContent   = gs.longestSequence;
+  document.getElementById('vSubtotal').textContent  = base.toLocaleString();
+  document.getElementById('vScore').textContent     = total.toLocaleString();
+  document.getElementById('vRank').textContent      = '#—';
+  document.getElementById('vBestToday').textContent = 'Sequence ' + bestSeqTodayV;
+  document.getElementById('victoryDate').textContent =
+    'Challenge #' + getPuzzleNumber() + ' · ' +
+    new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+
+  const bonusWrap   = document.getElementById('vBonuses');
+  const subtotalRow = document.getElementById('vSubtotalRow');
+  const scoreLbl    = document.getElementById('vScoreLabel');
+  if (bonuses.length) {
+    if (subtotalRow) subtotalRow.style.display = '';
+    if (scoreLbl)    scoreLbl.textContent       = 'Total Score';
+    if (bonusWrap) {
+      bonusWrap.innerHTML = bonuses.map(b =>
+        `<div class="score-row big bonus-earned">
+          <span class="score-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            ${b.label}
+          </span>
+          <span class="score-val" style="color:var(--accent)">+${b.pts.toLocaleString()}</span>
+        </div>`
+      ).join('');
+      bonusWrap.style.display = 'block';
+    }
+  } else {
+    if (subtotalRow) subtotalRow.style.display = 'none';
+    if (scoreLbl)    scoreLbl.textContent       = 'Score';
+    if (bonusWrap)   bonusWrap.style.display    = 'none';
+  }
+
+  updateStats(total);
+  setTimeout(() => openModal('victoryModal'), 800);
+}
+
+// ═══════════════════════════════════════════════════════
+// PARTICLES
+// ═══════════════════════════════════════════════════════
+function spawnVictoryParticles() {
+  const app  = document.getElementById('app');
+  const grid = document.getElementById('gameGrid');
+  const gr   = grid.getBoundingClientRect();
+  const ar   = app.getBoundingClientRect();
+  const colors = ['#60a5fa','#93c5fd','#4ade80','#fbbf24','#ffffff','#818cf8','#a5f3fc'];
+
+  function burst(cx, cy, count, dist, delay) {
+    setTimeout(() => {
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4;
+        const d     = dist * (0.7 + Math.random() * 0.6);
+        const size  = 5 + Math.floor(Math.random() * 7);
+        p.style.cssText =
+          `left:${cx}px;top:${cy}px;` +
+          `width:${size}px;height:${size}px;border-radius:${Math.random()>0.5?'50%':'2px'};` +
+          `background:${colors[i % colors.length]};` +
+          `--dx:${Math.cos(angle)*d}px;--dy:${Math.sin(angle)*d}px;` +
+          `animation:particleFly ${0.6 + Math.random()*0.5}s ease-out forwards;`;
+        app.appendChild(p);
+        setTimeout(() => p.remove(), 1200);
+      }
+    }, delay);
+  }
+  const gx = gr.left - ar.left;
+  const gy = gr.top  - ar.top;
+  const gw = gr.width, gh = gr.height;
+  burst(gx + gw * 0.5, gy + gh * 0.5, 28, 120, 0);
+  burst(gx + gw * 0.2, gy + gh * 0.25, 14, 80, 120);
+  burst(gx + gw * 0.8, gy + gh * 0.25, 14, 80, 180);
+  burst(gx + gw * 0.2, gy + gh * 0.75, 14, 80, 240);
+  burst(gx + gw * 0.8, gy + gh * 0.75, 14, 80, 300);
+  burst(gx + gw * 0.5, gy + gh * 0.5, 36, 160, 420);
+}
+
+// ═══════════════════════════════════════════════════════
+// MODALS
+// ═══════════════════════════════════════════════════════
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+document.querySelectorAll('[data-close]').forEach(btn =>
+  btn.addEventListener('click', () => closeModal(btn.dataset.close))
+);
+document.querySelectorAll('.modal-overlay').forEach(overlay =>
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay && !overlay.id.includes('victory') && !overlay.id.includes('timeout') && !overlay.id.includes('pregame'))
+      overlay.classList.remove('open');
+  })
+);
+
+document.getElementById('categoriesBtn').addEventListener('click', () => openModal('categoriesModal'));
+const _hb = document.getElementById('helpBtn'); if (_hb) _hb.addEventListener('click', () => openModal('helpModal'));
+document.getElementById('statsBtn').addEventListener('click',      () => { loadStats(); openModal('statsModal'); });
+document.getElementById('settingsBtn').addEventListener('click',   () => openModal('settingsModal'));
+
+// ═══════════════════════════════════════════════════════
+// SHARE
+// ═══════════════════════════════════════════════════════
+function buildShareText() {
+  const bonuses  = calcBonuses();
+  const bonusPts = bonuses.reduce((s, b) => s + b.pts, 0);
+  const total    = gs.score + bonusPts;
+  const now      = new Date();
+  const DAYS     = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const MONTHS   = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const dateStr  = `${DAYS[now.getUTCDay()]} ${now.getUTCDate()} ${MONTHS[now.getUTCMonth()]} ${now.getUTCFullYear()}`;
+  const CTAS = [
+    "My memory held strong today. Will yours?",
+    "New day, new challenge. The global leaderboard awaits.",
+    "You guys should be good at this. Can you beat me?",
+    "Everyone plays the same challenge. Where will you rank?",
+    "I pushed my focus to the limit. Can you go further?",
+    "I gave it my all today. Can you do better?",
+    "You've got one shot at today's game. Can you beat me?",
+  ];
+  const cta = CTAS[now.getUTCDay()];
+  return `Clickzle — Game 2: Follow the Pattern\n` +
+    `${dateStr} · Challenge #${getPuzzleNumber()}\n\n` +
+    `I just completed today's Follow the Pattern challenge!\n` +
+    `Score: ${total.toLocaleString()}  |  Sequences: ${gs.sequencesCompleted}  |  Longest: ${gs.longestSequence}\n\n` +
+    `${cta}\n\n` +
+    `Play now: clickzle.games`;
+}
+
+function buildShareTextTimeout() {
+  const bonuses  = calcBonuses();
+  const bonusPts = bonuses.reduce((s, b) => s + b.pts, 0);
+  const total    = gs.score + bonusPts;
+  const now      = new Date();
+  const DAYS     = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const MONTHS   = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const dateStr  = `${DAYS[now.getUTCDay()]} ${now.getUTCDate()} ${MONTHS[now.getUTCMonth()]} ${now.getUTCFullYear()}`;
+  return `Clickzle — Game 2: Follow the Pattern\n` +
+    `${dateStr} · Challenge #${getPuzzleNumber()}\n\n` +
+    `I ran out of time on today's Follow the Pattern challenge!\n` +
+    `Score: ${total.toLocaleString()}  |  Sequences: ${gs.sequencesCompleted}  |  Longest: ${gs.longestSequence}\n\n` +
+    `Can you do better?\n\n` +
+    `Play now: clickzle.games`;
+}
+
+document.getElementById('shareBtn').addEventListener('click', () => {
+  document.getElementById('sharePreview').textContent = buildShareText();
+  openModal('shareModal');
+});
+document.getElementById('shareTimeoutBtn').addEventListener('click', () => {
+  document.getElementById('sharePreview').textContent = buildShareText();
+  openModal('shareModal');
+});
+document.getElementById('inviteFriendBtn').addEventListener('click', () => {
+  const msg = `Can you beat my Clickzle score? Play today's Follow the Pattern Challenge:\nhttps://clickzle.games`;
+  navigator.clipboard.writeText(msg).then(() => {
+    const btn = document.getElementById('inviteFriendBtn');
+    const orig = btn.innerHTML;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> Link Copied!`;
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  }).catch(() => {
+    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  });
+});
+document.getElementById('inviteFriendTimeoutBtn').addEventListener('click', () => {
+  const msg = `Can you beat my Clickzle score? Play today's Follow the Pattern Challenge:\nhttps://clickzle.games`;
+  navigator.clipboard.writeText(msg).then(() => {
+    const btn = document.getElementById('inviteFriendTimeoutBtn');
+    const orig = btn.innerHTML;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> Link Copied!`;
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  }).catch(() => {
+    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  });
+});
+document.getElementById('shareX').addEventListener('click', () => {
+  const text = document.getElementById('sharePreview').textContent;
+  window.open('https://x.com/intent/post?text=' + encodeURIComponent(text), '_blank', 'noopener');
+});
+document.getElementById('shareWhatsApp').addEventListener('click', () => {
+  const text = document.getElementById('sharePreview').textContent;
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
+});
+document.getElementById('shareFacebook').addEventListener('click', () => {
+  const text = document.getElementById('sharePreview').textContent;
+  window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://clickzle.games') +
+    '&quote=' + encodeURIComponent(text), '_blank', 'noopener');
+});
+document.getElementById('shareCopy').addEventListener('click', () => {
+  const text = document.getElementById('sharePreview').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('shareCopy');
+    const orig = btn.innerHTML;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  });
+});
+
+// ═══════════════════════════════════════════════════════
+// SETTINGS
+// ═══════════════════════════════════════════════════════
+function updateEntranceLogo() {
+  const logo = document.getElementById('entranceLogo');
+  if (!logo) return;
+  logo.src = document.body.classList.contains('light')
+    ? '../../assets/logobluelm.png'
+    : '../../assets/logobluedm.png';
+}
+function saveSettings() { localStorage.setItem('clickzle_settings', JSON.stringify(settings)); }
+function applyMuteBtn() {
+  document.getElementById('muteIconOn').style.display  = settings.sound ? '' : 'none';
+  document.getElementById('muteIconOff').style.display = settings.sound ? 'none' : '';
+  document.getElementById('muteBtn').title     = settings.sound ? 'Mute sound' : 'Unmute sound';
+  document.getElementById('muteBtn').setAttribute('aria-label', settings.sound ? 'Mute' : 'Unmute');
+}
+function applySettings() {
+  document.getElementById('soundToggle').classList.toggle('on', settings.sound);
+  document.getElementById('lightModeToggle').classList.toggle('on', settings.lightMode);
+  document.body.classList.toggle('light', settings.lightMode);
+  applyMuteBtn();
+  updateEntranceLogo();
+  saveSettings();
+}
+document.getElementById('muteBtn').addEventListener('click', function() {
+  settings.sound = !settings.sound;
+  applyMuteBtn();
+  document.getElementById('soundToggle').classList.toggle('on', settings.sound);
+  saveSettings();
+});
+document.getElementById('soundToggle').addEventListener('click', function() {
+  settings.sound = !settings.sound;
+  this.classList.toggle('on', settings.sound);
+  applyMuteBtn();
+  saveSettings();
+});
+document.getElementById('lightModeToggle').addEventListener('click', function() {
+  settings.lightMode = !settings.lightMode;
+  this.classList.toggle('on', settings.lightMode);
+  document.body.classList.toggle('light', settings.lightMode);
+  updateEntranceLogo();
+  saveSettings();
+});
+applySettings();
+
+// ═══════════════════════════════════════════════════════
+// STATS
+// ═══════════════════════════════════════════════════════
+const STATS_KEY = 'clickzle_stats_pattern';
+function getStats()   { try { return JSON.parse(localStorage.getItem(STATS_KEY) || '{}'); } catch(e) { return {}; } }
+function saveStats(s) { localStorage.setItem(STATS_KEY, JSON.stringify(s)); }
+
+function updateStats(score) {
+  const stats = getStats();
+  const today     = new Date().toISOString().split('T')[0];
+  const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+  stats.played = (stats.played || 0) + 1;
+  if      (stats.lastDate === yesterday) stats.streak = (stats.streak || 0) + 1;
+  else if (stats.lastDate !== today)     stats.streak = 1;
+  stats.lastDate = today;
+  if (!stats.bestScore  || score > stats.bestScore) stats.bestScore = score;
+  if (!stats.bestSeq    || gs.sequencesCompleted > stats.bestSeq) stats.bestSeq = gs.sequencesCompleted;
+  if (!stats.bestLongest || gs.longestSequence > stats.bestLongest) stats.bestLongest = gs.longestSequence;
+  if (!stats.history) stats.history = {};
+  stats.history[today] = { played: true };
+  stats.lastRoundSeqs = gs.roundSeqs;
+  saveStats(stats);
+}
+
+function loadStats() {
+  const stats = getStats();
+  document.getElementById('statPlayed').textContent     = stats.played     || 0;
+  document.getElementById('statStreak').textContent     = stats.streak     || 0;
+  document.getElementById('statBestScore').textContent  = stats.bestScore  ? stats.bestScore.toLocaleString() : '—';
+  document.getElementById('statBestSeq').textContent    = stats.bestSeq    || '—';
+  document.getElementById('statBestLongest').textContent = stats.bestLongest || '—';
+  const bar = document.getElementById('streakBar');
+  bar.innerHTML = '';
+  for (let i = 6; i >= 0; i--) {
+    const d  = new Date(Date.now() - i * 86400000).toISOString().split('T')[0];
+    const el = document.createElement('div');
+    el.className = 'streak-day';
+    if (i === 0) el.classList.add('today');
+    else if (stats.history?.[d]?.played) el.classList.add('played');
+    bar.appendChild(el);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// START FLOW
+// ═══════════════════════════════════════════════════════
+document.getElementById('startBtn').addEventListener('click', startGame);
+document.getElementById('playerNameInput').addEventListener('keydown', e => { if (e.key === 'Enter') startGame(); });
+
+
+function startGame() {
+  const name = document.getElementById('playerNameInput').value.trim();
+  if (!name) {
+    const inp = document.getElementById('playerNameInput');
+    inp.focus(); inp.style.borderColor = 'var(--red)';
+    setTimeout(() => inp.style.borderColor = '', 1000);
+    return;
+  }
+  gs.playerName = name;
+  localStorage.setItem('clickzle_player_name', name);
+  document.getElementById('playerNameDisplay').textContent = gs.playerName;
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('mainHeader').classList.remove('hidden');
+
+  initAudio();
+  initVoice();
+  initGame();
+
+  const suppress = localStorage.getItem('clickzle_htp_pattern_skip') === '1';
+  if (suppress) {
+    showRoundTransition(1);
+  } else {
+    openModal('pregameHelpModal');
+  }
+}
+
+document.getElementById('pregamePlayBtn').addEventListener('click', () => {
+  if (document.getElementById('dontShowHtp').checked) {
+    localStorage.setItem('clickzle_htp_pattern_skip', '1');
+  }
+  closeModal('pregameHelpModal');
+  showRoundTransition(1);
+});
+
+// Already played banner
+(function() {
+  try {
+    const st    = JSON.parse(localStorage.getItem('clickzle_stats_pattern') || '{}');
+    const today = new Date().toISOString().split('T')[0];
+    if (st.history && st.history[today] && st.history[today].played) {
+      const target = document.querySelector('.game-identity');
+      if (!target) return;
+      const c = document.createElement('div');
+      c.style.cssText = 'background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:12px 16px;text-align:center;margin-top:12px;width:100%;max-width:340px;';
+      const h1 = document.createElement('div');
+      h1.style.cssText = "font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--accent);";
+      h1.textContent = 'ALREADY PLAYED';
+      const h2 = document.createElement('div');
+      h2.style.cssText = 'font-size:12px;color:var(--text3);margin-top:4px;margin-bottom:14px;';
+      h2.textContent = 'Come back tomorrow for a new challenge';
+      const gLabel = document.createElement('div');
+      gLabel.style.cssText = 'font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:600;margin-bottom:8px;';
+      gLabel.textContent = 'Try Another Game';
+      const gRow = document.createElement('div');
+      gRow.style.cssText = 'display:flex;gap:8px;justify-content:center;';
+      [
+        ['../../complete-the-image-game-1.html','1','rgba(74,222,128,0.1)','rgba(74,222,128,0.3)','#4ade80'],
+        ['../../hit-the-target-game-3.html',    '3','rgba(244,114,182,0.1)','rgba(244,114,182,0.3)','#f472b6'],
+        ['../../spot-the-pair-game-4.html',     '4','rgba(250,204,21,0.1)', 'rgba(250,204,21,0.3)', '#facc15'],
+        ['../../guess-the-answer-game-5.html',  '5','rgba(167,139,250,0.1)','rgba(167,139,250,0.3)','#a78bfa'],
+      ].forEach(([href,num,bg,border,col]) => {
+        const a = document.createElement('a');
+        a.href = href;
+        a.style.cssText = 'width:38px;height:38px;border-radius:8px;background:'+bg+';border:1px solid '+border+';color:'+col+';font-family:Bebas Neue,sans-serif;font-size:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;';
+        a.textContent = num;
+        gRow.appendChild(a);
+      });
+      c.appendChild(h1); c.appendChild(h2); c.appendChild(gLabel); c.appendChild(gRow);
+      target.insertAdjacentElement('afterend', c);
+      const pfl = document.getElementById('playFreeLabel');
+      if (pfl) pfl.style.display = 'none';
+      const fps = document.getElementById('freePlaySection');
+      if (fps) fps.style.display = 'none';
+      const adsl = document.getElementById('adSlot');
+      if (adsl) adsl.style.marginTop = '12px';
+    }
+  } catch(e) {}
+}());
+
+// Victory breakdown accordion
+const _vBtn      = document.getElementById('vBreakdownBtn');
+const _vPanel    = document.getElementById('vBreakdownPanel');
+const _vArrow    = document.getElementById('vBreakdownArrow');
+const _vActions  = document.getElementById('victoryActions');
+const _vCollapse = document.getElementById('vCollapseBtn');
+
+function openVBreakdown() {
+  _vPanel.style.display = 'block';
+  _vActions.classList.add('slide-away');
+  _vCollapse.classList.add('show');
+  _vBtn.style.display = 'none';
+  if (_vArrow) _vArrow.style.transform = 'rotate(180deg)';
+}
+function closeVBreakdown() {
+  _vPanel.style.display = 'none';
+  _vActions.classList.remove('slide-away');
+  _vCollapse.classList.remove('show');
+  _vBtn.style.display = '';
+  if (_vArrow) _vArrow.style.transform = '';
+}
+if (_vBtn)      _vBtn.addEventListener('click', () => _vPanel.style.display !== 'none' ? closeVBreakdown() : openVBreakdown());
+if (_vCollapse) _vCollapse.addEventListener('click', closeVBreakdown);
+
+// End card breakdown accordion
+const _tBtn      = document.getElementById('tBreakdownBtn');
+const _tPanel    = document.getElementById('tBreakdownPanel');
+const _tArrow    = document.getElementById('tBreakdownArrow');
+const _tActions  = document.getElementById('timeoutActions');
+const _tCollapse = document.getElementById('tCollapseBtn');
+
+function openTBreakdown() {
+  _tPanel.style.display = 'block';
+  _tActions.classList.add('slide-away');
+  _tCollapse.classList.add('show');
+  _tBtn.style.display = 'none';
+  if (_tArrow) _tArrow.style.transform = 'rotate(180deg)';
+}
+function closeTBreakdown() {
+  _tPanel.style.display = 'none';
+  _tActions.classList.remove('slide-away');
+  _tCollapse.classList.remove('show');
+  _tBtn.style.display = '';
+  if (_tArrow) _tArrow.style.transform = '';
+}
+if (_tBtn)      _tBtn.addEventListener('click', () => _tPanel.style.display !== 'none' ? closeTBreakdown() : openTBreakdown());
+if (_tCollapse) _tCollapse.addEventListener('click', closeTBreakdown);
+
+document.fonts.ready.then(() => document.body.classList.add('fonts-ready'));
+</script>
+</body>
+</html>

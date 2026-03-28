@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contact Clickzle — send feedback, bug reports, advertising enquiries and more.">
+<title>Contact Us — Clickzle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --bg:#0a0a0a;
+  --surface:#141414;
+  --surface2:#1e1e1e;
+  --border:#222222;
+  --border2:#2e2e2e;
+  --text:#f0f0f0;
+  --text2:#888888;
+  --text3:#555555;
+  --green:#4ade80;
+  --green-dim:#166534;
+  --green-glow:#1d4d2a;
+  --red:#f87171;
+}
+body.light{
+  --bg:#f4f4f4;
+  --surface:#ffffff;
+  --surface2:#ebebeb;
+  --border:#d0d0d0;
+  --border2:#c0c0c0;
+  --text:#111111;
+  --text2:#555555;
+  --text3:#999999;
+  --green-dim:#bbf7d0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(74,222,128,0.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(74,222,128,0.025) 1px,transparent 1px);
+  background-size:72px 72px;}
+.bg-radial{position:fixed;top:-280px;left:50%;transform:translateX(-50%);
+  width:900px;height:600px;
+  background:radial-gradient(ellipse,rgba(74,222,128,0.07) 0%,transparent 68%);
+  pointer-events:none;z-index:0;}
+body.light .bg-grid{display:none;}
+body.light .bg-radial{opacity:0.22;}
+
+/* Layout */
+.wrap{max-width:860px;margin:0 auto;padding:0 28px;position:relative;z-index:1;}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+body.light .site-header{background:rgba(244,244,244,0.92);}
+.hdr-inner{max-width:1120px;margin:0 auto;padding:0 28px;height:62px;display:flex;align-items:center;justify-content:space-between;}
+.site-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--text);text-decoration:none;}
+.site-logo span{color:var(--green);}
+.hdr-center{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text3);}
+.hdr-reset-label{font-weight:500;white-space:nowrap;}
+.hdr-timer{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--text2);}
+.hdr-right{display:flex;align-items:center;gap:20px;}
+.nav-link{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;transition:color 0.2s;}
+.nav-link:hover{color:var(--text);}
+.icon-btn{width:34px;height:34px;border-radius:8px;background:transparent;border:1px solid var(--border2);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all 0.2s;}
+.icon-btn:hover{color:var(--text);background:var(--surface);}
+.icon-btn svg{width:15px;height:15px;}
+
+/* Footer */
+.site-footer { border-top:1px solid var(--border); padding:44px 0; position:relative; z-index:1; }
+.ftr-inner {
+  max-width:1120px; margin:0 auto; padding:0 28px;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+}
+.ftr-logo { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px; color:var(--text2); }
+.ftr-logo span { color:var(--green); }
+.ftr-links { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.ftr-link { font-size:13px; color:var(--text3); text-decoration:none; transition:color 0.18s; }
+.ftr-link:hover { color:var(--text2); }
+.ftr-copy {
+  font-size:12px; color:var(--text3); width:100%;
+  text-align:center; margin-top:16px; padding-top:20px;
+  border-top:1px solid var(--border);
+}
+
+/* Page hero */
+.page-hero{padding:72px 0 56px;border-bottom:1px solid var(--border);margin-bottom:64px;}
+.page-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--green);display:block;margin-bottom:16px;}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,80px);letter-spacing:4px;color:var(--text);line-height:1;margin-bottom:20px;}
+.page-lead{font-size:17px;color:var(--text2);line-height:1.75;max-width:620px;}
+.last-updated{font-size:12px;color:var(--text3);margin-top:12px;display:block;}
+
+/* Content */
+.page-body{padding-bottom:80px;}
+.prose h2{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--text);margin:48px 0 16px;}
+.prose h2:first-child{margin-top:0;}
+.prose p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:16px;}
+.prose p:last-child{margin-bottom:0;}
+.prose a{color:var(--green);text-decoration:none;}
+.prose a:hover{text-decoration:underline;}
+.prose ul{list-style:none;margin:0 0 20px;padding:0;}
+.prose ul li{font-size:15px;color:var(--text2);line-height:1.7;padding:6px 0 6px 22px;position:relative;}
+.prose ul li::before{content:'—';position:absolute;left:0;color:var(--text3);}
+.prose strong{color:var(--text);font-weight:600;}
+.divider{height:1px;background:var(--border);margin:40px 0;}
+
+/* Cards */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;}
+.info-card{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px;}
+.info-card-icon{width:40px;height:40px;border-radius:10px;background:var(--green-dim);
+  border:1px solid rgba(74,222,128,0.18);display:flex;align-items:center;justify-content:center;
+  color:var(--green);margin-bottom:16px;}
+.info-card-icon svg{width:20px;height:20px;}
+.info-card-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:var(--text);margin-bottom:8px;}
+.info-card-body{font-size:13px;color:var(--text2);line-height:1.65;}
+
+/* TOC */
+.toc{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:24px 28px;margin-bottom:48px;}
+.toc-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:14px;font-weight:600;}
+.toc-list{list-style:none;}
+.toc-list li{padding:4px 0;}
+.toc-list a{font-size:14px;color:var(--text2);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.15s;}
+.toc-list a:hover{color:var(--green);}
+.toc-list a::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--text3);flex-shrink:0;}
+
+/* Form */
+.form-name-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{margin-bottom:20px;}
+.form-label{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;font-weight:600;}
+.req{color:var(--red);font-size:13px;}
+.form-input,.form-select,.form-textarea{
+  width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:10px;
+  padding:13px 16px;font-size:15px;color:var(--text);font-family:'DM Sans',sans-serif;
+  outline:none;transition:border-color 0.2s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--green);}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text3);}
+.form-textarea{resize:vertical;min-height:140px;}
+.form-select option{background:var(--bg);}
+body.light .form-select option{background:#fff;}
+.form-hint{font-size:12px;color:var(--text3);margin-top:12px;}
+.form-submit{background:var(--green);color:#000;border:none;border-radius:10px;
+  padding:14px 36px;font-size:15px;font-weight:700;font-family:'DM Sans',sans-serif;
+  cursor:pointer;transition:opacity 0.15s,transform 0.1s;display:inline-flex;align-items:center;gap:8px;}
+.form-submit:hover{opacity:0.9;}.form-submit:active{transform:scale(0.97);}
+.form-submit svg{width:16px;height:16px;}
+.form-success{display:none;background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.25);
+  border-radius:12px;padding:32px;text-align:center;margin-top:24px;}
+.form-success.show{display:block;}
+.form-success-icon{color:var(--green);margin-bottom:12px;}
+.form-success-icon svg{width:40px;height:40px;}
+.form-success-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--text);margin-bottom:8px;}
+.form-success-body{font-size:14px;color:var(--text2);line-height:1.6;}
+
+/* About stats */
+.stat-row{display:flex;gap:36px;margin-top:28px;flex-wrap:wrap;}
+.stat{display:flex;flex-direction:column;gap:3px;}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:2px;color:var(--green);line-height:1;}
+.stat-l{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;}
+.featured-card{background:linear-gradient(135deg,var(--surface) 0%,rgba(74,222,128,0.03) 100%);
+  border:1px solid rgba(74,222,128,0.15);border-radius:16px;padding:38px;margin-bottom:16px;}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media(max-width:640px){
+  .hdr-center{display:none;}
+  .hdr-right .nav-link{display:none;}
+  .hdr-inner{padding:0 16px;}
+  .wrap{padding:0 16px;}
+  .page-hero{padding:48px 0 36px;margin-bottom:44px;}
+  .page-title{font-size:clamp(40px,12vw,64px);letter-spacing:2px;}
+  .page-lead{font-size:15px;}
+  .card-grid{grid-template-columns:1fr;}
+  .info-card{padding:22px;}
+  .form-name-row{grid-template-columns:1fr;}
+  .form-submit{width:100%;justify-content:center;}
+  .featured-card{padding:24px;}
+  .stat-row{gap:20px;}
+  .toc{padding:18px 20px;}
+  .ftr-inner{flex-direction:column;align-items:flex-start;padding:0 16px;gap:14px;}
+  .ftr-links{gap:14px;}
+  .ftr-copy{margin-top:4px;}
+  .prose h2{font-size:22px;}
+  .prose p,.prose ul li{font-size:14px;}
+}
+@media(min-width:641px) and (max-width:900px){
+  .card-grid{grid-template-columns:1fr 1fr;}
+}
+
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-radial"></div>
+<header class="site-header">
+  <div class="hdr-inner">
+    <a href="index.html" class="site-logo">CLICK<span>ZLE</span></a>
+    <div class="hdr-center">
+      <span class="hdr-reset-label">Puzzles reset in:</span>
+      <span class="hdr-timer" id="hdrTimer">00:00:00</span>
+    </div>
+    <div class="hdr-right">
+      <a href="index.html#games" class="nav-link">Games</a>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="page-hero">
+  <div class="wrap">
+    <span class="page-eyebrow">Contact Us</span>
+    <div class="page-title">All enquiries<br>start here.</div>
+    <p class="page-lead">Bug reports, feature ideas, advertising enquiries, partnership proposals, account issues, or anything else — this form reaches us directly. Every message is read.</p>
+  </div>
+</section>
+<section class="page-body">
+  <div class="wrap">
+
+    <div class="card-grid reveal">
+      <div class="info-card">
+        <div class="info-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></div>
+        <div class="info-card-title">Bug Reports</div>
+        <div class="info-card-body">Something broken? Tell us what happened, which browser and device you're on, and which category was affected. Screenshots help us fix things faster.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="info-card-title">Feedback & Ideas</div>
+        <div class="info-card-body">Feature suggestions, gameplay feedback, image pool ideas. We're actively building and the right suggestion can make it into the next release.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/></svg></div>
+        <div class="info-card-title">Advertising & Business</div>
+        <div class="info-card-body">Interested in advertising on Clickzle or exploring a partnership? Select the relevant type below and tell us about your proposal.</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <form id="contactForm" onsubmit="submitContact(event)">
+        <div class="form-name-row">
+          <div class="form-group">
+            <label class="form-label" for="ct-name">Your name</label>
+            <input class="form-input" type="text" id="ct-name" placeholder="How should we address you?">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ct-email">Email address <span class="req">*</span></label>
+            <input class="form-input" type="email" id="ct-email" placeholder="Required so we can reply" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ct-type">Type of enquiry <span class="req">*</span></label>
+          <select class="form-select" id="ct-type" required onchange="toggleCategoryRow()">
+            <option value="">Select a type...</option>
+            <optgroup label="Game">
+              <option value="bug">Bug Report</option>
+              <option value="feature">Feature Idea</option>
+              <option value="image">Image Pool Suggestion</option>
+              <option value="gameplay">Gameplay Feedback</option>
+              <option value="praise">Something I loved</option>
+            </optgroup>
+            <optgroup label="Business">
+              <option value="advertising">Advertising Enquiry</option>
+              <option value="partnership">Partnership / Collaboration</option>
+              <option value="press">Press / Media</option>
+            </optgroup>
+            <optgroup label="Account & Legal">
+              <option value="account">Account Issue</option>
+              <option value="privacy">Privacy / Data Request</option>
+              <option value="copyright">Copyright / IP Concern</option>
+            </optgroup>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group" id="categoryRow" style="display:none;">
+          <label class="form-label" for="ct-category">Which category?</label>
+          <select class="form-select" id="ct-category">
+            <option value="">All categories / Not applicable</option>
+            <option>Movies</option><option>Flags</option><option>Animals</option>
+            <option>Food &amp; Drink</option><option>Vehicles</option><option>Sports</option>
+            <option>Landscape</option><option>Buildings</option><option>Celebrities</option><option>Art</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ct-message">Your message <span class="req">*</span></label>
+          <textarea class="form-textarea" id="ct-message" placeholder="The more detail the better." required></textarea>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+          <button type="submit" class="form-submit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send Message
+          </button>
+          <span class="form-hint">We typically respond within 2 business days.</span>
+        </div>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="form-success-title">Message sent</div>
+        <div class="form-success-body">Thanks for reaching out. We'll reply to your email — usually within 2 business days.</div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="ftr-inner">
+    <div class="ftr-logo">CLICK<span>ZLE</span></div>
+    <div class="ftr-links">
+      <a href="about.html" class="ftr-link">About</a>
+      <a href="contact.html" class="ftr-link">Contact</a>
+      <a href="privacy.html" class="ftr-link">Privacy</a>
+      <a href="terms.html" class="ftr-link">Terms of Use</a>
+    </div>
+    <div class="ftr-copy">&copy; 2026 Clickzle. All rights reserved.</div>
+  </div>
+</footer>
+<script>
+
+function tick(){
+  const now=new Date();
+  const midnight=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1));
+  let d=Math.max(0,midnight-now);
+  const h=Math.floor(d/3600000);d%=3600000;
+  const m=Math.floor(d/60000);d%=60000;
+  const s=Math.floor(d/1000);
+  document.getElementById('hdrTimer').textContent=
+    String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+setInterval(tick,1000);tick();
+
+let light=localStorage.getItem('clickzle_site_theme')==='light';
+function applyTheme(){
+  document.body.classList.toggle('light',light);
+  document.getElementById('iconSun').style.display=light?'none':'block';
+  document.getElementById('iconMoon').style.display=light?'block':'none';
+}
+applyTheme();
+document.getElementById('themeToggle').addEventListener('click',()=>{
+  light=!light;localStorage.setItem('clickzle_site_theme',light?'light':'dark');applyTheme();
+});
+
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revealObs.unobserve(e.target);}});
+},{threshold:0.08,rootMargin:'0px 0px -32px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+
+function toggleCategoryRow(){
+  const gameTypes=['bug','feature','image','gameplay','praise'];
+  document.getElementById('categoryRow').style.display=
+    gameTypes.includes(document.getElementById('ct-type').value)?'block':'none';
+}
+function submitContact(e){
+  e.preventDefault();
+  if(!document.getElementById('ct-email').value.trim()) return;
+  if(!document.getElementById('ct-type').value) return;
+  if(!document.getElementById('ct-message').value.trim()) return;
+  // Production: POST to Cloudflare Worker endpoint
+  document.getElementById('contactForm').style.display='none';
+  document.getElementById('formSuccess').classList.add('show');
+}
+
+</script>
+</body>
+</html>

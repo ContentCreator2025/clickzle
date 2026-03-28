@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="About Clickzle — five daily cognitive challenges testing perception, memory, reaction, observation and recognition.">
+<title>About — Clickzle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --bg:#0a0a0a;
+  --surface:#141414;
+  --surface2:#1e1e1e;
+  --border:#222222;
+  --border2:#2e2e2e;
+  --text:#f0f0f0;
+  --text2:#b0b0b0;
+  --text3:#888888;
+  --green:#4ade80;
+  --green-dim:#166534;
+  --green-glow:#1d4d2a;
+}
+body.light{
+  --bg:#f4f4f4;
+  --surface:#ffffff;
+  --surface2:#ebebeb;
+  --border:#d0d0d0;
+  --border2:#c0c0c0;
+  --text:#111111;
+  --text2:#444444;
+  --text3:#777777;
+  --green-dim:#bbf7d0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(74,222,128,0.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(74,222,128,0.025) 1px,transparent 1px);
+  background-size:72px 72px;}
+.bg-radial{position:fixed;top:-280px;left:50%;transform:translateX(-50%);
+  width:900px;height:600px;
+  background:radial-gradient(ellipse,rgba(74,222,128,0.07) 0%,transparent 68%);
+  pointer-events:none;z-index:0;}
+body.light .bg-grid{display:none;}
+body.light .bg-radial{opacity:0.22;}
+
+/* ── Layout ── */
+.wrap{max-width:860px;margin:0 auto;padding:0 28px;position:relative;z-index:1;}
+
+/* ── Header — matches homepage exactly ── */
+.site-header{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+body.light .site-header{background:rgba(244,244,244,0.92);}
+.hdr-inner{max-width:1120px;margin:0 auto;padding:0 28px;height:62px;display:flex;align-items:center;justify-content:space-between;}
+.site-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--text);text-decoration:none;}
+.site-logo span{color:var(--green);}
+.hdr-center{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text3);letter-spacing:0.3px;}
+.hdr-reset-label{font-weight:500;white-space:nowrap;color:var(--text2);}
+.hdr-timer{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--text);}
+.hdr-right{display:flex;align-items:center;gap:20px;}
+.nav-link{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;transition:color 0.2s;}
+.nav-link:hover{color:var(--text);}
+.icon-btn{width:34px;height:34px;border-radius:8px;background:transparent;border:1px solid var(--border2);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all 0.2s;}
+.icon-btn:hover{color:var(--text);background:var(--surface);}
+.icon-btn svg{width:15px;height:15px;}
+@media(max-width:600px){.hdr-center{display:none;}}
+
+/* ── Footer ── */
+.site-footer { border-top:1px solid var(--border); padding:44px 0; position:relative; z-index:1; }
+.ftr-inner {
+  max-width:1120px; margin:0 auto; padding:0 28px;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+}
+.ftr-logo { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px; color:var(--text2); }
+.ftr-logo span { color:var(--green); }
+.ftr-links { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.ftr-link { font-size:13px; color:var(--text3); text-decoration:none; transition:color 0.18s; }
+.ftr-link:hover { color:var(--text2); }
+.ftr-copy {
+  font-size:12px; color:var(--text3); width:100%;
+  text-align:center; margin-top:16px; padding-top:20px;
+  border-top:1px solid var(--border);
+}
+
+/* ── Page hero ── */
+.page-hero{padding:72px 0 56px;border-bottom:1px solid var(--border);margin-bottom:64px;}
+.page-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--green);display:block;margin-bottom:16px;}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,80px);letter-spacing:4px;color:var(--text);line-height:1;margin-bottom:20px;}
+.page-lead{font-size:17px;color:var(--text2);line-height:1.75;max-width:640px;}
+
+/* ── Content ── */
+.page-body{padding-bottom:80px;}
+.prose h2{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--text);margin:56px 0 16px;}
+.prose h2:first-child{margin-top:0;}
+.prose p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:16px;}
+.prose p:last-child{margin-bottom:0;}
+.prose a{color:var(--green);text-decoration:none;}
+.prose a:hover{text-decoration:underline;}
+.prose strong{color:var(--text);font-weight:600;}
+.divider{height:1px;background:var(--border);margin:48px 0;}
+
+/* ── Platform stats bar ── */
+.stats-bar{display:flex;gap:0;border:1px solid var(--border2);border-radius:16px;overflow:hidden;margin-bottom:56px;}
+.stats-bar-item{flex:1;padding:28px 24px;text-align:center;border-right:1px solid var(--border2);}
+.stats-bar-item:last-child{border-right:none;}
+.stats-bar-val{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:2px;color:var(--green);line-height:1;margin-bottom:6px;}
+.stats-bar-lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);}
+@media(max-width:600px){
+  .stats-bar{flex-direction:column;}
+  .stats-bar-item{border-right:none;border-bottom:1px solid var(--border2);}
+  .stats-bar-item:last-child{border-bottom:none;}
+}
+
+/* ── Games table ── */
+.games-table{width:100%;border-collapse:collapse;margin-bottom:56px;}
+.games-table thead tr{border-bottom:1px solid var(--border2);}
+.games-table thead th{padding:10px 16px;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);font-weight:600;text-align:left;}
+.games-table thead th:first-child{width:48px;text-align:center;}
+.games-table tbody tr{border-bottom:1px solid var(--border);transition:background 0.12s;}
+.games-table tbody tr:last-child{border-bottom:none;}
+.games-table tbody tr:hover{background:rgba(74,222,128,0.03);}
+.games-table td{padding:20px 16px;font-size:14px;color:var(--text2);vertical-align:middle;}
+.games-table td:first-child{text-align:center;}
+.game-num{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--text3);}
+.game-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.game-cats{font-size:12px;color:var(--text3);}
+.game-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 11px;border-radius:20px;white-space:nowrap;}
+.game-badge.green{color:#4ade80;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.18);}
+.game-badge.blue{color:#60a5fa;background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.2);}
+.game-badge.pink{color:#f472b6;background:rgba(244,114,182,0.08);border:1px solid rgba(244,114,182,0.2);}
+.game-badge.yellow{color:#facc15;background:rgba(250,204,21,0.08);border:1px solid rgba(250,204,21,0.2);}
+.game-badge.purple{color:#a78bfa;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);}
+
+/* ── Info cards ── */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:56px;}
+@media(max-width:680px){.card-grid{grid-template-columns:1fr;}}
+.info-card{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px;}
+.info-card-icon{width:40px;height:40px;border-radius:10px;background:rgba(74,222,128,0.08);
+  border:1px solid rgba(74,222,128,0.18);display:flex;align-items:center;justify-content:center;
+  color:var(--green);margin-bottom:16px;}
+.info-card-icon svg{width:20px;height:20px;}
+.info-card-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:var(--text);margin-bottom:8px;}
+.info-card-body{font-size:13px;color:var(--text2);line-height:1.65;}
+
+/* ── Reveal ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-radial"></div>
+
+<!-- ── Header ── -->
+<header class="site-header">
+  <div class="hdr-inner">
+    <a href="index.html" class="site-logo">CLICK<span>ZLE</span></a>
+    <div class="hdr-center">
+      <span class="hdr-reset-label">Puzzles reset in:</span>
+      <span class="hdr-timer" id="hdrTimer">00:00:00</span>
+    </div>
+    <div class="hdr-right">
+      <a href="index.html#games" class="nav-link">Games</a>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ── Hero ── -->
+<section class="page-hero">
+  <div class="wrap">
+    <span class="page-eyebrow">About Clickzle</span>
+    <div class="page-title">Daily Competitive Puzzle Games</div>
+    <p class="page-lead">
+      Clickzle is a platform of fast, skill-based puzzle games designed to be played daily.
+      Each game targets a different ability — perception, memory, reaction, observation and recognition —
+      and rewards players who can think clearly and act quickly under pressure.
+    </p>
+  </div>
+</section>
+
+<section class="page-body">
+  <div class="wrap">
+
+    <!-- Stats bar -->
+    <div class="stats-bar reveal">
+      <div class="stats-bar-item">
+        <div class="stats-bar-val">5</div>
+        <div class="stats-bar-lbl">Daily Games</div>
+      </div>
+      <div class="stats-bar-item">
+        <div class="stats-bar-val">Global</div>
+        <div class="stats-bar-lbl">Competition</div>
+      </div>
+      <div class="stats-bar-item">
+        <div class="stats-bar-val">24h</div>
+        <div class="stats-bar-lbl">Reset Cycle</div>
+      </div>
+      <div class="stats-bar-item">
+        <div class="stats-bar-val">Free</div>
+        <div class="stats-bar-lbl">To Play</div>
+      </div>
+    </div>
+
+    <!-- Games table -->
+    <div class="prose reveal">
+      <h2>The Games</h2>
+      <p>
+        Each game is built to feel different. Not variations of the same mechanic — but distinct challenges that test different ways of thinking.
+        Some reward precision. Some reward speed. Some reward pattern recognition under pressure.
+        Together, they create a daily run that feels varied, competitive and worth returning to.<br><br><br>
+      </p>
+    </div>
+
+    <table class="games-table reveal">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Game</th>
+          <th>Challenge</th>
+          <th>How It Works</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td><span class="game-num">1</span></td>
+          <td><div class="game-name">Complete the Image</div></td>
+          <td><span class="game-badge green">Perception</span></td>
+          <td>Six images are split across a shared grid. Only one forms a complete picture. Cycle tiles strategically to identify the correct image as fast as possible.</td>
+        </tr>
+
+        <tr>
+          <td><span class="game-num">2</span></td>
+          <td><div class="game-name">Follow the Pattern</div></td>
+          <td><span class="game-badge blue">Memory</span></td>
+          <td>A sequence is revealed tile by tile. Memorise it and repeat it exactly. Each round increases complexity, pushing short-term memory to its limit.</td>
+        </tr>
+
+        <tr>
+          <td><span class="game-num">3</span></td>
+          <td><div class="game-name">Hit the Target</div></td>
+          <td><span class="game-badge pink">Reaction</span></td>
+          <td>Targets appear unpredictably across the grid. React instantly and maintain accuracy as speed increases. Misses cost time and momentum.</td>
+        </tr>
+
+        <tr>
+          <td><span class="game-num">4</span></td>
+          <td><div class="game-name">Spot the Pair</div></td>
+          <td><span class="game-badge yellow">Observation</span></td>
+          <td>A full grid of near-identical visuals hides one exact match. Scan quickly, filter noise, and identify the true pair among subtle variations.</td>
+        </tr>
+
+        <tr>
+          <td><span class="game-num">5</span></td>
+          <td><div class="game-name">Guess the Answer</div></td>
+          <td><span class="game-badge purple">Recognition</span></td>
+          <td>Clues reveal progressively. Identify the answer as early as possible. The less you see before solving, the higher your score.</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- Info cards -->
+    <div class="card-grid reveal">
+
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="info-card-title">Free to Play</div>
+        <div class="info-card-body">
+          Every game is instantly accessible. No downloads, no friction. Jump in, play, and compete.
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="info-card-title">Same Game Worldwide</div>
+        <div class="info-card-body">
+          Every player gets the exact same puzzle each day. No variations, no advantages — just pure competition.
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="info-card-title">Daily Competition</div>
+        <div class="info-card-body">
+          Leaderboards reset every day. Every run matters. Every mistake costs.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Prose sections -->
+    <div class="prose reveal">
+
+      <h2>How It Plays</h2>
+      <p>
+        Clickzle is designed around short, focused sessions. Each game is fast to start, quick to understand, and difficult to master.
+        The challenge comes from execution — not complexity. You either perform under pressure or you don't.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>Scoring</h2>
+      <p>
+        Speed is the primary factor across all games. Faster completion means a higher rank.
+        Accuracy and efficiency refine your score, separating players who perform at similar speeds.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>Daily Reset</h2>
+      <p>
+        New challenges are released every day at midnight UTC. Every player starts fresh on the same puzzles.
+        Past games remain available, but only daily runs count toward active competition.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>Built for Play</h2>
+      <p>
+        These are not passive experiences or filler games. Every mechanic is designed to engage, challenge and reward.
+        If a game isn't enjoyable to replay, it doesn't belong here.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>Why I Built This</h2>
+      <p>Clickzle started as a personal project — a solo developer who wanted to build something genuinely fun and mentally engaging to play every day. The daily puzzle format is a proven concept, but every game in the space either leans too hard on language and word knowledge or becomes a one-trick format that gets old fast.</p>
+      <p>The idea behind Clickzle is to cover five completely different types of cognitive ability — perception, memory, reaction, observation and recognition — so that no two games feel alike. Each one is deliberately designed to reward a different kind of thinking. You might be fast at one and terrible at another. That variety is the point.</p>
+      <p>The whole platform is built and maintained by one person. Every image is hand-curated, every game mechanic is designed from scratch, and the code is written without frameworks or dependencies. It is a labour of love, built in the gaps of a regular day.</p>
+
+      <div class="divider"></div>
+
+      <h2>How Scoring Works</h2>
+      <p>Every game on Clickzle scores on the same principle: <strong>speed is the primary factor</strong>. The faster you complete the challenge, the higher your score. Secondary metrics like click count or accuracy act as tiebreakers only — they separate players who finish at the same time, but they will never compensate for being slow.</p>
+      <p>On top of the base score, each game awards <strong>bonus points</strong> for demonstrating genuine skill — solving with perfect efficiency, finishing inside a speed threshold, or other feats specific to that game. Bonuses are designed to be meaningful but not exploitable. A slow player cannot bonus their way above a fast one.</p>
+
+      <div class="divider"></div>
+
+      <h2>One Puzzle, Every Day</h2>
+      <p>Every puzzle across every game is generated from a UTC date seed. The same seed runs on every device in every country simultaneously, so every player in the world is playing the exact same puzzle at the exact same time. There are no difficulty tiers, no personalised variants. One puzzle. One leaderboard. Compete fairly from anywhere.</p>
+      <p>Puzzles reset at midnight UTC. Past puzzles remain permanently accessible — you can go back and play any previous day — but scores from past dates do not count toward live leaderboards or current streaks.</p>
+
+      <div class="divider"></div>
+
+      <h2>Bonus Points</h2>
+      <p>Bonus points exist to reward exceptional play beyond raw speed. In Complete the Image, a <strong>Perfect Game</strong> bonus (+500) is awarded if every tile is solved on the very first click with no wasted cycling. Speed bonuses add +300, +150 or +75 depending on whether you finish under one, two or three minutes respectively. Bonuses stack — the best runs earn both.</p>
+      <p>Each game in the platform will have its own bonus structure designed around its specific mechanics. The principle is always the same: reward the most skilful play, never punish honest effort.</p>
+
+      <div class="divider"></div>
+
+      <h2>Contact</h2>
+      <p>For bug reports, suggestions, feedback or anything else, head to the <a href="contact.html">Contact page</a>. Genuine feedback from players directly shapes what gets built next.</p>
+
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="ftr-inner">
+    <div class="ftr-logo">CLICK<span>ZLE</span></div>
+    <div class="ftr-links">
+      <a href="about.html" class="ftr-link">About</a>
+      <a href="contact.html" class="ftr-link">Contact</a>
+      <a href="privacy.html" class="ftr-link">Privacy</a>
+      <a href="terms.html" class="ftr-link">Terms of Use</a>
+    </div>
+    <div class="ftr-copy">&copy; 2026 Clickzle. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+function tick(){
+  const now=new Date();
+  const midnight=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1));
+  let d=Math.max(0,midnight-now);
+  const h=Math.floor(d/3600000);d%=3600000;
+  const m=Math.floor(d/60000);d%=60000;
+  const s=Math.floor(d/1000);
+  document.getElementById('hdrTimer').textContent=
+    String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+setInterval(tick,1000);tick();
+
+let light=localStorage.getItem('clickzle_site_theme')==='light';
+function applyTheme(){
+  document.body.classList.toggle('light',light);
+  document.getElementById('iconSun').style.display=light?'none':'block';
+  document.getElementById('iconMoon').style.display=light?'block':'none';
+}
+applyTheme();
+document.getElementById('themeToggle').addEventListener('click',()=>{
+  light=!light;
+  localStorage.setItem('clickzle_site_theme',light?'light':'dark');
+  applyTheme();
+});
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});
+},{threshold:0.08,rootMargin:'0px 0px -32px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Primary SEO -->
+<title>Complete the Image — Clickzle Game 1 | Daily Perception Puzzle</title>
+<meta name="description" content="Complete the Image is Clickzle's daily perception puzzle. Six images sliced into 20 tiles — only one is intact. Cycle tile faces, find the complete image, beat the clock. 10 categories. Free to play.">
+<meta name="keywords" content="complete the image, daily puzzle game, perception challenge, image puzzle, tile puzzle, clickzle, free daily game, brain game">
+<meta name="author" content="Clickzle">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://clickzle.games/complete-the-image-game-1.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://clickzle.games/complete-the-image-game-1.html">
+<meta property="og:title" content="Complete the Image — Clickzle Daily Perception Puzzle">
+<meta property="og:description" content="Six images sliced into 20 tiles. Only one is complete. Cycle tile faces to find it before the 5-minute clock runs out. 10 categories. Free daily puzzle.">
+<meta property="og:image" content="https://clickzle.games/assets/og-image.png">
+<meta property="og:site_name" content="Clickzle">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://clickzle.games/complete-the-image-game-1.html">
+<meta name="twitter:title" content="Complete the Image — Clickzle Daily Perception Puzzle">
+<meta name="twitter:description" content="Six images sliced into 20 tiles. Only one is complete. Can you find it in under 5 minutes?">
+<meta name="twitter:image" content="https://clickzle.games/assets/og-image.png">
+
+<!-- Structured Data — Game -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Game",
+  "name": "Complete the Image",
+  "description": "A daily perception puzzle where six images are sliced into 20 tiles and mixed together. Only one image is perfectly intact. Players cycle tile faces to find the complete image before a 5-minute timer expires.",
+  "url": "https://clickzle.games/complete-the-image-game-1.html",
+  "genre": "Puzzle",
+  "gamePlatform": "Web Browser",
+  "applicationCategory": "Game",
+  "isAccessibleForFree": true,
+  "numberOfPlayers": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 1 },
+  "publisher": { "@type": "Organization", "name": "Clickzle", "url": "https://clickzle.games" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<!-- Structured Data — BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Clickzle", "item": "https://clickzle.games" },
+    { "@type": "ListItem", "position": 2, "name": "Complete the Image", "item": "https://clickzle.games/complete-the-image-game-1.html" }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ═══ TOKENS ═══════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#0a0a0a;
+  --surface:#141414;
+  --surface2:#1e1e1e;
+  --border:#222222;
+  --border2:#2e2e2e;
+  --text:#f0f0f0;
+  --text2:#888888;
+  --text3:#555555;
+  --green:#4ade80;
+  --green-dim:#166534;
+  --green-glow:#1d4d2a;
+}
+body.light{
+  --bg:#f4f4f4;
+  --surface:#ffffff;
+  --surface2:#ebebeb;
+  --border:#d0d0d0;
+  --border2:#c0c0c0;
+  --text:#111111;
+  --text2:#555555;
+  --text3:#999999;
+  --green-dim:#bbf7d0;
+}
+
+/* ═══ RESET ════════════════════════════════════════════════════════════════ */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+}
+
+/* ═══ BACKGROUND ════════════════════════════════════════════════════════════ */
+.bg-grid {
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(74,222,128,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,222,128,0.025) 1px, transparent 1px);
+  background-size:72px 72px;
+}
+.bg-radial {
+  position:fixed; top:-280px; left:50%; transform:translateX(-50%);
+  width:900px; height:600px;
+  background:radial-gradient(ellipse, rgba(74,222,128,0.07) 0%, transparent 68%);
+  pointer-events:none; z-index:0;
+}
+body.light .bg-grid  { display:none; }
+body.light .bg-radial { opacity:0.22; }
+
+/* ═══ LAYOUT ════════════════════════════════════════════════════════════════ */
+.wrap { max-width:1120px; margin:0 auto; padding:0 28px; position:relative; z-index:1; }
+
+/* ═══ HEADER ════════════════════════════════════════════════════════════════ */
+.site-header {
+  position:sticky; top:0; z-index:100;
+  background:rgba(10,10,10,0.88); backdrop-filter:blur(18px);
+  border-bottom:none;
+}
+.site-header::after {
+  content:"";
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent 0%, rgba(74,222,128,0.15) 20%, rgba(74,222,128,0.9) 50%, rgba(74,222,128,0.15) 80%, transparent 100%);
+  pointer-events:none;
+}
+body.light .site-header::after {
+  background:linear-gradient(90deg, transparent 0%, rgba(74,222,128,0.1) 20%, rgba(74,222,128,0.6) 50%, rgba(74,222,128,0.1) 80%, transparent 100%);
+}
+body.light .site-header { background:rgba(244,244,244,0.92); }
+.hdr-inner {
+  max-width:1120px; margin:0 auto; padding:0 28px;
+  height:62px;
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center;
+}
+.hdr-center { justify-self:center; }
+.hdr-right  { justify-self:end; display:flex; align-items:center; gap:20px; }
+.site-logo {
+  font-family:'Bebas Neue',sans-serif; font-size:26px;
+  letter-spacing:3px; color:var(--text); text-decoration:none;
+}
+.site-logo span { color:var(--green); }
+.hdr-center {
+  display:flex; align-items:center; gap:8px;
+  font-size:12px; color:var(--text3); letter-spacing:0.3px;
+}
+.hdr-reset-label { font-weight:500; white-space:nowrap; }
+.hdr-timer {
+  font-family:'Bebas Neue',sans-serif; font-size:18px;
+  letter-spacing:2px; color:var(--text2);
+}
+.hdr-right { display:flex; align-items:center; gap:20px; }
+.nav-link {
+  font-size:13px; font-weight:500; color:var(--text2);
+  text-decoration:none; transition:color 0.2s;
+}
+.nav-link:hover { color:var(--text); }
+.nav-other-games {
+  display:flex; align-items:center; gap:8px;
+  font-size:13px; font-weight:500; color:var(--text2);
+}
+.nav-game-num {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:24px; height:24px; border-radius:6px;
+  border:1px solid var(--border2); background:var(--surface2);
+  font-size:11px; font-weight:700; color:var(--text3);
+  text-decoration:none; transition:all 0.18s; font-family:'DM Sans',sans-serif;
+}
+.nav-game-num:hover {
+  opacity:0.85;
+}
+.nav-game-num[data-game="1"] {
+  color:#4ade80;
+  border-color:color-mix(in srgb,#4ade80 35%,transparent);
+  background:color-mix(in srgb,#4ade80 8%,transparent);
+}
+.nav-game-num[data-game="1"]:hover {
+  border-color:#4ade80;
+  background:color-mix(in srgb,#4ade80 18%,transparent);
+}
+.nav-game-num[data-game="2"] {
+  color:#60a5fa;
+  border-color:color-mix(in srgb,#60a5fa 35%,transparent);
+  background:color-mix(in srgb,#60a5fa 8%,transparent);
+}
+.nav-game-num[data-game="2"]:hover {
+  border-color:#60a5fa;
+  background:color-mix(in srgb,#60a5fa 18%,transparent);
+}
+.nav-game-num[data-game="3"] {
+  color:#f472b6;
+  border-color:color-mix(in srgb,#f472b6 35%,transparent);
+  background:color-mix(in srgb,#f472b6 8%,transparent);
+}
+.nav-game-num[data-game="3"]:hover {
+  border-color:#f472b6;
+  background:color-mix(in srgb,#f472b6 18%,transparent);
+}
+.nav-game-num[data-game="4"] {
+  color:#facc15;
+  border-color:color-mix(in srgb,#facc15 35%,transparent);
+  background:color-mix(in srgb,#facc15 8%,transparent);
+}
+.nav-game-num[data-game="4"]:hover {
+  border-color:#facc15;
+  background:color-mix(in srgb,#facc15 18%,transparent);
+}
+.nav-game-num[data-game="5"] {
+  color:#a78bfa;
+  border-color:color-mix(in srgb,#a78bfa 35%,transparent);
+  background:color-mix(in srgb,#a78bfa 8%,transparent);
+}
+.nav-game-num[data-game="5"]:hover {
+  border-color:#a78bfa;
+  background:color-mix(in srgb,#a78bfa 18%,transparent);
+}
+.icon-btn {
+  width:34px; height:34px; border-radius:8px;
+  background:transparent; border:1px solid var(--border2);
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  color:var(--text2); transition:all 0.2s;
+}
+.icon-btn:hover { color:var(--text); background:var(--surface); }
+.icon-btn svg { width:15px; height:15px; }
+@media(max-width:600px) { .hdr-center { display:none; } }
+
+/* ═══ HERO ══════════════════════════════════════════════════════════════════ */
+.hero {
+  min-height:60vh;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:80px 0 60px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg, var(--surface) 0%, rgba(20,20,20,0) 100%);
+  border-bottom:1px solid var(--border);
+}
+.hero-bg-num {
+  position:absolute;
+  right:-40px;
+  top:50%;
+  transform:translateY(-50%);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(200px,35vw,400px);
+  font-weight:400;
+  letter-spacing:-10px;
+  color:var(--green);
+  opacity:0.04;
+  line-height:1;
+  user-select:none;
+  pointer-events:none;
+  z-index:0;
+}
+body.light .hero {
+  background:linear-gradient(180deg, var(--surface2) 0%, rgba(247,247,255,0) 100%);
+}
+.hero-badge {
+  display:inline-block;
+  font-size:11px; font-weight:600;
+  letter-spacing:2px; text-transform:uppercase;
+  color:var(--green); background:var(--green-dim);
+  border:1px solid rgba(74,222,128,0.18);
+  padding:6px 14px; border-radius:6px;
+  margin-bottom:20px;
+}
+.hero-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(48px,10vw,84px);
+  letter-spacing:4px; color:var(--text);
+  margin:0 0 12px; line-height:1;
+}
+.hero-title span { color:var(--green); }
+.hero-subtitle {
+  font-size:14px; font-weight:500;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--text2); margin:0 0 32px;
+}
+.hero-desc {
+  max-width:560px; margin:0 auto 36px;
+  font-size:17px; line-height:1.7; color:var(--text);
+}
+.hero-stats {
+  display:flex; justify-content:center; gap:48px;
+  margin-bottom:40px;
+}
+.hero-stat-value {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:36px; letter-spacing:2px;
+  color:var(--green); line-height:1; margin-bottom:4px;
+}
+.hero-stat-label {
+  font-size:11px; letter-spacing:1px;
+  text-transform:uppercase; color:var(--text2);
+}
+.hero-cta {
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--green); color:#000;
+  font-size:14px; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase;
+  text-decoration:none; padding:16px 40px;
+  border-radius:12px; transition:opacity 0.15s, transform 0.1s;
+}
+.hero-cta:hover { opacity:0.88; }
+.hero-cta:active { transform:scale(0.97); }
+.hero-cta svg { width:16px; height:16px; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(22px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.reveal { opacity:0; animation:fadeUp 0.55s ease forwards; }
+.reveal.d1 { animation-delay:0.1s; }
+.reveal.d2 { animation-delay:0.2s; }
+.reveal.d3 { animation-delay:0.3s; }
+.reveal.d4 { animation-delay:0.4s; }
+
+/* ═══ SECTION HEADERS ═══════════════════════════════════════════════════════ */
+.sec-head { display:flex; align-items:baseline; gap:14px; margin-bottom:32px; }
+.sec-title {
+  font-family:'Bebas Neue',sans-serif; font-size:34px;
+  letter-spacing:3px; color:var(--text);
+}
+.sec-title span { color:var(--green); }
+.sec-tag {
+  font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--text2); padding:3px 9px;
+  border:1px solid var(--border2); border-radius:4px;
+}
+
+/* ═══ LEADERBOARD ════════════════════════════════════════════════════════════
+   Columns are intentionally generous — no squeezing.
+   Player column is flexible and gets all remaining space.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.lb-section { padding:60px 0 80px; }
+
+.lb-instruct { font-size:14px; color:var(--text2); margin:-16px 0 36px; line-height:1.6; }
+.lb-panel {
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:20px;
+}
+
+/* ── Period tabs ── */
+.lb-tabs-wrap {
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+  padding:16px 20px;
+}
+.lb-period-wrap { display:flex; gap:8px; }
+.lb-period-tab {
+  padding:7px 20px; border-radius:20px;
+  font-size:11px; font-weight:700;
+  letter-spacing:0.6px; text-transform:uppercase;
+  border:1px solid var(--border2); color:var(--text2);
+  background:transparent; cursor:pointer;
+  transition:all 0.15s; white-space:nowrap;
+  font-family:'DM Sans',sans-serif;
+}
+.lb-period-tab:hover  { color:var(--text2); border-color:var(--text3); }
+.lb-period-tab.active { background:var(--green); border-color:var(--green); color:#000; }
+
+/* ── Panel header ── */
+.lb-panel-head {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:24px 32px 20px;
+  border-bottom:2px solid var(--border2);
+}
+.lb-panel-cat-name {
+  font-family:'Bebas Neue',sans-serif; font-size:28px;
+  letter-spacing:3px; color:var(--text);
+}
+.lb-panel-cat-sub {
+  font-size:11px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--text2); margin-top:3px;
+}
+.lb-play-btn {
+  background:var(--green); color:#000;
+  border:none; border-radius:9px;
+  padding:13px 30px; font-size:13px; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase;
+  font-family:'DM Sans',sans-serif;
+  text-decoration:none; cursor:pointer;
+  display:inline-flex; align-items:center; gap:7px;
+  transition:opacity 0.15s, transform 0.1s; flex-shrink:0;
+}
+.lb-play-btn:hover  { opacity:0.88; }
+.lb-play-btn:active { transform:scale(0.97); }
+.lb-play-btn svg { width:13px; height:13px; }
+
+/* ── Table wrapper ── */
+.lb-table-wrap { padding:0; overflow-x:auto; }
+
+/* ── Table: fixed layout — columns never jump regardless of content ── */
+.lb-table {
+  width:100%; border-collapse:collapse;
+  font-size:13px;
+  table-layout:fixed;
+}
+
+/* Column headers */
+.lb-table thead tr {
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--surface2);
+}
+.lb-table thead th {
+  padding:10px 20px 12px;
+  font-size:9px; letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--text2); font-weight:700;
+  text-align:left; white-space:nowrap;
+  overflow:hidden;
+  border-right:1px solid var(--border);
+}
+.lb-table thead th:last-child { border-right:none; }
+
+/* Fixed column widths — set on col elements, honoured by table-layout:fixed */
+.lb-col-rank    { width:60px; }
+.lb-col-country { width:70px; }
+.lb-col-player  { width:200px; }
+.lb-col-streak  { width:110px; }
+.lb-col-clock   { width:110px; }
+.lb-col-time    { width:110px; }
+.lb-col-clicks  { width:110px; }
+.lb-col-bonus   { width:110px; }
+.lb-col-score   { width:160px; }
+
+/* Column: 1=Rank 2=Country 3=Player 4=Streak 5=Countdown 6=TimeTaken 7=Clicks 8=Bonus 9=Score */
+.lb-table thead th               { text-align:center; padding:10px 8px 12px; white-space:nowrap; }
+.lb-table thead th:nth-child(1)  { text-align:center; }
+.lb-table thead th:nth-child(2)  { text-align:center; }
+.lb-table thead th:nth-child(3)  { text-align:left; padding-left:4px; }
+.lb-table thead th:nth-child(5)  { white-space:normal; line-height:1.3; padding:6px 2px; letter-spacing:1px; }
+
+/* Body rows */
+.lb-table tbody tr {
+  border-bottom:1px solid var(--border);
+  transition:background 0.12s; cursor:default;
+}
+.lb-table tbody tr:last-child { border-bottom:none; }
+.lb-table tbody tr:nth-child(odd)  { background:rgba(255,255,255,0.012); }
+.lb-table tbody tr:hover { background:rgba(74,222,128,0.04); }
+
+.lb-table td {
+  padding:14px 16px;
+  vertical-align:middle;
+  white-space:nowrap;
+  border-right:1px solid var(--border);
+}
+.lb-table td:last-child { border-right:none; }
+/* All tds default centre, override name to left */
+.lb-table td                     { text-align:center; }
+.lb-table td:nth-child(1)        { overflow:visible; }
+.lb-table td:nth-child(2)        { padding:8px 6px; }
+.lb-table td:nth-child(3)        { text-align:left; padding:8px 4px; }
+
+/* ── Top 3 chart-style rows ── */
+@keyframes goldPulse {
+  0%,100% { box-shadow:inset 4px 0 0 #EAC100, 0 0 0 0 rgba(234,193,0,0); }
+  50%      { box-shadow:inset 4px 0 0 #EAC100, 0 0 18px 2px rgba(234,193,0,0.15); }
+}
+.lb-table tbody tr.lb-top1 {
+  animation:goldPulse 2.8s ease-in-out infinite;
+  background:linear-gradient(90deg,rgba(234,193,0,0.09) 0%,rgba(234,193,0,0.02) 55%,transparent 100%);
+  border-bottom:1px solid rgba(234,193,0,0.18);
+  box-shadow:inset 6px 0 0 #EAC100;
+}
+.lb-top1 td { padding-top:28px; padding-bottom:28px; }
+
+.lb-table tbody tr.lb-top2 {
+  background:linear-gradient(90deg,rgba(148,163,184,0.07) 0%,rgba(148,163,184,0.01) 55%,transparent 100%);
+  border-bottom:1px solid rgba(148,163,184,0.12);
+  box-shadow:inset 5px 0 0 #8A9BA8;
+}
+.lb-top2 td { padding-top:22px; padding-bottom:22px; }
+
+.lb-table tbody tr.lb-top3 {
+  background:linear-gradient(90deg,rgba(180,83,9,0.07) 0%,rgba(180,83,9,0.01) 55%,transparent 100%);
+  border-bottom:2px solid var(--border);
+  box-shadow:inset 5px 0 0 #9B6B47;
+}
+.lb-top3 td { padding-top:18px; padding-bottom:18px; }
+
+/* ── Rank numbers ── */
+.lb-rank-num {
+  font-family:'Bebas Neue',sans-serif; font-size:18px;
+  letter-spacing:1px; line-height:1; color:var(--text3);
+}
+.lb-rank-num.top1 { font-size:72px; color:#EAC100; text-shadow:0 0 24px rgba(234,193,0,0.5); }
+.lb-rank-num.top2 { font-size:58px; color:#8A9BA8; text-shadow:0 0 18px rgba(148,163,184,0.35); }
+.lb-rank-num.top3 { font-size:46px; color:#9B6B47; text-shadow:0 0 14px rgba(180,83,9,0.3); }
+
+/* ── Player cell ── */
+.lb-player-cell {
+  display:flex; align-items:center; gap:12px;
+  overflow:hidden; min-width:0;
+}
+.lb-avatar-img {
+  width:32px; height:32px; border-radius:50%;
+  object-fit:cover; display:block; margin:0 auto;
+  border:1.5px solid var(--border2);
+}
+.lb-avatar {
+  width:32px; height:32px; border-radius:50%;
+  background:transparent; border:1.5px solid var(--text3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; color:var(--text3);
+  flex-shrink:0; letter-spacing:0.5px;
+}
+.lb-top1 .lb-avatar { width:40px; height:40px; font-size:14px; background:rgba(255,204,0,0.12); border-color:rgba(255,204,0,0.55); color:#FFCC00; }
+.lb-top2 .lb-avatar { width:36px; height:36px; font-size:13px; background:rgba(148,163,184,0.1); border-color:rgba(148,163,184,0.45); color:#94a3b8; }
+.lb-top3 .lb-avatar { width:34px; height:34px; font-size:12px; background:rgba(180,83,9,0.1); border-color:rgba(180,83,9,0.45); color:#b45309; }
+
+.lb-pname {
+  font-size:14px; font-weight:500; color:var(--text);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.lb-top1 .lb-pname { font-size:26px; font-weight:700; letter-spacing:0.3px; }
+.lb-top2 .lb-pname { font-size:22px; font-weight:700; }
+.lb-top3 .lb-pname { font-size:19px; font-weight:600; }
+
+.lb-streak {
+  font-size:9px; font-weight:700; letter-spacing:0.5px;
+  padding:2px 6px; border-radius:3px;
+  background:rgba(251,191,36,0.12); color:#fbbf24;
+  display:inline-block;
+}
+
+/* ── Country flag cell ── */
+.lb-flag-cell {
+  display:flex; align-items:center; justify-content:center;
+}
+.lb-flag-cell img {
+  width:30px; height:21px; border-radius:3px;
+  object-fit:cover; border:1px solid rgba(255,255,255,0.12); display:block;
+}
+.lb-top1 .lb-flag-cell img { width:36px; height:25px; }
+.lb-top2 .lb-flag-cell img { width:32px; height:22px; }
+
+/* ── Score / time / clicks values ── */
+.lb-score-val {
+  font-family:'Bebas Neue',sans-serif; font-size:16px;
+  letter-spacing:1px; color:var(--green);
+}
+.lb-top1 .lb-score-val { font-size:30px; }
+.lb-top2 .lb-score-val { font-size:26px; }
+.lb-top3 .lb-score-val { font-size:22px; }
+
+.lb-time-val {
+  font-size:13px; color:var(--text2); font-weight:500;
+  font-variant-numeric:tabular-nums; letter-spacing:0.3px;
+}
+.lb-top1 .lb-time-val { font-size:16px; }
+.lb-top2 .lb-time-val { font-size:14px; }
+.lb-clock-val { color:var(--green); }
+.lb-top1 .lb-time-val { font-size:17px; }
+.lb-top2 .lb-time-val { font-size:15px; }
+.lb-top3 .lb-time-val { font-size:14px; }
+.lb-clicks-val { font-size:13px; color:var(--text2); }
+.lb-top1 .lb-clicks-val { font-size:16px; }
+.lb-top2 .lb-clicks-val { font-size:14px; }
+.lb-clock-val { font-size:13px; color:var(--text2); font-variant-numeric:tabular-nums; }
+.lb-top1 .lb-clock-val { font-size:16px; }
+.lb-top2 .lb-clock-val { font-size:14px; }
+.lb-bonus-val { font-size:13px; color:var(--green); font-weight:700; }
+.lb-top1 .lb-bonus-val { font-size:17px; }
+.lb-top2 .lb-bonus-val { font-size:15px; }
+.lb-top3 .lb-bonus-val { font-size:14px; }
+.lb-top1 .lb-clicks-val { font-size:17px; }
+.lb-top2 .lb-clicks-val { font-size:15px; }
+.lb-top3 .lb-clicks-val { font-size:14px; }
+
+/* ── Expand / collapse: rows 11-100 ── */
+/* rows 11-100 hidden on load */
+.lb-table tbody tr.lb-hidden { display:none; }
+
+
+/* ── Panel footer ── */
+.lb-your-pos {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 24px; border-top:1px solid var(--border);
+  background:rgba(74,222,128,0.04);
+}
+.lb-your-pos-label {
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--text2);
+}
+.lb-your-pos-val {
+  font-family:'Bebas Neue',sans-serif; font-size:20px;
+  letter-spacing:2px; color:var(--green);
+}
+.lb-panel-foot {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 32px; border-top:1px solid var(--border);
+}
+.lb-foot-left { font-size:13px; color:var(--text2); }
+.lb-foot-left strong { color:var(--text); font-weight:700; }
+
+.lb-top100-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:12px; font-weight:600; color:var(--green);
+  background:none; border:none; cursor:pointer;
+  padding:0; font-family:'DM Sans',sans-serif;
+  transition:opacity 0.15s;
+}
+.lb-top100-btn:hover { opacity:0.75; }
+.lb-top100-btn svg { width:14px; height:14px; transition:transform 0.3s; }
+.lb-top100-btn.expanded svg { transform:rotate(90deg); }
+
+/* Period-specific column header label updates */
+.lb-col-header-time   { min-width:150px; text-align:right; }
+.lb-col-header-clicks { min-width:100px; text-align:right; }
+.lb-col-header-score  { min-width:130px; text-align:right; padding-right:32px; }
+
+/* ═══ NOTIFICATIONS ═════════════════════════════════════════════════════════ */
+.notify-section { padding:40px 0 68px; }
+.notify-card {
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:20px; padding:44px 52px;
+  display:flex; align-items:center; gap:44px;
+  position:relative; overflow:hidden;
+}
+.notify-bell { width:52px; height:52px; flex-shrink:0; color:var(--green); }
+.notify-bell svg { width:52px; height:52px; animation:bellRing 4s ease-in-out infinite; }
+@keyframes bellRing {
+  0%,88%,100% { transform:rotate(0deg); }
+  90% { transform:rotate(-14deg); }
+  94% { transform:rotate(14deg); }
+  97% { transform:rotate(-7deg); }
+}
+.notify-copy { flex:1; }
+.notify-title {
+  font-family:'Bebas Neue',sans-serif; font-size:30px;
+  letter-spacing:2px; color:var(--text); margin-bottom:10px; line-height:1.1;
+}
+.notify-title span { color:var(--green); }
+.notify-body { font-size:14px; color:var(--text2); line-height:1.65; max-width:480px; }
+.notify-btn {
+  background:var(--green); color:#000; border:none; border-radius:12px;
+  padding:14px 30px; font-size:14px; font-weight:700;
+  font-family:'DM Sans',sans-serif; cursor:pointer;
+  transition:opacity 0.15s, transform 0.1s; white-space:nowrap; flex-shrink:0;
+}
+.notify-btn:hover { opacity:0.9; }
+.notify-btn:active { transform:scale(0.97); }
+.notify-btn.confirmed {
+  background:transparent; color:var(--green);
+  border:1px solid rgba(74,222,128,0.35); cursor:default;
+}
+@media(max-width:640px) {
+  .notify-card { flex-direction:column; padding:30px 24px; text-align:center; gap:22px; }
+  .notify-btn { width:100%; }
+}
+
+/* ═══ ABOUT / WHAT IS ═══════════════════════════════════════════════════════ */
+.about-section { padding:60px 0; }
+.about-grid {
+  display:grid; grid-template-columns:1.2fr 1fr; gap:24px;
+}
+.about-card {
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:16px; padding:32px;
+}
+.about-card.featured { grid-row:span 2; }
+.about-eyebrow {
+  display:inline-block; font-size:10px; font-weight:600;
+  letter-spacing:2px; text-transform:uppercase;
+  color:var(--green); margin-bottom:12px;
+}
+.about-heading {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24px; letter-spacing:2px;
+  color:var(--text); margin-bottom:16px;
+}
+.about-body { font-size:14px; line-height:1.7; color:var(--text); }
+.about-body strong { color:var(--green); }
+.stat-row {
+  display:flex; gap:32px; margin-top:28px;
+  padding-top:20px; border-top:1px solid var(--border);
+}
+.stat-n {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px; letter-spacing:2px;
+  color:var(--green); line-height:1;
+}
+.stat-l {
+  font-size:11px; letter-spacing:1px;
+  text-transform:uppercase; color:var(--text2); margin-top:2px;
+}
+@media(max-width:768px) {
+  .about-grid { grid-template-columns:1fr; }
+  .about-card.featured { grid-row:auto; }
+}
+
+/* ═══ HOW TO PLAY ═══════════════════════════════════════════════════════════ */
+.howto-section { padding:60px 0; }
+.step-list { list-style:none; }
+.step-item {
+  display:flex; gap:20px;
+  padding:24px 0; border-bottom:1px solid var(--border);
+}
+.step-item:first-child { padding-top:0; }
+.step-item:last-child  { border-bottom:none; }
+/* Diamond bullet — no numbers to avoid clash with game IDs below */
+.step-bullet {
+  flex-shrink:0; width:36px; height:36px; margin-top:2px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:8px;
+  background:var(--green-dim); border:1px solid rgba(74,222,128,0.18);
+  color:var(--green);
+}
+.step-bullet svg { width:16px; height:16px; }
+.step-title {
+  font-size:17px; font-weight:600;
+  color:var(--text); margin-bottom:8px;
+}
+.step-body  { font-size:14px; line-height:1.7; color:var(--text); }
+.step-body strong { color:var(--green); }
+
+/* ═══ OTHER GAMES ════════════════════════════════════════════════════════════ */
+.other-games-section { padding:60px 0 80px; border-top:1px solid var(--border); }
+.other-games-grid {
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:20px;
+}
+@media(max-width:720px) {
+  .other-games-grid { grid-template-columns:1fr; }
+}
+.og-card {
+  position:relative; overflow:hidden;
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:16px; padding:28px 28px 24px;
+  text-decoration:none; display:block;
+  transition:border-color 0.18s, transform 0.18s;
+}
+.og-card:hover {
+  transform:translateY(-2px);
+}
+/* Accent colour applied via inline var */
+.og-card:hover { border-color:var(--og-col); }
+.og-num {
+  position:absolute; right:16px; bottom:-10px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:96px; letter-spacing:-2px;
+  color:var(--og-col); opacity:0.12;
+  line-height:1; user-select:none; pointer-events:none;
+}
+.og-badge {
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:10px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--og-col);
+  background:color-mix(in srgb, var(--og-col) 10%, transparent);
+  border:1px solid color-mix(in srgb, var(--og-col) 22%, transparent);
+  padding:4px 12px; border-radius:20px;
+  margin-bottom:14px;
+}
+.og-badge-dot {
+  width:5px; height:5px; border-radius:50%;
+  background:var(--og-col); flex-shrink:0;
+}
+.og-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px; letter-spacing:2px;
+  color:var(--text); margin-bottom:4px; line-height:1.1;
+}
+.og-title span { color:var(--og-col); }
+.og-subtitle {
+  font-size:11px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--text2); margin-bottom:12px;
+}
+.og-desc {
+  font-size:14px; line-height:1.6; color:var(--text);
+  margin-bottom:16px;
+}
+.og-stats {
+  display:flex; gap:20px;
+  padding-top:14px; border-top:1px solid var(--border);
+  margin-bottom:18px;
+}
+.og-stat-val {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px; letter-spacing:1px;
+  color:var(--og-col); line-height:1; margin-bottom:2px;
+}
+.og-stat-lbl {
+  font-size:9px; letter-spacing:1px;
+  text-transform:uppercase; color:var(--text3);
+}
+.og-link {
+  display:inline-flex; align-items:center; gap:5px;
+  font-size:12px; font-weight:600; color:var(--og-col);
+  text-decoration:none; transition:opacity 0.15s;
+}
+.og-link:hover { opacity:0.75; }
+.og-link svg { width:13px; height:13px; }
+
+/* ═══ FOOTER ════════════════════════════════════════════════════════════════ */
+.site-footer { border-top:1px solid var(--border); padding:44px 0; position:relative; z-index:1; }
+.ftr-inner {
+  max-width:1120px; margin:0 auto; padding:0 28px;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+}
+.ftr-logo { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px; color:var(--text2); }
+.ftr-logo span { color:var(--green); }
+.ftr-links { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.ftr-link { font-size:13px; color:var(--text3); text-decoration:none; transition:color 0.18s; }
+.ftr-link:hover { color:var(--text2); }
+.ftr-copy {
+  font-size:12px; color:var(--text3); width:100%;
+  text-align:center; margin-top:16px; padding-top:20px;
+  border-top:1px solid var(--border);
+}
+
+
+
+/* ── Category tabs on leaderboard ── */
+.lb-cat-wrap {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  padding: 16px 16px 0;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.lb-cat-wrap::-webkit-scrollbar { display: none; }
+.lb-cat-tab {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px 0 14px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: var(--text3);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  font-family: 'DM Sans', sans-serif;
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+.lb-cat-tab:hover { color: var(--text2); }
+.lb-cat-tab.active {
+  color: var(--text);
+  border-bottom-color: var(--green);
+}
+
+/* ═══ MOBILE RESPONSIVE ═════════════════════════════════════════════════════ */
+@media(max-width:767px) {
+
+  /* Wrap padding */
+  .wrap { padding:0 16px; }
+
+  /* Header */
+  .hdr-inner { padding:0 16px; grid-template-columns:auto 1fr auto; }
+  .hdr-center { display:none; }
+  .nav-games-wrap > span:first-child { display:none; }
+  .nav-games-wrap { gap:5px; }
+  .nav-game-num { width:28px; height:28px; font-size:12px; }
+
+  /* Hero */
+  .hero { padding:48px 0 36px; text-align:center; }
+  .hero-bg-num { font-size:180px; right:-20px; opacity:0.03; }
+  .hero-title { font-size:clamp(36px,10vw,60px); }
+  .hero-subtitle { font-size:12px; margin:0 0 20px; }
+  .hero-desc { font-size:15px; margin:0 auto 24px; }
+  .hero-stats { gap:24px; flex-wrap:wrap; justify-content:center; margin-bottom:28px; }
+  .hero-stat-value { font-size:28px; }
+  .hero-cta { padding:13px 28px; font-size:13px; }
+
+  /* Leaderboard */
+  .lb-section { padding:40px 0 60px; }
+  .lb-panel { border-radius:14px; }
+  .lb-panel-head { padding:16px 16px 14px; flex-wrap:wrap; gap:12px; }
+  .lb-panel-cat-name { font-size:22px; }
+  .lb-tabs-wrap { padding:12px 12px; overflow-x:auto; }
+  .lb-cat-wrap { padding:10px 12px 0; gap:4px; }
+  .lb-cat-tab { font-size:10px; padding:8px 0 10px; }
+  .lb-period-tab { padding:6px 14px; font-size:10px; }
+  .lb-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .lb-table { font-size:11px; min-width:600px; }
+  .lb-table td { padding:10px 8px; }
+  .lb-table thead th { padding:8px 6px 10px; font-size:8px; }
+  .lb-rank-num.top1 { font-size:40px; }
+  .lb-rank-num.top2 { font-size:32px; }
+  .lb-rank-num.top3 { font-size:26px; }
+  .lb-top1 td { padding-top:16px; padding-bottom:16px; }
+  .lb-top2 td { padding-top:14px; padding-bottom:14px; }
+  .lb-top3 td { padding-top:12px; padding-bottom:12px; }
+  .lb-top1 .lb-pname { font-size:16px; }
+  .lb-top2 .lb-pname { font-size:14px; }
+  .lb-top3 .lb-pname { font-size:13px; }
+  .lb-panel-foot { padding:12px 16px; }
+  .lb-your-pos { padding:10px 16px; }
+
+  /* About */
+  .about-section { padding:40px 0; }
+  .about-grid { grid-template-columns:1fr !important; }
+  .about-card.featured { grid-row:auto; padding:24px; }
+  .about-card { padding:20px; }
+  .about-heading { font-size:20px; }
+  .stat-row { gap:16px; flex-wrap:wrap; }
+
+  /* How to play */
+  .howto-section { padding:40px 0; }
+  .step-item { gap:14px; padding:18px 0; }
+  .step-bullet { width:30px; height:30px; }
+  .step-title { font-size:15px; }
+  .step-body { font-size:13px; }
+
+  /* Other games */
+  .other-games-section { padding:40px 0 60px; }
+  .other-games-grid { grid-template-columns:1fr !important; gap:14px; }
+  .og-card { padding:22px 20px 18px; }
+  .og-title { font-size:24px; }
+
+  /* Notify */
+  .notify-section { padding:36px 0; }
+  .notify-card { flex-direction:column; padding:28px 20px; text-align:center; gap:18px; }
+  .notify-title { font-size:24px; }
+  .notify-btn { width:100%; }
+
+  /* Footer */
+  .ftr-inner { flex-direction:column; align-items:flex-start; padding:0 16px; gap:14px; }
+  .ftr-links { gap:14px; flex-wrap:wrap; }
+}
+
+@media(max-width:400px) {
+  .nav-game-num { width:24px; height:24px; font-size:10px; }
+  .site-logo { font-size:20px; }
+  .hero-stats { gap:16px; }
+  .other-games-grid { grid-template-columns:1fr !important; }
+}
+
+  /* ── AD SLOT ──────────────────────────────────────────────────── */
+  .ad-slot {
+    width:100%; max-width:728px; height:90px; margin:0 auto;
+    background:var(--surface2); border:1px dashed var(--border2);
+    border-radius:10px; display:flex; align-items:center; justify-content:center;
+    gap:10px; color:var(--text3);
+  }
+  .ad-slot-label { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; font-weight:700; }
+  @media(max-width:768px) { .ad-slot { height:60px; } }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-radial"></div>
+
+<!-- ═══ HEADER ══════════════════════════════════════════════════════════════ -->
+<header class="site-header" role="banner">
+  <div class="hdr-inner">
+    <a href="index.html" class="site-logo">CLICK<span>ZLE</span></a>
+    <div class="hdr-center">
+      <span class="hdr-reset-label">Puzzles reset in:</span>
+      <span class="hdr-timer" id="hdrTimer">00:00:00</span>
+    </div>
+    <div class="hdr-right">
+      <span class="nav-link nav-other-games">
+        Other Games
+        <a href="follow-the-pattern-game-2.html" class="nav-game-num" data-game="2">2</a>
+        <a href="hit-the-target-game-3.html" class="nav-game-num" data-game="3">3</a>
+        <a href="spot-the-pair-game-4.html" class="nav-game-num" data-game="4">4</a>
+        <a href="next-in-sequence-game-5.html" class="nav-game-num" data-game="5" aria-label="Game 5: Next in Sequence">5</a>
+      </span>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main>
+
+<!-- ═══ HERO ════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="wrap" style="position:relative;z-index:1;">
+    <div class="hero-badge reveal d1">Game 1 of 5</div>
+    <h1 class="hero-title reveal d2">Complete the <span>Image</span></h1>
+    <p class="hero-subtitle reveal d2">Perception Challenge</p>
+    <p class="hero-desc reveal d3">
+      Six images are sliced into twenty tiles. Only one is complete.
+      Cycle tile faces to uncover the picture that holds together perfectly before the clock runs out.
+    </p>
+    <div class="hero-stats reveal d3">
+      <div class="hero-stat">
+        <div class="hero-stat-value">5:00 Mins</div>
+        <div class="hero-stat-label">Countdown</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">20×</div>
+        <div class="hero-stat-label">Tiles</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">6×</div>
+        <div class="hero-stat-label">Images — One is Complete</div>
+      </div>
+    </div>
+    <a href="#leaderboard" class="hero-cta reveal d4" style="background:transparent;color:var(--green);border:1px solid rgba(74,222,128,0.35);gap:10px;">
+      View Leaderboard
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
+  </div>
+  <!-- 01 background graphic — same as homepage game sections -->
+  <div class="hero-bg-num">01</div>
+</section>
+
+<!-- ═══ AD SLOT ═════════════════════════════════════════════════════════════ -->
+<div style="padding:40px 0 0;">
+  <div class="wrap">
+    <div class="ad-slot">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      <span class="ad-slot-label">Clickzle Games &mdash; 728 &times; 90</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LEADERBOARD ══════════════════════════════════════════════════════════ -->
+<section class="lb-section" id="leaderboard">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title" id="lbSectionTitle">Daily <span>Leaderboard</span></div>
+      <div class="sec-tag" id="lbSectionTag">Today &middot; Resets midnight UTC</div>
+    </div>
+    <p class="lb-instruct reveal">Choose a category below, then press the <strong>Play Now</strong> button to play today&rsquo;s puzzle.</p>
+    <div class="sec-head" style="display:none">
+    </div>
+    <div class="lb-panel">
+
+      <!-- Category tabs -->
+      <div class="lb-cat-wrap">
+        <button class="lb-cat-tab active" data-cat="movies" data-slug="movies">Movies</button>
+        <button class="lb-cat-tab" data-cat="animals" data-slug="animals">Animals</button>
+        <button class="lb-cat-tab" data-cat="art" data-slug="art">Art</button>
+        <button class="lb-cat-tab" data-cat="flags" data-slug="flags">Flags</button>
+        <button class="lb-cat-tab" data-cat="food" data-slug="food">Food</button>
+        <button class="lb-cat-tab" data-cat="landscapes" data-slug="landscapes">Landscapes</button>
+        <button class="lb-cat-tab" data-cat="buildings" data-slug="buildings">Buildings</button>
+        <button class="lb-cat-tab" data-cat="celebrities" data-slug="celebrities">Celebrities</button>
+      </div>
+
+      <!-- Period tabs -->
+      <div class="lb-tabs-wrap">
+        <div class="lb-period-wrap">
+          <button class="lb-period-tab active" data-period="today">Today</button>
+          <button class="lb-period-tab" data-period="month">This Month</button>
+          <button class="lb-period-tab" data-period="alltime">All Time</button>
+        </div>
+      </div>
+
+      <!-- Panel header -->
+      <div class="lb-panel-head">
+        <div>
+          <div class="lb-panel-cat-name">Complete the Image</div>
+          <div class="lb-panel-cat-sub" id="lbPanelSub">Perception Challenge &mdash; Today's Rankings</div>
+        </div>
+        <a href="games/game1/complete-the-image/movies/clickzle-movies.html" class="lb-play-btn">
+          Play Now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </a>
+      </div>
+
+      <!-- Table -->
+      <div class="lb-table-wrap">
+        <table class="lb-table" id="lbTable">
+          <colgroup>
+            <col class="lb-col-rank">
+            <col class="lb-col-country">
+            <col class="lb-col-player">
+            <col class="lb-col-streak">
+            <col class="lb-col-clock">
+            <col class="lb-col-time">
+            <col class="lb-col-clicks">
+            <col class="lb-col-bonus">
+            <col class="lb-col-score">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Country</th>
+              <th>Player</th>
+              <th>Streak</th>
+              <th id="lbThClock">5m Countdown</th>
+              <th id="lbThTime" style="text-align:center;">Time Taken</th>
+              <th id="lbThClicks">Clicks</th>
+              <th id="lbThBonus">Bonus</th>
+              <th id="lbThScore">Score</th>
+            </tr>
+          </thead>
+          <tbody id="lbBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Footer -->
+      <div class="lb-your-pos" id="lbYourPos">
+        <span class="lb-your-pos-label">Your Position</span>
+        <span class="lb-your-pos-val" id="lbYourPosVal" style="color:var(--text3)">Not played yet</span>
+      </div>
+      <div class="lb-panel-foot">
+        <div class="lb-foot-left">
+          <strong id="lbPlayerCount">0</strong> <span id="lbPeriodLabel">players today</span>
+        </div>
+        <button class="lb-top100-btn" id="lbExpandBtn" onclick="toggleExpand()">
+          View Top 100
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ NOTIFICATIONS ═══════════════════════════════════════════════════════ -->
+<section class="notify-section">
+  <div class="wrap">
+    <div class="notify-card reveal">
+      <div class="notify-bell">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+      </div>
+      <div class="notify-copy">
+        <div class="notify-title">Never miss a puzzle. <span>Get reminded.</span></div>
+        <div class="notify-body">
+          Enable daily reminders and we'll notify you the moment a new puzzle drops at midnight UTC.
+          No app required — works directly in your browser. Cancel any time.
+        </div>
+      </div>
+      <button class="notify-btn" id="notifyBtn">Enable Reminders</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IS ═════════════════════════════════════════════════════════════ -->
+<section class="about-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">What is <span>Complete the Image?</span></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-card featured">
+        <span class="about-eyebrow">The Game</span>
+        <div class="about-heading">Six images. Twenty tiles. One answer.</div>
+        <div class="about-body">
+          Complete the Image is a daily perception puzzle. Six images are sliced into 20 tiles and mixed together.
+          Only one image is perfectly intact — the other five have <strong>corrupted tiles</strong> that can never complete the picture.<br><br>
+          You have five minutes. The fastest accurate solve wins the leaderboard.<br><br>
+          Every player worldwide plays the exact same puzzle on the same day. One attempt. No retries.
+          A <strong>wrong tile sound</strong> alerts you the moment you land on a corrupted face —  8 categories available daily.
+        </div>
+        <div class="stat-row">
+          <div class="stat"><div class="stat-n">6×</div><div class="stat-l">Images Per Puzzle</div></div>
+          <div class="stat"><div class="stat-n">5:00</div><div class="stat-l">Countdown</div></div>
+          <div class="stat"><div class="stat-n">200</div><div class="stat-l">Images Per Pool</div></div>
+        </div>
+      </div>
+      <div class="about-card">
+        <span class="about-eyebrow">Free to Play</span>
+        <div class="about-heading">No account needed to start</div>
+        <div class="about-body">
+          Every puzzle is completely free. Jump straight in without signing up.
+          Create a free account to unlock leaderboard access and protect your streak across all devices.
+        </div>
+      </div>
+      <div class="about-card">
+        <span class="about-eyebrow">New Every Day</span>
+        <div class="about-heading">Fresh challenges at midnight UTC</div>
+        <div class="about-body">
+          Every puzzle is generated from a daily seed — every player on Earth plays the exact same
+          challenge on the same day. Archives are preserved permanently.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW TO PLAY ═════════════════════════════════════════════════════════ -->
+<section class="howto-section" id="how-to-play">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">How to <span>Play</span></div>
+      <div class="sec-tag">30 seconds to learn</div>
+    </div>
+    <ol class="step-list">
+      <li class="step-item">
+        <div class="step-bullet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <div class="step-title">Choose a category</div>
+          <div class="step-body">Pick a category — Movies, Flags, Animals, Art and more. Each has its own independent daily puzzle and live leaderboard.</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-bullet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <div class="step-title">A 5-second countdown launches the game</div>
+          <div class="step-body">When you enter the game a 5-4-3-2-1 countdown begins automatically. The moment GO fires, the clock is running.</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-bullet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <div class="step-title">Click tiles to cycle through faces</div>
+          <div class="step-body">Each tile holds six faces — one slice from each of the six images. Click to cycle through them until all 20 tiles show the same image.</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-bullet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <div class="step-title">Watch for the glitch flash</div>
+          <div class="step-body">Five of the six images are corrupted. When you land on a corrupted face, the tile <strong>flickers with a glitch flash</strong>. Use this to eliminate decoys.</div>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-bullet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <div class="step-title">Snap all 20 tiles into place</div>
+          <div class="step-body">Victory fires the instant all 20 tiles simultaneously show the same complete image. Fastest time wins the board.</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══ SCORING ════════════════════════════════════════════════════════════ -->
+<section style="padding:60px 0;border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">How <span>Scoring Works</span></div>
+      <div class="sec-tag">Earn points every solve</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:800px;margin:0 auto;">
+      <div style="background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px;">
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px;">Base Score</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-radius:8px;"><span style="font-size:13px;color:var(--text2);">Starting points</span><span style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--accent);">10,000</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-radius:8px;"><span style="font-size:13px;color:var(--text2);">Time penalty (per second)</span><span style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--accent);">−30 pts</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-radius:8px;"><span style="font-size:13px;color:var(--text2);">Click penalty (per tap)</span><span style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--accent);">−1 pt</span></div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px;">
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px;">Bonuses</div>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg);border-radius:8px;"><span style="font-size:12px;color:var(--text2);">Perfect Game &mdash; every tile first click</span><span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fbbf24;">+500</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg);border-radius:8px;"><span style="font-size:12px;color:var(--text2);">Speed Elite &mdash; solved under 1 minute</span><span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--accent);">+300</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg);border-radius:8px;"><span style="font-size:12px;color:var(--text2);">Speed Great &mdash; solved under 2 minutes</span><span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#4ade80;">+150</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg);border-radius:8px;"><span style="font-size:12px;color:var(--text2);">Speed Good &mdash; solved under 3 minutes</span><span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#4ade80;">+75</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OTHER GAMES ══════════════════════════════════════════════════════════ -->
+<section class="other-games-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">Other <span>Games</span></div>
+      <div class="sec-tag">4 More Daily Challenges</div>
+    </div>
+    <div class="other-games-grid">
+
+      <a href="follow-the-pattern-game-2.html" class="og-card" style="--og-col:#60a5fa">
+        <div class="og-num">2</div>
+        <div class="og-badge"><span class="og-badge-dot"></span>Game 2 of 5</div>
+        <div class="og-title">Follow the <span>Pattern</span></div>
+        <div class="og-subtitle">Memory Challenge</div>
+        <div class="og-desc">Tiles flash in sequence. Memorise the order. Tap them back exactly. Sequences grow longer each round.</div>
+        <div class="og-stats"><div><div class="og-stat-val">5:00</div><div class="og-stat-lbl">Time</div></div><div><div class="og-stat-val">5</div><div class="og-stat-lbl">Rounds</div></div><div><div class="og-stat-val">Daily</div><div class="og-stat-lbl">Puzzle</div></div></div>
+        <span class="og-link">View Game <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </a>
+
+      <a href="hit-the-target-game-3.html" class="og-card" style="--og-col:#f472b6">
+        <div class="og-num">3</div>
+        <div class="og-badge"><span class="og-badge-dot"></span>Game 3 of 5</div>
+        <div class="og-title">Hit the <span>Target</span></div>
+        <div class="og-subtitle">Reaction Challenge</div>
+        <div class="og-desc">Targets flood the grid. Solid dot means shoot it, hollow ring means leave it. Five one-minute rounds of pure reaction speed.</div>
+        <div class="og-stats"><div><div class="og-stat-val">5:00</div><div class="og-stat-lbl">Time</div></div><div><div class="og-stat-val">5</div><div class="og-stat-lbl">Rounds</div></div><div><div class="og-stat-val">Daily</div><div class="og-stat-lbl">Puzzle</div></div></div>
+        <span class="og-link">View Game <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </a>
+
+      <a href="spot-the-pair-game-4.html" class="og-card" style="--og-col:#facc15">
+        <div class="og-num">4</div>
+        <div class="og-badge"><span class="og-badge-dot"></span>Game 4 of 5</div>
+        <div class="og-title">Spot the <span>Pair</span></div>
+        <div class="og-subtitle">Observation Challenge</div>
+        <div class="og-desc">20 tiles, one hidden pair. Find both before the clock runs out. Decoys get sneakier every round.</div>
+        <div class="og-stats"><div><div class="og-stat-val">5:00</div><div class="og-stat-lbl">Time</div></div><div><div class="og-stat-val">5</div><div class="og-stat-lbl">Rounds</div></div><div><div class="og-stat-val">Daily</div><div class="og-stat-lbl">Puzzle</div></div></div>
+        <span class="og-link">View Game <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </a>
+
+      <a href="next-in-sequence-game-5.html" class="og-card" style="--og-col:#a78bfa">
+        <div class="og-num">5</div>
+        <div class="og-badge"><span class="og-badge-dot"></span>Game 5 of 5</div>
+        <div class="og-title">Next in <span>Sequence</span></div>
+        <div class="og-subtitle">Reasoning Challenge</div>
+        <div class="og-desc">Rotate pipe tiles to connect START to END. Chain puzzles under the clock — each one harder than the last.</div>
+        <div class="og-stats"><div><div class="og-stat-val">5:00</div><div class="og-stat-lbl">Time</div></div><div><div class="og-stat-val">20</div><div class="og-stat-lbl">Tiles</div></div><div><div class="og-stat-val">Daily</div><div class="og-stat-lbl">Puzzle</div></div></div>
+        <span class="og-link">View Game <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="ftr-inner">
+    <div class="ftr-logo">CLICK<span>ZLE</span></div>
+    <div class="ftr-links">
+      <a href="about.html" class="ftr-link">About</a>
+      <a href="contact.html" class="ftr-link">Contact</a>
+      <a href="privacy.html" class="ftr-link">Privacy</a>
+      <a href="terms.html" class="ftr-link">Terms of Use</a>
+    </div>
+    <div class="ftr-copy">&copy; 2026 Clickzle. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+// ── COUNTDOWN ─────────────────────────────────────────────────────────────────
+function tick() {
+  const now = new Date();
+  const midnight = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
+  let d = Math.max(0, midnight - now);
+  const h = Math.floor(d / 3600000); d %= 3600000;
+  const m = Math.floor(d / 60000);   d %= 60000;
+  const s = Math.floor(d / 1000);
+  document.getElementById('hdrTimer').textContent =
+    String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+}
+setInterval(tick, 1000); tick();
+
+// ── MOCK DATA ─────────────────────────────────────────────────────────────────
+// Score formula: 10,000 - (seconds elapsed x 30) - (clicks x 1)
+// Time is everything. Clicks are a pure tiebreaker.
+
+const NAMES = [
+  'CinemaEye','ReelHunter','SilverScreen','FrameRate99','PosterPerfect',
+  'CutPrint','DailyDirector','FilmNoir','TitleCard','MarqueeX',
+  'ScriptSpy','BoxOfficeQ','DirectorX','ReelMaster','CineNerd',
+  'FadeToBlack','OpeningAct','CloseUp','WideShot','TrackingShot',
+  'GoldenReel','SceneStealer','CallSheet','ClapperX','OverShoulder',
+  'BackLot','ScreenTest','SilentType','TalkiePro','FocusPull',
+  'GafferQ','KeyGrip99','BoomMike','SoundMix','ColorGrade',
+  'FinalCut','RoughEdit','AssemblyX','PrintIt','LockPicture',
+  'ScreenPlay','ThirdAct','ColdOpen','FadeIn99','MatchCut',
+  'JumpCut','CrossDissolve','WipeRight','IrisOut','TiltDown',
+  'PanRight','DollyIn','CraneUp','SmashCut','CheatCut',
+  'EyeMatch','PointOfView','ReactionShot','InsertCut','CutAway',
+  'MontagePro','ParallelCut','ContinuityX','IntCutaway','TwoShot',
+  'OverCranked','UnderCrank','SlowBurn','FastCut99','FreezeFrm',
+  'SmashZoom','RewindX','LoopBack','NegativeX','FilmGrain',
+  'ScratchPrint','SpliceMark','ReelSix','FrameOne','SpliceZero',
+  'TakeFive','SceneNine','RollTwo','SlateThree','BoardFour',
+  'ClapFive','MarkerSix','MarkSeven','FocusEight','LightNine',
+  'RigTen','GripElev','ElecTwelve','SetThirt','StandIn14',
+  'DoubleUp','StuntCoord','ScriptSup','ContinuityP','LineProducer'
+];
+
+const COUNTRIES = ['gb','us','de','fr','br','jp','kr','ca','au','nl','se','it','es','pt','mx','za','in','nz','ar','pl'];
+
+// Seeded RNG — stable across page loads, changes daily
+function makeRng(seed) {
+  let s = seed;
+  return function() {
+    s = (s * 1664525 + 1013904223) & 0xffffffff;
+    return (s >>> 0) / 4294967296;
+  };
+}
+
+function fmtTime(ms) {
+  const totalSecs = Math.floor(ms / 1000);
+  const m = Math.floor(totalSecs / 60);
+  const s = totalSecs % 60;
+  return m > 0 ? m + 'm ' + String(s).padStart(2,'0') + 's' : s + 's';
+}
+function fmtClock(ms) {
+  const rem = Math.max(0, 300000 - ms);
+  const m   = Math.floor(rem / 60000);
+  const s   = Math.floor((rem % 60000) / 1000);
+  const mil = rem % 1000;
+  return String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0') + ':' + String(mil).padStart(3,'0');
+}
+
+function generateDaily() {
+  const today = new Date();
+  const seed = today.getUTCFullYear() * 10000 + (today.getUTCMonth()+1) * 100 + today.getUTCDate();
+  const rng = makeRng(seed % 99991 + 1);
+  const entries = [];
+  for (let i = 0; i < 100; i++) {
+    // Distribute times realistically: top 10 under 1:30, long tail up to 4:50
+    const timeMs = Math.floor(rng() * 262000) + 18000; // 18s – 4m 40s
+    const clicks = Math.floor(rng() * 88) + 12;
+    const base   = Math.max(0, 10000 - Math.floor(timeMs / 1000) * 30 - clicks);
+    const bonus  = (timeMs < 60000 ? 300 : timeMs < 120000 ? 150 : timeMs < 180000 ? 75 : 0) + (rng() < 0.15 ? 500 : 0);
+    const score  = base + bonus;
+    entries.push({
+      name:      NAMES[i],
+      time:      fmtTime(timeMs),
+      clockTime: fmtClock(timeMs),
+      timeMs:    timeMs,
+      clicks:    clicks,
+      bonus:     bonus,
+      score:     score,
+      streak:    Math.floor(rng() * 24),
+      country:   COUNTRIES[Math.floor(rng() * COUNTRIES.length)]
+    });
+  }
+  // Sort by score desc, then time asc (time is tiebreaker, clicks breaks further ties)
+  entries.sort((a, b) => b.score - a.score || a.timeMs - b.timeMs || a.clicks - b.clicks);
+  return entries;
+}
+
+function generateMonthly() {
+  const rng = makeRng(7829);
+  const daysIn = new Date().getUTCDate();
+  const entries = [];
+  for (let i = 0; i < 100; i++) {
+    const played   = Math.min(daysIn, Math.floor(daysIn * 0.5 + rng() * daysIn * 0.5) + 1);
+    const avgTimeS = Math.floor(rng() * 180) + 20;
+    const bestTimeMs = Math.max(8000, (avgTimeS - Math.floor(rng() * 50)) * 1000);
+    const totalScore = Math.max(0, Math.floor(played * (10000 - avgTimeS * 30)));
+    entries.push({
+      name:      NAMES[i],
+      time:      fmtTime(bestTimeMs),
+      clockTime: fmtClock(bestTimeMs),
+      timeMs:    bestTimeMs,
+      clicks:    played,     // repurposed as "puzzles played" for monthly view
+      score:   totalScore,
+      streak:  Math.floor(rng() * daysIn),
+      country: COUNTRIES[Math.floor(rng() * COUNTRIES.length)]
+    });
+  }
+  entries.sort((a, b) => b.score - a.score || b.clicks - a.clicks || a.timeMs - b.timeMs);
+  return entries;
+}
+
+function generateAllTime() {
+  const rng = makeRng(3141);
+  const entries = [];
+  for (let i = 0; i < 100; i++) {
+    const bestTimeMs = Math.floor(rng() * 120000) + 8000;
+    const bestClicks = Math.floor(rng() * 60) + 10;
+    const bestScore  = Math.max(0, 10000 - Math.floor(bestTimeMs / 1000) * 30 - bestClicks);
+    entries.push({
+      name:      NAMES[i],
+      time:      fmtTime(bestTimeMs),
+      clockTime: fmtClock(bestTimeMs),
+      timeMs:    bestTimeMs,
+      clicks:    Math.floor(rng() * 280) + 20,  // total puzzles played all time
+      score:   bestScore,
+      streak:  Math.floor(rng() * 180),
+      country: COUNTRIES[Math.floor(rng() * COUNTRIES.length)]
+    });
+  }
+  entries.sort((a, b) => b.score - a.score || a.timeMs - b.timeMs);
+  return entries;
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+let activePeriod  = 'today';
+let isExpanded    = false;
+let currentData   = [];
+
+function rowHTML(p, i) {
+  const rank    = i + 1;
+  const rClass  = rank === 1 ? 'top1' : rank === 2 ? 'top2' : rank === 3 ? 'top3' : '';
+  const trClass = rank === 1 ? 'lb-top1' : rank === 2 ? 'lb-top2' : rank === 3 ? 'lb-top3' : '';
+  // Extra table rows never get top-3 treatment (they are rank 11+)
+  const trC  = trClass;
+  const rnC  = rClass;
+  const initials  = p.name.slice(0,2).toUpperCase();
+  const avatarHTML = p.avatar ? `<img src="${p.avatar}" class="lb-avatar-img" alt="${p.name}">` : '';
+  const streakHTML = p.streak >= 3
+    ? `<span class="lb-streak">${p.streak}d</span>` : '';
+  const flagHTML = `<img src="https://flagcdn.com/40x30/${p.country}.png"
+    srcset="https://flagcdn.com/80x60/${p.country}.png 2x"
+    alt="${p.country.toUpperCase()}" width="30" height="21">`;
+
+  const clickDisplay = activePeriod === 'today'
+    ? p.clicks
+    : activePeriod === 'month'
+      ? p.clicks + ' played'
+      : p.clicks + ' played';
+
+  return `
+    <tr class="${trC}">
+      <td><span class="lb-rank-num ${rnC}">${rank}</span></td>
+      <td><div class="lb-flag-cell">${flagHTML}</div></td>
+      <td><span class="lb-pname">${p.name}</span></td>
+      <td style="text-align:center">${streakHTML}</td>
+      <td><span class="lb-clock-val">${p.clockTime || '—'}</span></td>
+      <td><span class="lb-time-val">${p.time}</span></td>
+      <td><span class="lb-clicks-val">${clickDisplay}</span></td>
+      <td><span class="lb-bonus-val">${p.bonus > 0 ? '+' + p.bonus.toLocaleString() : '—'}</span></td>
+      <td><span class="lb-score-val">${p.score.toLocaleString()}</span></td>
+    </tr>`;
+}
+
+function renderLeaderboard(data) {
+  currentData = data;
+  const tbody = document.getElementById('lbBody');
+  tbody.innerHTML = data.map((p, i) => rowHTML(p, i, false)).join('');
+  // Hide rows 11-100 unless expanded
+  Array.from(tbody.rows).forEach((tr, i) => {
+    tr.classList.toggle('lb-hidden', i >= 10 && !isExpanded);
+  });
+  document.getElementById('lbPlayerCount').textContent = data.length;
+  updateYourPosition();
+}
+
+function updateYourPosition() {
+  const el = document.getElementById('lbYourPosVal');
+  if (!el) return;
+  const playerName = localStorage.getItem('clickzle_player_name') || '';
+  if (!playerName) { el.textContent = 'Not played yet'; el.style.color = 'var(--text3)'; return; }
+  // Check if player appears in current data
+  const idx = currentData.findIndex(p => p.name.toLowerCase() === playerName.toLowerCase());
+  if (idx !== -1) {
+    el.textContent = '#' + (idx + 1);
+    el.style.color = idx === 0 ? '#EAC100' : 'var(--green)';
+  } else {
+    // Check localStorage for a stored rank (set by the game on completion)
+    const storedRank = localStorage.getItem('clickzle_rank_' + activeCat + '_' + activePeriod);
+    el.textContent = storedRank ? '#' + storedRank : 'Not played yet';
+    el.style.color = 'var(--text3)';
+  }
+}
+
+// ── EXPAND / COLLAPSE ─────────────────────────────────────────────────────────
+function toggleExpand() {
+  const btn = document.getElementById('lbExpandBtn');
+  isExpanded = !isExpanded;
+  const tbody = document.getElementById('lbBody');
+  Array.from(tbody.rows).forEach((tr, i) => {
+    tr.classList.toggle('lb-hidden', i >= 10 && !isExpanded);
+  });
+  if (isExpanded) {
+    btn.classList.add('expanded');
+    btn.innerHTML = `Show Less
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+  } else {
+    btn.classList.remove('expanded');
+    btn.innerHTML = `View Top 100
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+  }
+}
+
+// ── PERIOD TABS ────────────────────────────────────────────────────────────────
+function setPeriod(p) {
+  activePeriod = p;
+
+  // Reset expand state
+  const btn = document.getElementById('lbExpandBtn');
+  btn.classList.remove('expanded');
+  btn.innerHTML = `View Top 100
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+  // Update tab active state
+  document.querySelectorAll('.lb-period-tab').forEach(t =>
+    t.classList.toggle('active', t.dataset.period === p)
+  );
+
+  // Update section heading
+  const titles = {
+    today:   'Daily <span>Leaderboard</span>',
+    month:   'Monthly <span>Standings</span>',
+    alltime: 'All Time <span>Hall of Fame</span>'
+  };
+  document.getElementById('lbSectionTitle').innerHTML = titles[p];
+
+  const tags = {
+    today:   'Today \u00b7 Resets midnight UTC',
+    month:   'This Month \u00b7 Cumulative score \u00b7 Prizes coming soon',
+    alltime: 'All Time \u00b7 Best single score ever'
+  };
+  document.getElementById('lbSectionTag').textContent = tags[p];
+
+  // Update panel subtitle
+  const activeMeta = CAT_META[activeCat] || { name: 'Movies' };
+  const subs = {
+    today:   activeMeta.name + ' \u2014 Today\'s Rankings',
+    month:   activeMeta.name + ' \u2014 ' + new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'}),
+    alltime: activeMeta.name + ' \u2014 Hall of Fame'
+  };
+  document.getElementById('lbPanelSub').textContent = subs[p];
+
+  // Update column headers
+  document.getElementById('lbThTime').textContent   = p === 'today' ? 'Time'    : 'Best Time';
+  document.getElementById('lbThClicks').textContent = p === 'today' ? 'Clicks'  : 'Puzzles';
+  document.getElementById('lbThScore').textContent  = p === 'today' ? 'Score'   : p === 'month' ? 'Monthly' : 'Best Score';
+
+  // Update player count label
+  const labels = {
+    today:   'players today',
+    month:   'players this month',
+    alltime: 'all-time players'
+  };
+  document.getElementById('lbPeriodLabel').textContent = labels[p];
+
+  // Render correct data
+  const data = p === 'today' ? generateDaily()
+             : p === 'month' ? generateMonthly()
+             : generateAllTime();
+  renderLeaderboard(data);
+}
+
+
+// ── CATEGORY TABS ─────────────────────────────────────────────────────────────
+const CAT_META = {
+  movies:      { name: 'Movies',      color: '#4ade80' },
+  animals:     { name: 'Animals',     color: '#14B8A6' },
+  art:         { name: 'Art',         color: '#F59E0B' },
+  flags:       { name: 'Flags',       color: '#3B82F6' },
+  food:        { name: 'Food',        color: '#FB923C' },
+  landscapes:   { name: 'Landscapes',  color: '#10B981' },
+  buildings:   { name: 'Buildings',  color: '#6366F1' },
+  celebrities: { name: 'Celebrities',color: '#EC4899' },
+};
+
+let activeCat = 'movies';
+
+function setCategory(slug) {
+  activeCat = slug;
+  const meta = CAT_META[slug];
+
+  // Update tab active state
+  document.querySelectorAll('.lb-cat-tab').forEach(t =>
+    t.classList.toggle('active', t.dataset.cat === slug)
+  );
+
+  // Update panel header cat name and play link
+  document.querySelector('.lb-panel-cat-name').textContent = meta.name;
+  const playBtn = document.querySelector('.lb-play-btn');
+  if (playBtn) playBtn.href = `games/game1/complete-the-image/${slug}/clickzle-${slug}.html`;
+
+  // Update panel subtitle to reflect current period
+  const p = document.querySelector('.lb-period-tab.active')?.dataset.period || 'today';
+  const subs = {
+    today:   `${meta.name} \u2014 Today's Rankings`,
+    month:   `${meta.name} \u2014 ` + new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'}),
+    alltime: `${meta.name} \u2014 Hall of Fame`,
+  };
+  document.getElementById('lbPanelSub').textContent = subs[p];
+
+  // Reset expand
+  isExpanded = false;
+  document.getElementById('lbExpandBtn').classList.remove('expanded');
+  document.getElementById('lbExpandBtn').innerHTML = `View Top 100
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+  // Re-render leaderboard with fresh data for this category
+  const data = p === 'today' ? generateDaily()
+             : p === 'month' ? generateMonthly()
+             : generateAllTime();
+  renderLeaderboard(data);
+}
+
+document.querySelectorAll('.lb-cat-tab').forEach(t => {
+  t.addEventListener('click', () => setCategory(t.dataset.cat));
+});
+
+// Wire period tabs
+document.querySelectorAll('.lb-period-tab').forEach(t => {
+  t.addEventListener('click', () => setPeriod(t.dataset.period));
+});
+
+// Initial render
+renderLeaderboard(generateDaily());
+
+// ── NOTIFICATIONS ─────────────────────────────────────────────────────────────
+const notifyBtn = document.getElementById('notifyBtn');
+if (localStorage.getItem('clickzle_notify') === 'granted') {
+  notifyBtn.textContent = 'Reminders enabled';
+  notifyBtn.classList.add('confirmed');
+}
+notifyBtn.addEventListener('click', async () => {
+  if (notifyBtn.classList.contains('confirmed')) return;
+  if (!('Notification' in window)) {
+    alert('Your browser does not support push notifications. Try Chrome or Firefox.');
+    return;
+  }
+  const perm = await Notification.requestPermission();
+  if (perm === 'granted') {
+    localStorage.setItem('clickzle_notify', 'granted');
+    notifyBtn.textContent = 'Reminders enabled';
+    notifyBtn.classList.add('confirmed');
+    setTimeout(() => new Notification('Clickzle', {
+      body: "You're all set. We'll notify you when tomorrow's puzzle drops.",
+    }), 500);
+  } else {
+    alert('Notifications blocked. Enable them in your browser settings and try again.');
+  }
+});
+
+// ── THEME ─────────────────────────────────────────────────────────────────────
+let light = localStorage.getItem('clickzle_site_theme') === 'light';
+function applyTheme() {
+  document.body.classList.toggle('light', light);
+  document.getElementById('iconSun').style.display  = light ? 'none'  : 'block';
+  document.getElementById('iconMoon').style.display = light ? 'block' : 'none';
+}
+applyTheme();
+document.getElementById('themeToggle').addEventListener('click', () => {
+  light = !light;
+  localStorage.setItem('clickzle_site_theme', light ? 'light' : 'dark');
+  applyTheme();
+});
+</script>
+</body>
+</html>
