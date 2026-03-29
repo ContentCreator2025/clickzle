@@ -6,7 +6,7 @@
 <meta name="description" content="Contact Clickzle — send feedback, bug reports, advertising enquiries and more.">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4466950609868947"
      crossorigin="anonymous"></script>
-  <!-- Primary SEO -->
+<!-- Primary SEO -->
 <title>Contact Us — Clickzle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -128,47 +128,79 @@ body.light .site-header{background:rgba(244,244,244,0.92);}
 .toc-list a:hover{color:var(--green);}
 .toc-list a::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--text3);flex-shrink:0;}
 
-/* Form */
-.form-name-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.form-group{margin-bottom:20px;}
-.form-label{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;font-weight:600;}
-.req{color:var(--red);font-size:13px;}
-.form-input,.form-select,.form-textarea{
-  width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:10px;
-  padding:13px 16px;font-size:15px;color:var(--text);font-family:'DM Sans',sans-serif;
-  outline:none;transition:border-color 0.2s;}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--green);}
-.form-input::placeholder,.form-textarea::placeholder{color:var(--text3);}
-.form-textarea{resize:vertical;min-height:140px;}
-.form-select option{background:var(--bg);}
-body.light .form-select option{background:#fff;}
-.form-hint{font-size:12px;color:var(--text3);margin-top:12px;}
-.form-submit{background:var(--green);color:#000;border:none;border-radius:10px;
-  padding:14px 36px;font-size:15px;font-weight:700;font-family:'DM Sans',sans-serif;
-  cursor:pointer;transition:opacity 0.15s,transform 0.1s;display:inline-flex;align-items:center;gap:8px;}
-.form-submit:hover{opacity:0.9;}.form-submit:active{transform:scale(0.97);}
-.form-submit svg{width:16px;height:16px;}
-.form-success{display:none;background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.25);
-  border-radius:12px;padding:32px;text-align:center;margin-top:24px;}
-.form-success.show{display:block;}
-.form-success-icon{color:var(--green);margin-bottom:12px;}
-.form-success-icon svg{width:40px;height:40px;}
-.form-success-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--text);margin-bottom:8px;}
-.form-success-body{font-size:14px;color:var(--text2);line-height:1.6;}
-
-/* About stats */
-.stat-row{display:flex;gap:36px;margin-top:28px;flex-wrap:wrap;}
-.stat{display:flex;flex-direction:column;gap:3px;}
-.stat-n{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:2px;color:var(--green);line-height:1;}
-.stat-l{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;}
-.featured-card{background:linear-gradient(135deg,var(--surface) 0%,rgba(74,222,128,0.03) 100%);
-  border:1px solid rgba(74,222,128,0.15);border-radius:16px;padding:38px;margin-bottom:16px;}
-
-/* Reveal animation */
+/* Email card (replaces form) */
+.email-card {
+  background:linear-gradient(135deg,var(--surface) 0%,rgba(74,222,128,0.03) 100%);
+  border:1px solid rgba(74,222,128,0.15);
+  border-radius:24px;
+  padding:48px 32px;
+  text-align:center;
+  margin-bottom:16px;
+}
+.email-icon {
+  width:64px;
+  height:64px;
+  margin:0 auto 20px auto;
+  background:var(--green-dim);
+  border-radius:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--green);
+}
+.email-icon svg {
+  width:32px;
+  height:32px;
+}
+.email-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px;
+  letter-spacing:2px;
+  color:var(--text);
+  margin-bottom:12px;
+}
+.email-desc {
+  font-size:15px;
+  color:var(--text2);
+  max-width:500px;
+  margin:0 auto 28px auto;
+  line-height:1.6;
+}
+.email-button {
+  background:var(--green);
+  color:#000;
+  border:none;
+  border-radius:40px;
+  padding:14px 32px;
+  font-size:16px;
+  font-weight:700;
+  font-family:'DM Sans',sans-serif;
+  cursor:pointer;
+  transition:opacity 0.15s,transform 0.1s;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+}
+.email-button:hover {
+  opacity:0.9;
+}
+.email-button:active {
+  transform:scale(0.97);
+}
+.email-button svg {
+  width:18px;
+  height:18px;
+}
+.email-hint {
+  font-size:12px;
+  color:var(--text3);
+  margin-top:20px;
+}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.5s ease,transform 0.5s ease;}
 .reveal.in{opacity:1;transform:translateY(0);}
 
-/* ── RESPONSIVE ──────────────────────────────────────────── */
+/* Responsive */
 @media(max-width:640px){
   .hdr-center{display:none;}
   .hdr-right .nav-link{display:none;}
@@ -179,21 +211,16 @@ body.light .form-select option{background:#fff;}
   .page-lead{font-size:15px;}
   .card-grid{grid-template-columns:1fr;}
   .info-card{padding:22px;}
-  .form-name-row{grid-template-columns:1fr;}
-  .form-submit{width:100%;justify-content:center;}
-  .featured-card{padding:24px;}
-  .stat-row{gap:20px;}
-  .toc{padding:18px 20px;}
+  .email-card{padding:32px 20px;}
+  .email-title{font-size:24px;}
+  .email-button{width:100%;justify-content:center;}
   .ftr-inner{flex-direction:column;align-items:flex-start;padding:0 16px;gap:14px;}
   .ftr-links{gap:14px;}
   .ftr-copy{margin-top:4px;}
-  .prose h2{font-size:22px;}
-  .prose p,.prose ul li{font-size:14px;}
 }
 @media(min-width:641px) and (max-width:900px){
   .card-grid{grid-template-columns:1fr 1fr;}
 }
-
 </style>
 </head>
 <body>
@@ -253,69 +280,31 @@ body.light .form-select option{background:#fff;}
       </div>
     </div>
 
+    <!-- REPLACED FORM WITH SIMPLE EMAIL CARD -->
     <div class="reveal">
-      <form id="contactForm" onsubmit="submitContact(event)">
-        <div class="form-name-row">
-          <div class="form-group">
-            <label class="form-label" for="ct-name">Your name</label>
-            <input class="form-input" type="text" id="ct-name" placeholder="How should we address you?">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="ct-email">Email address <span class="req">*</span></label>
-            <input class="form-input" type="email" id="ct-email" placeholder="Required so we can reply" required>
-          </div>
+      <div class="email-card">
+        <div class="email-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="ct-type">Type of enquiry <span class="req">*</span></label>
-          <select class="form-select" id="ct-type" required onchange="toggleCategoryRow()">
-            <option value="">Select a type...</option>
-            <optgroup label="Game">
-              <option value="bug">Bug Report</option>
-              <option value="feature">Feature Idea</option>
-              <option value="image">Image Pool Suggestion</option>
-              <option value="gameplay">Gameplay Feedback</option>
-              <option value="praise">Something I loved</option>
-            </optgroup>
-            <optgroup label="Business">
-              <option value="advertising">Advertising Enquiry</option>
-              <option value="partnership">Partnership / Collaboration</option>
-              <option value="press">Press / Media</option>
-            </optgroup>
-            <optgroup label="Account & Legal">
-              <option value="account">Account Issue</option>
-              <option value="privacy">Privacy / Data Request</option>
-              <option value="copyright">Copyright / IP Concern</option>
-            </optgroup>
-            <option value="other">Other</option>
-          </select>
+        <div class="email-title">Get in touch</div>
+        <div class="email-desc">
+          Send us an email directly. We read every message and reply within 2 business days.
         </div>
-        <div class="form-group" id="categoryRow" style="display:none;">
-          <label class="form-label" for="ct-category">Which category?</label>
-          <select class="form-select" id="ct-category">
-            <option value="">All categories / Not applicable</option>
-            <option>Movies</option><option>Flags</option><option>Animals</option>
-            <option>Food &amp; Drink</option><option>Vehicles</option><option>Sports</option>
-            <option>Landscape</option><option>Buildings</option><option>Celebrities</option><option>Art</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="ct-message">Your message <span class="req">*</span></label>
-          <textarea class="form-textarea" id="ct-message" placeholder="The more detail the better." required></textarea>
-        </div>
-        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-          <button type="submit" class="form-submit">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Send Message
-          </button>
-          <span class="form-hint">We typically respond within 2 business days.</span>
-        </div>
-      </form>
-      <div class="form-success" id="formSuccess">
-        <div class="form-success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-        <div class="form-success-title">Message sent</div>
-        <div class="form-success-body">Thanks for reaching out. We'll reply to your email — usually within 2 business days.</div>
+        <a href="mailto:contact@clickzle.games" class="email-button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+          Email contact@clickzle.games
+        </a>
+        <div class="email-hint">Your default email app will open. No sign‑up, no tracking.</div>
       </div>
     </div>
+    <!-- END EMAIL CARD -->
+
   </div>
 </section>
 </main>
@@ -332,20 +321,22 @@ body.light .form-select option{background:#fff;}
     <div class="ftr-copy">&copy; 2026 Clickzle. All rights reserved.</div>
   </div>
 </footer>
-<script>
 
+<script>
+// Timer for daily reset
 function tick(){
   const now=new Date();
   const midnight=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1));
   let d=Math.max(0,midnight-now);
-  const h=Math.floor(d/3600000);d%=3600000;
-  const m=Math.floor(d/60000);d%=60000;
+  const h=Math.floor(d/3600000); d%=3600000;
+  const m=Math.floor(d/60000); d%=60000;
   const s=Math.floor(d/1000);
   document.getElementById('hdrTimer').textContent=
     String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
 }
-setInterval(tick,1000);tick();
+setInterval(tick,1000); tick();
 
+// Theme toggle
 let light=localStorage.getItem('clickzle_site_theme')==='light';
 function applyTheme(){
   document.body.classList.toggle('light',light);
@@ -354,30 +345,14 @@ function applyTheme(){
 }
 applyTheme();
 document.getElementById('themeToggle').addEventListener('click',()=>{
-  light=!light;localStorage.setItem('clickzle_site_theme',light?'light':'dark');applyTheme();
+  light=!light; localStorage.setItem('clickzle_site_theme',light?'light':'dark'); applyTheme();
 });
 
+// Reveal animation
 const revealObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revealObs.unobserve(e.target);}});
-},{threshold:0.08,rootMargin:'0px 0px -32px 0px'});
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in'); revealObs.unobserve(e.target);}});
+},{threshold:0.08, rootMargin:'0px 0px -32px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
-
-
-function toggleCategoryRow(){
-  const gameTypes=['bug','feature','image','gameplay','praise'];
-  document.getElementById('categoryRow').style.display=
-    gameTypes.includes(document.getElementById('ct-type').value)?'block':'none';
-}
-function submitContact(e){
-  e.preventDefault();
-  if(!document.getElementById('ct-email').value.trim()) return;
-  if(!document.getElementById('ct-type').value) return;
-  if(!document.getElementById('ct-message').value.trim()) return;
-  // Production: POST to Cloudflare Worker endpoint
-  document.getElementById('contactForm').style.display='none';
-  document.getElementById('formSuccess').classList.add('show');
-}
-
 </script>
 </body>
 </html>
