@@ -209,8 +209,8 @@
         .cz-auth-chip { display:flex; align-items:center; gap:8px; margin-left:8px; }
         .cz-chip-avatar {
           width:30px; height:30px; border-radius:50%;
-          background:rgba(250,204,21,0.12); border:1.5px solid rgba(250,204,21,0.35);
-          color:#facc15; font-size:11px; font-weight:700; letter-spacing:0.5px;
+          background:rgba(74,222,128,0.12); border:1.5px solid rgba(74,222,128,0.35);
+          color:#4ade80; font-size:11px; font-weight:700; letter-spacing:0.5px;
           display:flex; align-items:center; justify-content:center; flex-shrink:0;
         }
         .cz-chip-name {
@@ -234,7 +234,7 @@
         }
         .cz-chip-login:hover { color:var(--text,#f0f0f0); border-color:var(--border2,#333); }
         .cz-chip-signup {
-          background:#facc15; color:#000; border:1px solid #facc15;
+          background:#4ade80; color:#000; border:1px solid #4ade80;
         }
         .cz-chip-signup:hover { opacity:0.88; }
         @media(max-width:480px) {
