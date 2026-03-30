@@ -223,12 +223,13 @@
       font-size:12px; color:var(--text3);
       letter-spacing:0.3px;
     }
+    .hdr-sep { color:var(--border2); font-size:14px; margin:0 2px; }
     .hdr-reset-label { font-weight:500; white-space:nowrap; }
     .hdr-timer {
       font-family:'Bebas Neue',sans-serif; font-size:18px;
       letter-spacing:2px; color:var(--text2);
     }
-    .hdr-right { display:flex; align-items:center; gap:20px; }
+    .hdr-right { display:flex; align-items:center; gap:12px; }
     .nav-link {
       font-size:13px; font-weight:500; color:var(--text2);
       text-decoration:none; transition:color 0.2s;
@@ -262,7 +263,7 @@
     }
     .icon-btn:hover { color:var(--text); border-color:var(--border2); background:var(--surface); }
     .icon-btn svg { width:15px; height:15px; }
-    @media(max-width:600px) { .hdr-center { display:none; } }
+    @media(max-width:767px) { .hdr-center { display:none; } }
 
     /* ═══ HERO ══════════════════════════════════════════════════════════════════ */
     .hero {
@@ -456,8 +457,9 @@
     [data-accent="yellow"] .game-vid-col img { border-color: rgba(250,204,21,0.18);  box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(250,204,21,0.08); }
     [data-accent="purple"] .game-vid-col img { border-color: rgba(167,139,250,0.18); box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(167,139,250,0.08); }
     @media(max-width:860px) {
-      .game-inner { grid-template-columns: 1fr; gap: 40px; }
+      .game-inner { grid-template-columns: 1fr; gap: 32px; }
       .game-inner .game-vid-col { display: none; }
+      .game1-screenshot { display: none; }
     }
     .game1-screenshot {
       position: relative;
@@ -917,19 +919,15 @@
     }
 
     /* ═══ MOBILE NAV ═══════════════════════════════════════════════════════════ */
-    @media(max-width:520px) {
+    @media(max-width:767px) {
       .hdr-inner {
         grid-template-columns: auto 1fr auto;
         padding: 0 16px;
         gap: 0;
       }
-      .hdr-center { display:none; }
-      .nav-games-wrap > span:first-child { display:none; } /* hide "Games" label */
-      .nav-games-wrap { gap:5px; }
-      .nav-game-num { width:28px; height:28px; font-size:12px; }
+      .hdr-center { display:none; } /* hide game numbers + timer on mobile */
     }
     @media(max-width:360px) {
-      .nav-game-num { width:24px; height:24px; font-size:11px; }
       .site-logo { font-size:22px; }
     }
     /* ═══ MOBILE SECTIONS ══════════════════════════════════════════════════════ */
@@ -998,21 +996,18 @@
       .game-page-play-btn, .game-page-lb-link { width: 100%; text-align: center; }
     }
 
-    /* ===== BLOCK 1: Quick-play cards hover lift + accent glow ===== */
-    .nav-games-wrap a {
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+    /* ===== Game number pill hover effects ===== */
+    .hdr-center .nav-game-num {
+      transition: all 0.2s ease;
     }
-    .nav-games-wrap a:hover {
-      transform: translateY(-8px) scale(1.06);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    .hdr-center .nav-game-num:hover {
+      transform: translateY(-2px) scale(1.12);
     }
-    .nav-games-wrap a[data-game="1"]:hover { box-shadow: 0 12px 32px rgba(74,222,128,0.35); }
-    .nav-games-wrap a[data-game="2"]:hover { box-shadow: 0 12px 32px rgba(96,165,250,0.35); }
-    .nav-games-wrap a[data-game="3"]:hover { box-shadow: 0 12px 32px rgba(244,114,182,0.35); }
-    .nav-games-wrap a[data-game="4"]:hover { box-shadow: 0 12px 32px rgba(250,204,21,0.35); }
-    .nav-games-wrap a[data-game="5"]:hover { box-shadow: 0 12px 32px rgba(167,139,250,0.35); }
+    .hdr-center .nav-game-num[data-game="1"]:hover { box-shadow: 0 6px 18px rgba(74,222,128,0.4); }
+    .hdr-center .nav-game-num[data-game="2"]:hover { box-shadow: 0 6px 18px rgba(96,165,250,0.4); }
+    .hdr-center .nav-game-num[data-game="3"]:hover { box-shadow: 0 6px 18px rgba(244,114,182,0.4); }
+    .hdr-center .nav-game-num[data-game="4"]:hover { box-shadow: 0 6px 18px rgba(250,204,21,0.4); }
+    .hdr-center .nav-game-num[data-game="5"]:hover { box-shadow: 0 6px 18px rgba(167,139,250,0.4); }
 
     /* Keyframe for timer glow pulse (used by Block 2) */
     @keyframes pulseGlow {
@@ -1021,6 +1016,7 @@
     }
 
   </style>
+  <script src="/assets/js/auth.js"></script>
 </head>
 <body>
 <div class="bg-grid"></div>
@@ -1031,18 +1027,17 @@
   <div class="hdr-inner">
     <a href="index.html" class="site-logo" id="siteLogo">CLICK<span>ZLE</span></a>
     <div class="hdr-center">
-      <span class="hdr-reset-label">Games reset in:</span>
+      <a href="complete-the-image-game-1.html" class="nav-game-num" data-game="1" aria-label="Game 1: Complete the Image">1</a>
+      <a href="follow-the-pattern-game-2.html" class="nav-game-num" data-game="2" aria-label="Game 2: Follow the Pattern">2</a>
+      <a href="hit-the-target-game-3.html" class="nav-game-num" data-game="3" aria-label="Game 3: Hit the Target">3</a>
+      <a href="spot-the-pair-game-4.html" class="nav-game-num" data-game="4" aria-label="Game 4: Spot the Pair">4</a>
+      <a href="next-in-sequence-game-5.html" class="nav-game-num" data-game="5" aria-label="Game 5: Next in Sequence">5</a>
+      <span class="hdr-sep">—</span>
+      <span class="hdr-reset-label">Reset in:</span>
       <span class="hdr-timer" id="hdrTimer">00:00:00</span>
     </div>
     <nav class="hdr-right" aria-label="Site navigation">
-      <span class="nav-games-wrap">
-        Games
-        <a href="complete-the-image-game-1.html" class="nav-game-num" data-game="1" aria-label="Game 1: Complete the Image">1</a>
-        <a href="follow-the-pattern-game-2.html" class="nav-game-num" data-game="2" aria-label="Game 2: Follow the Pattern">2</a>
-        <a href="hit-the-target-game-3.html" class="nav-game-num" data-game="3" aria-label="Game 3: Hit the Target">3</a>
-        <a href="spot-the-pair-game-4.html" class="nav-game-num" data-game="4" aria-label="Game 4: Spot the Pair">4</a>
-        <a href="next-in-sequence-game-5.html" class="nav-game-num" data-game="5" aria-label="Game 5: Next in Sequence">5</a>
-      </span>
+      <!-- auth chip injected here by auth.js -->
       <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
         <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="4"/>
