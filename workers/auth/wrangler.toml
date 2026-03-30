@@ -1,0 +1,16 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# CLICKZLE AUTH WORKER — wrangler.toml
+# ═══════════════════════════════════════════════════════════════════════════
+# After filling in your database_id below, run:
+#   wrangler secret put JWT_SECRET       ← paste a long random string
+#   wrangler deploy
+# ═══════════════════════════════════════════════════════════════════════════
+
+name                = "clickzle-auth"
+main                = "index.js"
+compatibility_date  = "2024-11-01"
+
+[[d1_databases]]
+binding       = "DB"
+database_name = "clickzle-db"
+database_id   = "d4a0b885-ffcf-4a26-9626-a67bd2d95734"

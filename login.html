@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log In — Clickzle</title>
+<meta name="description" content="Log in to your Clickzle account to view your scores, personal bests and daily leaderboard rankings.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="/assets/js/auth.js" defer></script>
+<style>
+
+/* ═══ TOKENS ══════════════════════════════════════════════════════════════ */
+:root {
+  --bg:#0a0a0a; --surface:#141414; --surface2:#1e1e1e;
+  --border:#222; --border2:#2e2e2e;
+  --text:#f0f0f0; --text2:#b0b0b0; --text3:#888;
+  --accent:#facc15;
+  --accent-dim:rgba(250,204,21,0.08);
+  --accent-border:rgba(250,204,21,0.22);
+  --green:#4ade80; --red:#f87171;
+}
+body.light {
+  --bg:#f4f4f4; --surface:#fff; --surface2:#ebebeb;
+  --border:#d0d0d0; --border2:#c0c0c0;
+  --text:#111; --text2:#444; --text3:#777;
+  --accent-dim:rgba(250,204,21,0.12);
+  --accent-border:rgba(180,140,0,0.28);
+}
+
+/* ═══ RESET ═══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+}
+
+/* ═══ BACKGROUND ══════════════════════════════════════════════════════════ */
+.bg-grid{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(250,204,21,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250,204,21,0.03) 1px, transparent 1px);
+  background-size:72px 72px;
+}
+.bg-radial{
+  position:fixed; top:-200px; left:50%; transform:translateX(-50%);
+  width:800px; height:500px;
+  background:radial-gradient(ellipse, rgba(250,204,21,0.07) 0%, transparent 68%);
+  pointer-events:none; z-index:0;
+}
+body.light .bg-grid{display:none;}
+body.light .bg-radial{opacity:0.2;}
+
+/* ═══ HEADER ══════════════════════════════════════════════════════════════ */
+.site-header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(10,10,10,0.88); backdrop-filter:blur(18px);
+}
+.site-header::after{
+  content:""; position:absolute; bottom:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent 0%,rgba(250,204,21,0.15) 20%,rgba(250,204,21,0.9) 50%,rgba(250,204,21,0.15) 80%,transparent 100%);
+}
+body.light .site-header{background:rgba(244,244,244,0.92);}
+body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,rgba(250,204,21,0.1) 20%,rgba(250,204,21,0.6) 50%,rgba(250,204,21,0.1) 80%,transparent 100%);}
+.hdr-inner{
+  max-width:1120px; margin:0 auto; padding:0 28px; height:62px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.site-logo{
+  font-family:'Bebas Neue',sans-serif; font-size:26px;
+  letter-spacing:3px; color:var(--text); text-decoration:none;
+}
+.site-logo span{color:var(--accent);}
+.hdr-right{display:flex;align-items:center;gap:8px;}
+.icon-btn{
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  background:none;border:none;cursor:pointer;color:var(--text2);
+  border-radius:8px;transition:background 0.15s,color 0.15s;
+}
+.icon-btn:hover{background:var(--surface2);color:var(--text);}
+.icon-btn svg{width:18px;height:18px;}
+
+/* ═══ PAGE LAYOUT ═════════════════════════════════════════════════════════ */
+.page-wrap{
+  position:relative; z-index:1;
+  min-height:calc(100vh - 62px);
+  display:flex; align-items:center; justify-content:center;
+  padding:40px 20px 60px;
+}
+
+/* ═══ AUTH CARD ═══════════════════════════════════════════════════════════ */
+.auth-card{
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:20px; padding:40px 36px;
+  width:100%; max-width:420px;
+}
+.auth-logo-wrap{text-align:center;margin-bottom:28px;}
+.auth-logo{
+  font-family:'Bebas Neue',sans-serif; font-size:32px;
+  letter-spacing:4px; color:var(--text); text-decoration:none;
+  display:inline-block;
+}
+.auth-logo span{color:var(--accent);}
+.auth-card-title{
+  font-family:'Bebas Neue',sans-serif; font-size:28px;
+  letter-spacing:2px; color:var(--text); margin-bottom:4px;
+}
+.auth-card-sub{font-size:13px;color:var(--text2);margin-bottom:28px;line-height:1.5;}
+.auth-card-sub a{color:var(--accent);text-decoration:none;}
+.auth-card-sub a:hover{text-decoration:underline;}
+
+/* ═══ FORM FIELDS ═════════════════════════════════════════════════════════ */
+.form-group{margin-bottom:18px;}
+.form-label{
+  display:flex; align-items:center; justify-content:space-between;
+  font-size:11px; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--text2); margin-bottom:7px;
+}
+.form-label a{
+  font-size:11px; color:var(--text3);
+  text-decoration:none; text-transform:none; letter-spacing:0;
+  font-weight:500; transition:color 0.15s;
+}
+.form-label a:hover{color:var(--accent);}
+.form-input{
+  width:100%; background:var(--surface2); border:1.5px solid var(--border2);
+  border-radius:10px; padding:13px 16px; font-size:15px;
+  color:var(--text); font-family:'DM Sans',sans-serif;
+  outline:none; transition:border-color 0.2s, box-shadow 0.2s;
+}
+.form-input:focus{border-color:var(--accent); box-shadow:0 0 0 3px rgba(250,204,21,0.1);}
+.form-input.error{border-color:var(--red);}
+.form-input::placeholder{color:var(--text3);}
+
+/* Password wrapper */
+.pw-wrap{position:relative;}
+.pw-wrap .form-input{padding-right:46px;}
+.pw-toggle{
+  position:absolute; right:12px; top:50%; transform:translateY(-50%);
+  background:none; border:none; cursor:pointer; color:var(--text3);
+  padding:4px; border-radius:5px; transition:color 0.15s;
+}
+.pw-toggle:hover{color:var(--text2);}
+.pw-toggle svg{width:18px;height:18px;display:block;}
+
+/* Submit button */
+.btn-submit{
+  width:100%; background:var(--accent); color:#000; border:none;
+  border-radius:12px; padding:15px; font-size:15px; font-weight:700;
+  font-family:'DM Sans',sans-serif; cursor:pointer;
+  letter-spacing:0.3px; transition:opacity 0.15s, transform 0.1s;
+  margin-top:4px; display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.btn-submit:hover{opacity:0.9;}
+.btn-submit:active{transform:scale(0.98);}
+.btn-submit:disabled{opacity:0.45;cursor:not-allowed;transform:none;}
+.btn-spinner{
+  width:16px;height:16px;border:2px solid rgba(0,0,0,0.2);
+  border-top-color:#000;border-radius:50%;
+  animation:spin 0.6s linear infinite;display:none;
+}
+.btn-submit.loading .btn-spinner{display:block;}
+.btn-submit.loading .btn-text{display:none;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* Alert */
+.form-alert{
+  border-radius:10px; padding:12px 16px;
+  font-size:13px; line-height:1.45; margin-bottom:20px;
+  display:none;
+}
+.form-alert.show{display:block;}
+.form-alert.error{background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.25);color:#f87171;}
+.form-alert.success{background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.25);color:#4ade80;}
+
+/* Divider */
+.auth-divider{
+  display:flex;align-items:center;gap:10px;
+  margin:22px 0;
+}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.auth-divider span{font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;}
+
+/* No account */
+.no-account{
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:12px; padding:16px 18px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.no-account-copy{font-size:13px;color:var(--text2);line-height:1.45;}
+.no-account-copy strong{color:var(--text);display:block;margin-bottom:2px;font-size:14px;}
+.btn-create{
+  flex-shrink:0; background:transparent; border:1.5px solid var(--accent-border);
+  color:var(--accent); border-radius:10px; padding:10px 18px;
+  font-size:13px; font-weight:700; font-family:'DM Sans',sans-serif;
+  cursor:pointer; white-space:nowrap; text-decoration:none;
+  transition:background 0.15s, border-color 0.15s;
+  display:inline-block;
+}
+.btn-create:hover{background:var(--accent-dim);border-color:rgba(250,204,21,0.4);}
+
+/* Guest play */
+.guest-play{
+  text-align:center; font-size:12px; color:var(--text3);
+  margin-top:16px; line-height:1.5;
+}
+.guest-play a{color:var(--text2);text-decoration:none;transition:color 0.15s;}
+.guest-play a:hover{color:var(--accent);}
+
+/* ═══ RESPONSIVE ══════════════════════════════════════════════════════════ */
+@media(max-width:480px){
+  .hdr-inner{padding:0 16px;}
+  .auth-card{padding:28px 22px;border-radius:16px;}
+  .page-wrap{padding:24px 16px 48px;}
+  .no-account{flex-direction:column;text-align:center;}
+  .btn-create{width:100%;}
+}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-radial"></div>
+
+<!-- ═══ HEADER ══════════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="hdr-inner">
+    <a href="/index.html" class="site-logo">CLICK<span>ZLE</span></a>
+    <div class="hdr-right">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ MAIN ════════════════════════════════════════════════════════════ -->
+<main class="page-wrap">
+  <div class="auth-card">
+
+    <div class="auth-logo-wrap">
+      <a href="/index.html" class="auth-logo">CLICK<span>ZLE</span></a>
+    </div>
+
+    <div class="auth-card-title">Welcome Back</div>
+    <p class="auth-card-sub">
+      Enter your username or email to continue.
+    </p>
+
+    <div class="form-alert" id="formAlert"></div>
+
+    <form id="loginForm" novalidate>
+
+      <!-- Username or Email -->
+      <div class="form-group">
+        <label class="form-label" for="identifier">Username or Email</label>
+        <input class="form-input" type="text" id="identifier" name="identifier"
+          placeholder="ClickMaster99 or you@example.com"
+          autocomplete="username" spellcheck="false">
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label class="form-label" for="password">
+          Password
+          <a href="#" onclick="return false" style="pointer-events:none;opacity:0.4;">Forgot password?</a>
+        </label>
+        <div class="pw-wrap">
+          <input class="form-input" type="password" id="password" name="password"
+            placeholder="Your password" autocomplete="current-password">
+          <button type="button" class="pw-toggle" id="pwToggle" aria-label="Show/hide password">
+            <svg id="eyeOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg id="eyeClosed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span class="btn-text">Log In</span>
+        <div class="btn-spinner"></div>
+      </button>
+
+    </form>
+
+    <div class="auth-divider"><span>New to Clickzle?</span></div>
+
+    <div class="no-account">
+      <div class="no-account-copy">
+        <strong>Create a free account</strong>
+        Save scores, track streaks &amp; compete on leaderboards.
+      </div>
+      <a href="/signup.html" class="btn-create">Sign Up →</a>
+    </div>
+
+    <div class="guest-play">
+      Just want to play?
+      <a href="/games/game4/spot-the-pair.html">Continue as guest →</a>
+    </div>
+
+  </div>
+</main>
+
+<script>
+(function(){
+  // ── Redirect if already logged in ────────────────────────────────────────
+  if(window.CZAuth && window.CZAuth.isLoggedIn()){
+    const redir=new URLSearchParams(location.search).get('redir')||'/index.html';
+    window.location.href=redir;
+  }
+
+  // ── Theme toggle ─────────────────────────────────────────────────────────
+  const theme=localStorage.getItem('cz_theme')||'dark';
+  if(theme==='light') document.body.classList.add('light');
+  document.getElementById('themeToggle').addEventListener('click',()=>{
+    document.body.classList.toggle('light');
+    const t=document.body.classList.contains('light')?'light':'dark';
+    localStorage.setItem('cz_theme',t);
+    document.getElementById('iconSun').style.display  = t==='dark'  ? '' : 'none';
+    document.getElementById('iconMoon').style.display = t==='light' ? '' : 'none';
+  });
+  if(theme==='light'){
+    document.getElementById('iconSun').style.display='none';
+    document.getElementById('iconMoon').style.display='';
+  }
+
+  // ── Password toggle ──────────────────────────────────────────────────────
+  const pwInput   = document.getElementById('password');
+  const pwToggle  = document.getElementById('pwToggle');
+  const eyeOpen   = document.getElementById('eyeOpen');
+  const eyeClosed = document.getElementById('eyeClosed');
+  pwToggle.addEventListener('click',()=>{
+    const show=pwInput.type==='password';
+    pwInput.type=show?'text':'password';
+    eyeOpen.style.display  =show?'none':'';
+    eyeClosed.style.display=show?'':'none';
+  });
+
+  // ── Form submit ──────────────────────────────────────────────────────────
+  const form       = document.getElementById('loginForm');
+  const submitBtn  = document.getElementById('submitBtn');
+  const formAlert  = document.getElementById('formAlert');
+
+  function showAlert(msg,type='error'){
+    formAlert.textContent=msg;
+    formAlert.className='form-alert show '+type;
+    formAlert.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  function hideAlert(){formAlert.className='form-alert';}
+
+  // Shake animation on error
+  function shakeCard(){
+    const card=document.querySelector('.auth-card');
+    card.style.animation='none';
+    card.offsetHeight; // reflow
+    card.style.animation='cardShake 0.38s ease-out';
+  }
+
+  const shakeStyle=document.createElement('style');
+  shakeStyle.textContent='@keyframes cardShake{0%,100%{transform:translateX(0)}15%{transform:translateX(-7px)}30%{transform:translateX(6px)}45%{transform:translateX(-4px)}60%{transform:translateX(3px)}75%{transform:translateX(-1px)}}';
+  document.head.appendChild(shakeStyle);
+
+  form.addEventListener('submit',async(e)=>{
+    e.preventDefault();
+    hideAlert();
+
+    const identifier = document.getElementById('identifier').value.trim();
+    const password   = document.getElementById('password').value;
+
+    if(!identifier){showAlert('Please enter your username or email');shakeCard();return;}
+    if(!password){showAlert('Please enter your password');shakeCard();return;}
+
+    submitBtn.classList.add('loading');
+    submitBtn.disabled=true;
+
+    const result=await CZAuth.login(identifier,password);
+
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled=false;
+
+    if(result.ok){
+      showAlert('Logged in! Redirecting…','success');
+      const redir=new URLSearchParams(location.search).get('redir')||'/index.html';
+      setTimeout(()=>{ window.location.href=redir; },700);
+    } else {
+      showAlert(result.error||'Login failed. Please try again.');
+      shakeCard();
+      document.getElementById('password').value='';
+      document.getElementById('password').focus();
+    }
+  });
+
+  // Enter key on identifier field moves focus to password
+  document.getElementById('identifier').addEventListener('keydown',(e)=>{
+    if(e.key==='Enter'){ e.preventDefault(); document.getElementById('password').focus(); }
+  });
+})();
+</script>
+</body>
+</html>
