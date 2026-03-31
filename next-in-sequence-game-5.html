@@ -276,57 +276,105 @@ body.light .hero { background:linear-gradient(180deg, var(--surface2) 0%, rgba(2
 .lb-play-btn:hover  { opacity:0.88; }
 .lb-play-btn:active { transform:scale(0.97); }
 .lb-play-btn svg { width:13px; height:13px; }
+/* Table wrapper */
 .lb-table-wrap { padding:0; overflow-x:auto; }
+/* Table */
 .lb-table { width:100%; border-collapse:collapse; font-size:13px; table-layout:fixed; }
+/* Column headers */
 .lb-table thead tr { border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--surface2); }
 .lb-table thead th {
-  padding:10px 20px 12px;
+  padding:10px 8px 12px;
   font-size:9px; letter-spacing:2.5px; text-transform:uppercase;
-  color:var(--text3); font-weight:600; text-align:left; white-space:nowrap; overflow:hidden;
+  color:var(--text2); font-weight:700;
+  text-align:center; white-space:nowrap; overflow:hidden;
+  border-right:1px solid var(--border);
 }
-/* Columns: Rank Country Player Streak Puzzles BestRound Efficiency Score */
-.lb-col-rank     { width:60px; }
-.lb-col-country  { width:70px; }
-.lb-col-player   { width:200px; }
-.lb-col-streak   { width:88px; }
-.lb-col-puzzles  { width:110px; }
-.lb-col-best     { width:110px; }
-.lb-col-eff      { width:100px; }
-.lb-col-score    { width:110px; }
-.lb-table tbody tr { border-bottom:1px solid var(--border); transition:background 0.12s; }
-.lb-table tbody tr:hover { background:var(--surface2); }
-.lb-table tbody td { padding:13px 20px; vertical-align:middle; overflow:hidden; white-space:nowrap; }
-.lb-rank-num { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1px; color:var(--text3); }
-.lb-rank-num.top1 { color:#EAC100; font-size:22px; }
-.lb-rank-num.top2 { color:#b0b0b0; font-size:20px; }
-.lb-rank-num.top3 { color:#cd7f32; font-size:20px; }
-.lb-top1 { background:color-mix(in srgb,#EAC100 4%,transparent)!important; }
-.lb-top2 { background:color-mix(in srgb,#b0b0b0 3%,transparent)!important; }
-.lb-top3 { background:color-mix(in srgb,#cd7f32 3%,transparent)!important; }
-.lb-flag-cell { display:flex; align-items:center; }
+.lb-table thead th:nth-child(3) { text-align:left; padding-left:4px; }
+.lb-table thead th:last-child { border-right:none; }
+/* Column widths */
+.lb-col-rank    { width:60px; }
+.lb-col-country { width:70px; }
+.lb-col-player  { width:180px; }
+.lb-col-streak  { width:80px; }
+.lb-col-puzzles { width:96px; }
+.lb-col-best    { width:96px; }
+.lb-col-eff     { width:96px; }
+.lb-col-score   { width:120px; }
+/* Body rows */
+.lb-table tbody tr { border-bottom:1px solid var(--border); transition:background 0.12s; cursor:default; }
+.lb-table tbody tr:last-child { border-bottom:none; }
+.lb-table tbody tr:nth-child(odd) { background:rgba(255,255,255,0.012); }
+.lb-table tbody tr:hover { background:rgba(167,139,250,0.04); }
+.lb-table td { padding:14px 16px; vertical-align:middle; white-space:nowrap; border-right:1px solid var(--border); text-align:center; }
+.lb-table td:last-child { border-right:none; }
+.lb-table td:nth-child(1) { overflow:visible; }
+.lb-table td:nth-child(2) { padding:8px 6px; }
+.lb-table td:nth-child(3) { text-align:left; padding:8px 4px; }
+/* Top 3 row styling */
+@keyframes goldPulse {
+  0%,100% { box-shadow:inset 4px 0 0 #EAC100, 0 0 0 0 rgba(234,193,0,0); }
+  50%      { box-shadow:inset 4px 0 0 #EAC100, 0 0 18px 2px rgba(234,193,0,0.15); }
+}
+.lb-table tbody tr.lb-top1 {
+  animation:goldPulse 2.8s ease-in-out infinite;
+  background:linear-gradient(90deg,rgba(234,193,0,0.09) 0%,rgba(234,193,0,0.02) 55%,transparent 100%);
+  border-bottom:1px solid rgba(234,193,0,0.18);
+  box-shadow:inset 6px 0 0 #EAC100;
+}
+.lb-top1 td { padding-top:28px; padding-bottom:28px; }
+.lb-table tbody tr.lb-top2 {
+  background:linear-gradient(90deg,rgba(148,163,184,0.07) 0%,rgba(148,163,184,0.01) 55%,transparent 100%);
+  border-bottom:1px solid rgba(148,163,184,0.12);
+  box-shadow:inset 5px 0 0 #8A9BA8;
+}
+.lb-top2 td { padding-top:22px; padding-bottom:22px; }
+.lb-table tbody tr.lb-top3 {
+  background:linear-gradient(90deg,rgba(180,83,9,0.07) 0%,rgba(180,83,9,0.01) 55%,transparent 100%);
+  border-bottom:2px solid var(--border);
+  box-shadow:inset 5px 0 0 #9B6B47;
+}
+.lb-top3 td { padding-top:18px; padding-bottom:18px; }
+/* Rank numbers */
+.lb-rank-num { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1px; line-height:1; color:var(--text2); }
+.lb-rank-num.top1 { font-size:72px; color:#EAC100; text-shadow:0 0 24px rgba(234,193,0,0.5); }
+.lb-rank-num.top2 { font-size:58px; color:#8A9BA8; text-shadow:0 0 18px rgba(148,163,184,0.35); }
+.lb-rank-num.top3 { font-size:46px; color:#9B6B47; text-shadow:0 0 14px rgba(180,83,9,0.3); }
+/* Player cell */
+.lb-player-cell { display:flex; align-items:center; gap:12px; overflow:hidden; min-width:0; }
+.lb-avatar {
+  width:32px; height:32px; border-radius:50%;
+  background:transparent; border:1.5px solid var(--text2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; color:var(--text2);
+  flex-shrink:0; letter-spacing:0.5px;
+}
+.lb-top1 .lb-avatar { width:40px; height:40px; font-size:14px; background:rgba(255,204,0,0.12); border-color:rgba(255,204,0,0.55); color:#FFCC00; }
+.lb-top2 .lb-avatar { width:36px; height:36px; font-size:13px; background:rgba(148,163,184,0.1); border-color:rgba(148,163,184,0.45); color:#94a3b8; }
+.lb-top3 .lb-avatar { width:34px; height:34px; font-size:12px; background:rgba(180,83,9,0.1); border-color:rgba(180,83,9,0.45); color:#b45309; }
+.lb-pname { font-size:14px; font-weight:500; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.lb-top1 .lb-pname { font-size:26px; font-weight:700; letter-spacing:0.3px; }
+.lb-top2 .lb-pname { font-size:22px; font-weight:700; }
+.lb-top3 .lb-pname { font-size:19px; font-weight:600; }
+/* Country flag */
+.lb-flag-cell { display:flex; align-items:center; justify-content:center; }
 .lb-flag-cell img { border-radius:2px; display:block; }
-.lb-pname { font-weight:600; color:var(--text); }
+/* Streak badge */
 .lb-streak {
-  display:inline-flex; align-items:center; gap:4px;
-  font-size:10px; font-weight:700; letter-spacing:0.5px;
-  color:var(--accent); background:var(--accent-dim);
-  border:1px solid var(--accent-border);
-  padding:2px 7px; border-radius:10px; margin-left:8px; white-space:nowrap;
+  font-size:9px; font-weight:700; letter-spacing:0.5px;
+  padding:2px 6px; border-radius:3px;
+  background:rgba(167,139,250,0.12); color:#a78bfa;
+  display:inline-block;
 }
+/* Stat values */
 .lb-time-val  { font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:1px; color:var(--text2); }
 .lb-score-val { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; color:var(--accent); }
 .lb-eff-val   { font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:1px; color:var(--green); }
-.lb-your-pos {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:14px 32px; border-top:1px solid var(--border);
-  background:var(--surface2);
-}
+/* Your position bar */
+.lb-your-pos { display:flex; align-items:center; justify-content:space-between; padding:14px 32px; border-top:1px solid var(--border); background:var(--surface2); }
 .lb-your-pos-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--text3); font-weight:600; }
 .lb-your-pos-val { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:2px; }
-.lb-panel-foot {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:16px 32px; border-top:1px solid var(--border);
-}
+/* Footer */
+.lb-panel-foot { display:flex; align-items:center; justify-content:space-between; padding:16px 32px; border-top:1px solid var(--border); }
 .lb-foot-left { font-size:12px; color:var(--text3); }
 .lb-foot-left strong { color:var(--text2); font-size:14px; }
 .lb-top100-btn {
@@ -902,18 +950,19 @@ let isExpanded   = false;
 let currentData  = [];
 
 function rowHTML(p, i) {
-  const rank    = i + 1;
-  const rC      = rank===1?'top1':rank===2?'top2':rank===3?'top3':'';
-  const trC     = rank===1?'lb-top1':rank===2?'lb-top2':rank===3?'lb-top3':'';
-  const streakH = p.streak >= 3 ? `<span class="lb-streak">${p.streak}d</span>` : '<span style="color:var(--text3);font-size:11px;">—</span>';
-  const flag    = `<img src="https://flagcdn.com/40x30/${p.country}.png" srcset="https://flagcdn.com/80x60/${p.country}.png 2x" alt="${p.country.toUpperCase()}" width="30" height="21">`;
+  const rank     = i + 1;
+  const rC       = rank===1?'top1':rank===2?'top2':rank===3?'top3':'';
+  const trC      = rank===1?'lb-top1':rank===2?'lb-top2':rank===3?'lb-top3':'';
+  const initials = p.name.slice(0,2).toUpperCase();
+  const streakH  = p.streak >= 3 ? `<span class="lb-streak">${p.streak}d</span>` : '<span style="color:var(--text3);font-size:11px;">—</span>';
+  const flag     = `<img src="https://flagcdn.com/40x30/${p.country}.png" srcset="https://flagcdn.com/80x60/${p.country}.png 2x" alt="${p.country.toUpperCase()}" width="30" height="21">`;
   const puzzDisp = p.puzzles || '—';
   const bestDisp = p.bestRound || '—';
   const effDisp  = p.eff ? p.eff + '%' : '—';
   return `<tr class="${trC}">
     <td><span class="lb-rank-num ${rC}">${rank}</span></td>
     <td><div class="lb-flag-cell">${flag}</div></td>
-    <td><span class="lb-pname">${p.name}</span></td>
+    <td><div class="lb-player-cell"><span class="lb-avatar">${initials}</span><span class="lb-pname">${p.name}</span></div></td>
     <td>${streakH}</td>
     <td><span class="lb-time-val">${puzzDisp}</span></td>
     <td><span class="lb-time-val">${bestDisp}</span></td>

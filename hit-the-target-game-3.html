@@ -1156,9 +1156,9 @@ async function loadLeaderboard(period) {
     if (rows.length === 0) throw new Error('empty');
     const mapped = rows.map(r => ({
       name:         r.username,
-      country:      r.country  || 'xx',
-      dailyStreak:  0,
-      hitStreak:    r.combo_max || 0,
+      country:      r.country      || 'xx',
+      dailyStreak:  r.streak_days  || 0,
+      hitStreak:    r.combo_max    || 0,
       fastest:      r.time_ms   || 0,
       accuracy:     r.accuracy != null ? Math.round(r.accuracy) : '—',
       score:        r.score     || 0,

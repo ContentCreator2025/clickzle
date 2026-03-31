@@ -1405,10 +1405,10 @@ async function loadLeaderboard(period) {
     if (rows.length === 0) throw new Error('empty');
     const mapped = rows.map(r => ({
       name:    r.username,
-      country: r.country     || 'xx',
-      streak:  0,
-      time:    r.time_ms     ? r.time_ms + 'ms' : '—',
-      clicks:  r.pairs_found || 0,
+      country: r.country      || 'xx',
+      streak:  r.streak_days  || 0,
+      time:    r.time_ms      ? r.time_ms + 'ms' : '—',
+      clicks:  r.pairs_found  || 0,
       score:   r.score       || 0,
     }));
     renderLeaderboard(mapped);
