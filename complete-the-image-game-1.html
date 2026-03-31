@@ -1488,6 +1488,43 @@ function generateAllTime() {
   return entries;
 }
 
+// ── LEADERBOARD API ──────────────────────────────────────────────────────────
+const API = 'https://clickzle-auth.thecontentcreationguy.workers.dev';
+
+async function loadLeaderboard(period) {
+  const tbody = document.getElementById('lbBody');
+  tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:48px 20px;color:var(--text3);font-size:13px;letter-spacing:0.5px;">Loading scores…</td></tr>';
+  try {
+    const res  = await fetch(`${API}/api/leaderboard?game=1&period=${period}&limit=100`);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'fetch failed');
+    const rows = data.rows || [];
+    document.getElementById('lbPlayerCount').textContent = data.total_players || rows.length;
+    if (rows.length === 0) throw new Error('empty');
+    const mapped = rows.map(r => {
+      const timeMs = r.time_ms || 0;
+      const clicks = r.wrong  || 0;
+      const base   = Math.max(0, 10000 - Math.floor(timeMs / 1000) * 30 - clicks);
+      const bonus  = Math.max(0, (r.score || 0) - base);
+      return {
+        name:      r.username,
+        country:   r.country || 'xx',
+        streak:    0,
+        clockTime: timeMs > 0 ? fmtClock(timeMs) : '—',
+        time:      timeMs > 0 ? fmtTime(timeMs)  : '—',
+        timeMs,
+        clicks,
+        bonus,
+        score: r.score || 0,
+      };
+    });
+    renderLeaderboard(mapped);
+  } catch (_) {
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:48px 20px;color:var(--text3);font-size:13px;">No scores yet — be the first to play today!</td></tr>';
+    document.getElementById('lbPlayerCount').textContent = 0;
+  }
+}
+
 // ── RENDER ────────────────────────────────────────────────────────────────────
 let activePeriod  = 'today';
 let isExpanded    = false;
@@ -1629,11 +1666,7 @@ function setPeriod(p) {
   };
   document.getElementById('lbPeriodLabel').textContent = labels[p];
 
-  // Render correct data
-  const data = p === 'today' ? generateDaily()
-             : p === 'month' ? generateMonthly()
-             : generateAllTime();
-  renderLeaderboard(data);
+  loadLeaderboard(p);
 }
 
 
@@ -1680,11 +1713,8 @@ function setCategory(slug) {
   document.getElementById('lbExpandBtn').innerHTML = `View Top 100
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
 
-  // Re-render leaderboard with fresh data for this category
-  const data = p === 'today' ? generateDaily()
-             : p === 'month' ? generateMonthly()
-             : generateAllTime();
-  renderLeaderboard(data);
+  // Re-render leaderboard for this category
+  loadLeaderboard(activePeriod);
 }
 
 document.querySelectorAll('.lb-cat-tab').forEach(t => {
@@ -1697,7 +1727,7 @@ document.querySelectorAll('.lb-period-tab').forEach(t => {
 });
 
 // Initial render
-renderLeaderboard(generateDaily());
+loadLeaderboard('today');
 
 // ── NOTIFICATIONS ─────────────────────────────────────────────────────────────
 const notifyBtn = document.getElementById('notifyBtn');

@@ -239,7 +239,12 @@
         .cz-chip-signup:hover { opacity:0.88; }
         @media(max-width:480px) {
           .cz-chip-name { display:none; }
-          .cz-chip-login { font-size:11px; padding:5px 10px; }
+          .cz-chip-login {
+            font-size:11px; padding:5px 10px;
+            color: var(--text,#f0f0f0);
+            border-color: rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.06);
+          }
           .cz-chip-signup { font-size:11px; padding:5px 10px; }
         }
       `;

@@ -1124,6 +1124,35 @@ function generateAllTime() {
   return entries;
 }
 
+// ── LEADERBOARD API ──────────────────────────────────────────────────────────
+const API = 'https://clickzle-auth.thecontentcreationguy.workers.dev';
+
+async function loadLeaderboard(period) {
+  const tbody = document.getElementById('lbBody');
+  tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:48px 20px;color:var(--text3);font-size:13px;letter-spacing:0.5px;">Loading scores…</td></tr>';
+  try {
+    const res  = await fetch(`${API}/api/leaderboard?game=3&period=${period}&limit=100`);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'fetch failed');
+    const rows = data.rows || [];
+    document.getElementById('lbPlayerCount').textContent = data.total_players || rows.length;
+    if (rows.length === 0) throw new Error('empty');
+    const mapped = rows.map(r => ({
+      name:         r.username,
+      country:      r.country  || 'xx',
+      dailyStreak:  0,
+      hitStreak:    r.combo_max || 0,
+      fastest:      r.time_ms   || 0,
+      accuracy:     r.accuracy != null ? Math.round(r.accuracy) : '—',
+      score:        r.score     || 0,
+    }));
+    renderLeaderboard(mapped);
+  } catch (_) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:48px 20px;color:var(--text3);font-size:13px;">No scores yet — be the first to play today!</td></tr>';
+    document.getElementById('lbPlayerCount').textContent = 0;
+  }
+}
+
 // ── RENDER ────────────────────────────────────────────────────────────────────
 let activePeriod = 'today';
 let isExpanded   = false;
@@ -1214,11 +1243,11 @@ function setPeriod(p) {
   document.getElementById('lbThAccuracy').textContent = 'Accuracy';
   document.getElementById('lbThScore').textContent    = p === 'today' ? 'Score' : p === 'month' ? 'Monthly' : 'Best Score';
   document.getElementById('lbPeriodLabel').textContent = p === 'today' ? 'players today' : p === 'month' ? 'players this month' : 'all-time players';
-  renderLeaderboard(p === 'today' ? generateDaily() : p === 'month' ? generateMonthly() : generateAllTime());
+  loadLeaderboard(p);
 }
 
 document.querySelectorAll('.lb-period-tab').forEach(t => t.addEventListener('click', () => setPeriod(t.dataset.period)));
-renderLeaderboard(generateDaily());
+loadLeaderboard('today');
 
 // ── NOTIFICATIONS ─────────────────────────────────────────────────────────────
 const notifyBtn = document.getElementById('notifyBtn');
