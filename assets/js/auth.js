@@ -75,10 +75,10 @@
     return res.json();
   }
 
-  async function signup(username, email, password) {
+  async function signup(username, email, password, country) {
     const data = await apiFetch('/api/auth/signup', {
       method: 'POST',
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ username, email, password, country }),
     });
     if (data.ok) setSession(data.token, data.user);
     return data;

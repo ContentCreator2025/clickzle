@@ -1640,7 +1640,7 @@
 function getPuzzleNum() {
   const now    = new Date();
   const utcNow = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-  const launch = Date.UTC(2026, 2, 11);
+  const launch = Date.UTC(2026, 3, 1);
   return String(Math.max(1, Math.floor((utcNow - launch) / 86400000) + 1)).padStart(4,'0');
 }
 

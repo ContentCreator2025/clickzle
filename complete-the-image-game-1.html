@@ -951,6 +951,7 @@ body.light .hero {
   .ad-slot-label { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; font-weight:700; }
   @media(max-width:768px) { .ad-slot { height:60px; } }
 </style>
+<script src="/assets/js/auth.js"></script>
 </head>
 <body>
 <div class="bg-grid"></div>
@@ -1545,11 +1546,7 @@ function rowHTML(p, i) {
     srcset="https://flagcdn.com/80x60/${p.country}.png 2x"
     alt="${p.country.toUpperCase()}" width="30" height="21">`;
 
-  const clickDisplay = activePeriod === 'today'
-    ? p.clicks
-    : activePeriod === 'month'
-      ? p.clicks + ' played'
-      : p.clicks + ' played';
+  const clickDisplay = p.clicks;
 
   return `
     <tr class="${trC}">
@@ -1655,7 +1652,7 @@ function setPeriod(p) {
 
   // Update column headers
   document.getElementById('lbThTime').textContent   = p === 'today' ? 'Time'    : 'Best Time';
-  document.getElementById('lbThClicks').textContent = p === 'today' ? 'Clicks'  : 'Puzzles';
+  document.getElementById('lbThClicks').textContent = 'Clicks';
   document.getElementById('lbThScore').textContent  = p === 'today' ? 'Score'   : p === 'month' ? 'Monthly' : 'Best Score';
 
   // Update player count label

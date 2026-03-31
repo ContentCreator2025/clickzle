@@ -853,6 +853,7 @@ body.light .hero {
   .ftr-links { gap:14px; flex-wrap:wrap; }
 }
 </style>
+<script src="/assets/js/auth.js"></script>
 </head>
 <body>
 <div class="bg-grid"></div>
@@ -1417,11 +1418,7 @@ function rowHTML(p, i) {
     srcset="https://flagcdn.com/80x60/${p.country}.png 2x"
     alt="${p.country.toUpperCase()}" width="30" height="21">`;
 
-  const clickDisplay = activePeriod === 'today'
-    ? p.clicks + ' pairs'
-    : activePeriod === 'month'
-      ? p.clicks + 'd played'
-      : p.clicks + 'd played';
+  const clickDisplay = p.clicks + ' pairs';
 
   return `
     <tr class="${trClass}">

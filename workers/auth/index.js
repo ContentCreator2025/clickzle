@@ -139,7 +139,8 @@ async function handleSignup(request, env) {
   let body;
   try { body = await request.json(); } catch { return json({ error: 'Invalid request body' }, 400); }
 
-  const { username, email, password } = body || {};
+  const { username, email, password, country } = body || {};
+  const cleanCountry = country && /^[a-z]{2}$/.test(country) ? country : null;
 
   // Validate
   if (!username || !email || !password)
@@ -175,9 +176,9 @@ async function handleSignup(request, env) {
   const device = detectDevice(request);
 
   await env.DB.prepare(
-    `INSERT INTO users (id, username, email, password_hash, created_at, last_seen, device_type)
-     VALUES (?1, ?2, ?3, ?4, ?5, ?5, ?6)`
-  ).bind(id, uname, uemail, passwordHash, now, device).run();
+    `INSERT INTO users (id, username, email, password_hash, country, created_at, last_seen, device_type)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?6, ?7)`
+  ).bind(id, uname, uemail, passwordHash, cleanCountry, now, device).run();
 
   const token = await signJWT({ sub: id, username: uname }, env.JWT_SECRET);
 
@@ -410,7 +411,7 @@ async function handleLeaderboard(request, env) {
 
   const rows = await env.DB.prepare(query).bind(gameId, limit).all();
   const total = await env.DB.prepare(
-    `SELECT COUNT(DISTINCT user_id) AS n FROM scores WHERE game_id = ?1 ${dateFilter}`
+    `SELECT COUNT(DISTINCT s.user_id) AS n FROM scores s WHERE s.game_id = ?1 ${dateFilter}`
   ).bind(gameId).first();
 
   return json({

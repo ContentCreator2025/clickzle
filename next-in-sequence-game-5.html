@@ -441,6 +441,7 @@ body.light .hero { background:linear-gradient(180deg, var(--surface2) 0%, rgba(2
 .ftr-link:hover { color:var(--text2); }
 .ftr-copy { font-size:12px; color:var(--text3); width:100%; text-align:center; margin-top:16px; padding-top:20px; border-top:1px solid var(--border); }
 </style>
+<script src="/assets/js/auth.js"></script>
 </head>
 <body>
 <div class="bg-grid"></div>
@@ -890,7 +891,7 @@ function rowHTML(p, i) {
   const trC     = rank===1?'lb-top1':rank===2?'lb-top2':rank===3?'lb-top3':'';
   const streakH = p.streak >= 3 ? `<span class="lb-streak">${p.streak}d</span>` : '';
   const flag    = `<img src="https://flagcdn.com/40x30/${p.country}.png" srcset="https://flagcdn.com/80x60/${p.country}.png 2x" alt="${p.country.toUpperCase()}" width="30" height="21">`;
-  const puzzDisp = activePeriod === 'today' ? p.puzzles : p.puzzles + ' played';
+  const puzzDisp = p.puzzles;
   const bestDisp = activePeriod === 'today' ? p.bestRound : '—';
   const effDisp  = activePeriod === 'today' ? p.eff + '%' : '—';
   return `<tr class="${trC}">

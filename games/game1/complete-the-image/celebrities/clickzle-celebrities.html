@@ -3517,6 +3517,8 @@ document.getElementById('pregameHelpClose').addEventListener('click', () => {
       const adsl  = document.getElementById('adSlot');
       if (pfl)  pfl.style.display  = 'none';
       if (fps)  fps.style.display  = 'none';
+      const lis = document.getElementById('loggedInSection');
+      if (lis)  lis.style.display  = 'none';
       // Build banner matching G2 style
       const c = document.createElement('div');
       c.style.cssText = 'background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:12px 16px;text-align:center;margin-top:12px;width:100%;max-width:340px;';
