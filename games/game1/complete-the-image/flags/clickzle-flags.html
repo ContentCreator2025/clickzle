@@ -57,6 +57,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap">
+<script src="../../../../assets/js/auth.js"></script>
 <style>
 
 
@@ -1589,6 +1590,22 @@
       <span class="game-id-tag">Speed</span>
     </div>
   </div>
+  <!-- Logged-in start state (shown when authenticated) -->
+  <div id="loggedInSection" style="display:none;width:100%;margin-bottom:6px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;">
+      <div>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);font-weight:700;margin-bottom:2px;">Playing as</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--text);" id="loggedInName">—</div>
+      </div>
+      <div style="text-align:right;" id="pbWrap">
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);font-weight:700;margin-bottom:2px;">Personal Best</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--green);" id="pbVal">—</div>
+      </div>
+    </div>
+    <button class="start-btn" id="startBtnLoggedIn" style="width:100%;">PLAY</button>
+    <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:8px;">Scores save automatically to the leaderboard</div>
+  </div>
+
   <!-- Free play -->
   <div class="section-label" id="playFreeLabel">Play free — no account needed</div>
   <div class="free-play-section" id="freePlaySection">
@@ -1596,7 +1613,7 @@
       <input type="text" class="name-input" id="playerNameInput" placeholder="Enter your name" maxlength="15" autocomplete="off" spellcheck="false">
       <button class="start-btn" id="startBtn">PLAY</button>
     </div>
-    <div class="free-note">Play instantly, no account needed. <a href="../../../../index.html" style="color:var(--green);text-decoration:underline;font-weight:600;">Login</a> or <a href="../../../../index.html" style="color:var(--green);text-decoration:underline;font-weight:600;">create a free account</a> to save your scores and stats and compete on the global leaderboard.</div>
+    <div class="free-note">Play instantly, no account needed. <a href="/login.html" style="color:var(--green);text-decoration:underline;font-weight:600;">Log in</a> or <a href="/signup.html" style="color:var(--green);text-decoration:underline;font-weight:600;">create a free account</a> to save scores and compete on the global leaderboard.</div>
   </div>
 
   <!-- Ad slot -->
@@ -2988,6 +3005,21 @@ function showVictory(timeMs, clicks) {
   document.getElementById('vSubtotal').textContent  = base.toLocaleString();
   document.getElementById('vScore').textContent     = score.toLocaleString();
   document.getElementById('vRank').textContent      = '#—';
+
+  // Submit score to leaderboard if logged in
+  if (window.CZAuth && CZAuth.isLoggedIn()) {
+    CZAuth.submitScore(1, {
+      score:    score,
+      time_ms:  timeMs,
+      correct:  1,
+      wrong:    clicks,
+      category: 'flags'
+    }).then(result => {
+      if (result && result.position) {
+        document.getElementById('vRank').textContent = '#' + result.position;
+      }
+    });
+  }
   document.getElementById('victoryMovieName').textContent = POSTER_DATA[gs.completePosterIdx].name;
   document.getElementById('victoryDate').textContent =
     'Puzzle #' + getPuzzleNumber() + ' · ' +
@@ -3029,6 +3061,21 @@ function showTimeout(clicks) {
   const base = Math.max(0, 10000 - Math.floor(TIMER_MS / 1000) * 30 - clicks);
   document.getElementById('tScore').textContent         = base.toLocaleString();
   document.getElementById('tRank').textContent          = '#—';
+
+  // Submit timeout score to leaderboard if logged in
+  if (window.CZAuth && CZAuth.isLoggedIn()) {
+    CZAuth.submitScore(1, {
+      score:    base,
+      time_ms:  TIMER_MS,
+      correct:  0,
+      wrong:    clicks,
+      category: 'flags'
+    }).then(result => {
+      if (result && result.position) {
+        document.getElementById('tRank').textContent = '#' + result.position;
+      }
+    });
+  }
   document.getElementById('tTilesRevealed').textContent = gs.correctCount + ' of 20';
   document.getElementById('tClicks').textContent        = clicks;
   document.getElementById('tMovieName').textContent     = POSTER_DATA[gs.completePosterIdx]?.name || '—';
@@ -3547,6 +3594,49 @@ function closeTBreakdown() {
 }
 if (_tBtn)      _tBtn.addEventListener('click', () => _tPanel.style.display !== 'none' ? closeTBreakdown() : openTBreakdown());
 if (_tCollapse) _tCollapse.addEventListener('click', closeTBreakdown);
+</script>
+
+<!-- ═══ AUTH INTEGRATION ═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  function initAuth() {
+    if (!window.CZAuth) return;
+
+    if (CZAuth.isLoggedIn()) {
+      const user = CZAuth.getUser();
+
+      // Show logged-in section, hide guest section
+      document.getElementById('loggedInSection').style.display = '';
+      document.getElementById('freePlaySection').style.display = 'none';
+      document.getElementById('playFreeLabel').textContent = 'Logged in — scores save automatically';
+
+      // Set username display
+      document.getElementById('loggedInName').textContent = user.username;
+
+      // Pre-fill player name so the game knows who's playing
+      document.getElementById('playerNameInput').value = user.username;
+
+      // Wire up logged-in play button
+      document.getElementById('startBtnLoggedIn').addEventListener('click', startGame);
+
+      // Fetch and show personal best for game 1
+      CZAuth.getPersonalBest(1).then(pb => {
+        if (pb && pb.best_score) {
+          document.getElementById('pbVal').textContent = pb.best_score.toLocaleString();
+        } else {
+          document.getElementById('pbVal').textContent = 'None yet';
+        }
+      });
+    }
+  }
+
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAuth);
+  } else {
+    initAuth();
+  }
+})();
 </script>
 </body>
 </html>

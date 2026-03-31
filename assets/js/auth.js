@@ -239,7 +239,8 @@
         .cz-chip-signup:hover { opacity:0.88; }
         @media(max-width:480px) {
           .cz-chip-name { display:none; }
-          .cz-chip-login { display:none; }
+          .cz-chip-login { font-size:11px; padding:5px 10px; }
+          .cz-chip-signup { font-size:11px; padding:5px 10px; }
         }
       `;
       document.head.appendChild(style);
