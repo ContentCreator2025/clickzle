@@ -1797,21 +1797,17 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
             Share Result
           </button>
-          <button class="share-btn" id="inviteFriendBtn" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
-            Invite Friend
+          <button class="share-btn" id="challengeBtn" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Challenge a Friend
           </button>
         </div>
 
         <!-- Secondary actions -->
         <div class="postgame-actions">
-          <a href="../../../../complete-the-image-game-1.html#leaderboard" class="action-btn action-home">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            View Leaderboard
-          </a>
-          <a href="../../../../complete-the-image-game-1.html" class="action-btn">
+          <a href="../../../../complete-the-image-game-1.html" class="action-btn action-home">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-            Play Another Category
+            Back to Game 1
           </a>
           <a href="../../../../index.html" class="action-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -1981,13 +1977,9 @@
 
         <!-- Secondary actions -->
         <div class="postgame-actions">
-          <a href="../../../../complete-the-image-game-1.html#leaderboard" class="action-btn action-home">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            View Leaderboard
-          </a>
-          <a href="../../../../complete-the-image-game-1.html" class="action-btn">
+          <a href="../../../../complete-the-image-game-1.html" class="action-btn action-home">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-            Play Another Category
+            Back to Game 1
           </a>
           <a href="../../../../index.html" class="action-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -3286,19 +3278,25 @@ document.getElementById('categoriesBtn').addEventListener('click', () => openMod
 document.getElementById('statsBtn').addEventListener('click',      () => { loadStats(); openModal('statsModal'); });
 document.getElementById('settingsBtn').addEventListener('click',   () => openModal('settingsModal'));
 
-// Invite friend — copies the game URL to clipboard
-const _ib = document.getElementById('inviteFriendBtn');
-if (_ib) _ib.addEventListener('click', () => {
-  const url = 'https://clickzle.games/games/movies/clickzle-movies.html';
-  const msg = `Can you beat my Clickzle score? Play today's Movie Poster puzzle:\n${url}`;
-  navigator.clipboard.writeText(msg).then(() => {
-    const btn = document.getElementById('inviteFriendBtn');
-    const orig = btn.innerHTML;
-    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> Link Copied!`;
-    setTimeout(() => { btn.innerHTML = orig; }, 2000);
-  }).catch(() => {
-    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
-  });
+// Challenge a friend — generates personalised challenge URL
+const _cb = document.getElementById('challengeBtn');
+if (_cb) _cb.addEventListener('click', function() {
+  const scoreEl = document.getElementById('vScore');
+  const score = scoreEl ? scoreEl.textContent.replace(/,/g, '') : '0';
+  const name = (window.CZAuth && CZAuth.isLoggedIn()) ? CZAuth.getUser().username : (document.getElementById('playerNameDisplay') ? document.getElementById('playerNameDisplay').textContent.trim() : 'player');
+  const challengeUrl = `https://clickzle.games/complete-the-image-game-1.html?challenge=${encodeURIComponent(name)}&score=${score}&cat=movies`;
+  const msg = `🎬 Can you beat my Clickzle score of ${scoreEl ? scoreEl.textContent : score}? Challenge accepted?\n${challengeUrl}`;
+  if (navigator.share) {
+    navigator.share({ title: 'Clickzle Challenge', text: msg, url: challengeUrl }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(challengeUrl).then(() => {
+      const orig = _cb.innerHTML;
+      _cb.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> Link Copied!`;
+      setTimeout(() => { _cb.innerHTML = orig; }, 2000);
+    }).catch(() => {
+      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    });
+  }
 });
 
 // Timeout share button
@@ -3652,7 +3650,11 @@ if (_tCollapse) _tCollapse.addEventListener('click', closeTBreakdown);
       const user = CZAuth.getUser();
 
       // Show logged-in section, hide guest section
-      document.getElementById('loggedInSection').style.display = '';
+      const _todayAP = new Date().toISOString().split('T')[0];
+      const _stAP = JSON.parse(localStorage.getItem('clickzle_stats_movies') || '{}');
+      if (!(_stAP.history && _stAP.history[_todayAP] && _stAP.history[_todayAP].played)) {
+        document.getElementById('loggedInSection').style.display = '';
+      }
       document.getElementById('freePlaySection').style.display = 'none';
       document.getElementById('playFreeLabel').textContent = 'Logged in — scores save automatically';
 
