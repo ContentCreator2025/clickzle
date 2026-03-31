@@ -440,6 +440,7 @@ body.light .hero { background:linear-gradient(180deg, var(--surface2) 0%, rgba(2
 .ftr-link { font-size:13px; color:var(--text3); text-decoration:none; transition:color 0.18s; }
 .ftr-link:hover { color:var(--text2); }
 .ftr-copy { font-size:12px; color:var(--text3); width:100%; text-align:center; margin-top:16px; padding-top:20px; border-top:1px solid var(--border); }
+.hdr-sep { color:var(--border2); font-size:14px; margin:0 2px; }
 </style>
 <script src="/assets/js/auth.js"></script>
 </head>
@@ -452,23 +453,22 @@ body.light .hero { background:linear-gradient(180deg, var(--surface2) 0%, rgba(2
   <div class="hdr-inner">
     <a href="index.html" class="site-logo">CLICK<span>ZLE</span></a>
     <div class="hdr-center">
-      <span class="hdr-reset-label">Games reset in:</span>
+      <a href="complete-the-image-game-1.html" class="nav-game-num" data-game="1" aria-label="Game 1: Complete the Image">1</a>
+      <a href="follow-the-pattern-game-2.html" class="nav-game-num" data-game="2" aria-label="Game 2: Follow the Pattern">2</a>
+      <a href="hit-the-target-game-3.html" class="nav-game-num" data-game="3" aria-label="Game 3: Hit the Target">3</a>
+      <a href="spot-the-pair-game-4.html" class="nav-game-num" data-game="4" aria-label="Game 4: Spot the Pair">4</a>
+      <a href="next-in-sequence-game-5.html" class="nav-game-num" data-game="5" aria-label="Game 5: Next in Sequence">5</a>
+      <span class="hdr-sep">—</span>
+      <span class="hdr-reset-label">Reset in:</span>
       <span class="hdr-timer" id="hdrTimer">00:00:00</span>
     </div>
-    <div class="hdr-right">
-      <span class="nav-link nav-other-games">
-        Other Games
-        <a href="complete-the-image-game-1.html" class="nav-game-num" data-game="1" aria-label="Game 1: Complete the Image">1</a>
-        <a href="follow-the-pattern-game-2.html" class="nav-game-num" data-game="2" aria-label="Game 2: Follow the Pattern">2</a>
-        <a href="hit-the-target-game-3.html" class="nav-game-num" data-game="3" aria-label="Game 3: Hit the Target">3</a>
-        <a href="spot-the-pair-game-4.html" class="nav-game-num" data-game="4" aria-label="Game 4: Spot the Pair">4</a>
-        <a href="next-in-sequence-game-5.html" class="nav-game-num" data-game="5" aria-label="Game 5: Next in Sequence" style="outline:2px solid rgba(167,139,250,0.5);">5</a>
-      </span>
+    <nav class="hdr-right" aria-label="Site navigation">
+      <!-- auth chip injected here by auth.js -->
       <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
         <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
-    </div>
+    </nav>
   </div>
 </header>
 

@@ -153,6 +153,7 @@ body.light .site-header { background:rgba(244,244,244,0.92); }
   font-size:12px; color:var(--text3); letter-spacing:0.3px;
 }
 .hdr-reset-label { font-weight:500; white-space:nowrap; }
+.hdr-sep { color:var(--border2); font-size:14px; margin:0 2px; }
 .hdr-timer {
   font-family:'Bebas Neue',sans-serif; font-size:18px;
   letter-spacing:2px; color:var(--text2);
@@ -962,17 +963,17 @@ body.light .hero {
   <div class="hdr-inner">
     <a href="index.html" class="site-logo">CLICK<span>ZLE</span></a>
     <div class="hdr-center">
-      <span class="hdr-reset-label">Games reset in:</span>
+      <a href="complete-the-image-game-1.html" class="nav-game-num" data-game="1" aria-label="Game 1: Complete the Image">1</a>
+      <a href="follow-the-pattern-game-2.html" class="nav-game-num" data-game="2" aria-label="Game 2: Follow the Pattern">2</a>
+      <a href="hit-the-target-game-3.html" class="nav-game-num" data-game="3" aria-label="Game 3: Hit the Target">3</a>
+      <a href="spot-the-pair-game-4.html" class="nav-game-num" data-game="4" aria-label="Game 4: Spot the Pair">4</a>
+      <a href="next-in-sequence-game-5.html" class="nav-game-num" data-game="5" aria-label="Game 5: Next in Sequence">5</a>
+      <span class="hdr-sep">—</span>
+      <span class="hdr-reset-label">Reset in:</span>
       <span class="hdr-timer" id="hdrTimer">00:00:00</span>
     </div>
-    <div class="hdr-right">
-      <span class="nav-link nav-other-games">
-        Other Games
-        <a href="follow-the-pattern-game-2.html" class="nav-game-num" data-game="2">2</a>
-        <a href="hit-the-target-game-3.html" class="nav-game-num" data-game="3">3</a>
-        <a href="spot-the-pair-game-4.html" class="nav-game-num" data-game="4">4</a>
-        <a href="next-in-sequence-game-5.html" class="nav-game-num" data-game="5" aria-label="Game 5: Next in Sequence">5</a>
-      </span>
+    <nav class="hdr-right" aria-label="Site navigation">
+      <!-- auth chip injected here by auth.js -->
       <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
         <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="4"/>
@@ -985,7 +986,7 @@ body.light .hero {
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
       </button>
-    </div>
+    </nav>
   </div>
 </header>
 <main>
