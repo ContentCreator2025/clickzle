@@ -1598,9 +1598,9 @@
 </div>
         <div class="stat-row">
           <div class="stat"><div class="stat-n">5</div><div class="stat-l">Daily Games</div></div>
-          <div class="stat"><div class="stat-n">12+</div><div class="stat-l">Categories</div></div>
+          <div class="stat"><div class="stat-n" id="statRegistered">—</div><div class="stat-l">Registered Players</div></div>
+          <div class="stat"><div class="stat-n" id="statGamesToday">—</div><div class="stat-l">Games Played Today</div></div>
           <div class="stat"><div class="stat-n">24h</div><div class="stat-l">New Puzzles</div></div>
-          <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Leaderboards</div></div>
         </div>
       </div>
       <div class="about-card reveal">
@@ -1723,6 +1723,25 @@ document.getElementById('themeToggle').addEventListener('click', () => {
 });
 
 initHero();
+
+// ── LIVE STATS ────────────────────────────────────────────────────────────────
+(function(){
+  var API = 'https://clickzle-auth.thecontentcreationguy.workers.dev';
+  function fmt(n) {
+    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    return String(n);
+  }
+  fetch(API + '/api/stats')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (!d.ok) return;
+      var reg = document.getElementById('statRegistered');
+      var games = document.getElementById('statGamesToday');
+      if (reg)   reg.textContent   = fmt(d.registered_players || 0);
+      if (games) games.textContent = fmt(d.games_today || 0);
+    })
+    .catch(function(){});
+})();
 
 // ── SMOOTH SCROLL SNAP (desktop only) ─────────────────────────────────────────
 (function() {

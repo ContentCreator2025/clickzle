@@ -506,6 +506,22 @@ async function handleUpdateAccount(request, env) {
   return json({ ok: true, user: updated });
 }
 
+async function handleStats(request, env) {
+  const date = todayUTC();
+  const [users, playersToday, gamesToday] = await Promise.all([
+    env.DB.prepare('SELECT COUNT(*) AS n FROM users').first(),
+    env.DB.prepare('SELECT COUNT(DISTINCT user_id) AS n FROM scores WHERE date_utc = ?1').bind(date).first(),
+    env.DB.prepare('SELECT COUNT(*) AS n FROM scores WHERE date_utc = ?1').bind(date).first(),
+  ]);
+  return json({
+    ok: true,
+    registered_players: users?.n   || 0,
+    players_today:      playersToday?.n || 0,
+    games_today:        gamesToday?.n   || 0,
+    date,
+  });
+}
+
 async function handleDeleteScore(request, env) {
   const token = getBearerToken(request);
   if (!token) return json({ error: 'Authorisation required' }, 401);
@@ -553,6 +569,7 @@ export default {
     if (path === '/api/auth/score'          && method === 'POST') return handleSubmitScore(request, env);
     if (path === '/api/auth/personal-best'  && method === 'GET')  return handlePersonalBest(request, env);
     if (path === '/api/leaderboard'         && method === 'GET')  return handleLeaderboard(request, env);
+    if (path === '/api/stats'               && method === 'GET')  return handleStats(request, env);
 
     return json({ error: 'Not found' }, 404);
   },
