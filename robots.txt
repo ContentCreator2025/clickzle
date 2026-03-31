@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Auth pages — no indexing needed
+Disallow: /login.html
+Disallow: /signup.html
+Disallow: /account.html
+
+# Assets
+Disallow: /assets/
+
+Sitemap: https://clickzle.games/sitemap.xml
