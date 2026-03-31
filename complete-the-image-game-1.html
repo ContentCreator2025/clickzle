@@ -1050,6 +1050,14 @@ body.light .hero {
       <div class="sec-tag" id="lbSectionTag">Today &middot; Resets midnight UTC</div>
     </div>
     <p class="lb-instruct reveal">Choose a category below, then press the <strong>Play Now</strong> button to play today&rsquo;s puzzle.</p>
+    <!-- Challenge banner — shown when arriving via a challenge link -->
+    <div id="challengeBanner" style="display:none;margin:0 0 16px;padding:14px 18px;background:var(--surface);border:1px solid var(--accent-border);border-left:3px solid var(--accent);border-radius:12px;display:none;align-items:center;gap:12px;flex-wrap:wrap;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <div style="flex:1;min-width:0;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1.5px;color:var(--accent);">CHALLENGE ACCEPTED?</div>
+        <div id="challengeText" style="font-size:13px;color:var(--text2);margin-top:2px;"></div>
+      </div>
+    </div>
     <div class="sec-head" style="display:none">
     </div>
     <div class="lb-panel">
@@ -1773,6 +1781,30 @@ document.getElementById('themeToggle').addEventListener('click', () => {
   localStorage.setItem('clickzle_site_theme', light ? 'light' : 'dark');
   applyTheme();
 });
+
+// ── CHALLENGE BANNER ───────────────────────────────────────────────────────
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const challenger = params.get('challenge');
+  const score      = params.get('score');
+  const cat        = params.get('cat');
+  if (!challenger || !score) return;
+
+  // Show the banner
+  const banner = document.getElementById('challengeBanner');
+  const text   = document.getElementById('challengeText');
+  if (!banner || !text) return;
+  const catLabel = cat ? cat.charAt(0).toUpperCase() + cat.slice(1) : 'Complete the Image';
+  const scoreNum = parseInt(score, 10);
+  text.textContent = challenger + ' scored ' + (isNaN(scoreNum) ? score : scoreNum.toLocaleString()) + ' on ' + catLabel + ' — can you beat it?';
+  banner.style.display = 'flex';
+
+  // Auto-switch to the matching category tab
+  if (cat) {
+    const tab = document.querySelector('.lb-cat-tab[data-cat="' + cat + '"]');
+    if (tab) tab.click();
+  }
+})();
 </script>
 </body>
 </html>

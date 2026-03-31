@@ -1695,6 +1695,13 @@
             </span>
             <span class="score-val" id="vRank">#—</span>
           </div>
+          <div class="score-row big" id="vStreakRow" style="display:none;">
+            <span class="score-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Streak
+            </span>
+            <span class="score-val" id="vStreak" style="color:var(--green);">—</span>
+          </div>
         </div>
 
         <!-- Score breakdown accordion -->
@@ -3004,6 +3011,14 @@ function showVictory(timeMs, clicks) {
   document.getElementById('vSubtotal').textContent  = base.toLocaleString();
   document.getElementById('vScore').textContent     = score.toLocaleString();
   document.getElementById('vRank').textContent      = '#—';
+  try {
+    const _ss = JSON.parse(localStorage.getItem('clickzle_stats_food') || '{}');
+    const _streak = _ss.streak || 0;
+    if (_streak > 0) {
+      document.getElementById('vStreak').textContent = _streak + (_streak === 1 ? ' day' : ' days');
+      document.getElementById('vStreakRow').style.display = '';
+    }
+  } catch(e) {}
 
   // Submit score to leaderboard if logged in
   if (window.CZAuth && CZAuth.isLoggedIn()) {
