@@ -528,6 +528,14 @@ body.light .hero { background:linear-gradient(180deg, var(--surface2) 0%, rgba(2
       <div class="sec-tag" id="lbSectionTag">Today &middot; Resets midnight UTC</div>
     </div>
     <p class="lb-instruct reveal">Press <strong>Play Now</strong> to play today&rsquo;s Next in Sequence puzzle.</p>
+    <!-- Challenge banner — shown when arriving via a challenge link -->
+    <div id="challengeBanner" style="display:none;margin:0 0 16px;padding:14px 18px;background:var(--surface);border:1px solid var(--accent-border);border-left:3px solid var(--accent);border-radius:12px;align-items:center;gap:12px;flex-wrap:wrap;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <div style="flex:1;min-width:0;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1.5px;color:var(--accent);">CHALLENGE ACCEPTED?</div>
+        <div id="challengeText" style="font-size:13px;color:var(--text2);margin-top:2px;"></div>
+      </div>
+    </div>
     <div class="lb-panel">
 
       <div class="lb-tabs-wrap">
@@ -874,12 +882,12 @@ async function loadLeaderboard(period) {
     if (rows.length === 0) throw new Error('empty');
     const mapped = rows.map(r => ({
       name:      r.username,
-      country:   r.country   || 'xx',
-      streak:    0,
-      puzzles:   r.correct   || 0,
-      bestRound: r.combo_max || 0,
+      country:   r.country      || 'xx',
+      streak:    r.streak_days  || 0,
+      puzzles:   r.correct      || 0,
+      bestRound: r.combo_max    || 0,
       eff:       r.accuracy != null ? Math.round(r.accuracy) : 0,
-      score:     r.score     || 0,
+      score:     r.score        || 0,
     }));
     renderLeaderboard(mapped);
   } catch (_) {
@@ -897,16 +905,16 @@ function rowHTML(p, i) {
   const rank    = i + 1;
   const rC      = rank===1?'top1':rank===2?'top2':rank===3?'top3':'';
   const trC     = rank===1?'lb-top1':rank===2?'lb-top2':rank===3?'lb-top3':'';
-  const streakH = p.streak >= 3 ? `<span class="lb-streak">${p.streak}d</span>` : '';
+  const streakH = p.streak >= 3 ? `<span class="lb-streak">${p.streak}d</span>` : '<span style="color:var(--text3);font-size:11px;">—</span>';
   const flag    = `<img src="https://flagcdn.com/40x30/${p.country}.png" srcset="https://flagcdn.com/80x60/${p.country}.png 2x" alt="${p.country.toUpperCase()}" width="30" height="21">`;
-  const puzzDisp = p.puzzles;
-  const bestDisp = activePeriod === 'today' ? p.bestRound : '—';
-  const effDisp  = activePeriod === 'today' ? p.eff + '%' : '—';
+  const puzzDisp = p.puzzles || '—';
+  const bestDisp = p.bestRound || '—';
+  const effDisp  = p.eff ? p.eff + '%' : '—';
   return `<tr class="${trC}">
     <td><span class="lb-rank-num ${rC}">${rank}</span></td>
     <td><div class="lb-flag-cell">${flag}</div></td>
-    <td><span class="lb-pname">${p.name}</span>${streakH}</td>
-    <td>${streakH ? '' : '<span style="color:var(--text3);font-size:11px;">—</span>'}</td>
+    <td><span class="lb-pname">${p.name}</span></td>
+    <td>${streakH}</td>
     <td><span class="lb-time-val">${puzzDisp}</span></td>
     <td><span class="lb-time-val">${bestDisp}</span></td>
     <td><span class="lb-eff-val">${effDisp}</span></td>
@@ -1037,6 +1045,20 @@ document.getElementById('themeToggle').addEventListener('click', () => {
     }
   } catch(e) {}
 }());
+
+// ── CHALLENGE BANNER ─────────────────────────────────────────────────────────
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const challenger = params.get('challenge');
+  const score      = params.get('score');
+  if (!challenger || !score) return;
+  const banner = document.getElementById('challengeBanner');
+  const text   = document.getElementById('challengeText');
+  if (!banner || !text) return;
+  const scoreNum = parseInt(score, 10);
+  text.textContent = challenger + ' scored ' + (isNaN(scoreNum) ? score : scoreNum.toLocaleString()) + ' on Next in Sequence — can you beat it?';
+  banner.style.display = 'flex';
+})();
 </script>
 </body>
 </html>
