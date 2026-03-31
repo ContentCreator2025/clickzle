@@ -9,6 +9,7 @@
  *   GET  /api/auth/check-email     — ?e=email → { available: bool }
  *   POST /api/auth/score           — submit a game score (requires Bearer token)
  *   GET  /api/auth/personal-best   — ?game=1 → personal best for logged-in user
+ *   PUT  /api/auth/update          — update email / country / password (requires Bearer token)
  *   GET  /api/leaderboard          — ?game=1&period=today|month|alltime&limit=100
  *
  * Environment variables (set via: wrangler secret put JWT_SECRET):
@@ -19,7 +20,7 @@
 // ── CORS ───────────────────────────────────────────────────────────────────────
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   'Access-Control-Max-Age': '86400',
 };
@@ -424,6 +425,77 @@ async function handleLeaderboard(request, env) {
   });
 }
 
+async function handleUpdateAccount(request, env) {
+  const token = getBearerToken(request);
+  if (!token) return json({ error: 'Authorisation required' }, 401);
+
+  const payload = await verifyJWT(token, env.JWT_SECRET);
+  if (!payload) return json({ error: 'Token invalid or expired — please log in again' }, 401);
+
+  let body;
+  try { body = await request.json(); } catch { return json({ error: 'Invalid request body' }, 400); }
+
+  const { email, country, current_password, new_password } = body || {};
+
+  const user = await env.DB.prepare(
+    'SELECT id, username, email, password_hash FROM users WHERE id = ?1'
+  ).bind(payload.sub).first();
+  if (!user) return json({ error: 'Account not found' }, 404);
+
+  const setClauses = [];
+  const bindings   = [];
+  let idx = 1;
+
+  // Email
+  if (email !== undefined && email !== '') {
+    const newEmail = email.toLowerCase().trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail))
+      return json({ error: 'Please enter a valid email address' }, 400);
+    if (newEmail !== user.email) {
+      const taken = await env.DB.prepare(
+        'SELECT id FROM users WHERE email = ?1 AND id != ?2'
+      ).bind(newEmail, user.id).first();
+      if (taken) return json({ error: 'That email address is already in use' }, 409);
+      setClauses.push(`email = ?${idx++}`); bindings.push(newEmail);
+    }
+  }
+
+  // Country
+  if (country !== undefined) {
+    const clean = (country && /^[a-z]{2}$/.test(country)) ? country : null;
+    setClauses.push(`country = ?${idx++}`); bindings.push(clean);
+  }
+
+  // Password
+  if (new_password !== undefined && new_password !== '') {
+    if (!current_password)
+      return json({ error: 'Current password is required to set a new password' }, 400);
+    const valid = await verifyPassword(current_password, user.password_hash);
+    if (!valid) return json({ error: 'Current password is incorrect' }, 401);
+    if (new_password.length < 8)
+      return json({ error: 'New password must be at least 8 characters' }, 400);
+    const newHash = await hashPassword(new_password);
+    setClauses.push(`password_hash = ?${idx++}`); bindings.push(newHash);
+  }
+
+  if (setClauses.length === 0)
+    return json({ ok: true, message: 'No changes to save' });
+
+  setClauses.push(`last_seen = ?${idx++}`);
+  bindings.push(Math.floor(Date.now() / 1000));
+  bindings.push(user.id);
+
+  await env.DB.prepare(
+    `UPDATE users SET ${setClauses.join(', ')} WHERE id = ?${idx}`
+  ).bind(...bindings).run();
+
+  const updated = await env.DB.prepare(
+    'SELECT id, username, email, country FROM users WHERE id = ?1'
+  ).bind(user.id).first();
+
+  return json({ ok: true, user: updated });
+}
+
 // ── MAIN ROUTER ───────────────────────────────────────────────────────────────
 export default {
   async fetch(request, env) {
@@ -437,6 +509,7 @@ export default {
     const method = request.method;
 
     if (path === '/api/auth/signup'         && method === 'POST') return handleSignup(request, env);
+    if (path === '/api/auth/update'         && method === 'PUT')  return handleUpdateAccount(request, env);
     if (path === '/api/auth/login'          && method === 'POST') return handleLogin(request, env);
     if (path === '/api/auth/me'             && method === 'GET')  return handleMe(request, env);
     if (path === '/api/auth/check-username' && method === 'GET')  return handleCheckUsername(request, env);

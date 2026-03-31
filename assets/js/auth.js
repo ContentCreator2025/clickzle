@@ -137,6 +137,19 @@
     } catch { return null; }
   }
 
+  async function updateAccount(data) {
+    const res = await apiFetch('/api/auth/update', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+    if (res.ok && res.user) {
+      // Merge updated fields into stored user
+      const current = getStoredUser() || {};
+      localStorage.setItem(USER_KEY, JSON.stringify({ ...current, ...res.user }));
+    }
+    return res;
+  }
+
   async function checkUsername(username) {
     try {
       const data = await apiFetch(`/api/auth/check-username?u=${encodeURIComponent(username)}`);
@@ -184,8 +197,10 @@
     if (loggedIn) {
       const initials = user.username.slice(0, 2).toUpperCase();
       chip.innerHTML = `
-        <div class="cz-chip-avatar">${initials}</div>
-        <span class="cz-chip-name">${user.username}</span>
+        <a href="/account.html" class="cz-chip-user" title="My account">
+          <div class="cz-chip-avatar">${initials}</div>
+          <span class="cz-chip-name">${user.username}</span>
+        </a>
         <button class="cz-chip-logout" onclick="CZAuth.logout()" title="Log out">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
@@ -207,6 +222,8 @@
       style.id = 'cz-auth-styles';
       style.textContent = `
         .cz-auth-chip { display:flex; align-items:center; gap:8px; margin-left:8px; }
+        .cz-chip-user { display:flex; align-items:center; gap:8px; text-decoration:none; border-radius:8px; padding:2px 4px; transition:background 0.15s; }
+        .cz-chip-user:hover { background:var(--surface2,rgba(255,255,255,0.06)); }
         .cz-chip-avatar {
           width:30px; height:30px; border-radius:50%;
           background:rgba(74,222,128,0.12); border:1.5px solid rgba(74,222,128,0.35);
@@ -260,11 +277,13 @@
     signup,
     login,
     logout,
+    updateAccount,
     getPersonalBest,
     submitScore,
     checkUsername,
     checkEmail,
     injectHeader,
+    apiFetch,
     API_BASE,
   };
 
