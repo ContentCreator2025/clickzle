@@ -434,7 +434,7 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
       <p class="terms-note">
         By creating an account you agree to our
         <a href="/terms.html">Terms of Service</a> and <a href="/privacy.html">Privacy Policy</a>.
-        No email verification required.
+        A verification email will be sent after sign-up.
       </p>
 
       <div class="auth-divider"><span>or</span></div>
@@ -588,8 +588,17 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
     submitBtn.disabled=false;
 
     if(result.ok){
-      showAlert('Account created! Redirecting…','success');
-      setTimeout(()=>{ window.location.href='/index.html'; },800);
+      if(result.email_verification_sent){
+        // Show email verification prompt — don't auto-redirect
+        formAlert.innerHTML='<strong>Account created!</strong> We\'ve sent a verification email to <strong>' +
+          document.getElementById('email').value.trim() +
+          '</strong>. Click the link in the email to activate your account, then <a href="/login.html" style="color:var(--accent)">log in here</a>.';
+        formAlert.className='form-alert show success';
+        document.getElementById('signupForm').style.display='none';
+      } else {
+        showAlert('Account created! Redirecting…','success');
+        setTimeout(()=>{ window.location.href='/index.html'; },800);
+      }
     } else {
       showAlert(result.error||'Something went wrong. Please try again.');
     }

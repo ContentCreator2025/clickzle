@@ -18,6 +18,16 @@
   // IMPORTANT: Change this to your deployed Worker URL after deploying
   const API_BASE = 'https://clickzle-auth.thecontentcreationguy.workers.dev';
 
+  // ── COOKIE CONSENT — applied immediately (before DOM ready) ───────────────
+  // Blocks GA by default until the user actively accepts.
+  const CONSENT_KEY = 'czCookieConsent';
+  const GA_ID       = 'G-LVM484NRCG';
+  const _consent    = localStorage.getItem(CONSENT_KEY);
+  if (_consent !== 'accepted') {
+    // Disable GA tracking until explicitly accepted (privacy-by-default)
+    window['ga-disable-' + GA_ID] = true;
+  }
+
   const TOKEN_KEY  = 'cz_token';
   const USER_KEY   = 'cz_user';
   const PB_KEY_PFX = 'cz_pb_';   // personal best cache prefix
@@ -168,6 +178,28 @@
     } catch { return null; }
   }
 
+  async function forgotPassword(email) {
+    return apiFetch('/api/auth/forgot-password', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    });
+  }
+
+  async function resetPassword(token, password) {
+    return apiFetch('/api/auth/reset-password', {
+      method: 'POST',
+      body: JSON.stringify({ token, password }),
+    });
+  }
+
+  async function verifyEmail(token) {
+    return apiFetch(`/api/auth/verify-email?token=${encodeURIComponent(token)}`);
+  }
+
+  async function resendVerify() {
+    return apiFetch('/api/auth/resend-verify', { method: 'POST' });
+  }
+
   // ── HEADER INJECTION ──────────────────────────────────────────────────────
   /**
    * Call CZAuth.injectHeader() after the DOM loads.
@@ -273,6 +305,70 @@
     }
   }
 
+  // ── COOKIE CONSENT BANNER ─────────────────────────────────────────────────
+  function initCookieConsent() {
+    // Already decided — nothing to show
+    if (localStorage.getItem(CONSENT_KEY)) return;
+
+    const banner = document.createElement('div');
+    banner.id = 'cz-cookie-banner';
+    Object.assign(banner.style, {
+      position: 'fixed', bottom: '0', left: '0', right: '0',
+      zIndex: '99999',
+      background: 'var(--surface,#141414)',
+      borderTop: '1px solid var(--border2,#2e2e2e)',
+      padding: '14px 0',
+      boxShadow: '0 -4px 32px rgba(0,0,0,0.35)',
+      fontFamily: "'DM Sans',sans-serif",
+    });
+    banner.innerHTML = `
+      <div style="max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:0 28px;">
+        <div style="flex:1;min-width:200px;font-size:13px;color:var(--text2,#b0b0b0);line-height:1.5;">
+          🍪 We use cookies to analyse traffic and improve your experience.
+          <a href="/privacy.html" style="color:var(--accent,#4ade80);text-decoration:none;white-space:nowrap;">Privacy Policy</a>
+        </div>
+        <div style="display:flex;gap:10px;flex-shrink:0;">
+          <button id="czCookieDecline" style="background:none;border:1.5px solid rgba(255,255,255,0.12);color:var(--text3,#888);border-radius:8px;padding:8px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:border-color 0.15s,color 0.15s;">Decline</button>
+          <button id="czCookieAccept" style="background:var(--accent,#4ade80);border:none;color:#000;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.15s;">Accept</button>
+        </div>
+      </div>`;
+
+    function dismissBanner() {
+      banner.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+      banner.style.transform  = 'translateY(100%)';
+      banner.style.opacity    = '0';
+      setTimeout(() => { if (banner.parentNode) banner.remove(); }, 350);
+    }
+
+    document.getElementById && document.body.appendChild(banner);
+
+    banner.querySelector('#czCookieAccept').addEventListener('click', () => {
+      localStorage.setItem(CONSENT_KEY, 'accepted');
+      window['ga-disable-' + GA_ID] = false;   // un-block GA
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
+      dismissBanner();
+    });
+
+    banner.querySelector('#czCookieDecline').addEventListener('click', () => {
+      localStorage.setItem(CONSENT_KEY, 'declined');
+      window['ga-disable-' + GA_ID] = true;
+      dismissBanner();
+    });
+
+    // Hover tint on decline button
+    const decBtn = banner.querySelector('#czCookieDecline');
+    decBtn.addEventListener('mouseenter', () => {
+      decBtn.style.borderColor = 'rgba(255,255,255,0.28)';
+      decBtn.style.color = 'var(--text,#f0f0f0)';
+    });
+    decBtn.addEventListener('mouseleave', () => {
+      decBtn.style.borderColor = 'rgba(255,255,255,0.12)';
+      decBtn.style.color = 'var(--text3,#888)';
+    });
+  }
+
   // ── EXPOSE GLOBAL ─────────────────────────────────────────────────────────
   window.CZAuth = {
     isLoggedIn,
@@ -287,15 +383,23 @@
     submitScore,
     checkUsername,
     checkEmail,
+    forgotPassword,
+    resetPassword,
+    verifyEmail,
+    resendVerify,
     injectHeader,
     apiFetch,
     API_BASE,
   };
 
-  // Auto-inject header on DOM ready
+  // Auto-inject header + cookie banner on DOM ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectHeader);
+    document.addEventListener('DOMContentLoaded', () => {
+      injectHeader();
+      initCookieConsent();
+    });
   } else {
     injectHeader();
+    initCookieConsent();
   }
 })();

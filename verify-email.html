@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LVM484NRCG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LVM484NRCG');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify Email — Clickzle</title>
+<meta name="description" content="Verify your Clickzle email address to activate your account.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="/assets/js/auth.js"></script>
+<style>
+
+/* ═══ TOKENS ══════════════════════════════════════════════════════════════ */
+:root {
+  --bg:#0a0a0a; --surface:#141414; --surface2:#1e1e1e;
+  --border:#222; --border2:#2e2e2e;
+  --text:#f0f0f0; --text2:#b0b0b0; --text3:#888;
+  --accent:#4ade80;
+  --accent-dim:rgba(74,222,128,0.08);
+  --accent-border:rgba(74,222,128,0.22);
+  --green:#4ade80; --red:#f87171;
+}
+body.light {
+  --bg:#f4f4f4; --surface:#fff; --surface2:#ebebeb;
+  --border:#d0d0d0; --border2:#c0c0c0;
+  --text:#111; --text2:#444; --text3:#777;
+  --accent-dim:rgba(74,222,128,0.12);
+  --accent-border:rgba(74,222,128,0.28);
+}
+
+/* ═══ RESET ═══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+}
+
+/* ═══ BACKGROUND ══════════════════════════════════════════════════════════ */
+.bg-grid{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px);
+  background-size:72px 72px;
+}
+.bg-radial{
+  position:fixed; top:-200px; left:50%; transform:translateX(-50%);
+  width:800px; height:500px;
+  background:radial-gradient(ellipse, rgba(74,222,128,0.07) 0%, transparent 68%);
+  pointer-events:none; z-index:0;
+}
+body.light .bg-grid{display:none;}
+body.light .bg-radial{opacity:0.2;}
+
+/* ═══ HEADER ══════════════════════════════════════════════════════════════ */
+.site-header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(10,10,10,0.88); backdrop-filter:blur(18px);
+}
+.site-header::after{
+  content:""; position:absolute; bottom:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent 0%,rgba(74,222,128,0.15) 20%,rgba(74,222,128,0.9) 50%,rgba(74,222,128,0.15) 80%,transparent 100%);
+}
+body.light .site-header{background:rgba(244,244,244,0.92);}
+.hdr-inner{
+  max-width:1120px; margin:0 auto; padding:0 28px; height:62px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.site-logo{
+  font-family:'Bebas Neue',sans-serif; font-size:26px;
+  letter-spacing:3px; color:var(--text); text-decoration:none;
+}
+.site-logo span{color:var(--accent);}
+.hdr-right{display:flex;align-items:center;gap:8px;}
+.icon-btn{
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  background:none;border:none;cursor:pointer;color:var(--text2);
+  border-radius:8px;transition:background 0.15s,color 0.15s;
+}
+.icon-btn:hover{background:var(--surface2);color:var(--text);}
+.icon-btn svg{width:18px;height:18px;}
+
+/* ═══ PAGE LAYOUT ═════════════════════════════════════════════════════════ */
+.page-wrap{
+  position:relative; z-index:1;
+  min-height:calc(100vh - 62px);
+  display:flex; align-items:center; justify-content:center;
+  padding:40px 20px 60px;
+}
+
+/* ═══ STATUS CARD ═════════════════════════════════════════════════════════ */
+.status-card{
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:20px; padding:48px 40px;
+  width:100%; max-width:440px; text-align:center;
+}
+.status-icon{
+  width:64px; height:64px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 24px;
+  font-size:32px;
+}
+.status-icon.loading{
+  background:var(--surface2); border:2px solid var(--border2);
+}
+.status-icon.success{
+  background:rgba(74,222,128,0.1); border:2px solid rgba(74,222,128,0.3);
+}
+.status-icon.error{
+  background:rgba(248,113,113,0.1); border:2px solid rgba(248,113,113,0.3);
+}
+.status-spinner{
+  width:28px; height:28px;
+  border:3px solid var(--border2);
+  border-top-color:var(--accent);
+  border-radius:50%;
+  animation:spin 0.7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.status-title{
+  font-family:'Bebas Neue',sans-serif; font-size:30px;
+  letter-spacing:2px; color:var(--text); margin-bottom:10px;
+}
+.status-body{
+  font-size:14px; color:var(--text2); line-height:1.6;
+  margin-bottom:28px;
+}
+
+.btn-primary{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--accent); color:#000; border:none;
+  border-radius:12px; padding:13px 28px;
+  font-size:14px; font-weight:700; font-family:'DM Sans',sans-serif;
+  cursor:pointer; text-decoration:none;
+  transition:opacity 0.15s, transform 0.1s;
+}
+.btn-primary:hover{opacity:0.88;}
+.btn-primary:active{transform:scale(0.97);}
+
+.btn-secondary{
+  display:inline-flex; align-items:center; gap:8px;
+  background:transparent; color:var(--text2);
+  border:1.5px solid var(--border2);
+  border-radius:12px; padding:12px 24px;
+  font-size:14px; font-weight:600; font-family:'DM Sans',sans-serif;
+  cursor:pointer; text-decoration:none;
+  transition:border-color 0.15s, color 0.15s;
+  margin-left:10px;
+}
+.btn-secondary:hover{border-color:var(--border);color:var(--text);}
+
+@media(max-width:480px){
+  .status-card{padding:32px 22px;}
+  .btn-secondary{margin-left:0;margin-top:10px;}
+}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-radial"></div>
+
+<!-- ═══ HEADER ══════════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="hdr-inner">
+    <a href="/index.html" class="site-logo">CLICK<span>ZLE</span></a>
+    <div class="hdr-right">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ MAIN ════════════════════════════════════════════════════════════ -->
+<main class="page-wrap">
+  <div class="status-card">
+
+    <!-- Loading state -->
+    <div id="stateLoading">
+      <div class="status-icon loading">
+        <div class="status-spinner"></div>
+      </div>
+      <div class="status-title">Verifying…</div>
+      <p class="status-body">Hang on while we confirm your email address.</p>
+    </div>
+
+    <!-- Success state -->
+    <div id="stateSuccess" style="display:none;">
+      <div class="status-icon success">✓</div>
+      <div class="status-title">Email Verified!</div>
+      <p class="status-body">Your email address has been confirmed. Your account is now active — log in to start competing on the leaderboards.</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;">
+        <a href="/login.html" class="btn-primary">Log In →</a>
+        <a href="/index.html" class="btn-secondary">Home</a>
+      </div>
+    </div>
+
+    <!-- Error state -->
+    <div id="stateError" style="display:none;">
+      <div class="status-icon error">✕</div>
+      <div class="status-title" id="errorTitle">Link Expired</div>
+      <p class="status-body" id="errorBody">This verification link has expired or already been used. Sign up again or contact support if you need help.</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;">
+        <a href="/signup.html" class="btn-primary">Sign Up</a>
+        <a href="/index.html" class="btn-secondary">Home</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+(function(){
+  // ── Theme ─────────────────────────────────────────────────────────────────
+  const theme = localStorage.getItem('cz_theme') || 'dark';
+  if(theme==='light') document.body.classList.add('light');
+  document.getElementById('themeToggle').addEventListener('click',()=>{
+    document.body.classList.toggle('light');
+    const t = document.body.classList.contains('light') ? 'light' : 'dark';
+    localStorage.setItem('cz_theme', t);
+    document.getElementById('iconSun').style.display  = t==='dark'  ? '' : 'none';
+    document.getElementById('iconMoon').style.display = t==='light' ? '' : 'none';
+  });
+  if(theme==='light'){
+    document.getElementById('iconSun').style.display  = 'none';
+    document.getElementById('iconMoon').style.display = '';
+  }
+
+  // ── Verify token ──────────────────────────────────────────────────────────
+  function show(id) {
+    ['stateLoading','stateSuccess','stateError'].forEach(s => {
+      document.getElementById(s).style.display = s===id ? '' : 'none';
+    });
+  }
+
+  const token = new URLSearchParams(window.location.search).get('token');
+
+  if(!token) {
+    document.getElementById('errorTitle').textContent = 'Missing Token';
+    document.getElementById('errorBody').textContent  = 'No verification token was found in this link. Please use the full link from your email.';
+    show('stateError');
+    return;
+  }
+
+  // Call the verify endpoint
+  CZAuth.verifyEmail(token).then(res => {
+    if(res && res.ok) {
+      show('stateSuccess');
+    } else {
+      const msg = (res && res.error) || 'This verification link is invalid or has expired.';
+      document.getElementById('errorTitle').textContent = 'Verification Failed';
+      document.getElementById('errorBody').textContent  = msg + ' Please sign up again or contact support.';
+      show('stateError');
+    }
+  }).catch(() => {
+    document.getElementById('errorTitle').textContent = 'Something Went Wrong';
+    document.getElementById('errorBody').textContent  = 'We couldn\'t connect to the server. Please check your connection and try again.';
+    show('stateError');
+  });
+})();
+</script>
+</body>
+</html>
