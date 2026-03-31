@@ -45,6 +45,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap">
+<script src="../../assets/js/auth.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -763,13 +764,28 @@
       <span class="game-id-tag">Speed</span>
     </div>
   </div>
-  <div class="section-label">Play free &mdash; no account needed</div>
-  <div class="free-play-section">
+  <!-- Logged-in start state (shown when authenticated) -->
+  <div id="loggedInSection" style="display:none;width:100%;margin-bottom:6px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;">
+      <div>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);font-weight:700;margin-bottom:2px;">Playing as</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--text);" id="loggedInName">—</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);font-weight:700;margin-bottom:2px;">Personal Best</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--accent);" id="pbVal">—</div>
+      </div>
+    </div>
+    <button class="start-btn" id="startBtnLoggedIn" style="width:100%;">PLAY</button>
+    <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:8px;">Scores save automatically to the leaderboard</div>
+  </div>
+  <div class="section-label" id="playFreeLabel">Play free &mdash; no account needed</div>
+  <div class="free-play-section" id="freePlaySection">
     <div class="name-row">
       <input type="text" class="name-input" id="playerNameInput" placeholder="Enter your name" maxlength="20" autocomplete="off" spellcheck="false">
       <button class="start-btn" id="startBtn">PLAY</button>
     </div>
-    <div class="free-note">Play instantly, no account needed. <a href="../../index.html" style="color:var(--accent);text-decoration:underline;font-weight:600;">Login</a> or <a href="../../index.html" style="color:var(--accent);text-decoration:underline;font-weight:600;">create a free account</a> to save your scores and stats and compete on the global leaderboard.</div>
+    <div class="free-note">Play instantly, no account needed. <a href="/login.html" style="color:var(--accent);text-decoration:underline;font-weight:600;">Log in</a> or <a href="/signup.html" style="color:var(--accent);text-decoration:underline;font-weight:600;">create a free account</a> to save scores and compete on the global leaderboard.</div>
   </div>
   <div class="ad-slot" id="adSlot">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
@@ -917,6 +933,7 @@
         <div class="ec-stat"><div class="ec-stat-lbl">Best Streak</div><div class="ec-stat-val" id="tBestStreak">&mdash;</div></div>
         <div class="ec-stat"><div class="ec-stat-lbl">Avg Reaction</div><div class="ec-stat-val" id="tAvgReact">&mdash;</div></div>
         <div class="ec-stat"><div class="ec-stat-lbl">Accuracy</div><div class="ec-stat-val" id="tAccuracy">&mdash;</div></div>
+        <div class="ec-stat"><div class="ec-stat-lbl">Rank Today</div><div class="ec-stat-val" id="tRank">#&mdash;</div></div>
       </div>
       <div class="ec-accordion">
         <button class="ec-accordion-btn" id="roundAccordionBtn">
@@ -2149,6 +2166,25 @@ function showEndCard() {
   document.getElementById('tBestStreak').textContent = gs.bestStreak;
   document.getElementById('tAvgReact').textContent   = avgReact ? avgReact + 'ms' : '—';
   document.getElementById('tAccuracy').textContent   = accuracy + '%';
+  document.getElementById('tRank').textContent       = '#—';
+
+  // Submit score to leaderboard if logged in
+  // time_ms = avg reaction time per pair (lower = better, used as tiebreaker)
+  if (window.CZAuth && CZAuth.isLoggedIn()) {
+    CZAuth.submitScore(4, {
+      score:       gs.score,
+      time_ms:     avgReact || null,
+      pairs_found: totalPairs,
+      correct:     gs.totalHits,
+      wrong:       gs.totalWrongs,
+      combo_max:   gs.bestStreak,
+      accuracy:    accuracy
+    }).then(result => {
+      if (result && result.position) {
+        document.getElementById('tRank').textContent = '#' + result.position;
+      }
+    });
+  }
 
   // Round breakdown
   const bd = document.getElementById('roundBreakdown');
@@ -2363,6 +2399,29 @@ if (_sn) document.getElementById('playerNameInput').value = _sn;
     }
   } catch(e) {}
 }());
+</script>
+
+<!-- ═══ AUTH INTEGRATION ═══════════════════════════════════════════════════ -->
+<script>
+(function() {
+  function initAuth() {
+    if (!window.CZAuth) return;
+    if (CZAuth.isLoggedIn()) {
+      const user = CZAuth.getUser();
+      document.getElementById('loggedInSection').style.display = '';
+      document.getElementById('freePlaySection').style.display = 'none';
+      document.getElementById('playFreeLabel').textContent = 'Logged in — scores save automatically';
+      document.getElementById('loggedInName').textContent = user.username;
+      document.getElementById('playerNameInput').value = user.username;
+      document.getElementById('startBtnLoggedIn').addEventListener('click', startGame);
+      CZAuth.getPersonalBest(4).then(pb => {
+        document.getElementById('pbVal').textContent = (pb && pb.best_score) ? pb.best_score.toLocaleString() : 'None yet';
+      });
+    }
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initAuth); }
+  else { initAuth(); }
+})();
 </script>
 </body>
 </html>
