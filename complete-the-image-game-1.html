@@ -1519,7 +1519,7 @@ async function loadLeaderboard(period) {
       return {
         name:      r.username,
         country:   r.country || 'xx',
-        streak:    0,
+        streak:    r.streak_days || 0,
         clockTime: timeMs > 0 ? fmtClock(timeMs) : '—',
         time:      timeMs > 0 ? fmtTime(timeMs)  : '—',
         timeMs,

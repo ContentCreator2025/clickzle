@@ -20,7 +20,7 @@
 // ── CORS ───────────────────────────────────────────────────────────────────────
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   'Access-Control-Max-Age': '86400',
 };
@@ -318,17 +318,25 @@ async function handleSubmitScore(request, env) {
     'UPDATE users SET total_games = total_games + 1, last_seen = ?1 WHERE id = ?2'
   ).bind(now, userId).run();
 
-  // Fetch leaderboard position for today
+  // Fetch the actual stored score (may differ from submitted if previous best was higher)
+  const stored = await env.DB.prepare(
+    'SELECT score FROM scores WHERE user_id = ?1 AND game_id = ?2 AND date_utc = ?3'
+  ).bind(userId, game_id, date).first();
+
+  const rankScore = stored ? stored.score : score;
+
+  // Rank based on the actual stored (best) score, not the submitted score
   const pos = await env.DB.prepare(`
     SELECT COUNT(*) + 1 as position FROM scores
     WHERE game_id = ?1 AND date_utc = ?2 AND score > ?3
-  `).bind(game_id, date, score).first();
+  `).bind(game_id, date, rankScore).first();
 
   return json({
     ok: true,
     position: pos?.position || null,
     date,
-    score,
+    score: rankScore,
+    is_personal_best: score >= rankScore,
   });
 }
 
@@ -379,6 +387,7 @@ async function handleLeaderboard(request, env) {
     query = `
       SELECT
         u.username, u.country, u.device_type,
+        u.streak_days,
         s.score, s.time_ms, s.accuracy,
         s.pairs_found, s.correct, s.wrong, s.combo_max,
         s.device_type AS play_device,
@@ -393,6 +402,7 @@ async function handleLeaderboard(request, env) {
     query = `
       SELECT
         u.username, u.country,
+        u.streak_days,
         MAX(s.score) AS score,
         MIN(s.time_ms) AS time_ms,
         AVG(s.accuracy) AS accuracy,
@@ -496,6 +506,31 @@ async function handleUpdateAccount(request, env) {
   return json({ ok: true, user: updated });
 }
 
+async function handleDeleteScore(request, env) {
+  const token = getBearerToken(request);
+  if (!token) return json({ error: 'Authorisation required' }, 401);
+
+  const payload = await verifyJWT(token, env.JWT_SECRET);
+  if (!payload) return json({ error: 'Token invalid or expired' }, 401);
+
+  const url    = new URL(request.url);
+  const gameId = parseInt(url.searchParams.get('game') || '0');
+  if (!gameId || gameId < 1 || gameId > 5)
+    return json({ error: 'game parameter required (1–5)' }, 400);
+
+  const date = todayUTC();
+
+  await env.DB.prepare(
+    'DELETE FROM scores WHERE user_id = ?1 AND game_id = ?2 AND date_utc = ?3'
+  ).bind(payload.sub, gameId, date).run();
+
+  await env.DB.prepare(
+    'UPDATE personal_bests SET games_played = MAX(0, games_played - 1) WHERE user_id = ?1 AND game_id = ?2'
+  ).bind(payload.sub, gameId).run();
+
+  return json({ ok: true, message: `Today\'s score for game ${gameId} deleted` });
+}
+
 // ── MAIN ROUTER ───────────────────────────────────────────────────────────────
 export default {
   async fetch(request, env) {
@@ -509,7 +544,8 @@ export default {
     const method = request.method;
 
     if (path === '/api/auth/signup'         && method === 'POST') return handleSignup(request, env);
-    if (path === '/api/auth/update'         && method === 'PUT')  return handleUpdateAccount(request, env);
+    if (path === '/api/auth/update'         && method === 'PUT')    return handleUpdateAccount(request, env);
+    if (path === '/api/auth/score'          && method === 'DELETE') return handleDeleteScore(request, env);
     if (path === '/api/auth/login'          && method === 'POST') return handleLogin(request, env);
     if (path === '/api/auth/me'             && method === 'GET')  return handleMe(request, env);
     if (path === '/api/auth/check-username' && method === 'GET')  return handleCheckUsername(request, env);

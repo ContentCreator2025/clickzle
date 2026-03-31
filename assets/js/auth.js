@@ -137,6 +137,10 @@
     } catch { return null; }
   }
 
+  async function deleteScore(gameId) {
+    return apiFetch(`/api/auth/score?game=${gameId}`, { method: 'DELETE' });
+  }
+
   async function updateAccount(data) {
     const res = await apiFetch('/api/auth/update', {
       method: 'PUT',
@@ -278,6 +282,7 @@
     login,
     logout,
     updateAccount,
+    deleteScore,
     getPersonalBest,
     submitScore,
     checkUsername,
