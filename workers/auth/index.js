@@ -475,15 +475,18 @@ async function handlePersonalBest(request, env) {
   const gameId = parseInt(url.searchParams.get('game') || '0');
   if (!gameId) return json({ error: 'game parameter required' }, 400);
 
-  const pb = await env.DB.prepare(
-    'SELECT best_score, best_date, games_played FROM personal_bests WHERE user_id = ?1 AND game_id = ?2'
-  ).bind(payload.sub, gameId).first();
+  const today = todayUTC();
+  const [pb, todayRow] = await Promise.all([
+    env.DB.prepare('SELECT best_score, best_date, games_played FROM personal_bests WHERE user_id = ?1 AND game_id = ?2').bind(payload.sub, gameId).first(),
+    env.DB.prepare('SELECT 1 AS played FROM scores WHERE user_id = ?1 AND game_id = ?2 AND date_utc = ?3').bind(payload.sub, gameId, today).first(),
+  ]);
 
   return json({
     ok: true,
     logged_in: true,
     username: payload.username,
     personal_best: pb || null,
+    played_today: !!todayRow,
   });
 }
 

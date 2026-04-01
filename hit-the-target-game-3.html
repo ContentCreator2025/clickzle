@@ -1343,28 +1343,37 @@ document.getElementById('themeToggle').addEventListener('click', () => {
 
 // ── ALREADY PLAYED BANNER ────────────────────────────────────────────────────
 (function() {
-  const STATS_KEY = 'clickzle_stats_target';
+  function showBanner() {
+    if (document.getElementById('alreadyPlayedBanner')) return;
+    const hero = document.querySelector('.hero .wrap');
+    if (!hero) return;
+    const banner = document.createElement('div');
+    banner.id = 'alreadyPlayedBanner';
+    banner.style.cssText = 'background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:24px 28px;margin:28px auto 0;max-width:560px;';
+    banner.innerHTML = `
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--accent);margin-bottom:4px;">ALREADY PLAYED</div>
+      <div style="font-size:14px;color:var(--text2);margin-bottom:20px;">Come back tomorrow for a new challenge.</div>
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:600;margin-bottom:10px;">Try Another Game</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+        <a href="complete-the-image-game-1.html" style="width:38px;height:38px;border-radius:8px;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);color:#4ade80;font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(74,222,128,0.2)'" onmouseout="this.style.background='rgba(74,222,128,0.1)'">1</a>
+        <a href="follow-the-pattern-game-2.html" style="width:38px;height:38px;border-radius:8px;background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.3);color:#60a5fa;font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(96,165,250,0.2)'" onmouseout="this.style.background='rgba(96,165,250,0.1)'">2</a>
+        <a href="spot-the-pair-game-4.html"      style="width:38px;height:38px;border-radius:8px;background:rgba(250,204,21,0.1);border:1px solid rgba(250,204,21,0.3);color:#facc15;font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(250,204,21,0.2)'" onmouseout="this.style.background='rgba(250,204,21,0.1)'">4</a>
+        <a href="next-in-sequence-game-5.html"   style="width:38px;height:38px;border-radius:8px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.3);color:#a78bfa;font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(167,139,250,0.2)'" onmouseout="this.style.background='rgba(167,139,250,0.1)'">5</a>
+      </div>`;
+    hero.appendChild(banner);
+  }
+  // 1. Fast path — same device (localStorage)
   try {
-    const st    = JSON.parse(localStorage.getItem(STATS_KEY) || '{}');
+    const st = JSON.parse(localStorage.getItem('clickzle_stats_target') || '{}');
     const today = new Date().toISOString().split('T')[0];
-    if (st.history && st.history[today] && st.history[today].played) {
-      const hero = document.querySelector('.hero .wrap');
-      if (!hero) return;
-      const banner = document.createElement('div');
-      banner.style.cssText = 'background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:24px 28px;margin:28px auto 0;max-width:560px;';
-      banner.innerHTML = `
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--accent);margin-bottom:4px;">ALREADY PLAYED</div>
-        <div style="font-size:14px;color:var(--text2);margin-bottom:20px;">Come back tomorrow for a new challenge.</div>
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:600;margin-bottom:10px;">Try Another Game</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
-          <a href="complete-the-image-game-1.html" style="width:38px;height:38px;border-radius:8px;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);color:#4ade80;font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(74,222,128,0.2)'" onmouseout="this.style.background='rgba(74,222,128,0.1)'">1</a>
-          <a href="follow-the-pattern-game-2.html" style="width:38px;height:38px;border-radius:8px;background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.3);color:#60a5fa;font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(96,165,250,0.2)'" onmouseout="this.style.background='rgba(96,165,250,0.1)'">2</a>
-          <a href="spot-the-pair-game-4.html"      style="width:38px;height:38px;border-radius:8px;background:rgba(250,204,21,0.1);border:1px solid rgba(250,204,21,0.3);color:#facc15;font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(250,204,21,0.2)'" onmouseout="this.style.background='rgba(250,204,21,0.1)'">4</a>
-          <a href="next-in-sequence-game-5.html"   style="width:38px;height:38px;border-radius:8px;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.3);color:#a78bfa;font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='rgba(167,139,250,0.2)'" onmouseout="this.style.background='rgba(167,139,250,0.1)'">5</a>
-        </div>`;
-      hero.appendChild(banner);
-    }
+    if (st.history && st.history[today] && st.history[today].played) { showBanner(); return; }
   } catch(e) {}
+  // 2. Server check — catches cross-device plays for logged-in users
+  if (typeof CZAuth !== 'undefined' && CZAuth.isLoggedIn()) {
+    CZAuth.apiFetch('/api/auth/personal-best?game=3').then(function(d) {
+      if (d && d.ok && d.played_today) showBanner();
+    }).catch(function(){});
+  }
 }());
 
 // ── CHALLENGE MODAL ───────────────────────────────────────────────────────────

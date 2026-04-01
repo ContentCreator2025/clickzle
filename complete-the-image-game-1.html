@@ -1861,35 +1861,22 @@ document.getElementById('themeToggle').addEventListener('click', () => {
     { slug:'celebrities', label:'Celebrities' },
   ];
   const today = new Date().toISOString().split('T')[0];
-  try {
-    const played   = [];
-    const notYet   = [];
-    CATS.forEach(function(c) {
-      const st = JSON.parse(localStorage.getItem('clickzle_stats_' + c.slug) || '{}');
-      if (st.history && st.history[today] && st.history[today].played) {
-        played.push(c);
-      } else {
-        notYet.push(c);
-      }
-    });
-    if (!played.length) return;
 
-    // Build played label e.g. "Movies" or "Movies & Animals"
+  function buildAndShowBanner(played, notYet) {
+    if (document.getElementById('alreadyPlayedBanner')) return;
+    const hero = document.querySelector('.hero .wrap');
+    if (!hero) return;
     const playedLabel = played.length === 1
       ? played[0].label
       : played.slice(0,-1).map(function(c){ return c.label; }).join(', ') + ' & ' + played[played.length-1].label;
-
-    // Build "play another" category buttons for unplayed categories
     const catBtns = notYet.map(function(c) {
       return '<a href="games/game1/complete-the-image/' + c.slug + '/clickzle-' + c.slug + '.html"'
         + ' style="padding:7px 16px;border-radius:8px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.25);color:#4ade80;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;transition:background 0.15s;"'
         + ' onmouseover="this.style.background=\'rgba(74,222,128,0.18)\'" onmouseout="this.style.background=\'rgba(74,222,128,0.08)\'">'
         + c.label + '</a>';
     }).join('');
-
-    const hero = document.querySelector('.hero .wrap');
-    if (!hero) return;
     const banner = document.createElement('div');
+    banner.id = 'alreadyPlayedBanner';
     banner.style.cssText = 'background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:24px 28px;margin:28px auto 0;max-width:600px;text-align:center;';
     banner.innerHTML =
       '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:26px;letter-spacing:3px;color:#4ade80;margin-bottom:4px;">ALREADY PLAYED TODAY</div>'
@@ -1900,7 +1887,28 @@ document.getElementById('themeToggle').addEventListener('click', () => {
             + '<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">' + catBtns + '</div>'
           : '');
     hero.appendChild(banner);
+  }
+
+  // 1. Fast path — same device (localStorage knows which categories)
+  try {
+    const played = [], notYet = [];
+    CATS.forEach(function(c) {
+      const st = JSON.parse(localStorage.getItem('clickzle_stats_' + c.slug) || '{}');
+      if (st.history && st.history[today] && st.history[today].played) played.push(c);
+      else notYet.push(c);
+    });
+    if (played.length) { buildAndShowBanner(played, notYet); return; }
   } catch(e) {}
+
+  // 2. Server check — cross-device: server knows game was played but not which category
+  if (typeof CZAuth !== 'undefined' && CZAuth.isLoggedIn()) {
+    CZAuth.apiFetch('/api/auth/personal-best?game=1').then(function(d) {
+      if (d && d.ok && d.played_today) {
+        // We don't know which category from the server alone — show all as "play another"
+        buildAndShowBanner([{ label:'Complete the Image' }], CATS);
+      }
+    }).catch(function(){});
+  }
 }());
 </script>
 </body>
