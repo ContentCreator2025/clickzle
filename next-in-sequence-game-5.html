@@ -959,6 +959,7 @@ async function loadLeaderboard(period) {
       bestRound: r.combo_max    || 0,
       eff:       r.accuracy != null ? Math.round(r.accuracy) : 0,
       score:     r.score        || 0,
+      device:    r.play_device  || '',
     }));
     renderLeaderboard(mapped);
   } catch (_) {
@@ -971,6 +972,12 @@ async function loadLeaderboard(period) {
 let activePeriod = 'today';
 let isExpanded   = false;
 let currentData  = [];
+
+function deviceIcon(d) {
+  if (!d) return '';
+  if (d === 'mobile') return '<svg style="width:11px;height:11px;margin-left:5px;opacity:0.6;vertical-align:middle;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>';
+  return '<svg style="width:11px;height:11px;margin-left:5px;opacity:0.35;vertical-align:middle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>';
+}
 
 function rowHTML(p, i) {
   const rank     = i + 1;
@@ -985,7 +992,7 @@ function rowHTML(p, i) {
   return `<tr class="${trC}">
     <td><span class="lb-rank-num ${rC}">${rank}</span></td>
     <td><div class="lb-flag-cell">${flag}</div></td>
-    <td><div class="lb-player-cell"><span class="lb-avatar">${initials}</span><span class="lb-pname">${p.name}</span></div></td>
+    <td><div class="lb-player-cell"><span class="lb-avatar">${initials}</span><span class="lb-pname">${p.name}</span>${deviceIcon(p.device)}</div></td>
     <td>${streakH}</td>
     <td><span class="lb-time-val">${puzzDisp}</span></td>
     <td><span class="lb-time-val">${bestDisp}</span></td>

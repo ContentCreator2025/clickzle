@@ -368,7 +368,7 @@ async function handleSubmitScore(request, env) {
 
   const { game_id, score, time_ms, accuracy, pairs_found, correct, wrong, combo_max } = body || {};
   if (!game_id || score == null) return json({ error: 'game_id and score are required' }, 400);
-  if (game_id < 1 || game_id > 5) return json({ error: 'Invalid game_id' }, 400);
+  if (game_id < 1 || game_id > 18) return json({ error: 'Invalid game_id' }, 400);
 
   const userId = payload.sub;
   const date = todayUTC();
@@ -496,8 +496,8 @@ async function handleLeaderboard(request, env) {
   const period = url.searchParams.get('period') || 'today';
   const limit = Math.min(parseInt(url.searchParams.get('limit') || '10'), 100);
 
-  if (!gameId || gameId < 1 || gameId > 5)
-    return json({ error: 'game parameter required (1–5)' }, 400);
+  if (!gameId || gameId < 1 || gameId > 18)
+    return json({ error: 'game parameter required (1–18)' }, 400);
 
   let dateFilter = '';
   if (period === 'today') {
@@ -806,8 +806,8 @@ async function handleDeleteScore(request, env) {
 
   const url    = new URL(request.url);
   const gameId = parseInt(url.searchParams.get('game') || '0');
-  if (!gameId || gameId < 1 || gameId > 5)
-    return json({ error: 'game parameter required (1–5)' }, 400);
+  if (!gameId || gameId < 1 || gameId > 18)
+    return json({ error: 'game parameter required (1–18)' }, 400);
 
   const date = todayUTC();
 

@@ -1545,7 +1545,8 @@ async function loadLeaderboard(period) {
   const tbody = document.getElementById('lbBody');
   tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:48px 20px;color:var(--text3);font-size:13px;letter-spacing:0.5px;">Loading scores…</td></tr>';
   try {
-    const res  = await fetch(`${API}/api/leaderboard?game=1&period=${period}&limit=100`);
+    const catGameId = CAT_GAME_ID[activeCat] || 11;
+    const res  = await fetch(`${API}/api/leaderboard?game=${catGameId}&period=${period}&limit=100`);
     const data = await res.json();
     if (!data.ok) throw new Error(data.error || 'fetch failed');
     const rows = data.rows || [];
@@ -1565,7 +1566,8 @@ async function loadLeaderboard(period) {
         timeMs,
         clicks,
         bonus,
-        score: r.score || 0,
+        score:  r.score || 0,
+        device: r.play_device || '',
       };
     });
     renderLeaderboard(mapped);
@@ -1575,10 +1577,28 @@ async function loadLeaderboard(period) {
   }
 }
 
+// ── CATEGORY → GAME ID MAP ────────────────────────────────────────────────────
+const CAT_GAME_ID = {
+  movies:      11,
+  animals:     12,
+  art:         13,
+  flags:       14,
+  food:        15,
+  landscapes:  16,
+  buildings:   17,
+  celebrities: 18,
+};
+
 // ── RENDER ────────────────────────────────────────────────────────────────────
 let activePeriod  = 'today';
 let isExpanded    = false;
 let currentData   = [];
+
+function deviceIcon(d) {
+  if (!d) return '';
+  if (d === 'mobile') return '<svg style="width:11px;height:11px;margin-left:5px;opacity:0.6;vertical-align:middle;color:var(--accent)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>';
+  return '<svg style="width:11px;height:11px;margin-left:5px;opacity:0.35;vertical-align:middle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>';
+}
 
 function rowHTML(p, i) {
   const rank    = i + 1;
@@ -1601,7 +1621,7 @@ function rowHTML(p, i) {
     <tr class="${trC}">
       <td><span class="lb-rank-num ${rnC}">${rank}</span></td>
       <td><div class="lb-flag-cell">${flagHTML}</div></td>
-      <td><span class="lb-pname">${p.name}</span></td>
+      <td><span class="lb-pname">${p.name}</span>${deviceIcon(p.device)}</td>
       <td style="text-align:center">${streakHTML}</td>
       <td><span class="lb-clock-val">${p.clockTime || '—'}</span></td>
       <td><span class="lb-time-val">${p.time}</span></td>

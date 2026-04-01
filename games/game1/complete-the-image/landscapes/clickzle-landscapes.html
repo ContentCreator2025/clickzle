@@ -3027,7 +3027,7 @@ function showVictory(timeMs, clicks) {
 
   // Submit score to leaderboard if logged in
   if (window.CZAuth && CZAuth.isLoggedIn()) {
-    CZAuth.submitScore(1, {
+    CZAuth.submitScore(16, {
       score:    score,
       time_ms:  timeMs,
       correct:  1,
@@ -3083,7 +3083,7 @@ function showTimeout(clicks) {
 
   // Submit timeout score to leaderboard if logged in
   if (window.CZAuth && CZAuth.isLoggedIn()) {
-    CZAuth.submitScore(1, {
+    CZAuth.submitScore(16, {
       score:    base,
       time_ms:  TIMER_MS,
       correct:  0,
@@ -3578,6 +3578,24 @@ document.getElementById('pregameHelpClose').addEventListener('click', () => {
     }
   } catch(e) {}
 }());
+// Cross-device: server fallback
+if (typeof CZAuth !== 'undefined' && CZAuth.isLoggedIn()) {
+  CZAuth.apiFetch('/api/auth/personal-best?game=16').then(function(d) {
+    if (d && d.ok && d.played_today) {
+      try {
+        const today = new Date().toISOString().split('T')[0];
+        const st = JSON.parse(localStorage.getItem('clickzle_stats_landscapes') || '{}');
+        if (!st.history) st.history = {};
+        if (!st.history[today]) st.history[today] = {};
+        if (!st.history[today].played) {
+          st.history[today].played = true;
+          localStorage.setItem('clickzle_stats_landscapes', JSON.stringify(st));
+          location.reload();
+        }
+      } catch(e) {}
+    }
+  }).catch(function(){});
+}
 document.fonts.ready.then(() => document.body.classList.add('fonts-ready'));
 
 // Victory breakdown accordion
@@ -3651,7 +3669,7 @@ if (_tCollapse) _tCollapse.addEventListener('click', closeTBreakdown);
       document.getElementById('startBtnLoggedIn').addEventListener('click', startGame);
 
       // Fetch and show personal best for game 1
-      CZAuth.getPersonalBest(1).then(pb => {
+      CZAuth.getPersonalBest(16).then(pb => {
         if (pb && pb.best_score) {
           document.getElementById('pbVal').textContent = pb.best_score.toLocaleString();
         } else {
