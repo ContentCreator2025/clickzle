@@ -1579,6 +1579,15 @@ function rowHTML(p, i) {
     </tr>`;
 }
 
+function adjustTop1NameSize() {
+  const el = document.querySelector('.lb-top1 .lb-pname');
+  if (!el) return;
+  const len = el.textContent.length;
+  if (len > 14) el.style.fontSize = '14px';
+  else if (len > 12) el.style.fontSize = '18px';
+  else if (len > 10) el.style.fontSize = '22px';
+}
+
 function renderLeaderboard(data) {
   currentData = data;
   const tbody = document.getElementById('lbBody');
@@ -1589,6 +1598,7 @@ function renderLeaderboard(data) {
   });
   document.getElementById('lbPlayerCount').textContent = data.length;
   updateYourPosition();
+  adjustTop1NameSize();
 }
 
 function updateYourPosition() {

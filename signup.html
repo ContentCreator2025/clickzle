@@ -364,7 +364,7 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
         <div class="form-group">
           <label class="form-label" for="username">Username</label>
           <input class="form-input" type="text" id="username" name="username"
-            placeholder="e.g. ClickMaster99" maxlength="20" autocomplete="off" spellcheck="false">
+            placeholder="e.g. ClickMaster99" maxlength="16" autocomplete="off" spellcheck="false">
           <div class="field-status" id="usernameStatus"></div>
         </div>
 
@@ -529,6 +529,7 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
     clearTimeout(unTimer);
     if(!v){setStatus('usernameStatus',false,'');setInput('username','');return;}
     if(v.length<3){setStatus('usernameStatus',false,'At least 3 characters');setInput('username','error');return;}
+    if(v.length>16){setStatus('usernameStatus',false,'Max 16 characters');setInput('username','error');return;}
     if(!/^[a-zA-Z0-9_-]+$/.test(v)){setStatus('usernameStatus',false,'Letters, numbers, _ and - only');setInput('username','error');return;}
     setStatus('usernameStatus',true,'Checking…');
     unTimer=setTimeout(async()=>{

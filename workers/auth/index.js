@@ -193,7 +193,7 @@ function emailTemplate(title, bodyHtml) {
 <body style="margin:0;padding:0;background:#0d0d1a;font-family:'Helvetica Neue',Arial,sans-serif;">
   <div style="max-width:480px;margin:0 auto;padding:40px 24px;">
     <div style="margin-bottom:32px;">
-      <span style="font-family:Georgia,serif;font-size:26px;font-weight:900;letter-spacing:3px;color:#f0f0f0;">CLICK</span><span style="font-family:Georgia,serif;font-size:26px;font-weight:900;letter-spacing:3px;color:#4ade80;">ZLE</span>
+      <span style="font-family:Arial,Helvetica,sans-serif;font-size:26px;font-weight:900;letter-spacing:4px;color:#f0f0f0;">CLICK</span><span style="font-family:Arial,Helvetica,sans-serif;font-size:26px;font-weight:900;letter-spacing:4px;color:#4ade80;">ZLE</span>
     </div>
     <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:16px;padding:32px 28px;">
       <h2 style="margin:0 0 16px;font-size:20px;color:#f0f0f0;font-weight:700;">${title}</h2>
@@ -218,8 +218,8 @@ async function handleSignup(request, env) {
 
   if (!username || !email || !password)
     return json({ error: 'Username, email and password are required' }, 400);
-  if (username.length < 3 || username.length > 20)
-    return json({ error: 'Username must be 3–20 characters' }, 400);
+  if (username.length < 3 || username.length > 16)
+    return json({ error: 'Username must be 3–16 characters' }, 400);
   if (!/^[a-zA-Z0-9_-]+$/.test(username))
     return json({ error: 'Username may only contain letters, numbers, _ and -' }, 400);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
@@ -250,9 +250,9 @@ async function handleSignup(request, env) {
      VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?6, ?7, 0, ?8, ?9)`
   ).bind(id, uname, uemail, passwordHash, cleanCountry, now, device, verifyToken, verifyExpires).run();
 
-  // Send verification email (non-blocking — don't fail signup if email fails)
+  // Send verification email
   const verifyUrl = `https://clickzle.games/verify-email.html?token=${verifyToken}`;
-  sendEmail(env, {
+  await sendEmail(env, {
     to: uemail,
     subject: 'Verify your Clickzle account',
     html: emailTemplate('Verify your email address', `
@@ -592,9 +592,9 @@ async function handleUpdateAccount(request, env) {
       const verifyExpires = Math.floor(Date.now() / 1000) + 86400;
       setClauses.push(`email_verified = 0, verify_token = ?${idx++}, verify_token_expires = ?${idx++}`);
       bindings.push(verifyToken, verifyExpires);
-      // Send verification email (non-blocking)
+      // Send verification email
       const verifyUrl = `https://clickzle.games/verify-email.html?token=${verifyToken}`;
-      sendEmail(env, {
+      await sendEmail(env, {
         to: newEmail,
         subject: 'Verify your new Clickzle email address',
         html: emailTemplate('Confirm your new email', `
@@ -820,7 +820,7 @@ async function handleDeleteScore(request, env) {
 
 // ── MAIN ROUTER ───────────────────────────────────────────────────────────────
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: CORS_HEADERS });
     }
@@ -844,6 +844,15 @@ export default {
     if (path === '/api/auth/resend-verify'   && method === 'POST')   return handleResendVerify(request, env);
     if (path === '/api/leaderboard'          && method === 'GET')    return handleLeaderboard(request, env);
     if (path === '/api/stats'                && method === 'GET')    return handleStats(request, env);
+    if (path === '/api/auth/test-email'      && method === 'GET') {
+      const testTo = url.searchParams.get('to') || 'test@example.com';
+      const result = await sendEmail(env, {
+        to: testTo,
+        subject: 'Clickzle email test',
+        html: '<p>This is a test email from Clickzle.</p>',
+      });
+      return json({ resend_api_key_set: !!env.RESEND_API_KEY, result });
+    }
 
     return json({ error: 'Not found' }, 404);
   },
