@@ -949,6 +949,29 @@ body.light .hero {
   .hero-stats { gap:16px; }
   .other-games-grid { grid-template-columns:1fr !important; }
 }
+@media(max-width:500px) {
+  /* Hide least important leaderboard columns: streak(4), clock(5), bonus(8) */
+  .lb-table thead th:nth-child(4), .lb-table tbody td:nth-child(4),
+  .lb-table thead th:nth-child(5), .lb-table tbody td:nth-child(5),
+  .lb-table thead th:nth-child(8), .lb-table tbody td:nth-child(8) { display:none; }
+  /* Reduce big rank numbers + avatars */
+  .lb-rank-num.top1 { font-size:42px; }
+  .lb-rank-num.top2 { font-size:34px; }
+  .lb-rank-num.top3 { font-size:26px; }
+  .lb-top1 .lb-avatar { width:28px; height:28px; font-size:10px; }
+  .lb-top2 .lb-avatar { width:26px; height:26px; font-size:10px; }
+  .lb-top3 .lb-avatar { width:24px; height:24px; font-size:9px; }
+  .lb-top1 .lb-pname { font-size:16px; }
+  .lb-top2 .lb-pname { font-size:14px; }
+  .lb-top3 .lb-pname { font-size:13px; }
+  .lb-top1 td { padding-top:10px; padding-bottom:10px; }
+  .lb-top2 td { padding-top:8px; padding-bottom:8px; }
+  .lb-top3 td { padding-top:7px; padding-bottom:7px; }
+  .lb-table thead th { padding:8px 8px; font-size:8px; }
+  .lb-table tbody td { padding:8px 8px; font-size:12px; }
+  .lb-score-val { font-size:14px; }
+  .lb-time-val { font-size:13px; }
+}
 
   /* ── AD SLOT ──────────────────────────────────────────────────── */
   .ad-slot {

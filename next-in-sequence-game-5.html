@@ -497,6 +497,20 @@ body.light .hero { background:linear-gradient(180deg, var(--surface2) 0%, rgba(2
 .ftr-link:hover { color:var(--text2); }
 .ftr-copy { font-size:12px; color:var(--text3); width:100%; text-align:center; margin-top:16px; padding-top:20px; border-top:1px solid var(--border); }
 .hdr-sep { color:var(--border2); font-size:14px; margin:0 2px; }
+@media(max-width:500px) {
+  .lb-table thead th:nth-child(4), .lb-table tbody td:nth-child(4),
+  .lb-table thead th:nth-child(5), .lb-table tbody td:nth-child(5),
+  .lb-table thead th:nth-child(6), .lb-table tbody td:nth-child(6) { display:none; }
+  .lb-rank-num.top1 { font-size:42px; }
+  .lb-rank-num.top2 { font-size:34px; }
+  .lb-rank-num.top3 { font-size:26px; }
+  .lb-top1 .lb-avatar { width:28px; height:28px; font-size:10px; }
+  .lb-top2 .lb-avatar { width:26px; height:26px; font-size:9px; }
+  .lb-top3 .lb-avatar { width:24px; height:24px; font-size:9px; }
+  .lb-top1 .lb-pname { font-size:18px; }
+  .lb-top2 .lb-pname { font-size:15px; }
+  .lb-top3 .lb-pname { font-size:13px; }
+}
 </style>
 <script src="/assets/js/auth.js"></script>
 </head>
