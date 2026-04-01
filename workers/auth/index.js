@@ -331,11 +331,12 @@ async function handleMe(request, env) {
 
   if (!user) return json({ error: 'Account not found' }, 404);
 
-  const pbs = await env.DB.prepare(
-    'SELECT game_id, best_score, games_played FROM personal_bests WHERE user_id = ?1'
-  ).bind(user.id).all();
+  const [pbs, recent] = await Promise.all([
+    env.DB.prepare('SELECT game_id, best_score, games_played FROM personal_bests WHERE user_id = ?1').bind(user.id).all(),
+    env.DB.prepare('SELECT game_id, score, date_utc, submitted_at FROM scores WHERE user_id = ?1 ORDER BY submitted_at DESC LIMIT 20').bind(user.id).all(),
+  ]);
 
-  return json({ ok: true, user, personal_bests: pbs.results || [] });
+  return json({ ok: true, user, personal_bests: pbs.results || [], recent_scores: recent.results || [] });
 }
 
 async function handleCheckUsername(request, env) {
@@ -844,16 +845,6 @@ export default {
     if (path === '/api/auth/resend-verify'   && method === 'POST')   return handleResendVerify(request, env);
     if (path === '/api/leaderboard'          && method === 'GET')    return handleLeaderboard(request, env);
     if (path === '/api/stats'                && method === 'GET')    return handleStats(request, env);
-    if (path === '/api/auth/test-email'      && method === 'GET') {
-      const testTo = url.searchParams.get('to') || 'test@example.com';
-      const result = await sendEmail(env, {
-        to: testTo,
-        subject: 'Clickzle email test',
-        html: '<p>This is a test email from Clickzle.</p>',
-      });
-      return json({ resend_api_key_set: !!env.RESEND_API_KEY, result });
-    }
-
     return json({ error: 'Not found' }, 404);
   },
 };

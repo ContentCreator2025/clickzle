@@ -297,6 +297,34 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
   50%{ opacity:0.7; }
 }
 
+/* ═══ PERSONAL BESTS + HISTORY ════════════════════════════════════════════ */
+.pb-row {
+  display:flex; align-items:center; gap:12px;
+  padding:10px 14px; border-radius:10px;
+  background:var(--surface2); border:1px solid var(--border2);
+}
+.pb-game-badge {
+  width:28px; height:28px; border-radius:7px; flex-shrink:0;
+  font-family:'Bebas Neue',sans-serif; font-size:15px;
+  display:flex; align-items:center; justify-content:center; font-weight:700;
+}
+.pb-game-name { flex:1; font-size:13px; font-weight:600; color:var(--text2); }
+.pb-score { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; color:var(--text); }
+.pb-played { font-size:11px; color:var(--text3); text-align:right; }
+.hist-row {
+  display:flex; align-items:center; gap:10px;
+  padding:8px 14px; border-radius:10px;
+  background:var(--surface2); border:1px solid var(--border2);
+}
+.hist-game-badge {
+  width:24px; height:24px; border-radius:6px; flex-shrink:0;
+  font-family:'Bebas Neue',sans-serif; font-size:13px;
+  display:flex; align-items:center; justify-content:center;
+}
+.hist-game-name { flex:1; font-size:12px; color:var(--text2); }
+.hist-score { font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:0.5px; color:var(--text); }
+.hist-date { font-size:11px; color:var(--text3); }
+
 /* ═══ RESPONSIVE ══════════════════════════════════════════════════════════ */
 @media(max-width:767px){
   .hdr-inner{ padding:0 16px; grid-template-columns:auto 1fr auto; }
@@ -401,6 +429,22 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
           <div class="btn-spinner"></div>
         </button>
       </form>
+    </div>
+
+    <!-- Personal Bests card -->
+    <div class="account-card" id="pbCard">
+      <div class="card-title">My Best Scores</div>
+      <div id="pbList" style="display:flex;flex-direction:column;gap:10px;">
+        <div style="font-size:13px;color:var(--text3);">Play a game to see your personal bests here.</div>
+      </div>
+    </div>
+
+    <!-- Recent Games card -->
+    <div class="account-card" id="historyCard">
+      <div class="card-title">Recent Games</div>
+      <div id="historyList" style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text3);">No games played yet.</div>
+      </div>
     </div>
 
     <!-- Change Password card -->
@@ -562,10 +606,53 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
     loadCountries('');
   }
 
+  // Game metadata
+  const GAMES = {
+    game1: { name:'Complete the Image', color:'#4ade80', bg:'rgba(74,222,128,0.12)' },
+    game2: { name:'Follow the Pattern', color:'#60a5fa', bg:'rgba(96,165,250,0.12)' },
+    game3: { name:'Hit the Target',     color:'#f472b6', bg:'rgba(244,114,182,0.12)' },
+    game4: { name:'Spot the Pair',      color:'#facc15', bg:'rgba(250,204,21,0.12)' },
+    game5: { name:'Next in Sequence',   color:'#a78bfa', bg:'rgba(167,139,250,0.12)' },
+  };
+  function gameNum(id) { return id ? id.replace('game','') : '?'; }
+
+  function renderPersonalBests(pbs) {
+    const el = document.getElementById('pbList');
+    if (!pbs || !pbs.length) return;
+    el.innerHTML = pbs.map(function(pb) {
+      const g = GAMES[pb.game_id] || { name: pb.game_id, color:'#888', bg:'rgba(136,136,136,0.12)' };
+      return `<div class="pb-row">
+        <div class="pb-game-badge" style="background:${g.bg};color:${g.color};">${gameNum(pb.game_id)}</div>
+        <div class="pb-game-name">${g.name}</div>
+        <div style="text-align:right;">
+          <div class="pb-score" style="color:${g.color};">${(pb.best_score||0).toLocaleString()}</div>
+          <div class="pb-played">${pb.games_played || 1} play${pb.games_played !== 1 ? 's' : ''}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderHistory(scores) {
+    const el = document.getElementById('historyList');
+    if (!scores || !scores.length) return;
+    el.innerHTML = scores.map(function(s) {
+      const g = GAMES[s.game_id] || { name: s.game_id, color:'#888', bg:'rgba(136,136,136,0.12)' };
+      const d = s.date_utc ? s.date_utc : (s.submitted_at ? new Date(s.submitted_at*1000).toISOString().slice(0,10) : '');
+      return `<div class="hist-row">
+        <div class="hist-game-badge" style="background:${g.bg};color:${g.color};">${gameNum(s.game_id)}</div>
+        <div class="hist-game-name">${g.name}</div>
+        <div class="hist-score" style="color:${g.color};">${(s.score||0).toLocaleString()}</div>
+        <div class="hist-date">${d}</div>
+      </div>`;
+    }).join('');
+  }
+
   // Then fetch full profile from API
   CZAuth.apiFetch('/api/auth/me').then(function(me){
     if (me && me.ok) {
       populateProfile(localUser || {}, me);
+      renderPersonalBests(me.personal_bests);
+      renderHistory(me.recent_scores);
     }
   }).catch(function(){});
 
