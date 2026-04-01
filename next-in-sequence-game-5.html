@@ -590,12 +590,21 @@ body.light .hero { background:linear-gradient(180deg, var(--surface2) 0%, rgba(2
       <div class="sec-tag" id="lbSectionTag">Today &middot; Resets midnight UTC</div>
     </div>
     <p class="lb-instruct reveal">Press <strong>Play Now</strong> to play today&rsquo;s Next in Sequence puzzle.</p>
-    <!-- Challenge banner — shown when arriving via a challenge link -->
-    <div id="challengeBanner" style="display:none;margin:0 0 16px;padding:14px 18px;background:var(--surface);border:1px solid var(--accent-border);border-left:3px solid var(--accent);border-radius:12px;align-items:center;gap:12px;flex-wrap:wrap;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      <div style="flex:1;min-width:0;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1.5px;color:var(--accent);">CHALLENGE ACCEPTED?</div>
-        <div id="challengeText" style="font-size:13px;color:var(--text2);margin-top:2px;"></div>
+    <!-- Challenge Modal — shown when arriving via a challenge link -->
+    <div id="challengeModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px;">
+      <div style="background:var(--surface);border:1px solid rgba(167,139,250,0.25);border-top:3px solid #a78bfa;border-radius:22px;padding:40px 32px 32px;width:100%;max-width:400px;text-align:center;">
+        <div style="width:52px;height:52px;border-radius:50%;background:rgba(167,139,250,0.1);border:1.5px solid rgba(167,139,250,0.22);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#a78bfa;margin-bottom:10px;">Challenge Received</div>
+        <div id="chalName" style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:2px;color:var(--text);line-height:1;margin-bottom:4px;"></div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:20px;">challenged you on <strong style="color:var(--text);">Next in Sequence</strong></div>
+        <div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.22);border-radius:14px;padding:16px 24px;margin:0 auto 28px;display:inline-block;min-width:140px;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#a78bfa;margin-bottom:6px;">Their Score to Beat</div>
+          <div id="chalScore" style="font-family:'Bebas Neue',sans-serif;font-size:46px;letter-spacing:2px;color:var(--text);line-height:1;"></div>
+        </div>
+        <a href="games/game5/next-in-sequence.html" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#a78bfa;color:#000;border-radius:12px;padding:16px;font-size:15px;font-weight:700;font-family:'DM Sans',sans-serif;text-decoration:none;margin-bottom:10px;box-sizing:border-box;">Accept Challenge — Play Now →</a>
+        <button onclick="document.getElementById('challengeModal').style.display='none'" style="width:100%;background:transparent;border:1.5px solid var(--border2);color:var(--text2);border-radius:12px;padding:13px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;">View Leaderboard ↓</button>
       </div>
     </div>
     <div class="lb-panel">
@@ -1119,18 +1128,18 @@ document.getElementById('themeToggle').addEventListener('click', () => {
   } catch(e) {}
 }());
 
-// ── CHALLENGE BANNER ─────────────────────────────────────────────────────────
+// ── CHALLENGE MODAL ───────────────────────────────────────────────────────────
 (function() {
   const params = new URLSearchParams(window.location.search);
   const challenger = params.get('challenge');
   const score      = params.get('score');
   if (!challenger || !score) return;
-  const banner = document.getElementById('challengeBanner');
-  const text   = document.getElementById('challengeText');
-  if (!banner || !text) return;
+  const modal = document.getElementById('challengeModal');
+  if (!modal) return;
   const scoreNum = parseInt(score, 10);
-  text.textContent = challenger + ' scored ' + (isNaN(scoreNum) ? score : scoreNum.toLocaleString()) + ' on Next in Sequence — can you beat it?';
-  banner.style.display = 'flex';
+  document.getElementById('chalName').textContent  = challenger;
+  document.getElementById('chalScore').textContent = isNaN(scoreNum) ? score : scoreNum.toLocaleString();
+  modal.style.display = 'flex';
 })();
 </script>
 </body>

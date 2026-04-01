@@ -528,6 +528,7 @@
   .ec-score-num { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--accent); letter-spacing: 3px; line-height: 1; }
   .ec-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; flex-shrink: 0; }
   .ec-stat  { background: var(--surface2); border-radius: 10px; padding: 9px 8px; text-align: center; }
+  .ec-stats .ec-stat:last-child { grid-column: 1 / -1; }
   .ec-stat-lbl { font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); font-weight: 600; margin-bottom: 3px; }
   .ec-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--text); letter-spacing: 1px; line-height: 1; }
   .near-miss-bar { background: var(--surface2); border: 1px solid var(--accent-border); border-radius: 12px; padding: 14px 16px; flex-shrink: 0; display: flex; flex-direction: column; gap: 4px; }
@@ -1692,7 +1693,8 @@ function onCorrectPair(pos1, pos2) {
     if (t2) spawnParticles(t2, ic.c);
   }
 
-  if (gs.streak > 0 && gs.streak % 5 === 0) fireMilestone(gs.streak, combo);
+  const prevCombo = comboFromStreak(gs.streak - 1);
+  if (combo > prevCombo) fireMilestone(gs.streak, combo);
 
   document.getElementById('app').className = combo >= 2 ? 'combo-' + combo : '';
   updateHUD();

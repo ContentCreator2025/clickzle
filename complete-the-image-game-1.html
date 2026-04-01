@@ -1073,12 +1073,21 @@ body.light .hero {
       <div class="sec-tag" id="lbSectionTag">Today &middot; Resets midnight UTC</div>
     </div>
     <p class="lb-instruct reveal">Choose a category below, then press the <strong>Play Now</strong> button to play today&rsquo;s puzzle.</p>
-    <!-- Challenge banner — shown when arriving via a challenge link -->
-    <div id="challengeBanner" style="display:none;margin:0 0 16px;padding:14px 18px;background:var(--surface);border:1px solid var(--accent-border);border-left:3px solid var(--accent);border-radius:12px;display:none;align-items:center;gap:12px;flex-wrap:wrap;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      <div style="flex:1;min-width:0;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1.5px;color:var(--accent);">CHALLENGE ACCEPTED?</div>
-        <div id="challengeText" style="font-size:13px;color:var(--text2);margin-top:2px;"></div>
+    <!-- Challenge Modal — shown when arriving via a challenge link -->
+    <div id="challengeModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px;">
+      <div style="background:var(--surface);border:1px solid rgba(74,222,128,0.25);border-top:3px solid #4ade80;border-radius:22px;padding:40px 32px 32px;width:100%;max-width:400px;text-align:center;">
+        <div style="width:52px;height:52px;border-radius:50%;background:rgba(74,222,128,0.1);border:1.5px solid rgba(74,222,128,0.22);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#4ade80;margin-bottom:10px;">Challenge Received</div>
+        <div id="chalName" style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:2px;color:var(--text);line-height:1;margin-bottom:4px;"></div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:20px;">challenged you on <strong id="chalGameName" style="color:var(--text);">Complete the Image</strong></div>
+        <div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.22);border-radius:14px;padding:16px 24px;margin:0 auto 28px;display:inline-block;min-width:140px;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#4ade80;margin-bottom:6px;">Their Score to Beat</div>
+          <div id="chalScore" style="font-family:'Bebas Neue',sans-serif;font-size:46px;letter-spacing:2px;color:var(--text);line-height:1;"></div>
+        </div>
+        <a id="chalPlayBtn" href="games/game1/complete-the-image/movies/clickzle-movies.html" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#4ade80;color:#000;border-radius:12px;padding:16px;font-size:15px;font-weight:700;font-family:'DM Sans',sans-serif;text-decoration:none;margin-bottom:10px;box-sizing:border-box;">Accept Challenge — Play Now →</a>
+        <button onclick="document.getElementById('challengeModal').style.display='none'" style="width:100%;background:transparent;border:1.5px solid var(--border2);color:var(--text2);border-radius:12px;padding:13px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;">View Leaderboard ↓</button>
       </div>
     </div>
     <div class="sec-head" style="display:none">
@@ -1815,29 +1824,84 @@ document.getElementById('themeToggle').addEventListener('click', () => {
   applyTheme();
 });
 
-// ── CHALLENGE BANNER ───────────────────────────────────────────────────────
+// ── CHALLENGE MODAL ────────────────────────────────────────────────────────
 (function() {
   const params = new URLSearchParams(window.location.search);
   const challenger = params.get('challenge');
   const score      = params.get('score');
   const cat        = params.get('cat');
   if (!challenger || !score) return;
-
-  // Show the banner
-  const banner = document.getElementById('challengeBanner');
-  const text   = document.getElementById('challengeText');
-  if (!banner || !text) return;
+  const modal = document.getElementById('challengeModal');
+  if (!modal) return;
   const catLabel = cat ? cat.charAt(0).toUpperCase() + cat.slice(1) : 'Complete the Image';
   const scoreNum = parseInt(score, 10);
-  text.textContent = challenger + ' scored ' + (isNaN(scoreNum) ? score : scoreNum.toLocaleString()) + ' on ' + catLabel + ' — can you beat it?';
-  banner.style.display = 'flex';
-
+  document.getElementById('chalName').textContent      = challenger;
+  document.getElementById('chalScore').textContent     = isNaN(scoreNum) ? score : scoreNum.toLocaleString();
+  document.getElementById('chalGameName').textContent  = catLabel;
+  const slug = cat || 'movies';
+  document.getElementById('chalPlayBtn').href = 'games/game1/complete-the-image/' + slug + '/clickzle-' + slug + '.html';
+  modal.style.display = 'flex';
   // Auto-switch to the matching category tab
   if (cat) {
     const tab = document.querySelector('.lb-cat-tab[data-cat="' + cat + '"]');
     if (tab) tab.click();
   }
 })();
+
+// ── ALREADY PLAYED BANNER (category-aware) ────────────────────────────────
+(function() {
+  const CATS = [
+    { slug:'movies',      label:'Movies' },
+    { slug:'animals',     label:'Animals' },
+    { slug:'art',         label:'Art' },
+    { slug:'flags',       label:'Flags' },
+    { slug:'food',        label:'Food' },
+    { slug:'landscapes',  label:'Landscapes' },
+    { slug:'buildings',   label:'Buildings' },
+    { slug:'celebrities', label:'Celebrities' },
+  ];
+  const today = new Date().toISOString().split('T')[0];
+  try {
+    const played   = [];
+    const notYet   = [];
+    CATS.forEach(function(c) {
+      const st = JSON.parse(localStorage.getItem('clickzle_stats_' + c.slug) || '{}');
+      if (st.history && st.history[today] && st.history[today].played) {
+        played.push(c);
+      } else {
+        notYet.push(c);
+      }
+    });
+    if (!played.length) return;
+
+    // Build played label e.g. "Movies" or "Movies & Animals"
+    const playedLabel = played.length === 1
+      ? played[0].label
+      : played.slice(0,-1).map(function(c){ return c.label; }).join(', ') + ' & ' + played[played.length-1].label;
+
+    // Build "play another" category buttons for unplayed categories
+    const catBtns = notYet.map(function(c) {
+      return '<a href="games/game1/complete-the-image/' + c.slug + '/clickzle-' + c.slug + '.html"'
+        + ' style="padding:7px 16px;border-radius:8px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.25);color:#4ade80;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;transition:background 0.15s;"'
+        + ' onmouseover="this.style.background=\'rgba(74,222,128,0.18)\'" onmouseout="this.style.background=\'rgba(74,222,128,0.08)\'">'
+        + c.label + '</a>';
+    }).join('');
+
+    const hero = document.querySelector('.hero .wrap');
+    if (!hero) return;
+    const banner = document.createElement('div');
+    banner.style.cssText = 'background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:24px 28px;margin:28px auto 0;max-width:600px;text-align:center;';
+    banner.innerHTML =
+      '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:26px;letter-spacing:3px;color:#4ade80;margin-bottom:4px;">ALREADY PLAYED TODAY</div>'
+      + '<div style="font-size:14px;color:var(--text2);margin-bottom:' + (notYet.length ? '18px' : '0') + ';">You\'ve already played <strong style="color:var(--text);">' + playedLabel + '</strong> today.'
+      + (notYet.length ? ' Play another category below.' : ' Come back tomorrow for a new puzzle!') + '</div>'
+      + (notYet.length
+          ? '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:600;margin-bottom:10px;">Choose a category</div>'
+            + '<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">' + catBtns + '</div>'
+          : '');
+    hero.appendChild(banner);
+  } catch(e) {}
+}());
 </script>
 </body>
 </html>

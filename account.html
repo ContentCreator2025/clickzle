@@ -147,10 +147,82 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
 .page-wrap{
   position:relative; z-index:1;
   min-height:calc(100vh - 62px);
-  padding:40px 20px 80px;
+  padding:40px 28px 80px;
 }
 .account-wrap{
-  max-width:540px; margin:0 auto;
+  max-width:1120px; margin:0 auto;
+}
+
+/* ═══ TWO-COLUMN GRID ═════════════════════════════════════════════════════ */
+.acct-grid{
+  display:grid; grid-template-columns:1fr 380px;
+  gap:20px; align-items:start;
+}
+@media(max-width:960px){
+  .acct-grid{ grid-template-columns:1fr; }
+}
+
+/* ═══ GAME STAT CARDS ═════════════════════════════════════════════════════ */
+.game-stats-section{
+  display:flex; flex-direction:column; gap:16px;
+}
+.gsc-card{
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:16px; overflow:hidden;
+}
+.gsc-header{
+  display:flex; align-items:center; gap:12px;
+  padding:16px 20px 14px;
+  border-bottom:1px solid var(--border2);
+}
+.gsc-badge{
+  width:32px; height:32px; border-radius:8px; flex-shrink:0;
+  font-family:'Bebas Neue',sans-serif; font-size:17px;
+  display:flex; align-items:center; justify-content:center;
+}
+.gsc-game-name{
+  font-family:'Bebas Neue',sans-serif; font-size:17px;
+  letter-spacing:1.5px; flex:1;
+}
+.gsc-best-tag{
+  font-size:11px; font-weight:700; letter-spacing:1px;
+  text-transform:uppercase; padding:3px 10px;
+  border-radius:20px;
+}
+.gsc-plays{
+  font-size:12px; color:var(--text3);
+}
+.gsc-score-table{
+  width:100%;
+}
+.gsc-row{
+  display:grid; grid-template-columns:28px 1fr 1fr auto;
+  align-items:center; gap:8px;
+  padding:10px 20px; border-bottom:1px solid var(--border);
+}
+.gsc-row:last-child{ border-bottom:none; }
+.gsc-rank{
+  font-size:11px; font-weight:700; color:var(--text3);
+  text-align:center;
+}
+.gsc-rank.top{ color:var(--accent); }
+.gsc-score-val{
+  font-family:'Bebas Neue',sans-serif; font-size:22px;
+  letter-spacing:1px;
+}
+.gsc-date{
+  font-size:11px; color:var(--text3); text-align:right;
+}
+.gsc-time{
+  font-size:11px; color:var(--text3); text-align:right;
+}
+.gsc-empty{
+  padding:18px 20px; font-size:13px; color:var(--text3); text-align:center;
+}
+
+/* ═══ SETTINGS COLUMN ═════════════════════════════════════════════════════ */
+.settings-col{
+  display:flex; flex-direction:column; gap:14px;
 }
 
 /* ═══ PROFILE HEADER ══════════════════════════════════════════════════════ */
@@ -399,6 +471,18 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
       </div>
     </div>
 
+    <!-- Two-column grid -->
+    <div class="acct-grid">
+
+      <!-- LEFT: per-game score archive -->
+      <div class="game-stats-section" id="gameStatsSection">
+        <!-- populated by JS -->
+        <div class="gsc-card"><div class="gsc-empty">Loading game stats…</div></div>
+      </div>
+
+      <!-- RIGHT: account settings -->
+      <div class="settings-col">
+
     <!-- Account Details card -->
     <div class="account-card">
       <div class="card-title">Account Details</div>
@@ -429,22 +513,6 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
           <div class="btn-spinner"></div>
         </button>
       </form>
-    </div>
-
-    <!-- Personal Bests card -->
-    <div class="account-card" id="pbCard">
-      <div class="card-title">My Best Scores</div>
-      <div id="pbList" style="display:flex;flex-direction:column;gap:10px;">
-        <div style="font-size:13px;color:var(--text3);">Play a game to see your personal bests here.</div>
-      </div>
-    </div>
-
-    <!-- Recent Games card -->
-    <div class="account-card" id="historyCard">
-      <div class="card-title">Recent Games</div>
-      <div id="historyList" style="display:flex;flex-direction:column;gap:8px;">
-        <div style="font-size:13px;color:var(--text3);">No games played yet.</div>
-      </div>
     </div>
 
     <!-- Change Password card -->
@@ -495,9 +563,12 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
           <div class="btn-spinner"></div>
         </button>
       </form>
-    </div>
+    </div><!-- /.account-card change-pw -->
 
-  </div>
+      </div><!-- /.settings-col -->
+    </div><!-- /.acct-grid -->
+
+  </div><!-- /.account-wrap -->
 </main>
 
 <!-- ═══ FOOTER ══════════════════════════════════════════════════════════ -->
@@ -616,43 +687,94 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
   };
   function gameNum(id) { return id ? id.replace('game','') : '?'; }
 
-  function renderPersonalBests(pbs) {
-    const el = document.getElementById('pbList');
-    if (!pbs || !pbs.length) return;
-    el.innerHTML = pbs.map(function(pb) {
-      const g = GAMES[pb.game_id] || { name: pb.game_id, color:'#888', bg:'rgba(136,136,136,0.12)' };
-      return `<div class="pb-row">
-        <div class="pb-game-badge" style="background:${g.bg};color:${g.color};">${gameNum(pb.game_id)}</div>
-        <div class="pb-game-name">${g.name}</div>
-        <div style="text-align:right;">
-          <div class="pb-score" style="color:${g.color};">${(pb.best_score||0).toLocaleString()}</div>
-          <div class="pb-played">${pb.games_played || 1} play${pb.games_played !== 1 ? 's' : ''}</div>
-        </div>
-      </div>`;
-    }).join('');
+  function fmtDate(unixSec) {
+    if (!unixSec) return '';
+    const d = new Date(unixSec * 1000);
+    return d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+  }
+  function fmtTime(unixSec) {
+    if (!unixSec) return '';
+    const d = new Date(unixSec * 1000);
+    return d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+  }
+  function dateFromScore(s) {
+    // prefer submitted_at (unix), fall back to date_utc string
+    if (s.submitted_at) return s.submitted_at;
+    if (s.date_utc) { const ts = Date.parse(s.date_utc); return isNaN(ts) ? 0 : ts / 1000; }
+    return 0;
   }
 
-  function renderHistory(scores) {
-    const el = document.getElementById('historyList');
-    if (!scores || !scores.length) return;
-    el.innerHTML = scores.map(function(s) {
-      const g = GAMES[s.game_id] || { name: s.game_id, color:'#888', bg:'rgba(136,136,136,0.12)' };
-      const d = s.date_utc ? s.date_utc : (s.submitted_at ? new Date(s.submitted_at*1000).toISOString().slice(0,10) : '');
-      return `<div class="hist-row">
-        <div class="hist-game-badge" style="background:${g.bg};color:${g.color};">${gameNum(s.game_id)}</div>
-        <div class="hist-game-name">${g.name}</div>
-        <div class="hist-score" style="color:${g.color};">${(s.score||0).toLocaleString()}</div>
-        <div class="hist-date">${d}</div>
+  function renderGameStats(pbs, recentScores) {
+    const section = document.getElementById('gameStatsSection');
+    if (!section) return;
+
+    // Build pb lookup
+    const pbMap = {};
+    (pbs || []).forEach(function(pb){ pbMap[pb.game_id] = pb; });
+
+    // Group recent scores by game, sort each group by score desc, take top 5
+    const byGame = {};
+    (recentScores || []).forEach(function(s){
+      if (!byGame[s.game_id]) byGame[s.game_id] = [];
+      byGame[s.game_id].push(s);
+    });
+    Object.keys(byGame).forEach(function(gid){
+      byGame[gid].sort(function(a,b){ return (b.score||0) - (a.score||0); });
+      byGame[gid] = byGame[gid].slice(0, 5);
+    });
+
+    // Render a card per game (show all 5 games, even if no data yet)
+    const gameOrder = ['game1','game2','game3','game4','game5'];
+    const hasAnyData = pbs && pbs.length;
+
+    if (!hasAnyData) {
+      section.innerHTML = '<div class="gsc-card"><div class="gsc-empty">Play a game to see your stats here.</div></div>';
+      return;
+    }
+
+    section.innerHTML = gameOrder.map(function(gid) {
+      const g    = GAMES[gid];
+      const pb   = pbMap[gid];
+      const rows = byGame[gid] || [];
+      if (!pb && !rows.length) return ''; // never played this game
+
+      const bestScore = pb ? (pb.best_score || 0) : 0;
+      const plays     = pb ? (pb.games_played || 0) : 0;
+
+      const rowsHtml = rows.length ? rows.map(function(s, i) {
+        const ts   = dateFromScore(s);
+        const date = ts ? fmtDate(ts) : (s.date_utc || '');
+        const time = ts ? fmtTime(ts) : '';
+        const isTop = i === 0;
+        return `<div class="gsc-row">
+          <div class="gsc-rank${isTop ? ' top' : ''}">${i+1}</div>
+          <div class="gsc-score-val" style="color:${g.color};">${(s.score||0).toLocaleString()}</div>
+          <div class="gsc-date">${date}</div>
+          <div class="gsc-time">${time}</div>
+        </div>`;
+      }).join('') : `<div class="gsc-empty">No detailed records yet.</div>`;
+
+      return `<div class="gsc-card">
+        <div class="gsc-header">
+          <div class="gsc-badge" style="background:${g.bg};color:${g.color};">${gameNum(gid)}</div>
+          <div class="gsc-game-name" style="color:${g.color};">${g.name}</div>
+          ${bestScore ? `<div class="gsc-best-tag" style="background:${g.bg};color:${g.color};">Best: ${bestScore.toLocaleString()}</div>` : ''}
+          <div class="gsc-plays">${plays} play${plays !== 1 ? 's' : ''}</div>
+        </div>
+        <div class="gsc-score-table">${rowsHtml}</div>
       </div>`;
-    }).join('');
+    }).filter(Boolean).join('');
+
+    if (!section.innerHTML) {
+      section.innerHTML = '<div class="gsc-card"><div class="gsc-empty">Play a game to see your stats here.</div></div>';
+    }
   }
 
   // Then fetch full profile from API
   CZAuth.apiFetch('/api/auth/me').then(function(me){
     if (me && me.ok) {
       populateProfile(localUser || {}, me);
-      renderPersonalBests(me.personal_bests);
-      renderHistory(me.recent_scores);
+      renderGameStats(me.personal_bests, me.recent_scores);
     }
   }).catch(function(){});
 
