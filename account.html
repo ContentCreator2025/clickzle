@@ -708,15 +708,16 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
     const section = document.getElementById('gameStatsSection');
     if (!section) return;
 
-    // Build pb lookup
+    // Build pb lookup — DB stores game_id as integer (1,2,3…), prefix to match GAMES keys
     const pbMap = {};
-    (pbs || []).forEach(function(pb){ pbMap[pb.game_id] = pb; });
+    (pbs || []).forEach(function(pb){ pbMap['game' + pb.game_id] = pb; });
 
     // Group recent scores by game, sort each group by score desc, take top 5
     const byGame = {};
     (recentScores || []).forEach(function(s){
-      if (!byGame[s.game_id]) byGame[s.game_id] = [];
-      byGame[s.game_id].push(s);
+      const key = 'game' + s.game_id;
+      if (!byGame[key]) byGame[key] = [];
+      byGame[key].push(s);
     });
     Object.keys(byGame).forEach(function(gid){
       byGame[gid].sort(function(a,b){ return (b.score||0) - (a.score||0); });
