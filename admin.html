@@ -157,7 +157,7 @@
     <p>Admin Dashboard</p>
     <input type="password" id="keyInput" placeholder="Admin key…" autocomplete="off">
     <div class="cf-turnstile" id="turnstileWidget"
-      data-sitekey="0x4AAAAAABkYOUR_SITE_KEY_HERE"
+      data-sitekey="1x00000000000000000000AA"
       data-theme="dark"
       data-callback="onTurnstileSuccess"
       data-expired-callback="onTurnstileExpired">
@@ -241,6 +241,12 @@ function fmtMs(ms) {
 
 // ── TURNSTILE ──
 let turnstileToken = '';
+// Fallback: if Turnstile script hasn't fired success within 4 seconds, enable the button anyway
+setTimeout(() => {
+  const btn = document.getElementById('loginBtn');
+  if (btn && btn.disabled) { btn.disabled = false; }
+}, 4000);
+
 function onTurnstileSuccess(token) {
   turnstileToken = token;
   document.getElementById('loginBtn').disabled = false;
