@@ -55,7 +55,7 @@
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Admin-Key',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Admin-Key, X-Turnstile-Token',
   'Access-Control-Max-Age': '86400',
 };
 
@@ -977,8 +977,33 @@ function checkAdminKey(request, env) {
   return env.ADMIN_KEY && key === env.ADMIN_KEY;
 }
 
+// Verifies a Cloudflare Turnstile token server-side.
+// Returns true if valid, or if TURNSTILE_SECRET is not yet configured (graceful fallback).
+async function verifyTurnstile(token, env) {
+  if (!env.TURNSTILE_SECRET) return true; // not configured — skip check
+  if (!token) return false;
+  try {
+    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: env.TURNSTILE_SECRET, response: token }),
+    });
+    const data = await res.json();
+    return data.success === true;
+  } catch {
+    return false;
+  }
+}
+
 async function handleAdminUsers(request, env) {
   if (!checkAdminKey(request, env)) return json({ error: 'Unauthorised' }, 401);
+
+  // On the initial login call the page sends X-Turnstile-Token; verify it.
+  const turnstileToken = request.headers.get('X-Turnstile-Token') || '';
+  if (turnstileToken) {
+    const ok = await verifyTurnstile(turnstileToken, env);
+    if (!ok) return json({ error: 'Security check failed' }, 403);
+  }
   const users = await env.DB.prepare(
     `SELECT u.id, u.username, u.email, u.email_verified, u.country,
             u.streak_days, u.best_streak, u.total_games,
