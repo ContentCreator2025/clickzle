@@ -6,7 +6,6 @@
   <title>Clickzle Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -48,7 +47,6 @@
     }
     .btn-primary:hover { opacity: 0.88; }
     .login-err { color: var(--red); font-size: 13px; margin-top: 10px; min-height: 18px; }
-    .cf-turnstile { margin: 4px 0 12px; display: flex; justify-content: center; }
 
     /* ── MAIN ── */
     #mainScreen { display: none; }
@@ -156,13 +154,7 @@
     <h1>Clickzle</h1>
     <p>Admin Dashboard</p>
     <input type="password" id="keyInput" placeholder="Admin key…" autocomplete="off">
-    <div class="cf-turnstile" id="turnstileWidget"
-      data-sitekey="1x00000000000000000000AA"
-      data-theme="dark"
-      data-callback="onTurnstileSuccess"
-      data-expired-callback="onTurnstileExpired">
-    </div>
-    <button class="btn-primary" id="loginBtn" onclick="login()" disabled>Sign In</button>
+    <button class="btn-primary" id="loginBtn" onclick="login()">Sign In</button>
     <div class="login-err" id="loginErr"></div>
   </div>
 </div>
@@ -240,45 +232,21 @@ function fmtMs(ms) {
   return Math.floor(s/60) > 0 ? `${Math.floor(s/60)}m ${s%60}s` : `${s}s`;
 }
 
-// ── TURNSTILE ──
-let turnstileToken = '';
-// Fallback: if Turnstile script hasn't fired success within 4 seconds, enable the button anyway
-setTimeout(() => {
-  const btn = document.getElementById('loginBtn');
-  if (btn && btn.disabled) { btn.disabled = false; }
-}, 4000);
-
-function onTurnstileSuccess(token) {
-  turnstileToken = token;
-  document.getElementById('loginBtn').disabled = false;
-}
-function onTurnstileExpired() {
-  turnstileToken = '';
-  document.getElementById('loginBtn').disabled = true;
-}
-
 // ── LOGIN ──
-document.getElementById('keyInput').addEventListener('keydown', e => { if (e.key === 'Enter' && !document.getElementById('loginBtn').disabled) login(); });
+document.getElementById('keyInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
 
 async function login() {
   const k = document.getElementById('keyInput').value.trim();
   if (!k) { document.getElementById('loginErr').textContent = 'Enter your admin key.'; return; }
-  if (!turnstileToken) { document.getElementById('loginErr').textContent = 'Please complete the security check.'; return; }
   document.getElementById('loginBtn').disabled = true;
   document.getElementById('loginBtn').textContent = 'Signing in…';
   adminKey = k;
   try {
-    const d = await apiFetch('/api/admin/users', {
-      headers: { 'X-Turnstile-Token': turnstileToken },
-    });
-    if (d.error === 'Unauthorised' || d.error === 'Security check failed') {
-      document.getElementById('loginErr').textContent = d.error === 'Security check failed'
-        ? 'Security check failed. Please refresh and try again.'
-        : 'Wrong admin key.';
+    const d = await apiFetch('/api/admin/users');
+    if (d.error === 'Unauthorised') {
+      document.getElementById('loginErr').textContent = 'Wrong admin key.';
       adminKey = '';
-      turnstileToken = '';
-      if (window.turnstile) window.turnstile.reset();
-      document.getElementById('loginBtn').disabled = true;
+      document.getElementById('loginBtn').disabled = false;
       document.getElementById('loginBtn').textContent = 'Sign In';
       return;
     }
@@ -287,10 +255,9 @@ async function login() {
     document.getElementById('mainScreen').style.display = 'block';
     processUsers(d.users || []);
   } catch {
-    document.getElementById('loginErr').textContent = 'Could not connect. Deploy the worker first.';
+    document.getElementById('loginErr').textContent = 'Could not connect.';
     adminKey = '';
-    if (window.turnstile) window.turnstile.reset();
-    document.getElementById('loginBtn').disabled = true;
+    document.getElementById('loginBtn').disabled = false;
     document.getElementById('loginBtn').textContent = 'Sign In';
   }
 }

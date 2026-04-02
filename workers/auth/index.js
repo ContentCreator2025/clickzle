@@ -1037,13 +1037,6 @@ async function verifyTurnstile(token, env) {
 
 async function handleAdminUsers(request, env) {
   if (!checkAdminKey(request, env)) return json({ error: 'Unauthorised' }, 401);
-
-  // On the initial login call the page sends X-Turnstile-Token; verify it.
-  const turnstileToken = request.headers.get('X-Turnstile-Token') || '';
-  if (turnstileToken) {
-    const ok = await verifyTurnstile(turnstileToken, env);
-    if (!ok) return json({ error: 'Security check failed' }, 403);
-  }
   const users = await env.DB.prepare(
     `SELECT u.id, u.username, u.email, u.email_verified, u.country,
             u.streak_days, u.best_streak, u.total_games,
