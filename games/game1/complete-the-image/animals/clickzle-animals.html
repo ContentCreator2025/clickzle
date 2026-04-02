@@ -3027,7 +3027,7 @@ function showVictory(timeMs, clicks) {
 
   // Submit score to leaderboard if logged in
   if (window.CZAuth && CZAuth.isLoggedIn()) {
-    CZAuth.submitScore(1, {
+    CZAuth.submitScore(12, {
       score:    score,
       time_ms:  timeMs,
       correct:  1,
@@ -3083,7 +3083,7 @@ function showTimeout(clicks) {
 
   // Submit timeout score to leaderboard if logged in
   if (window.CZAuth && CZAuth.isLoggedIn()) {
-    CZAuth.submitScore(1, {
+    CZAuth.submitScore(12, {
       score:    base,
       time_ms:  TIMER_MS,
       correct:  0,
@@ -3580,7 +3580,7 @@ document.getElementById('pregameHelpClose').addEventListener('click', () => {
 }());
 // Cross-device: server fallback
 if (typeof CZAuth !== 'undefined' && CZAuth.isLoggedIn()) {
-  CZAuth.apiFetch('/api/auth/personal-best?game=1').then(function(d) {
+  CZAuth.apiFetch('/api/auth/personal-best?game=12').then(function(d) {
     if (d && d.ok && d.played_today) {
       try {
         const today = new Date().toISOString().split('T')[0];
