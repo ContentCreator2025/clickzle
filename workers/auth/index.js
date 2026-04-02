@@ -893,14 +893,34 @@ const BOT_SCORE_RANGES = {
 
 function rng(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
-// Called by the cron trigger every day at midnight UTC, and by the admin endpoint.
+// Per-game realistic field ranges — calibrated from real player data.
+// time_ms means different things per game:
+//   G3  = fastest single reaction (real: 246ms–400ms)
+//   G4  = avg reaction time per pair (real: 364ms–481ms)
+//   G11-18 = total time taken to solve puzzle (real: 122s–153s)
+//   G2/G5 = not submitted by game, leave null
+const BOT_GAME_PARAMS = {
+  2:  { time: null,              correct: [3,15],   wrong: [0,5],    combo: [2,8],    pairs: null, accuracy: null },
+  3:  { time: [280,1200],        correct: [20,80],  wrong: [2,15],   combo: [2,10],   pairs: null, accuracy: null },
+  4:  { time: [500,3000],        correct: [8,30],   wrong: [2,12],   combo: [2,8],    pairs: [8,25], accuracy: [72,97] },
+  5:  { time: null,              correct: [3,12],   wrong: [5,30],   combo: [200,800],pairs: [0,3], accuracy: [50,92] },
+  11: { time: [80000,240000],    correct: [1,1],    wrong: [20,100], combo: null,     pairs: null, accuracy: null },
+  12: { time: [80000,240000],    correct: [1,1],    wrong: [20,100], combo: null,     pairs: null, accuracy: null },
+  13: { time: [80000,240000],    correct: [1,1],    wrong: [20,100], combo: null,     pairs: null, accuracy: null },
+  14: { time: [80000,240000],    correct: [1,1],    wrong: [20,100], combo: null,     pairs: null, accuracy: null },
+  15: { time: [80000,240000],    correct: [1,1],    wrong: [20,100], combo: null,     pairs: null, accuracy: null },
+  16: { time: [80000,240000],    correct: [1,1],    wrong: [20,100], combo: null,     pairs: null, accuracy: null },
+  17: { time: [80000,240000],    correct: [1,1],    wrong: [20,100], combo: null,     pairs: null, accuracy: null },
+  18: { time: [80000,240000],    correct: [1,1],    wrong: [20,100], combo: null,     pairs: null, accuracy: null },
+};
+
+// Called by the cron trigger every day at midnight UTC, and by admin endpoints.
 // submitted_at is spread randomly across the day so scores don't all land at midnight.
 async function seedDailyBotScores(env) {
-  const date    = todayUTC();
-  const now     = Math.floor(Date.now() / 1000);
-  // Spread window: midnight → now (or midnight → 23:59 if running partway through day)
+  const date     = todayUTC();
+  const now      = Math.floor(Date.now() / 1000);
   const dayStart = Math.floor(new Date(date + 'T00:00:00Z').getTime() / 1000);
-  const spreadEnd = Math.max(now, dayStart + 3600); // at least 1 hour of spread
+  const spreadEnd = Math.max(now, dayStart + 3600);
 
   const botsResult = await env.DB.prepare(
     "SELECT id FROM users WHERE email LIKE '%@clickzle.bot'"
@@ -911,28 +931,32 @@ async function seedDailyBotScores(env) {
   let seeded = 0;
   for (const bot of bots) {
     for (const [gameIdStr, [min, max]] of Object.entries(BOT_SCORE_RANGES)) {
-      // ~80% chance each bot played each game today
       if (Math.random() > 0.80) continue;
       const gameId = parseInt(gameIdStr);
 
-      // Idempotent — skip if score already exists for today
       const existing = await env.DB.prepare(
         'SELECT id FROM scores WHERE user_id=?1 AND game_id=?2 AND date_utc=?3'
       ).bind(bot.id, gameId, date).first();
       if (existing) continue;
 
+      const p           = BOT_GAME_PARAMS[gameId];
       const score       = rng(min, max);
-      const timeMs      = rng(8000, 55000);
+      const timeMs      = p.time      ? rng(p.time[0], p.time[1])         : null;
+      const correct     = p.correct   ? rng(p.correct[0], p.correct[1])   : 0;
+      const wrong       = p.wrong     ? rng(p.wrong[0], p.wrong[1])       : 0;
+      const combo       = p.combo     ? rng(p.combo[0], p.combo[1])       : 0;
+      const pairs       = p.pairs     ? rng(p.pairs[0], p.pairs[1])       : 0;
+      const accuracy    = p.accuracy  ? rng(p.accuracy[0], p.accuracy[1]) : null;
       const scoreId     = generateId();
-      // Each bot score lands at a different random time during the day
       const submittedAt = rng(dayStart, spreadEnd);
 
       await env.DB.prepare(
         `INSERT INTO scores
-           (id, user_id, game_id, date_utc, score, time_ms, correct, wrong, combo_max, device_type, submitted_at)
-         VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11)`
-      ).bind(scoreId, bot.id, gameId, date, score, timeMs,
-             rng(3, 10), rng(0, 4), rng(1, 5), 'desktop', submittedAt).run();
+           (id, user_id, game_id, date_utc, score, time_ms, accuracy, pairs_found,
+            correct, wrong, combo_max, device_type, submitted_at)
+         VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13)`
+      ).bind(scoreId, bot.id, gameId, date, score, timeMs, accuracy, pairs,
+             correct, wrong, combo, 'desktop', submittedAt).run();
       seeded++;
     }
   }
@@ -1044,7 +1068,7 @@ async function handleAdminUsers(request, env) {
             (SELECT COUNT(*) FROM scores s WHERE s.user_id = u.id) AS score_count,
             (SELECT MAX(s.score) FROM scores s WHERE s.user_id = u.id) AS top_score,
             (SELECT s.date_utc FROM scores s WHERE s.user_id = u.id ORDER BY s.submitted_at DESC LIMIT 1) AS last_played
-     FROM users u ORDER BY u.created_at DESC`
+     FROM users u WHERE u.email NOT LIKE '%@clickzle.bot' ORDER BY u.created_at DESC`
   ).all();
   return json({ ok: true, users: users.results || [] });
 }
