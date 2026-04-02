@@ -24,11 +24,31 @@
  *   DB              — D1 database binding (set in wrangler.toml)
  *
  * DB MIGRATIONS REQUIRED (run once via Cloudflare dashboard or wrangler):
+ *
+ *   -- users table additions
  *   ALTER TABLE users ADD COLUMN email_verified INTEGER DEFAULT 1;
  *   ALTER TABLE users ADD COLUMN verify_token TEXT;
  *   ALTER TABLE users ADD COLUMN verify_token_expires INTEGER;
  *   ALTER TABLE users ADD COLUMN reset_token TEXT;
  *   ALTER TABLE users ADD COLUMN reset_token_expires INTEGER;
+ *
+ *   -- scores table: rename play_date → date_utc, add missing columns
+ *   ALTER TABLE scores ADD COLUMN date_utc TEXT;
+ *   UPDATE scores SET date_utc = play_date WHERE date_utc IS NULL;
+ *   ALTER TABLE scores ADD COLUMN time_ms INTEGER;
+ *   ALTER TABLE scores ADD COLUMN correct INTEGER DEFAULT 0;
+ *   ALTER TABLE scores ADD COLUMN wrong INTEGER DEFAULT 0;
+ *   ALTER TABLE scores ADD COLUMN combo_max INTEGER DEFAULT 0;
+ *
+ *   -- personal_bests table (create if not exists)
+ *   CREATE TABLE IF NOT EXISTS personal_bests (
+ *     user_id TEXT NOT NULL,
+ *     game_id INTEGER NOT NULL,
+ *     best_score INTEGER NOT NULL DEFAULT 0,
+ *     best_date TEXT,
+ *     games_played INTEGER NOT NULL DEFAULT 0,
+ *     updated_at INTEGER NOT NULL DEFAULT 0
+ *   );
  */
 
 // ── CORS ───────────────────────────────────────────────────────────────────────
