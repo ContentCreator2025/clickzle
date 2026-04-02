@@ -843,6 +843,66 @@ async function handleDeleteScore(request, env) {
   return json({ ok: true, message: `Today's score for game ${gameId} deleted` });
 }
 
+// ── ADMIN ─────────────────────────────────────────────────────────────────────
+function checkAdminKey(request, env) {
+  const key = request.headers.get('X-Admin-Key') || '';
+  return env.ADMIN_KEY && key === env.ADMIN_KEY;
+}
+
+async function handleAdminLookup(request, env) {
+  if (!checkAdminKey(request, env)) return json({ error: 'Unauthorised' }, 401);
+  const url   = new URL(request.url);
+  const email = (url.searchParams.get('email') || '').trim().toLowerCase();
+  const uname = (url.searchParams.get('username') || '').trim().toLowerCase();
+  if (!email && !uname) return json({ error: 'email or username required' }, 400);
+
+  const user = email
+    ? await env.DB.prepare('SELECT * FROM users WHERE LOWER(email)=?1').bind(email).first()
+    : await env.DB.prepare('SELECT * FROM users WHERE LOWER(username)=?1').bind(uname).first();
+
+  if (!user) return json({ ok: true, found: false });
+
+  const [scores, pbs] = await Promise.all([
+    env.DB.prepare('SELECT game_id, date_utc, score, time_ms, correct, wrong, submitted_at FROM scores WHERE user_id=?1 ORDER BY submitted_at DESC LIMIT 50').bind(user.id).all(),
+    env.DB.prepare('SELECT game_id, best_score, best_date, games_played FROM personal_bests WHERE user_id=?1').bind(user.id).all(),
+  ]);
+
+  return json({
+    ok: true, found: true,
+    user: {
+      id: user.id, username: user.username, email: user.email,
+      email_verified: user.email_verified, country: user.country,
+      streak_days: user.streak_days, best_streak: user.best_streak,
+      total_games: user.total_games, created_at: user.created_at,
+      last_seen: user.last_seen,
+    },
+    scores: scores.results || [],
+    personal_bests: pbs.results || [],
+  });
+}
+
+async function handleAdminVerify(request, env) {
+  if (!checkAdminKey(request, env)) return json({ error: 'Unauthorised' }, 401);
+  let body; try { body = await request.json(); } catch { return json({ error: 'Invalid body' }, 400); }
+  const { user_id } = body || {};
+  if (!user_id) return json({ error: 'user_id required' }, 400);
+  await env.DB.prepare(
+    'UPDATE users SET email_verified=1, verify_token=NULL, verify_token_expires=NULL WHERE id=?1'
+  ).bind(user_id).run();
+  return json({ ok: true, message: 'Email marked as verified' });
+}
+
+async function handleAdminDeleteScore(request, env) {
+  if (!checkAdminKey(request, env)) return json({ error: 'Unauthorised' }, 401);
+  let body; try { body = await request.json(); } catch { return json({ error: 'Invalid body' }, 400); }
+  const { user_id, game_id, date_utc } = body || {};
+  if (!user_id || !game_id || !date_utc) return json({ error: 'user_id, game_id, date_utc required' }, 400);
+  await env.DB.prepare(
+    'DELETE FROM scores WHERE user_id=?1 AND game_id=?2 AND date_utc=?3'
+  ).bind(user_id, game_id, date_utc).run();
+  return json({ ok: true, message: 'Score deleted' });
+}
+
 // ── MAIN ROUTER ───────────────────────────────────────────────────────────────
 export default {
   async fetch(request, env, ctx) {
@@ -869,6 +929,9 @@ export default {
     if (path === '/api/auth/resend-verify'   && method === 'POST')   return handleResendVerify(request, env);
     if (path === '/api/leaderboard'          && method === 'GET')    return handleLeaderboard(request, env);
     if (path === '/api/stats'                && method === 'GET')    return handleStats(request, env);
+    if (path === '/api/admin/lookup'         && method === 'GET')    return handleAdminLookup(request, env);
+    if (path === '/api/admin/verify'         && method === 'POST')   return handleAdminVerify(request, env);
+    if (path === '/api/admin/delete-score'   && method === 'POST')   return handleAdminDeleteScore(request, env);
     return json({ error: 'Not found' }, 404);
   },
 };
