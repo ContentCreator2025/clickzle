@@ -182,6 +182,7 @@
       <button class="btn-sm" onclick="loadUsers()">↻ Refresh</button>
       <button class="btn-sm" id="btnSeedToday" onclick="seedToday()" title="Manually run today's bot score seed">Seed Today</button>
       <button class="btn-sm" id="btnSetupBots" onclick="setupBots()" title="One-time: create all 50 bot accounts and seed today's scores">Setup Bots</button>
+      <button class="btn-sm" id="btnResetBots" onclick="resetBots()" title="Delete old bots and recreate with corrected names and scores">Reset Bots</button>
       <button class="btn-sm" onclick="signOut()">Sign out</button>
     </div>
   </div>
@@ -341,8 +342,7 @@ const COLS = [
   { key: 'email',         label: 'Email' },
   { key: 'country',       label: 'Country' },
   { key: 'email_verified',label: 'Verified' },
-  { key: 'score_count',   label: 'Games' },
-  { key: 'top_score',     label: 'Top Score' },
+  { key: 'score_count',   label: 'Games Played' },
   { key: 'streak_days',   label: 'Streak' },
   { key: 'last_played',   label: 'Last Played' },
   { key: 'created_at',    label: 'Joined' },
@@ -389,7 +389,6 @@ function renderTable(users) {
       <td>${flag}</td>
       <td><span class="pill ${verified?'pill-green':'pill-red'}">${verified?'✓ Yes':'✗ No'}</span></td>
       <td>${u.score_count || 0}</td>
-      <td>${u.top_score ? u.top_score.toLocaleString() : '—'}</td>
       <td>${u.streak_days || 0}d</td>
       <td>${u.last_played || '—'}</td>
       <td>${fmtDate(u.created_at)}</td>
@@ -472,6 +471,19 @@ async function setupBots() {
     loadUsers();
   } catch { alert('Request failed. Is the worker deployed?'); }
   btn.textContent = 'Setup Bots'; btn.disabled = false;
+}
+
+async function resetBots() {
+  if (!confirm('This will DELETE all existing bot accounts and recreate them with correct names and score ranges. Continue?')) return;
+  const btn = document.getElementById('btnResetBots');
+  btn.textContent = 'Resetting…'; btn.disabled = true;
+  try {
+    const d = await apiFetch('/api/admin/reset-bots', { method: 'POST' });
+    if (d.ok) alert(`✓ Done!\nBots recreated: ${d.deleted_and_recreated}\nScores seeded today: ${d.scores_seeded}`);
+    else alert('Error: ' + (d.error || 'Unknown'));
+    loadUsers();
+  } catch { alert('Request failed.'); }
+  btn.textContent = 'Reset Bots'; btn.disabled = false;
 }
 
 async function seedToday() {

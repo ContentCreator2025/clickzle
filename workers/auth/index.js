@@ -844,60 +844,63 @@ async function handleDeleteScore(request, env) {
 }
 
 // ── BOT / LEADERBOARD SEED SYSTEM ─────────────────────────────────────────────
-// 50 bot accounts spread across countries. All have email @clickzle.bot so they
-// can be identified and can never log in (password_hash = 'bot:no-login').
+// 50 bot accounts — natural-looking names, no prefix. Identified only by their
+// @clickzle.bot email (never visible to players). Cannot log in.
 const BOT_USERS = [
-  { username: 'cz_swift_fox',    country: 'us' }, { username: 'cz_pixel_ninja',  country: 'gb' },
-  { username: 'cz_neon_wave',    country: 'de' }, { username: 'cz_turbo_vex',    country: 'fr' },
-  { username: 'cz_flash_kira',   country: 'au' }, { username: 'cz_dark_orbit',   country: 'ca' },
-  { username: 'cz_stellar_z',    country: 'br' }, { username: 'cz_blaze_x',      country: 'jp' },
-  { username: 'cz_quick_shot',   country: 'in' }, { username: 'cz_echo_pulse',   country: 'es' },
-  { username: 'cz_vortex_88',    country: 'nl' }, { username: 'cz_hyper_run',    country: 'se' },
-  { username: 'cz_laser_eye',    country: 'it' }, { username: 'cz_nova_spark',   country: 'pl' },
-  { username: 'cz_rapid_bolt',   country: 'za' }, { username: 'cz_grid_jump',    country: 'mx' },
-  { username: 'cz_prime_aim',    country: 'kr' }, { username: 'cz_ultra_max',    country: 'ar' },
-  { username: 'cz_neo_glitch',   country: 'ng' }, { username: 'cz_arc_flash',    country: 'tr' },
-  { username: 'cz_speed_rx',     country: 'us' }, { username: 'cz_titan_glow',   country: 'gb' },
-  { username: 'cz_byte_rider',   country: 'de' }, { username: 'cz_edge_striker', country: 'fr' },
-  { username: 'cz_deep_scan',    country: 'au' }, { username: 'cz_raw_power',    country: 'ca' },
-  { username: 'cz_sharp_aim',    country: 'br' }, { username: 'cz_code_blast',   country: 'jp' },
-  { username: 'cz_zero_lag',     country: 'in' }, { username: 'cz_true_north',   country: 'es' },
-  { username: 'cz_ion_burst',    country: 'nl' }, { username: 'cz_data_wave',    country: 'se' },
-  { username: 'cz_phase_x',      country: 'it' }, { username: 'cz_night_owl',    country: 'pl' },
-  { username: 'cz_cloud_7',      country: 'za' }, { username: 'cz_red_laser',    country: 'mx' },
-  { username: 'cz_fox_run',      country: 'kr' }, { username: 'cz_star_dash',    country: 'ar' },
-  { username: 'cz_bright_key',   country: 'ng' }, { username: 'cz_cool_loop',    country: 'tr' },
-  { username: 'cz_max_reflex',   country: 'us' }, { username: 'cz_sun_flare',    country: 'gb' },
-  { username: 'cz_big_brain',    country: 'de' }, { username: 'cz_void_zen',     country: 'fr' },
-  { username: 'cz_heat_map',     country: 'au' }, { username: 'cz_pin_point',    country: 'ca' },
-  { username: 'cz_apex_aim',     country: 'br' }, { username: 'cz_turbo_eye',    country: 'jp' },
-  { username: 'cz_run_quick',    country: 'in' }, { username: 'cz_ace_click',    country: 'es' },
+  { username: 'pixelrex',    country: 'us' }, { username: 'neonkai',      country: 'gb' },
+  { username: 'swiftzara',   country: 'de' }, { username: 'turbomax99',   country: 'fr' },
+  { username: 'flashnova',   country: 'au' }, { username: 'darkorbit',    country: 'ca' },
+  { username: 'stellar99',   country: 'br' }, { username: 'blazex',       country: 'jp' },
+  { username: 'quickshot',   country: 'in' }, { username: 'echopulse',    country: 'es' },
+  { username: 'vortex88',    country: 'nl' }, { username: 'hyperrun',     country: 'se' },
+  { username: 'lasereye',    country: 'it' }, { username: 'novaspark',    country: 'pl' },
+  { username: 'rapidbolt',   country: 'za' }, { username: 'gridjump',     country: 'mx' },
+  { username: 'primeaim',    country: 'kr' }, { username: 'ultramax',     country: 'ar' },
+  { username: 'neoglitch',   country: 'ng' }, { username: 'arcflash',     country: 'tr' },
+  { username: 'speedrx',     country: 'us' }, { username: 'titanglow',    country: 'gb' },
+  { username: 'byterider',   country: 'de' }, { username: 'edgestriker',  country: 'fr' },
+  { username: 'deepscan',    country: 'au' }, { username: 'rawpower',     country: 'ca' },
+  { username: 'sharpaim',    country: 'br' }, { username: 'codeblast',    country: 'jp' },
+  { username: 'zerolag',     country: 'in' }, { username: 'truenorth',    country: 'es' },
+  { username: 'ionburst',    country: 'nl' }, { username: 'datawave',     country: 'se' },
+  { username: 'phasex99',    country: 'it' }, { username: 'nightowl',     country: 'pl' },
+  { username: 'cloud777',    country: 'za' }, { username: 'redlaser',     country: 'mx' },
+  { username: 'foxrunner',   country: 'kr' }, { username: 'stardash',     country: 'ar' },
+  { username: 'brightkey',   country: 'ng' }, { username: 'coolloop',     country: 'tr' },
+  { username: 'maxreflex',   country: 'us' }, { username: 'sunflare',     country: 'gb' },
+  { username: 'bigbrain',    country: 'de' }, { username: 'voidzen',      country: 'fr' },
+  { username: 'heatmapper',  country: 'au' }, { username: 'pinpoint',     country: 'ca' },
+  { username: 'apexaim',     country: 'br' }, { username: 'turboeye',     country: 'jp' },
+  { username: 'runquick',    country: 'in' }, { username: 'aceclick',     country: 'es' },
 ];
 
-// Score ranges [min, max] per game_id.
-// These are intentionally middle-to-low so real players can beat them.
-// Adjust to match your games' actual scoring scale.
+// Score ranges [min, max] per game_id — calibrated from real player data.
+// Bots are intentionally middle-to-low so any decent player beats them.
 const BOT_SCORE_RANGES = {
-  2:  [100, 520],  // Follow the Pattern
-  3:  [100, 480],  // Hit the Target
-  4:  [100, 500],  // Spot the Pair
-  5:  [100, 520],  // Next in Sequence
-  11: [100, 550],  // CTI Movies
-  12: [100, 560],  // CTI Animals
-  13: [100, 530],  // CTI Art
-  14: [100, 540],  // CTI Flags
-  15: [100, 550],  // CTI Food
-  16: [100, 520],  // CTI Landscapes
-  17: [100, 530],  // CTI Buildings
-  18: [100, 560],  // CTI Celebrities
+  2:  [800,  2800],   // Follow the Pattern  (real top: ~6,000)
+  3:  [20000, 90000], // Hit the Target       (real top: ~170,000)
+  4:  [800,  4000],   // Spot the Pair
+  5:  [800,  3500],   // Next in Sequence
+  11: [1500, 4500],   // CTI Movies           (real top: ~6,000–7,000)
+  12: [1500, 4500],   // CTI Animals
+  13: [1500, 4500],   // CTI Art
+  14: [1500, 4500],   // CTI Flags
+  15: [1500, 4500],   // CTI Food
+  16: [1500, 4500],   // CTI Landscapes
+  17: [1500, 4500],   // CTI Buildings
+  18: [1500, 4500],   // CTI Celebrities
 };
 
 function rng(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
 // Called by the cron trigger every day at midnight UTC, and by the admin endpoint.
+// submitted_at is spread randomly across the day so scores don't all land at midnight.
 async function seedDailyBotScores(env) {
-  const date = todayUTC();
-  const now  = Math.floor(Date.now() / 1000);
+  const date    = todayUTC();
+  const now     = Math.floor(Date.now() / 1000);
+  // Spread window: midnight → now (or midnight → 23:59 if running partway through day)
+  const dayStart = Math.floor(new Date(date + 'T00:00:00Z').getTime() / 1000);
+  const spreadEnd = Math.max(now, dayStart + 3600); // at least 1 hour of spread
 
   const botsResult = await env.DB.prepare(
     "SELECT id FROM users WHERE email LIKE '%@clickzle.bot'"
@@ -918,16 +921,18 @@ async function seedDailyBotScores(env) {
       ).bind(bot.id, gameId, date).first();
       if (existing) continue;
 
-      const score   = rng(min, max);
-      const timeMs  = rng(8000, 55000);
-      const scoreId = generateId();
+      const score       = rng(min, max);
+      const timeMs      = rng(8000, 55000);
+      const scoreId     = generateId();
+      // Each bot score lands at a different random time during the day
+      const submittedAt = rng(dayStart, spreadEnd);
 
       await env.DB.prepare(
         `INSERT INTO scores
            (id, user_id, game_id, date_utc, score, time_ms, correct, wrong, combo_max, device_type, submitted_at)
          VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11)`
       ).bind(scoreId, bot.id, gameId, date, score, timeMs,
-             rng(3, 10), rng(0, 4), rng(1, 5), 'desktop', now).run();
+             rng(3, 10), rng(0, 4), rng(1, 5), 'desktop', submittedAt).run();
       seeded++;
     }
   }
@@ -969,6 +974,41 @@ async function handleAdminSeedToday(request, env) {
   if (!checkAdminKey(request, env)) return json({ error: 'Unauthorised' }, 401);
   const result = await seedDailyBotScores(env);
   return json({ ok: true, ...result });
+}
+
+// Wipes all existing bot accounts + their scores and recreates fresh with correct names/ranges.
+async function handleAdminResetBots(request, env) {
+  if (!checkAdminKey(request, env)) return json({ error: 'Unauthorised' }, 401);
+
+  // Delete all scores belonging to bot users
+  await env.DB.prepare(
+    "DELETE FROM scores WHERE user_id IN (SELECT id FROM users WHERE email LIKE '%@clickzle.bot')"
+  ).run();
+  await env.DB.prepare(
+    "DELETE FROM personal_bests WHERE user_id IN (SELECT id FROM users WHERE email LIKE '%@clickzle.bot')"
+  ).run();
+  // Delete bot user accounts
+  await env.DB.prepare("DELETE FROM users WHERE email LIKE '%@clickzle.bot'").run();
+
+  // Recreate with new names
+  const now = Math.floor(Date.now() / 1000);
+  let created = 0;
+  for (const bot of BOT_USERS) {
+    const id = generateId();
+    const createdAt = now - rng(0, 5_184_000);
+    await env.DB.prepare(
+      `INSERT INTO users
+         (id, username, email, password_hash, country, created_at, last_seen,
+          device_type, email_verified, streak_days, best_streak, total_games)
+       VALUES (?1,?2,?3,?4,?5,?6,?6,?7,1,?8,?9,?10)`
+    ).bind(id, bot.username, `${bot.username}@clickzle.bot`, 'bot:no-login',
+           bot.country, createdAt, 'desktop',
+           rng(1, 30), rng(1, 45), rng(20, 200)).run();
+    created++;
+  }
+
+  const seed = await seedDailyBotScores(env);
+  return json({ ok: true, deleted_and_recreated: created, scores_seeded: seed.seeded });
 }
 
 // ── ADMIN ─────────────────────────────────────────────────────────────────────
@@ -1105,6 +1145,7 @@ export default {
     if (path === '/api/admin/delete-score'   && method === 'POST')   return handleAdminDeleteScore(request, env);
     if (path === '/api/admin/seed-bots'      && method === 'POST')   return handleAdminSeedBots(request, env);
     if (path === '/api/admin/seed-today'     && method === 'POST')   return handleAdminSeedToday(request, env);
+    if (path === '/api/admin/reset-bots'     && method === 'POST')   return handleAdminResetBots(request, env);
     return json({ error: 'Not found' }, 404);
   },
 
