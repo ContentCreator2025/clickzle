@@ -55,7 +55,7 @@
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Admin-Key',
   'Access-Control-Max-Age': '86400',
 };
 
@@ -843,10 +843,152 @@ async function handleDeleteScore(request, env) {
   return json({ ok: true, message: `Today's score for game ${gameId} deleted` });
 }
 
+// ── BOT / LEADERBOARD SEED SYSTEM ─────────────────────────────────────────────
+// 50 bot accounts spread across countries. All have email @clickzle.bot so they
+// can be identified and can never log in (password_hash = 'bot:no-login').
+const BOT_USERS = [
+  { username: 'cz_swift_fox',    country: 'us' }, { username: 'cz_pixel_ninja',  country: 'gb' },
+  { username: 'cz_neon_wave',    country: 'de' }, { username: 'cz_turbo_vex',    country: 'fr' },
+  { username: 'cz_flash_kira',   country: 'au' }, { username: 'cz_dark_orbit',   country: 'ca' },
+  { username: 'cz_stellar_z',    country: 'br' }, { username: 'cz_blaze_x',      country: 'jp' },
+  { username: 'cz_quick_shot',   country: 'in' }, { username: 'cz_echo_pulse',   country: 'es' },
+  { username: 'cz_vortex_88',    country: 'nl' }, { username: 'cz_hyper_run',    country: 'se' },
+  { username: 'cz_laser_eye',    country: 'it' }, { username: 'cz_nova_spark',   country: 'pl' },
+  { username: 'cz_rapid_bolt',   country: 'za' }, { username: 'cz_grid_jump',    country: 'mx' },
+  { username: 'cz_prime_aim',    country: 'kr' }, { username: 'cz_ultra_max',    country: 'ar' },
+  { username: 'cz_neo_glitch',   country: 'ng' }, { username: 'cz_arc_flash',    country: 'tr' },
+  { username: 'cz_speed_rx',     country: 'us' }, { username: 'cz_titan_glow',   country: 'gb' },
+  { username: 'cz_byte_rider',   country: 'de' }, { username: 'cz_edge_striker', country: 'fr' },
+  { username: 'cz_deep_scan',    country: 'au' }, { username: 'cz_raw_power',    country: 'ca' },
+  { username: 'cz_sharp_aim',    country: 'br' }, { username: 'cz_code_blast',   country: 'jp' },
+  { username: 'cz_zero_lag',     country: 'in' }, { username: 'cz_true_north',   country: 'es' },
+  { username: 'cz_ion_burst',    country: 'nl' }, { username: 'cz_data_wave',    country: 'se' },
+  { username: 'cz_phase_x',      country: 'it' }, { username: 'cz_night_owl',    country: 'pl' },
+  { username: 'cz_cloud_7',      country: 'za' }, { username: 'cz_red_laser',    country: 'mx' },
+  { username: 'cz_fox_run',      country: 'kr' }, { username: 'cz_star_dash',    country: 'ar' },
+  { username: 'cz_bright_key',   country: 'ng' }, { username: 'cz_cool_loop',    country: 'tr' },
+  { username: 'cz_max_reflex',   country: 'us' }, { username: 'cz_sun_flare',    country: 'gb' },
+  { username: 'cz_big_brain',    country: 'de' }, { username: 'cz_void_zen',     country: 'fr' },
+  { username: 'cz_heat_map',     country: 'au' }, { username: 'cz_pin_point',    country: 'ca' },
+  { username: 'cz_apex_aim',     country: 'br' }, { username: 'cz_turbo_eye',    country: 'jp' },
+  { username: 'cz_run_quick',    country: 'in' }, { username: 'cz_ace_click',    country: 'es' },
+];
+
+// Score ranges [min, max] per game_id.
+// These are intentionally middle-to-low so real players can beat them.
+// Adjust to match your games' actual scoring scale.
+const BOT_SCORE_RANGES = {
+  2:  [100, 520],  // Follow the Pattern
+  3:  [100, 480],  // Hit the Target
+  4:  [100, 500],  // Spot the Pair
+  5:  [100, 520],  // Next in Sequence
+  11: [100, 550],  // CTI Movies
+  12: [100, 560],  // CTI Animals
+  13: [100, 530],  // CTI Art
+  14: [100, 540],  // CTI Flags
+  15: [100, 550],  // CTI Food
+  16: [100, 520],  // CTI Landscapes
+  17: [100, 530],  // CTI Buildings
+  18: [100, 560],  // CTI Celebrities
+};
+
+function rng(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+// Called by the cron trigger every day at midnight UTC, and by the admin endpoint.
+async function seedDailyBotScores(env) {
+  const date = todayUTC();
+  const now  = Math.floor(Date.now() / 1000);
+
+  const botsResult = await env.DB.prepare(
+    "SELECT id FROM users WHERE email LIKE '%@clickzle.bot'"
+  ).all();
+  const bots = botsResult.results || [];
+  if (!bots.length) return { seeded: 0, bots: 0 };
+
+  let seeded = 0;
+  for (const bot of bots) {
+    for (const [gameIdStr, [min, max]] of Object.entries(BOT_SCORE_RANGES)) {
+      // ~80% chance each bot played each game today
+      if (Math.random() > 0.80) continue;
+      const gameId = parseInt(gameIdStr);
+
+      // Idempotent — skip if score already exists for today
+      const existing = await env.DB.prepare(
+        'SELECT id FROM scores WHERE user_id=?1 AND game_id=?2 AND date_utc=?3'
+      ).bind(bot.id, gameId, date).first();
+      if (existing) continue;
+
+      const score   = rng(min, max);
+      const timeMs  = rng(8000, 55000);
+      const scoreId = generateId();
+
+      await env.DB.prepare(
+        `INSERT INTO scores
+           (id, user_id, game_id, date_utc, score, time_ms, correct, wrong, combo_max, device_type, submitted_at)
+         VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11)`
+      ).bind(scoreId, bot.id, gameId, date, score, timeMs,
+             rng(3, 10), rng(0, 4), rng(1, 5), 'desktop', now).run();
+      seeded++;
+    }
+  }
+  return { seeded, bots: bots.length };
+}
+
+async function handleAdminSeedBots(request, env) {
+  if (!checkAdminKey(request, env)) return json({ error: 'Unauthorised' }, 401);
+
+  const now = Math.floor(Date.now() / 1000);
+  let created = 0, skipped = 0;
+
+  for (const bot of BOT_USERS) {
+    const existing = await env.DB.prepare(
+      'SELECT id FROM users WHERE username=?1'
+    ).bind(bot.username).first();
+    if (existing) { skipped++; continue; }
+
+    const id = generateId();
+    // Spread created_at over past 60 days so they look like real registrations
+    const createdAt = now - rng(0, 5_184_000);
+    await env.DB.prepare(
+      `INSERT INTO users
+         (id, username, email, password_hash, country, created_at, last_seen,
+          device_type, email_verified, streak_days, best_streak, total_games)
+       VALUES (?1,?2,?3,?4,?5,?6,?6,?7,1,?8,?9,?10)`
+    ).bind(id, bot.username, `${bot.username}@clickzle.bot`, 'bot:no-login',
+           bot.country, createdAt, 'desktop',
+           rng(1, 30), rng(1, 45), rng(20, 200)).run();
+    created++;
+  }
+
+  // Seed today's scores immediately
+  const seed = await seedDailyBotScores(env);
+  return json({ ok: true, bots_created: created, bots_skipped: skipped, scores_seeded: seed.seeded });
+}
+
+async function handleAdminSeedToday(request, env) {
+  if (!checkAdminKey(request, env)) return json({ error: 'Unauthorised' }, 401);
+  const result = await seedDailyBotScores(env);
+  return json({ ok: true, ...result });
+}
+
 // ── ADMIN ─────────────────────────────────────────────────────────────────────
 function checkAdminKey(request, env) {
   const key = request.headers.get('X-Admin-Key') || '';
   return env.ADMIN_KEY && key === env.ADMIN_KEY;
+}
+
+async function handleAdminUsers(request, env) {
+  if (!checkAdminKey(request, env)) return json({ error: 'Unauthorised' }, 401);
+  const users = await env.DB.prepare(
+    `SELECT u.id, u.username, u.email, u.email_verified, u.country,
+            u.streak_days, u.best_streak, u.total_games,
+            u.created_at, u.last_seen,
+            (SELECT COUNT(*) FROM scores s WHERE s.user_id = u.id) AS score_count,
+            (SELECT MAX(s.score) FROM scores s WHERE s.user_id = u.id) AS top_score,
+            (SELECT s.date_utc FROM scores s WHERE s.user_id = u.id ORDER BY s.submitted_at DESC LIMIT 1) AS last_played
+     FROM users u ORDER BY u.created_at DESC`
+  ).all();
+  return json({ ok: true, users: users.results || [] });
 }
 
 async function handleAdminLookup(request, env) {
@@ -854,9 +996,12 @@ async function handleAdminLookup(request, env) {
   const url   = new URL(request.url);
   const email = (url.searchParams.get('email') || '').trim().toLowerCase();
   const uname = (url.searchParams.get('username') || '').trim().toLowerCase();
-  if (!email && !uname) return json({ error: 'email or username required' }, 400);
+  const uid   = (url.searchParams.get('id') || '').trim();
+  if (!email && !uname && !uid) return json({ error: 'email, username, or id required' }, 400);
 
-  const user = email
+  const user = uid
+    ? await env.DB.prepare('SELECT * FROM users WHERE id=?1').bind(uid).first()
+    : email
     ? await env.DB.prepare('SELECT * FROM users WHERE LOWER(email)=?1').bind(email).first()
     : await env.DB.prepare('SELECT * FROM users WHERE LOWER(username)=?1').bind(uname).first();
 
@@ -929,9 +1074,17 @@ export default {
     if (path === '/api/auth/resend-verify'   && method === 'POST')   return handleResendVerify(request, env);
     if (path === '/api/leaderboard'          && method === 'GET')    return handleLeaderboard(request, env);
     if (path === '/api/stats'                && method === 'GET')    return handleStats(request, env);
+    if (path === '/api/admin/users'          && method === 'GET')    return handleAdminUsers(request, env);
     if (path === '/api/admin/lookup'         && method === 'GET')    return handleAdminLookup(request, env);
     if (path === '/api/admin/verify'         && method === 'POST')   return handleAdminVerify(request, env);
     if (path === '/api/admin/delete-score'   && method === 'POST')   return handleAdminDeleteScore(request, env);
+    if (path === '/api/admin/seed-bots'      && method === 'POST')   return handleAdminSeedBots(request, env);
+    if (path === '/api/admin/seed-today'     && method === 'POST')   return handleAdminSeedToday(request, env);
     return json({ error: 'Not found' }, 404);
+  },
+
+  // Runs every day at midnight UTC — seeds bot scores for all leaderboards
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(seedDailyBotScores(env));
   },
 };

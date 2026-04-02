@@ -14,3 +14,6 @@ compatibility_date  = "2024-11-01"
 binding       = "DB"
 database_name = "clickzle-db"
 database_id   = "d4a0b885-ffcf-4a26-9626-a67bd2d95734"
+
+[triggers]
+crons = ["0 0 * * *"]

@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clickzle Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg:       #0a0a0f;
       --surface:  #13131a;
       --surface2: #1c1c26;
-      --border:   rgba(255,255,255,0.08);
+      --border:   rgba(255,255,255,0.07);
       --border2:  rgba(255,255,255,0.12);
       --text:     #f0f0f5;
       --text2:    #9090a8;
@@ -21,306 +23,451 @@
       --blue:     #60a5fa;
       --accent:   #f472b6;
     }
-    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system-ui, sans-serif; min-height: 100vh; padding: 24px 16px; }
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap');
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system-ui, sans-serif; min-height: 100vh; }
 
-    .header { text-align: center; margin-bottom: 32px; }
-    .header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 4px; color: var(--accent); }
-    .header p { font-size: 13px; color: var(--text3); margin-top: 4px; }
-
-    .card { background: var(--surface); border: 1px solid var(--border2); border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto 20px; }
-    .card h2 { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
-
-    .field-row { display: flex; gap: 10px; flex-wrap: wrap; }
-    input[type="text"], input[type="password"] {
-      flex: 1; min-width: 0; background: var(--surface2); border: 1px solid var(--border2); border-radius: 9px;
-      color: var(--text); font-size: 14px; padding: 10px 14px; outline: none; font-family: inherit;
+    /* ── LOGIN ── */
+    #loginScreen {
+      display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px;
     }
-    input:focus { border-color: var(--accent); }
-    button {
-      background: var(--accent); color: #000; border: none; border-radius: 9px; padding: 10px 22px;
-      font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; white-space: nowrap;
+    .login-card {
+      background: var(--surface); border: 1px solid var(--border2); border-radius: 18px;
+      padding: 40px 32px; width: 100%; max-width: 380px; text-align: center;
     }
-    button:hover { opacity: 0.88; }
-    button.secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border2); }
-    button.danger { background: var(--red); color: #000; }
-    button.success { background: var(--green); color: #000; }
-
-    .status-pill {
-      display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px;
-      border-radius: 20px; font-size: 12px; font-weight: 600;
+    .login-card h1 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 4px; color: var(--accent); margin-bottom: 6px; }
+    .login-card p  { font-size: 13px; color: var(--text3); margin-bottom: 28px; }
+    .login-card input {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border2); border-radius: 10px;
+      color: var(--text); font-size: 15px; padding: 13px 16px; outline: none; font-family: inherit;
+      margin-bottom: 12px;
     }
-    .verified   { background: rgba(74,222,128,0.15); color: var(--green); border: 1px solid rgba(74,222,128,0.3); }
-    .unverified { background: rgba(248,113,113,0.15); color: var(--red);   border: 1px solid rgba(248,113,113,0.3); }
+    .login-card input:focus { border-color: var(--accent); }
+    .btn-primary {
+      width: 100%; background: var(--accent); color: #000; border: none; border-radius: 10px;
+      padding: 13px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .login-err { color: var(--red); font-size: 13px; margin-top: 10px; min-height: 18px; }
 
-    .user-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-    .user-field { background: var(--surface2); border-radius: 9px; padding: 10px 14px; }
-    .user-field .lbl { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); font-weight: 600; margin-bottom: 3px; }
-    .user-field .val { font-size: 14px; font-weight: 600; word-break: break-all; }
+    /* ── MAIN ── */
+    #mainScreen { display: none; }
+    .topbar {
+      background: var(--surface); border-bottom: 1px solid var(--border2);
+      padding: 14px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .topbar-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--accent); flex-shrink: 0; }
+    .topbar-stats { display: flex; gap: 16px; flex-wrap: wrap; }
+    .topbar-stat { font-size: 12px; color: var(--text3); }
+    .topbar-stat strong { color: var(--text); font-size: 14px; }
+    .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+    .search-input {
+      background: var(--surface2); border: 1px solid var(--border2); border-radius: 9px;
+      color: var(--text); font-size: 13px; padding: 8px 14px; outline: none; font-family: inherit; width: 220px;
+    }
+    .search-input:focus { border-color: var(--accent); }
+    .btn-sm {
+      background: var(--surface2); color: var(--text2); border: 1px solid var(--border2);
+      border-radius: 8px; padding: 8px 14px; font-size: 12px; font-weight: 600;
+      cursor: pointer; font-family: inherit; white-space: nowrap;
+    }
+    .btn-sm:hover { color: var(--text); border-color: var(--border2); }
 
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    th { text-align: left; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); font-weight: 600; padding: 6px 10px; border-bottom: 1px solid var(--border); }
-    td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text2); }
-    td:first-child { color: var(--text); font-weight: 500; }
-    tr:last-child td { border-bottom: none; }
+    /* ── TABLE ── */
+    .table-wrap { overflow-x: auto; padding: 0 24px 24px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+    thead th {
+      text-align: left; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--text3); font-weight: 600; padding: 8px 12px; border-bottom: 1px solid var(--border2);
+      white-space: nowrap; cursor: pointer; user-select: none;
+    }
+    thead th:hover { color: var(--text2); }
+    thead th.sorted { color: var(--accent); }
+    tbody tr { border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s; }
+    tbody tr:hover { background: var(--surface2); }
+    tbody tr:last-child { border-bottom: none; }
+    td { padding: 10px 12px; color: var(--text2); white-space: nowrap; }
+    td.name-cell { color: var(--text); font-weight: 600; }
+    td.email-cell { font-size: 12px; max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
 
-    .game-label { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 6px; display: inline-block; }
-    .action-row { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-    .msg { padding: 10px 14px; border-radius: 9px; font-size: 13px; font-weight: 600; margin-top: 12px; }
-    .msg.ok  { background: rgba(74,222,128,0.12); color: var(--green); border: 1px solid rgba(74,222,128,0.25); }
-    .msg.err { background: rgba(248,113,113,0.12); color: var(--red);   border: 1px solid rgba(248,113,113,0.25); }
-    #results { display: none; }
-    .empty { color: var(--text3); font-size: 13px; padding: 12px 0; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px;
+      border-radius: 20px; font-size: 11px; font-weight: 600;
+    }
+    .pill-green { background: rgba(74,222,128,0.12);  color: var(--green); border: 1px solid rgba(74,222,128,0.25); }
+    .pill-red   { background: rgba(248,113,113,0.12); color: var(--red);   border: 1px solid rgba(248,113,113,0.25); }
+    .pill-grey  { background: rgba(255,255,255,0.06); color: var(--text3); border: 1px solid var(--border); }
 
-    @media (max-width: 480px) { .user-grid { grid-template-columns: 1fr; } .field-row { flex-direction: column; } }
+    .flag-img { width: 20px; height: 14px; border-radius: 2px; vertical-align: middle; }
+    .no-flag  { display: inline-block; width: 20px; }
+
+    /* ── DRAWER ── */
+    .drawer-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px); z-index: 100; align-items: flex-start; justify-content: flex-end;
+    }
+    .drawer-overlay.open { display: flex; }
+    .drawer {
+      background: var(--surface); border-left: 1px solid var(--border2);
+      width: 100%; max-width: 480px; height: 100vh; overflow-y: auto; padding: 28px 24px;
+    }
+    .drawer-close {
+      float: right; background: var(--surface2); border: 1px solid var(--border2); color: var(--text2);
+      border-radius: 8px; padding: 6px 12px; font-size: 13px; cursor: pointer; font-family: inherit; margin-bottom: 20px;
+    }
+    .drawer h2 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: var(--text); margin-bottom: 4px; }
+    .drawer-email { font-size: 13px; color: var(--text3); margin-bottom: 20px; }
+
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+    .info-box { background: var(--surface2); border-radius: 9px; padding: 10px 14px; }
+    .info-box .lbl { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); font-weight: 600; margin-bottom: 3px; }
+    .info-box .val { font-size: 14px; font-weight: 600; color: var(--text); }
+
+    .section-title { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); font-weight: 700; margin: 20px 0 10px; }
+    .score-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .score-row:last-child { border-bottom: none; }
+    .score-game { font-weight: 600; color: var(--text); }
+    .score-date { color: var(--text3); font-size: 12px; }
+    .score-val  { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px; color: var(--green); }
+
+    .action-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .btn-verify { background: var(--green); color: #000; border: none; border-radius: 9px; padding: 10px 18px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; }
+    .btn-verify:hover { opacity: 0.88; }
+    .drawer-msg { padding: 9px 14px; border-radius: 9px; font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+    .drawer-msg.ok  { background: rgba(74,222,128,0.12);  color: var(--green); border: 1px solid rgba(74,222,128,0.25); }
+    .drawer-msg.err { background: rgba(248,113,113,0.12); color: var(--red);   border: 1px solid rgba(248,113,113,0.25); }
+
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text3); font-size: 14px; }
+    .loading { text-align: center; padding: 60px 20px; color: var(--text3); font-size: 14px; }
+
+    @media (max-width: 600px) {
+      .topbar { padding: 12px 16px; }
+      .table-wrap { padding: 0 12px 20px; }
+      .search-input { width: 150px; }
+      .drawer { max-width: 100%; }
+    }
   </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Clickzle Admin</h1>
-  <p>Player lookup &amp; management</p>
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <h1>Clickzle</h1>
+    <p>Admin Dashboard</p>
+    <input type="password" id="keyInput" placeholder="Admin key…" autocomplete="off">
+    <button class="btn-primary" onclick="login()">Sign In</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
 </div>
 
-<!-- Auth -->
-<div class="card" id="authCard">
-  <h2>Admin Key</h2>
-  <div class="field-row">
-    <input type="password" id="adminKey" placeholder="Enter admin key…" autocomplete="off">
-    <button onclick="saveKey()">Unlock</button>
+<!-- MAIN -->
+<div id="mainScreen">
+  <div class="topbar">
+    <div class="topbar-title">Admin</div>
+    <div class="topbar-stats" id="topbarStats"></div>
+    <div class="topbar-right">
+      <input type="text" class="search-input" id="searchBox" placeholder="Search name or email…" oninput="filterTable()">
+      <select class="btn-sm" id="filterVerified" onchange="filterTable()">
+        <option value="">All players</option>
+        <option value="1">Verified only</option>
+        <option value="0">Unverified only</option>
+      </select>
+      <button class="btn-sm" onclick="loadUsers()">↻ Refresh</button>
+      <button class="btn-sm" id="btnSeedToday" onclick="seedToday()" title="Manually run today's bot score seed">Seed Today</button>
+      <button class="btn-sm" id="btnSetupBots" onclick="setupBots()" title="One-time: create all 50 bot accounts and seed today's scores">Setup Bots</button>
+      <button class="btn-sm" onclick="signOut()">Sign out</button>
+    </div>
   </div>
-  <div id="authMsg"></div>
+
+  <div class="table-wrap">
+    <div id="tableContainer"><div class="loading">Loading players…</div></div>
+  </div>
 </div>
 
-<!-- Lookup -->
-<div class="card" id="lookupCard" style="display:none">
-  <h2>Look Up Player</h2>
-  <div class="field-row">
-    <input type="text" id="searchVal" placeholder="Email address or username…" autocomplete="off">
-    <button onclick="lookup()">Search</button>
-  </div>
-  <div id="lookupMsg"></div>
-</div>
-
-<!-- Results -->
-<div id="results">
-  <!-- User Info -->
-  <div class="card">
-    <h2>Player Info</h2>
-    <div class="user-grid" id="userGrid"></div>
-    <div class="action-row" id="actionRow"></div>
-    <div id="actionMsg"></div>
-  </div>
-
-  <!-- Scores -->
-  <div class="card">
-    <h2>Scores (<span id="scoreCount">0</span>)</h2>
-    <div id="scoresWrap"></div>
-  </div>
-
-  <!-- Personal Bests -->
-  <div class="card">
-    <h2>Personal Bests</h2>
-    <div id="pbsWrap"></div>
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer(e)">
+  <div class="drawer" id="drawer" onclick="event.stopPropagation()">
+    <button class="drawer-close" onclick="closeDrawer()">✕ Close</button>
+    <div id="drawerContent"></div>
   </div>
 </div>
 
 <script>
 const API = 'https://clickzle-auth.thecontentcreationguy.workers.dev';
+let adminKey = '';
+let allUsers = [];
+let sortCol = 'created_at';
+let sortDir = -1;
 
 const GAME_NAMES = {
-  1:'Complete the Image',2:'Follow the Pattern',3:'Hit the Target',
-  4:'Spot the Pair',5:'Next in Sequence',
-  11:'CTI – Movies',12:'CTI – Animals',13:'CTI – Art',14:'CTI – Flags',
-  15:'CTI – Food',16:'CTI – Landscapes',17:'CTI – Buildings',18:'CTI – Celebrities',
-};
-const GAME_COLORS = {
-  1:'#4ade80',2:'#60a5fa',3:'#f472b6',4:'#facc15',5:'#a78bfa',
-  11:'#4ade80',12:'#4ade80',13:'#4ade80',14:'#4ade80',
-  15:'#4ade80',16:'#4ade80',17:'#4ade80',18:'#4ade80',
+  1:'Complete the Image', 2:'Follow the Pattern', 3:'Hit the Target',
+  4:'Spot the Pair', 5:'Next in Sequence',
+  11:'CTI Movies', 12:'CTI Animals', 13:'CTI Art', 14:'CTI Flags',
+  15:'CTI Food', 16:'CTI Landscapes', 17:'CTI Buildings', 18:'CTI Celebrities',
 };
 
-let adminKey = localStorage.getItem('czAdminKey') || '';
-let currentUser = null;
-
-function saveKey() {
-  const k = document.getElementById('adminKey').value.trim();
-  if (!k) return;
-  adminKey = k;
-  localStorage.setItem('czAdminKey', k);
-  document.getElementById('authCard').style.display = 'none';
-  document.getElementById('lookupCard').style.display = '';
-}
-
-// If key already stored, skip auth card
-if (adminKey) {
-  document.getElementById('authCard').style.display = 'none';
-  document.getElementById('lookupCard').style.display = '';
-}
-
-async function apiFetch(path, opts = {}) {
-  const res = await fetch(API + path, {
+function apiFetch(path, opts = {}) {
+  return fetch(API + path, {
     ...opts,
     headers: { 'Content-Type': 'application/json', 'X-Admin-Key': adminKey, ...(opts.headers || {}) },
-  });
-  return res.json();
-}
-
-function setMsg(id, text, type) {
-  const el = document.getElementById(id);
-  el.className = 'msg ' + type;
-  el.textContent = text;
-  el.style.display = text ? '' : 'none';
+  }).then(r => r.json());
 }
 
 function fmtDate(ts) {
   if (!ts) return '—';
   if (String(ts).length === 10) ts = ts * 1000;
-  return new Date(ts).toLocaleString('en-GB', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+  const d = new Date(ts);
+  const now = Date.now();
+  const diff = now - d;
+  if (diff < 60000)  return 'Just now';
+  if (diff < 3600000) return Math.floor(diff/60000) + 'm ago';
+  if (diff < 86400000) return Math.floor(diff/3600000) + 'h ago';
+  if (diff < 604800000) return Math.floor(diff/86400000) + 'd ago';
+  return d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
 }
 
 function fmtMs(ms) {
   if (!ms) return '—';
   const s = Math.floor(ms / 1000);
-  const m = Math.floor(s / 60);
-  return m > 0 ? `${m}m ${s % 60}s` : `${s}s`;
+  return Math.floor(s/60) > 0 ? `${Math.floor(s/60)}m ${s%60}s` : `${s}s`;
 }
 
-async function lookup() {
-  const val = document.getElementById('searchVal').value.trim();
-  if (!val) return;
-  setMsg('lookupMsg', 'Searching…', 'ok');
+// ── LOGIN ──
+document.getElementById('keyInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
 
-  const isEmail = val.includes('@');
-  const qs = isEmail ? `?email=${encodeURIComponent(val)}` : `?username=${encodeURIComponent(val)}`;
-  const data = await apiFetch('/api/admin/lookup' + qs);
-
-  if (data.error) {
-    if (data.error === 'Unauthorised') {
-      setMsg('lookupMsg', 'Wrong admin key — clear your browser storage and try again.', 'err');
-      localStorage.removeItem('czAdminKey');
-    } else {
-      setMsg('lookupMsg', data.error, 'err');
+async function login() {
+  const k = document.getElementById('keyInput').value.trim();
+  if (!k) return;
+  adminKey = k;
+  try {
+    const d = await apiFetch('/api/admin/users');
+    if (d.error === 'Unauthorised') {
+      document.getElementById('loginErr').textContent = 'Wrong admin key.';
+      adminKey = '';
+      return;
     }
+    localStorage.setItem('czAdminKey', k);
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('mainScreen').style.display = '';
+    processUsers(d.users || []);
+  } catch {
+    document.getElementById('loginErr').textContent = 'Could not connect. Deploy the worker first.';
+    adminKey = '';
+  }
+}
+
+function signOut() {
+  localStorage.removeItem('czAdminKey');
+  adminKey = '';
+  allUsers = [];
+  document.getElementById('mainScreen').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('keyInput').value = '';
+}
+
+// Auto-login if key stored
+(function() {
+  const k = localStorage.getItem('czAdminKey');
+  if (k) { document.getElementById('keyInput').value = k; }
+})();
+
+// ── LOAD ──
+async function loadUsers() {
+  document.getElementById('tableContainer').innerHTML = '<div class="loading">Loading players…</div>';
+  try {
+    const d = await apiFetch('/api/admin/users');
+    if (d.error) { document.getElementById('tableContainer').innerHTML = `<div class="empty-state">${d.error}</div>`; return; }
+    processUsers(d.users || []);
+  } catch(e) {
+    document.getElementById('tableContainer').innerHTML = '<div class="empty-state">Failed to load. Check console.</div>';
+  }
+}
+
+function processUsers(users) {
+  allUsers = users;
+  const total     = users.length;
+  const verified  = users.filter(u => u.email_verified).length;
+  const playedToday = users.filter(u => u.last_played === new Date().toISOString().slice(0,10)).length;
+  document.getElementById('topbarStats').innerHTML = `
+    <div class="topbar-stat"><strong>${total}</strong> registered</div>
+    <div class="topbar-stat"><strong>${verified}</strong> verified</div>
+    <div class="topbar-stat"><strong>${total - verified}</strong> unverified</div>
+    <div class="topbar-stat"><strong>${playedToday}</strong> played today</div>
+  `;
+  renderTable(users);
+}
+
+// ── TABLE ──
+const COLS = [
+  { key: 'username',      label: 'Player' },
+  { key: 'email',         label: 'Email' },
+  { key: 'country',       label: 'Country' },
+  { key: 'email_verified',label: 'Verified' },
+  { key: 'score_count',   label: 'Games' },
+  { key: 'top_score',     label: 'Top Score' },
+  { key: 'streak_days',   label: 'Streak' },
+  { key: 'last_played',   label: 'Last Played' },
+  { key: 'created_at',    label: 'Joined' },
+];
+
+function sortUsers(users) {
+  return [...users].sort((a, b) => {
+    let av = a[sortCol] ?? '', bv = b[sortCol] ?? '';
+    if (typeof av === 'string') av = av.toLowerCase();
+    if (typeof bv === 'string') bv = bv.toLowerCase();
+    return av < bv ? sortDir : av > bv ? -sortDir : 0;
+  });
+}
+
+function filterTable() {
+  const q = document.getElementById('searchBox').value.toLowerCase();
+  const v = document.getElementById('filterVerified').value;
+  let filtered = allUsers.filter(u => {
+    const matchQ = !q || (u.username||'').toLowerCase().includes(q) || (u.email||'').toLowerCase().includes(q);
+    const matchV = v === '' || String(u.email_verified ? '1' : '0') === v;
+    return matchQ && matchV;
+  });
+  renderTable(filtered);
+}
+
+function renderTable(users) {
+  const sorted = sortUsers(users);
+  if (!sorted.length) {
+    document.getElementById('tableContainer').innerHTML = '<div class="empty-state">No players found.</div>';
     return;
   }
+  const headers = COLS.map(c =>
+    `<th onclick="setSort('${c.key}')" class="${sortCol===c.key?'sorted':''}">${c.label}${sortCol===c.key?(sortDir===1?' ↑':' ↓'):''}</th>`
+  ).join('');
 
-  if (!data.found) { setMsg('lookupMsg', 'No player found with that email / username.', 'err'); return; }
-  setMsg('lookupMsg', '', '');
-  currentUser = data.user;
-  renderUser(data.user, data.scores, data.personal_bests);
+  const rows = sorted.map(u => {
+    const verified = u.email_verified === 1 || u.email_verified === true;
+    const flag = u.country
+      ? `<img class="flag-img" src="https://flagcdn.com/40x30/${u.country.toLowerCase()}.png" alt="${u.country}">`
+      : '<span class="no-flag">—</span>';
+    return `<tr onclick="openDrawer('${u.id}')">
+      <td class="name-cell">${u.username || '—'}</td>
+      <td class="email-cell">${u.email || '—'}</td>
+      <td>${flag}</td>
+      <td><span class="pill ${verified?'pill-green':'pill-red'}">${verified?'✓ Yes':'✗ No'}</span></td>
+      <td>${u.score_count || 0}</td>
+      <td>${u.top_score ? u.top_score.toLocaleString() : '—'}</td>
+      <td>${u.streak_days || 0}d</td>
+      <td>${u.last_played || '—'}</td>
+      <td>${fmtDate(u.created_at)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('tableContainer').innerHTML =
+    `<table><thead><tr>${headers}</tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-function renderUser(u, scores, pbs) {
-  document.getElementById('results').style.display = '';
+function setSort(col) {
+  if (sortCol === col) sortDir *= -1; else { sortCol = col; sortDir = -1; }
+  filterTable();
+}
 
-  // User grid
+// ── DRAWER ──
+async function openDrawer(userId) {
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.getElementById('drawerContent').innerHTML = '<div class="loading">Loading…</div>';
+  try {
+    const d = await apiFetch(`/api/admin/lookup?id=${userId}`);
+    if (!d.found) { document.getElementById('drawerContent').innerHTML = '<div class="empty-state">Player not found.</div>'; return; }
+    renderDrawer(d.user, d.scores, d.personal_bests);
+  } catch {
+    document.getElementById('drawerContent').innerHTML = '<div class="empty-state">Failed to load player.</div>';
+  }
+}
+
+function closeDrawer() {
+  document.getElementById('drawerOverlay').classList.remove('open');
+}
+document.getElementById('drawerOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeDrawer();
+});
+
+function renderDrawer(u, scores, pbs) {
   const verified = u.email_verified === 1 || u.email_verified === true;
-  const grid = document.getElementById('userGrid');
-  grid.innerHTML = `
-    <div class="user-field"><div class="lbl">Username</div><div class="val">${u.username}</div></div>
-    <div class="user-field"><div class="lbl">Email</div><div class="val">${u.email}</div></div>
-    <div class="user-field"><div class="lbl">Email Verified</div><div class="val">
-      <span class="status-pill ${verified ? 'verified' : 'unverified'}">
-        ${verified ? '✓ Verified' : '✗ Not verified'}
-      </span>
-    </div></div>
-    <div class="user-field"><div class="lbl">Country</div><div class="val">${u.country || '—'}</div></div>
-    <div class="user-field"><div class="lbl">Registered</div><div class="val">${fmtDate(u.created_at)}</div></div>
-    <div class="user-field"><div class="lbl">Last Seen</div><div class="val">${fmtDate(u.last_seen)}</div></div>
-    <div class="user-field"><div class="lbl">Streak / Best</div><div class="val">${u.streak_days || 0}d / ${u.best_streak || 0}d</div></div>
-    <div class="user-field"><div class="lbl">Total Games</div><div class="val">${u.total_games || 0}</div></div>
-    <div class="user-field" style="grid-column:1/-1"><div class="lbl">User ID</div><div class="val" style="font-size:11px;color:var(--text3)">${u.id}</div></div>
+  const verifyBtn = !verified
+    ? `<button class="btn-verify" onclick="manualVerify('${u.id}')">✓ Verify Email Now</button>`
+    : '';
+
+  const scoreRows = scores.length
+    ? scores.map(s => `
+        <div class="score-row">
+          <div>
+            <div class="score-game">${GAME_NAMES[s.game_id] || 'Game '+s.game_id}</div>
+            <div class="score-date">${s.date_utc} · ${fmtMs(s.time_ms)} · ${s.wrong||0} clicks</div>
+          </div>
+          <div class="score-val">${(s.score||0).toLocaleString()}</div>
+        </div>`).join('')
+    : '<div style="color:var(--text3);font-size:13px;padding:8px 0;">No scores recorded yet.</div>';
+
+  document.getElementById('drawerContent').innerHTML = `
+    <div id="drawerMsg"></div>
+    <h2>${u.username}</h2>
+    <div class="drawer-email">${u.email} &nbsp;
+      <span class="pill ${verified?'pill-green':'pill-red'}">${verified?'✓ Verified':'✗ Not verified'}</span>
+    </div>
+    <div class="action-row">${verifyBtn}</div>
+    <div class="info-grid">
+      <div class="info-box"><div class="lbl">Country</div><div class="val">${u.country || '—'}</div></div>
+      <div class="info-box"><div class="lbl">Joined</div><div class="val">${fmtDate(u.created_at)}</div></div>
+      <div class="info-box"><div class="lbl">Last Seen</div><div class="val">${fmtDate(u.last_seen)}</div></div>
+      <div class="info-box"><div class="lbl">Total Games</div><div class="val">${u.total_games || 0}</div></div>
+      <div class="info-box"><div class="lbl">Streak</div><div class="val">${u.streak_days||0}d (best ${u.best_streak||0}d)</div></div>
+    </div>
+    <div class="section-title">Score History (${scores.length})</div>
+    <div>${scoreRows}</div>
   `;
+}
 
-  // Actions
-  const ar = document.getElementById('actionRow');
-  ar.innerHTML = '';
-  if (!verified) {
-    const btn = document.createElement('button');
-    btn.className = 'success';
-    btn.textContent = '✓ Manually Verify Email';
-    btn.onclick = () => manualVerify(u.id);
-    ar.appendChild(btn);
-  }
-  const logBtn = document.createElement('button');
-  logBtn.className = 'secondary';
-  logBtn.textContent = 'Copy User ID';
-  logBtn.onclick = () => { navigator.clipboard.writeText(u.id); logBtn.textContent = 'Copied!'; setTimeout(() => logBtn.textContent = 'Copy User ID', 2000); };
-  ar.appendChild(logBtn);
+async function setupBots() {
+  if (!confirm('Create 50 bot accounts and seed today\'s leaderboard scores? (Safe to run multiple times — skips existing bots)')) return;
+  const btn = document.getElementById('btnSetupBots');
+  btn.textContent = 'Setting up…'; btn.disabled = true;
+  try {
+    const d = await apiFetch('/api/admin/seed-bots', { method: 'POST' });
+    if (d.ok) alert(`✓ Done!\nBots created: ${d.bots_created}\nBots skipped (already exist): ${d.bots_skipped}\nScores seeded today: ${d.scores_seeded}`);
+    else alert('Error: ' + (d.error || 'Unknown'));
+    loadUsers();
+  } catch { alert('Request failed. Is the worker deployed?'); }
+  btn.textContent = 'Setup Bots'; btn.disabled = false;
+}
 
-  document.getElementById('actionMsg').innerHTML = '';
-
-  // Scores
-  document.getElementById('scoreCount').textContent = scores.length;
-  const sw = document.getElementById('scoresWrap');
-  if (!scores.length) { sw.innerHTML = '<div class="empty">No scores on record.</div>'; }
-  else {
-    sw.innerHTML = `<table>
-      <thead><tr><th>Game</th><th>Date</th><th>Score</th><th>Time</th><th>Correct</th><th>Wrong</th><th>Submitted</th></tr></thead>
-      <tbody>${scores.map(s => {
-        const gname = GAME_NAMES[s.game_id] || 'Game ' + s.game_id;
-        const gcol  = GAME_COLORS[s.game_id] || '#fff';
-        return `<tr>
-          <td><span class="game-label" style="background:${gcol}22;color:${gcol};border:1px solid ${gcol}44">${gname}</span></td>
-          <td>${s.date_utc}</td>
-          <td style="color:var(--text);font-weight:700">${(s.score||0).toLocaleString()}</td>
-          <td>${fmtMs(s.time_ms)}</td>
-          <td>${s.correct || 0}</td>
-          <td>${s.wrong || 0}</td>
-          <td>${fmtDate(s.submitted_at)}</td>
-        </tr>`;
-      }).join('')}</tbody>
-    </table>`;
-  }
-
-  // Personal Bests
-  const pw = document.getElementById('pbsWrap');
-  if (!pbs.length) { pw.innerHTML = '<div class="empty">No personal bests on record.</div>'; }
-  else {
-    pw.innerHTML = `<table>
-      <thead><tr><th>Game</th><th>Best Score</th><th>Best Date</th><th>Games Played</th></tr></thead>
-      <tbody>${pbs.map(p => {
-        const gname = GAME_NAMES[p.game_id] || 'Game ' + p.game_id;
-        const gcol  = GAME_COLORS[p.game_id] || '#fff';
-        return `<tr>
-          <td><span class="game-label" style="background:${gcol}22;color:${gcol};border:1px solid ${gcol}44">${gname}</span></td>
-          <td style="color:var(--text);font-weight:700">${(p.best_score||0).toLocaleString()}</td>
-          <td>${p.best_date || '—'}</td>
-          <td>${p.games_played || 0}</td>
-        </tr>`;
-      }).join('')}</tbody>
-    </table>`;
-  }
-
-  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+async function seedToday() {
+  const btn = document.getElementById('btnSeedToday');
+  btn.textContent = 'Seeding…'; btn.disabled = true;
+  try {
+    const d = await apiFetch('/api/admin/seed-today', { method: 'POST' });
+    if (d.ok) alert(`✓ Seeded ${d.seeded} bot scores for today across ${d.bots} bots.`);
+    else alert('Error: ' + (d.error || 'Unknown'));
+  } catch { alert('Request failed.'); }
+  btn.textContent = 'Seed Today'; btn.disabled = false;
 }
 
 async function manualVerify(userId) {
-  const data = await apiFetch('/api/admin/verify', {
-    method: 'POST',
-    body: JSON.stringify({ user_id: userId }),
-  });
-  const msg = document.getElementById('actionMsg');
-  if (data.ok) {
-    msg.className = 'msg ok';
-    msg.textContent = '✓ Email verified successfully. The player can now log in and post scores.';
-    // Update displayed status
-    currentUser.email_verified = 1;
-    renderUser(currentUser,
-      JSON.parse(document.querySelector('#scoresWrap table') ? '[]' : '[]'),
-      JSON.parse(document.querySelector('#pbsWrap table') ? '[]' : '[]')
-    );
-    lookup(); // re-fetch to refresh
-  } else {
-    msg.className = 'msg err';
-    msg.textContent = data.error || 'Failed to verify.';
+  try {
+    const d = await apiFetch('/api/admin/verify', {
+      method: 'POST',
+      body: JSON.stringify({ user_id: userId }),
+    });
+    const msg = document.getElementById('drawerMsg');
+    if (d.ok) {
+      msg.className = 'drawer-msg ok';
+      msg.textContent = '✓ Email verified. Player can now log in and post scores.';
+      // Refresh drawer
+      openDrawer(userId);
+      loadUsers();
+    } else {
+      msg.className = 'drawer-msg err';
+      msg.textContent = d.error || 'Verification failed.';
+    }
+  } catch {
+    document.getElementById('drawerMsg').className = 'drawer-msg err';
+    document.getElementById('drawerMsg').textContent = 'Request failed.';
   }
 }
-
-// Enter key triggers search
-document.getElementById('searchVal')?.addEventListener('keydown', e => { if (e.key === 'Enter') lookup(); });
-document.getElementById('adminKey')?.addEventListener('keydown', e => { if (e.key === 'Enter') saveKey(); });
 </script>
 </body>
 </html>
