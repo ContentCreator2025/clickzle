@@ -377,91 +377,92 @@ async function handleSubmitScore(request, env) {
   const device = detectDevice(request);
   const id = generateId();
 
-  // Check if this is the user's FIRST score submission today (any game) — before the upsert
-  const playedTodayRow = await env.DB.prepare(
-    'SELECT COUNT(*) as n FROM scores WHERE user_id = ?1 AND date_utc = ?2'
-  ).bind(userId, date).first();
-  const isFirstToday = !playedTodayRow || playedTodayRow.n === 0;
+  try {
+    // Check if this is the user's FIRST score submission today (any game)
+    const playedTodayRow = await env.DB.prepare(
+      'SELECT COUNT(*) as n FROM scores WHERE user_id = ?1 AND date_utc = ?2'
+    ).bind(userId, date).first();
+    const isFirstToday = !playedTodayRow || playedTodayRow.n === 0;
 
-  // Upsert score — only update if new score is higher
-  await env.DB.prepare(`
-    INSERT INTO scores (id, user_id, game_id, date_utc, score, time_ms, accuracy, pairs_found, correct, wrong, combo_max, device_type, submitted_at)
-    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13)
-    ON CONFLICT(user_id, game_id, date_utc)
-    DO UPDATE SET
-      score        = CASE WHEN excluded.score > score THEN excluded.score ELSE score END,
-      time_ms      = CASE WHEN excluded.score > score THEN excluded.time_ms ELSE time_ms END,
-      accuracy     = CASE WHEN excluded.score > score THEN excluded.accuracy ELSE accuracy END,
-      pairs_found  = CASE WHEN excluded.score > score THEN excluded.pairs_found ELSE pairs_found END,
-      correct      = CASE WHEN excluded.score > score THEN excluded.correct ELSE correct END,
-      wrong        = CASE WHEN excluded.score > score THEN excluded.wrong ELSE wrong END,
-      combo_max    = CASE WHEN excluded.score > score THEN excluded.combo_max ELSE combo_max END,
-      device_type  = CASE WHEN excluded.score > score THEN excluded.device_type ELSE device_type END,
-      submitted_at = CASE WHEN excluded.score > score THEN excluded.submitted_at ELSE submitted_at END
-  `).bind(
-    id, userId, game_id, date,
-    score, time_ms || null, accuracy || null,
-    pairs_found || 0, correct || 0, wrong || 0, combo_max || 0,
-    device, now
-  ).run();
+    // Check for existing score for this user/game/date
+    const existing = await env.DB.prepare(
+      'SELECT id, score FROM scores WHERE user_id = ?1 AND game_id = ?2 AND date_utc = ?3'
+    ).bind(userId, game_id, date).first();
 
-  // Update personal bests
-  await env.DB.prepare(`
-    INSERT INTO personal_bests (user_id, game_id, best_score, best_date, games_played, updated_at)
-    VALUES (?1, ?2, ?3, ?4, 1, ?5)
-    ON CONFLICT(user_id, game_id)
-    DO UPDATE SET
-      best_score   = CASE WHEN excluded.best_score > best_score THEN excluded.best_score ELSE best_score END,
-      best_date    = CASE WHEN excluded.best_score > best_score THEN excluded.best_date ELSE best_date END,
-      games_played = games_played + 1,
-      updated_at   = excluded.updated_at
-  `).bind(userId, game_id, score, date, now).run();
+    if (existing) {
+      // Only update if new score is higher
+      if (score > existing.score) {
+        await env.DB.prepare(
+          'UPDATE scores SET score=?1, time_ms=?2, accuracy=?3, pairs_found=?4, correct=?5, wrong=?6, combo_max=?7, device_type=?8, submitted_at=?9 WHERE id=?10'
+        ).bind(score, time_ms || null, accuracy || null, pairs_found || 0, correct || 0, wrong || 0, combo_max || 0, device, now, existing.id).run();
+      }
+    } else {
+      await env.DB.prepare(
+        'INSERT INTO scores (id, user_id, game_id, date_utc, score, time_ms, accuracy, pairs_found, correct, wrong, combo_max, device_type, submitted_at) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13)'
+      ).bind(id, userId, game_id, date, score, time_ms || null, accuracy || null, pairs_found || 0, correct || 0, wrong || 0, combo_max || 0, device, now).run();
+    }
 
-  // ── STREAK + TOTALS ──────────────────────────────────────────────────────────
-  let updatedStreak = null;
+    // Update personal bests
+    const existingPb = await env.DB.prepare(
+      'SELECT best_score FROM personal_bests WHERE user_id = ?1 AND game_id = ?2'
+    ).bind(userId, game_id).first();
 
-  if (isFirstToday) {
-    // Fetch user's current streak and check yesterday's activity in parallel
-    const [user, playedYesterday] = await Promise.all([
-      env.DB.prepare('SELECT streak_days, best_streak FROM users WHERE id = ?1').bind(userId).first(),
-      env.DB.prepare('SELECT COUNT(*) as n FROM scores WHERE user_id = ?1 AND date_utc = ?2').bind(userId, yesterday).first(),
-    ]);
+    if (existingPb) {
+      await env.DB.prepare(
+        'UPDATE personal_bests SET best_score = CASE WHEN ?1 > best_score THEN ?1 ELSE best_score END, best_date = CASE WHEN ?1 > best_score THEN ?2 ELSE best_date END, games_played = games_played + 1, updated_at = ?3 WHERE user_id = ?4 AND game_id = ?5'
+      ).bind(score, date, now, userId, game_id).run();
+    } else {
+      await env.DB.prepare(
+        'INSERT INTO personal_bests (user_id, game_id, best_score, best_date, games_played, updated_at) VALUES (?1, ?2, ?3, ?4, 1, ?5)'
+      ).bind(userId, game_id, score, date, now).run();
+    }
 
-    const currentStreak = user?.streak_days || 0;
-    const newStreak = (playedYesterday?.n > 0) ? currentStreak + 1 : 1;
-    const newBest = Math.max(newStreak, user?.best_streak || 0);
-    updatedStreak = newStreak;
+    // ── STREAK + TOTALS ──────────────────────────────────────────────────────
+    let updatedStreak = null;
 
-    await env.DB.prepare(
-      'UPDATE users SET total_games = total_games + 1, streak_days = ?1, best_streak = ?2, last_seen = ?3 WHERE id = ?4'
-    ).bind(newStreak, newBest, now, userId).run();
-  } else {
-    // Not first play today — just increment total_games and update last_seen
-    await env.DB.prepare(
-      'UPDATE users SET total_games = total_games + 1, last_seen = ?1 WHERE id = ?2'
-    ).bind(now, userId).run();
+    if (isFirstToday) {
+      const [user, playedYesterday] = await Promise.all([
+        env.DB.prepare('SELECT streak_days, best_streak FROM users WHERE id = ?1').bind(userId).first(),
+        env.DB.prepare('SELECT COUNT(*) as n FROM scores WHERE user_id = ?1 AND date_utc = ?2').bind(userId, yesterday).first(),
+      ]);
+
+      const currentStreak = user?.streak_days || 0;
+      const newStreak = (playedYesterday?.n > 0) ? currentStreak + 1 : 1;
+      const newBest = Math.max(newStreak, user?.best_streak || 0);
+      updatedStreak = newStreak;
+
+      await env.DB.prepare(
+        'UPDATE users SET total_games = total_games + 1, streak_days = ?1, best_streak = ?2, last_seen = ?3 WHERE id = ?4'
+      ).bind(newStreak, newBest, now, userId).run();
+    } else {
+      await env.DB.prepare(
+        'UPDATE users SET total_games = total_games + 1, last_seen = ?1 WHERE id = ?2'
+      ).bind(now, userId).run();
+    }
+
+    // Fetch the stored score and rank
+    const stored = await env.DB.prepare(
+      'SELECT score FROM scores WHERE user_id = ?1 AND game_id = ?2 AND date_utc = ?3'
+    ).bind(userId, game_id, date).first();
+
+    const rankScore = stored ? stored.score : score;
+
+    const pos = await env.DB.prepare(
+      'SELECT COUNT(*) + 1 as position FROM scores WHERE game_id = ?1 AND date_utc = ?2 AND score > ?3'
+    ).bind(game_id, date, rankScore).first();
+
+    return json({
+      ok: true,
+      position: pos?.position || null,
+      date,
+      score: rankScore,
+      is_personal_best: score >= rankScore,
+      streak: updatedStreak,
+    });
+
+  } catch (err) {
+    return json({ error: 'Score save failed: ' + (err?.message || String(err)) }, 500);
   }
-
-  // Fetch the actual stored score (may be a previous best, not this submission)
-  const stored = await env.DB.prepare(
-    'SELECT score FROM scores WHERE user_id = ?1 AND game_id = ?2 AND date_utc = ?3'
-  ).bind(userId, game_id, date).first();
-
-  const rankScore = stored ? stored.score : score;
-
-  const pos = await env.DB.prepare(`
-    SELECT COUNT(*) + 1 as position FROM scores
-    WHERE game_id = ?1 AND date_utc = ?2 AND score > ?3
-  `).bind(game_id, date, rankScore).first();
-
-  return json({
-    ok: true,
-    position: pos?.position || null,
-    date,
-    score: rankScore,
-    is_personal_best: score >= rankScore,
-    streak: updatedStreak,
-  });
 }
 
 async function handlePersonalBest(request, env) {
