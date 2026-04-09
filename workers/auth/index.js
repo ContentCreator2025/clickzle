@@ -877,10 +877,10 @@ const BOT_USERS = [
 // Score ranges [min, max] per game_id — calibrated from real player data.
 // Bots are intentionally middle-to-low so any decent player beats them.
 const BOT_SCORE_RANGES = {
-  2:  [800,  2800],   // Follow the Pattern  (real top: ~6,000)
+  2:  [800,  3000],   // Follow the Pattern  (real top: ~6,000)
   3:  [20000, 90000], // Hit the Target       (real top: ~170,000)
-  4:  [800,  4000],   // Spot the Pair
-  5:  [800,  3500],   // Next in Sequence
+  4:  [800,  2000],   // Spot the Pair
+  5:  [800,  9500],   // Next in Sequence
   11: [1500, 4500],   // CTI Movies           (real top: ~6,000–7,000)
   12: [1500, 4500],   // CTI Animals
   13: [1500, 4500],   // CTI Art

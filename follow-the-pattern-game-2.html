@@ -387,7 +387,7 @@ body.light .hero {
 .lb-col-rank      { width:60px; }
 .lb-col-country   { width:70px; }
 .lb-col-player    { width:200px; }
-.lb-col-streak    { width:88px; }
+.lb-col-streak    { width:60px; }
 .lb-col-sequences { width:110px; }
 .lb-col-longest   { width:110px; }
 .lb-col-bonus     { width:110px; }
@@ -1178,7 +1178,8 @@ function rowHTML(p, i) {
 function updateYourPosition() {
   const el = document.getElementById('lbYourPosVal');
   if (!el) return;
-  const playerName = localStorage.getItem('clickzle_player_name') || '';
+  const _czUser = window.CZAuth && CZAuth.getUser();
+  const playerName = (_czUser && _czUser.username) || localStorage.getItem('clickzle_player_name') || '';
   if (!playerName) { el.textContent = 'Not played yet'; el.style.color = 'var(--text3)'; return; }
   const idx = currentData.findIndex(p => p.name.toLowerCase() === playerName.toLowerCase());
   if (idx !== -1) {

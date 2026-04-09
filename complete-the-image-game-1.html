@@ -435,10 +435,10 @@ body.light .hero {
 .lb-col-rank    { width:60px; }
 .lb-col-country { width:70px; }
 .lb-col-player  { width:200px; }
-.lb-col-streak  { width:110px; }
+.lb-col-streak  { width:70px; }
 .lb-col-clock   { width:110px; }
 .lb-col-time    { width:110px; }
-.lb-col-clicks  { width:110px; }
+.lb-col-clicks  { width:70px; }
 .lb-col-bonus   { width:110px; }
 .lb-col-score   { width:160px; }
 
@@ -1658,7 +1658,8 @@ function renderLeaderboard(data) {
 function updateYourPosition() {
   const el = document.getElementById('lbYourPosVal');
   if (!el) return;
-  const playerName = localStorage.getItem('clickzle_player_name') || '';
+  const _czUser = window.CZAuth && CZAuth.getUser();
+  const playerName = (_czUser && _czUser.username) || localStorage.getItem('clickzle_player_name') || '';
   if (!playerName) { el.textContent = 'Not played yet'; el.style.color = 'var(--text3)'; return; }
   // Check if player appears in current data
   const idx = currentData.findIndex(p => p.name.toLowerCase() === playerName.toLowerCase());

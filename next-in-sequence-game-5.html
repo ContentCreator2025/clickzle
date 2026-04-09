@@ -297,10 +297,10 @@ body.light .hero { background:linear-gradient(180deg, var(--surface2) 0%, rgba(2
 .lb-col-rank    { width:60px; }
 .lb-col-country { width:70px; }
 .lb-col-player  { width:180px; }
-.lb-col-streak  { width:80px; }
-.lb-col-puzzles { width:96px; }
-.lb-col-best    { width:96px; }
-.lb-col-eff     { width:96px; }
+.lb-col-streak  { width:55px; }
+.lb-col-puzzles { width:65px; }
+.lb-col-best    { width:65px; }
+.lb-col-eff     { width:65px; }
 .lb-col-score   { width:120px; }
 /* Body rows */
 .lb-table tbody tr { border-bottom:1px solid var(--border); transition:background 0.12s; cursor:default; }
@@ -994,7 +994,7 @@ function rowHTML(p, i) {
   return `<tr class="${trC}">
     <td><span class="lb-rank-num ${rC}">${rank}</span></td>
     <td><div class="lb-flag-cell">${flag}</div></td>
-    <td><div class="lb-player-cell"><span class="lb-avatar">${initials}</span><span class="lb-pname">${p.name}</span>${deviceIcon(p.device)}</div></td>
+    <td><div class="lb-player-cell"><span class="lb-pname">${p.name}</span>${deviceIcon(p.device)}</div></td>
     <td>${streakH}</td>
     <td><span class="lb-time-val">${puzzDisp}</span></td>
     <td><span class="lb-time-val">${bestDisp}</span></td>
@@ -1006,7 +1006,8 @@ function rowHTML(p, i) {
 function updateYourPosition() {
   const el = document.getElementById('lbYourPosVal');
   if (!el) return;
-  const playerName = localStorage.getItem('clickzle_player_name') || '';
+  const _czUser = window.CZAuth && CZAuth.getUser();
+  const playerName = (_czUser && _czUser.username) || localStorage.getItem('clickzle_player_name') || '';
   if (!playerName) { el.textContent = 'Not played yet'; el.style.color = 'var(--text3)'; return; }
   const idx = currentData.findIndex(p => p.name.toLowerCase() === playerName.toLowerCase());
   if (idx !== -1) {

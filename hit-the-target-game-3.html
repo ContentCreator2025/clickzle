@@ -438,10 +438,10 @@ body.light .hero {
 .lb-col-rank     { width:60px; }
 .lb-col-country  { width:70px; }
 .lb-col-player   { width:190px; }
-.lb-col-dstreak  { width:100px; }
-.lb-col-streak   { width:100px; }
+.lb-col-dstreak  { width:70px; }
+.lb-col-streak   { width:70px; }
 .lb-col-fastest  { width:110px; }
-.lb-col-accuracy { width:100px; }
+.lb-col-accuracy { width:70px; }
 .lb-col-score    { width:160px; }
 
 /* All tds default centre */
@@ -846,7 +846,7 @@ body.light .hero {
               <th>Rank</th>
               <th>Country</th>
               <th>Player</th>
-              <th id="lbThDStreak">Daily Streak</th>
+              <th id="lbThDStreak">Streak</th>
               <th id="lbThStreak">Best Streak</th>
               <th id="lbThFastest">Fastest</th>
               <th id="lbThAccuracy">Accuracy</th>
@@ -1230,7 +1230,7 @@ function rowHTML(p, i) {
     <tr class="${trC}">
       <td><span class="lb-rank-num ${rC}">${rank}</span></td>
       <td><div class="lb-flag-cell">${flag}</div></td>
-      <td><div class="lb-player-cell">${avatarHTML}<span class="lb-pname">${p.name}</span>${deviceIcon(p.device)}</div></td>
+      <td><div class="lb-player-cell"><span class="lb-pname">${p.name}</span>${deviceIcon(p.device)}</div></td>
       <td style="text-align:center">${dstreakCol}</td>
       <td><span class="lb-time-val">${p.hitStreak}</span></td>
       <td>${fastestCol}</td>
@@ -1242,7 +1242,8 @@ function rowHTML(p, i) {
 function updateYourPosition() {
   const el = document.getElementById('lbYourPosVal');
   if (!el) return;
-  const playerName = localStorage.getItem('clickzle_player_name') || '';
+  const _czUser = window.CZAuth && CZAuth.getUser();
+  const playerName = (_czUser && _czUser.username) || localStorage.getItem('clickzle_player_name') || '';
   if (!playerName) { el.textContent = 'Not played yet'; el.style.color = 'var(--text3)'; return; }
   const idx = currentData.findIndex(p => p.name.toLowerCase() === playerName.toLowerCase());
   if (idx !== -1) {
@@ -1302,7 +1303,7 @@ function setPeriod(p) {
   document.getElementById('lbSectionTag').textContent = tags[p];
   const subs = { today:"Reaction Challenge — Today's Rankings", month:'Reaction Challenge — ' + new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'}), alltime:'Reaction Challenge — Hall of Fame' };
   document.getElementById('lbPanelSub').textContent = subs[p];
-  document.getElementById('lbThDStreak').textContent  = 'Daily Streak';
+  document.getElementById('lbThDStreak').textContent  = 'Streak';
   document.getElementById('lbThStreak').textContent   = 'Best Streak';
   document.getElementById('lbThFastest').textContent  = p === 'today' ? 'Fastest' : 'Best Fastest';
   document.getElementById('lbThAccuracy').textContent = 'Accuracy';
