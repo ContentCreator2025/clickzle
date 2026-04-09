@@ -719,10 +719,11 @@ async function handleResetPassword(request, env) {
   let body;
   try { body = await request.json(); } catch { return json({ error: 'Invalid request body' }, 400); }
 
-  const { token, new_password } = body || {};
-  if (!token || !new_password)
+  const { token, new_password, password } = body || {};
+  const pw = new_password || password;
+  if (!token || !pw)
     return json({ error: 'Reset token and new password are required' }, 400);
-  if (new_password.length < 8)
+  if (pw.length < 8)
     return json({ error: 'Password must be at least 8 characters' }, 400);
 
   const now = Math.floor(Date.now() / 1000);
@@ -733,7 +734,7 @@ async function handleResetPassword(request, env) {
   if (!user)
     return json({ error: 'This reset link is invalid or has expired. Please request a new one.' }, 400);
 
-  const newHash = await hashPassword(new_password);
+  const newHash = await hashPassword(pw);
   await env.DB.prepare(
     'UPDATE users SET password_hash = ?1, reset_token = NULL, reset_token_expires = NULL WHERE id = ?2'
   ).bind(newHash, user.id).run();

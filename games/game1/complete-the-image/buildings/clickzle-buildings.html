@@ -3667,15 +3667,17 @@ if (_tCollapse) _tCollapse.addEventListener('click', closeTBreakdown);
       // Pre-fill player name so the game knows who's playing
       document.getElementById('playerNameInput').value = user.username;
 
-      // Wire up logged-in play button
-      document.getElementById('startBtnLoggedIn').addEventListener('click', startGame);
-
       // Fetch and show personal best for game 1
       CZAuth.getPersonalBest(1).then(pb => {
-        if (pb && pb.best_score) {
-          document.getElementById('pbVal').textContent = pb.best_score.toLocaleString();
+        document.getElementById('pbVal').textContent = (pb && pb.best_score) ? pb.best_score.toLocaleString() : 'None yet';
+        const btn = document.getElementById('startBtnLoggedIn');
+        if (pb && pb.played_today) {
+          btn.disabled = true;
+          btn.textContent = 'COME BACK TOMORROW';
+          btn.style.opacity = '0.45';
+          btn.style.cursor = 'not-allowed';
         } else {
-          document.getElementById('pbVal').textContent = 'None yet';
+          btn.addEventListener('click', startGame);
         }
       });
     }

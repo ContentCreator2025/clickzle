@@ -2389,9 +2389,17 @@ document.body.addEventListener('touchstart', () => getAudioCtx(), {once:true});
       document.getElementById('playFreeLabel').textContent = 'Logged in — scores save automatically';
       document.getElementById('loggedInName').textContent = user.username;
       document.getElementById('playerNameInput').value = user.username;
-      document.getElementById('startBtnLoggedIn').addEventListener('click', startGame);
       CZAuth.getPersonalBest(5).then(pb => {
         document.getElementById('pbVal').textContent = (pb && pb.best_score) ? pb.best_score.toLocaleString() : 'None yet';
+        const btn = document.getElementById('startBtnLoggedIn');
+        if (pb && pb.played_today) {
+          btn.disabled = true;
+          btn.textContent = 'COME BACK TOMORROW';
+          btn.style.opacity = '0.45';
+          btn.style.cursor = 'not-allowed';
+        } else {
+          btn.addEventListener('click', startGame);
+        }
       });
     }
   }
