@@ -116,19 +116,21 @@
     const cacheKey = `${PB_KEY_PFX}${gameId}`;
     const today = new Date().toISOString().slice(0, 10);
 
-    // Return cached value if it's from today
+    // Return cached value if it's from today AND played_today is true
+    // (if played_today is false, cache may be stale — re-fetch to catch a play that happened this session)
     try {
       const cached = JSON.parse(localStorage.getItem(cacheKey));
-      if (cached && cached.date === today) return cached.pb;
+      if (cached && cached.date === today && cached.played_today) return cached;
     } catch {}
 
     if (!isLoggedIn()) return null;
 
     try {
       const data = await apiFetch(`/api/auth/personal-best?game=${gameId}`);
-      if (data.ok && data.personal_best) {
-        localStorage.setItem(cacheKey, JSON.stringify({ date: today, pb: data.personal_best }));
-        return data.personal_best;
+      if (data.ok) {
+        const result = { ...(data.personal_best || {}), played_today: !!data.played_today };
+        localStorage.setItem(cacheKey, JSON.stringify({ date: today, played_today: !!data.played_today, ...result }));
+        return result;
       }
     } catch {}
     return null;
