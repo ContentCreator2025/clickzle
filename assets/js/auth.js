@@ -188,7 +188,7 @@
   async function resetPassword(token, password) {
     return apiFetch('/api/auth/reset-password', {
       method: 'POST',
-      body: JSON.stringify({ token, password }),
+      body: JSON.stringify({ token, new_password: password }),
     });
   }
 
