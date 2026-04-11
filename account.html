@@ -714,10 +714,21 @@ body.light .site-header::after{background:linear-gradient(90deg,transparent 0%,r
     const pbMap = {};
     (pbs || []).forEach(function(pb){ pbMap['game' + pb.game_id] = pb; });
 
+    // Game 1 categories use game_ids 11-18 — aggregate them into 'game1'
+    const G1_IDS = [11,12,13,14,15,16,17,18];
+    const g1Pbs = G1_IDS.map(function(id){ return pbMap['game' + id]; }).filter(Boolean);
+    if (g1Pbs.length) {
+      pbMap['game1'] = {
+        best_score:   Math.max.apply(null, g1Pbs.map(function(p){ return p.best_score || 0; })),
+        games_played: g1Pbs.reduce(function(s, p){ return s + (p.games_played || 0); }, 0)
+      };
+    }
+
     // Group recent scores by game, sort each group by score desc, take top 5
     const byGame = {};
     (recentScores || []).forEach(function(s){
-      const key = 'game' + s.game_id;
+      // Map Game 1 category ids (11-18) to 'game1'
+      const key = G1_IDS.indexOf(s.game_id) !== -1 ? 'game1' : 'game' + s.game_id;
       if (!byGame[key]) byGame[key] = [];
       byGame[key].push(s);
     });
