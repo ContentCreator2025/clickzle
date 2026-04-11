@@ -3040,6 +3040,8 @@ function showVictory(timeMs, clicks) {
         document.getElementById('vRank').textContent = '#' + result.position;
       }
     });
+    const _b = document.getElementById('startBtnLoggedIn');
+    if (_b) { _b.disabled = true; _b.textContent = 'COME BACK TOMORROW'; _b.style.opacity = '0.45'; _b.style.cursor = 'not-allowed'; }
   }
   document.getElementById('victoryMovieName').textContent = POSTER_DATA[gs.completePosterIdx].name;
   document.getElementById('victoryDate').textContent =
@@ -3096,6 +3098,8 @@ function showTimeout(clicks) {
         document.getElementById('tRank').textContent = '#' + result.position;
       }
     });
+    const _b = document.getElementById('startBtnLoggedIn');
+    if (_b) { _b.disabled = true; _b.textContent = 'COME BACK TOMORROW'; _b.style.opacity = '0.45'; _b.style.cursor = 'not-allowed'; }
   }
   document.getElementById('tTilesRevealed').textContent = gs.correctCount + ' of 20';
   document.getElementById('tClicks').textContent        = clicks;
@@ -3668,7 +3672,7 @@ if (_tCollapse) _tCollapse.addEventListener('click', closeTBreakdown);
       document.getElementById('playerNameInput').value = user.username;
 
       // Fetch and show personal best for game 1
-      CZAuth.getPersonalBest(1).then(pb => {
+      CZAuth.getPersonalBest(15).then(pb => {
         document.getElementById('pbVal').textContent = (pb && pb.best_score) ? pb.best_score.toLocaleString() : 'None yet';
         const btn = document.getElementById('startBtnLoggedIn');
         if (pb && pb.played_today) {

@@ -2121,6 +2121,8 @@ function showEndCard() {
         document.getElementById('ecRank').textContent = '#' + result.position;
       }
     });
+    const _b = document.getElementById('startBtnLoggedIn');
+    if (_b) { _b.disabled = true; _b.textContent = 'COME BACK TOMORROW'; _b.style.opacity = '0.45'; _b.style.cursor = 'not-allowed'; }
   }
   document.getElementById('ecTotalSolved').textContent    = gs.totalSolved;
   document.getElementById('ecTotalSolvedAcc').textContent = gs.totalSolved;
